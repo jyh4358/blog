@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="sideBar">
+
+    <div class="m-4 sidebar-header" style="white-space: nowrap">
+        <a th:href="@{/}"><h3 class="text-black-50">Jinia's LOG</h3></a>
+        <a th:href="@{/aboutMe}"><h5 class="text-black-50">ABOUT ME(작성중)</h5></a>
+        <a th:href="@{/article/write}" href="#">
+            <h5 class="text-black-50">NEW ARTICLE</h5>
+        </a>
+
+    </div>
+
+    <div class="border-top my-3"></div>
+
+    <div class="mb-1 link-dark">
+        <div class="searchBox">
+            <input id="searchInput" name="searchInput" class="searchInput form-control ps-4" type="text"
+                   onkeyup="if(window.event.keyCode==13){searchKeyword()}">
+            <i class="fas fa-search"></i>
+        </div>
+    </div>
+
+    <ul class="list-unstyled ps-0">
+
+        <li class="mb-1">
+            <button class="btn btn-toggle align-items-center rounded collapsed fs-5" data-bs-toggle="collapse"
+                    data-bs-target="#collapse-link" aria-expanded="true">Link
+            </button>
+            <div class="collapse show" id="collapse-link">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+                    <li><a href="https://github.com/jinia91" class="link-dark rounded">
+                        <i class="fab fa-github" style="font-size: 20px;"></i>&nbsp Github</a>
+                    </li>
+                </ul>
+                <div class="git-box">
+                    <div class="git-chart">
+                        <img src="https://ghchart.rshah.org/219138/jinia91">
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <!--   카테고리 s   -->
+        <li class="border-top my-3"></li>
+        <li class="mb-1 superCategory btn fs-5"><a th:href="@{/article/list}"
+                                                   th:text="|전체글()|">토탈</a></li>
+        <a th:href="@{/category/edit}" class="me-0 ps-0 btn"><i class="fas fa-pen"></i></a>
+
+        <li class="mb-1" >
+            <div class="btn-group">
+                <button class="btn btn-toggle align-items-center rounded collapsed
+                           me-0 pe-0" data-bs-toggle="collapse"
+                        aria-expanded="true">
+                </button>
+                <a th:href="@{/article/list}"
+                   class="ms-0 superCategory btn fs-5"
+                   >슈퍼</a>
+            </div>
+            <div class="collapse show" >
+                <ul class="ms-1 btn-toggle-nav list-unstyled fw-normal pb-1">
+                    <li><a th:href="@{/article/list}"
+                           class="link-dark rounded"
+                           >서브</a></li>
+                </ul>
+            </div>
+        </li>
+        <!--    카테고리 e    -->
+        <!--   최신 댓글 s    -->
+        <li class="border-top my-3"></li>
+        <li class="mb-1">
+            <button class="btn btn-toggle align-items-center rounded collapsed fs-5" data-bs-toggle="collapse"
+                    data-bs-target="#tag-collapse-xl" aria-expanded="true">최신 댓글
+            </button>
+            <div class="collapse show" id="tag-collapse-xl">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li>
+                        <a class="comment-side rounded">댓글1</a>
+                        <a class="comment-side rounded">비밀댓글</a>
+                        <a class="comment-side rounded">댓글2</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <!--    최신 댓글 e    -->
+
+        <li class="border-top my-3"></li>
+        <li class="mb-1">
+            <div >
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+                    <li><a th:href="@{/rss}" class="link-dark rounded">
+                        <i class="fas fa-rss" style="font-size: 20px;"></i>&nbsp RSS FEED</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="border-top my-3"></li>
+        <li class="mb-1">
+            <div>
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><a th:href="@{/login}"
+                                                              class="link-dark rounded"><i class="fas fa-sign-in-alt"></i>&nbsp로그인</a></li>
+
+                    <li>
+                        <form method="post" id="logout" name="logout" th:action="@{/logout}">
+                            <button class="btn"><a class="link-dark rounded ms-1 small"><i class="fas fa-sign-out-alt"></i></i>&nbsp로그아웃</a></button>
+                        </form>
+                    </li>
+
+                    <li class="ms-3 small">조윤호님 환영합니다</li>
+                    <li class="ms-4 small">(관리자 계정)</li>
+
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+</div>
+</html>

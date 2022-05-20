@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/layout/adminLayout :: layout(~{::title}, ~{::section}, ~{::script})}">
+
+
+<title>JDong's Blog</title>
+
+<!-- Admin Page Wrapper -->
+<section class="admin-wrapper">
+    <!-- Left Sidebar -->
+    <div class="left-sidebar">
+        <ul>
+            <li><a href="../posts/index.html">Manage Posts</a></li>
+            <li><a href="../user/userList.html">Manage Users</a></li>
+            <li><a href="index.html">Manage Topics</a></li>
+        </ul>
+
+    </div>
+    <!-- // Left Sidebar End -->
+
+
+    <!-- Admin Content -->
+    <div class="admin-content">
+        <div class="button-group">
+            <a href="categoryAddForm.html" class="btn btn-big">Add Topic</a>
+            <a href="index.html" class="btn btn-big">Manage Topics</a>
+        </div>
+
+        <div class="content">
+            <h2 class="page-title">Manage Topics</h2>
+
+            <div class="category-list">
+                <ul>
+                    <li id="parent-list">
+                        <div class="category-list">
+                            <div class="child-list">Poetry</div>
+                            <div class="child-list">
+                                <a href="#" class="add" id="elem2">추가</a> <a href="#" class="delete">삭제</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="parent-list2">
+                        <div class="category-list">
+                            <div class="child-list">Poetry</div>
+                            <div class="child-list">
+                                <a href="#" class="add">추가</a> <a href="#" class="delete">삭제</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- // Admin Content End -->
+
+</section>
+<!-- // Page Wrapper End -->
+
+<script>
+    let element = document.getElementById("elem2");
+    element.onclick = function(event) {
+
+        let a = '';
+        a += '                    <div class="child-list">\n' +
+            '                          <form action="create.html" method="post">\n' +
+            '                              <div>\n' +
+            '                                  <input type="text" name="name" id="name" class="text-input">\n' +
+            '                              </div>\n' +
+            '                              <div>\n' +
+            '                                  <button type="submit" class="btn btn-big">Add Category</button>\n' +
+            '                              </div>\n' +
+            '                          </form>\n' +
+            '                     </div>'
+
+        $("#parent-list").append(a);
+    }
+</script>
+</html>
