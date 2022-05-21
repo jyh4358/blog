@@ -21,66 +21,38 @@
 <!--            </li>-->
 <!--        </ul>-->
 <!--    </header>-->
-<!--    <header class="fixed-top d-xxl-none p-0">-->
-<!--        <nav class="navbar navbar-light bg-light">-->
-<!--            <div class="container-fluid p-0">-->
-<!--                <button class="btn-tab" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu"-->
-<!--                        aria-controls="offcanvasMenu">-->
-<!--                    <i class="fas fa-bars"></i>-->
-<!--                </button>-->
-<!--                <div id="nav-brand" class="nav-brand">-->
-<!--                    <a th:href="@{/}">Jinia's LOG</a>-->
-<!--                </div>-->
-<!--                <div id="nav-login">-->
-<!--                    <a th:href="@{/login}"><span class="pe-2">로그인</span></a>-->
-<!--                </div>-->
-<!--&lt;!&ndash;                <div class="pe-2">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <span>조윤호님</span>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <a th:href="@{/article/write}">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <span style="font-size: 21px"><i class="fas fa-edit"></i></span>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </a>&ndash;&gt;-->
-<!--&lt;!&ndash;                </div>&ndash;&gt;-->
-<!--            </div>-->
-<!--        </nav>-->
-<!--        -->
-<!--        <aside class="offcanvas offcanvas-start " data-bs-scroll="true" style="max-width: 300px;" tabindex="-1"-->
-<!--               id="offcanvasMenu" aria-labelledby="offcanvasLabel">-->
-<!--            <div class="offcanvas-header bg-light">-->
-<!--                <button class="btn btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>-->
-<!--            </div>-->
-
-<!--            <div class="offcanvas-body bg-light">-->
-<!--                <div th:replace="fragments/sideBar.html :: sideBar"></div>-->
-<!--            </div>-->
-<!--        </aside>-->
-<!--    </header>-->
-    <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-        Link with href
-    </a>
-    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-        Button with data-bs-target
-    </button>
-
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div>
-                Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
-            </div>
-            <div class="dropdown mt-3">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
-                    Dropdown button
+    <header class="fixed-top d-xxl-none p-0">
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid p-0">
+                <button class="btn-tab" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu"
+                        aria-controls="offcanvasMenu">
+                    <i class="fas fa-bars"></i>
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
+                <div id="nav-brand" class="nav-brand">
+                    <a th:href="@{/}">Jinia's LOG</a>
+                </div>
+                <div id="nav-login">
+                    <a th:href="@{/login}"><span class="pe-2">로그인</span></a>
+                </div>
+<!--                <div class="pe-2">-->
+<!--                    <span>조윤호님</span>-->
+<!--                    <a th:href="@{/article/write}">-->
+<!--                        <span style="font-size: 21px"><i class="fas fa-edit"></i></span>-->
+<!--                    </a>-->
+<!--                </div>-->
             </div>
-        </div>
-    </div>
+        </nav>
+
+        <aside class="offcanvas offcanvas-start " data-bs-scroll="true" style="max-width: 300px;" tabindex="-1"
+               id="offcanvasMenu" aria-labelledby="offcanvasLabel">
+            <div class="offcanvas-header bg-light">
+                <button class="btn btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+
+            <div class="offcanvas-body bg-light">
+                <div th:replace="fragments/sideBar.html :: sideBar"></div>
+            </div>
+        </aside>
+    </header>
 </th:block>
 </html>
