@@ -1,66 +1,56 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{/layout/adminLayout :: layout(~{::title}, ~{::section}, ~{::script})}">
+      th:replace="~{/layout/adminLayout :: adminLayout(~{::title}, ~{::section}, ~{::script})}">
 
 
 <title>JDong's Blog</title>
 
 <!-- Admin Page Wrapper -->
-<section class="admin-wrapper">
-    <!-- Left Sidebar -->
-    <div class="left-sidebar">
-        <ul>
-            <li><a href="index.html">Manage Posts</a></li>
-            <li><a href="../user/userList.html">Manage Users</a></li>
-            <li><a href="../category/categoryList.html">Manage Topics</a></li>
-        </ul>
+<section>
 
-    </div>
-    <!-- // Left Sidebar End -->
+<!--    &lt;!&ndash; Admin Content &ndash;&gt;-->
+<!--    <div class="admin-content">-->
+<!--        <div class="button-group">-->
+<!--            <a href="create.html" class="btn btn-big">Add Post</a>-->
+<!--            <a href="index.html" class="btn btn-big">Manage Posts</a>-->
+<!--        </div>-->
 
+<!--        <div class="content">-->
+<!--            <h2 class="page-title">Manage Posts</h2>-->
 
-    <!-- Admin Content -->
-    <div class="admin-content">
-        <div class="button-group">
-            <a href="create.html" class="btn btn-big">Add Post</a>
-            <a href="index.html" class="btn btn-big">Manage Posts</a>
-        </div>
+<!--            <form action="create.html" method="post">-->
+<!--                <div>-->
+<!--                    <label>Title</label>-->
+<!--                    <input type="text" name="title" id="title" class="text-input">-->
+<!--                </div>-->
 
-        <div class="content">
-            <h2 class="page-title">Manage Posts</h2>
+<!--                <div>-->
+<!--                    <label>Body</label>-->
+<!--                    <textarea name="body" id="body"></textarea>-->
+<!--                </div>-->
 
-            <form action="create.html" method="post">
-                <div>
-                    <label>Title</label>
-                    <input type="text" name="title" id="title" class="text-input">
-                </div>
+<!--                <div>-->
+<!--                    <label>Image</label>-->
+<!--                    <input type="file" name="image" id="image" class="text-input">-->
+<!--                </div>-->
 
-                <div>
-                    <label>Body</label>
-                    <textarea name="body" id="body"></textarea>
-                </div>
+<!--                <div>-->
+<!--                    <label>Topic</label>-->
+<!--                    <select name="topic" id="topic" class="text-input">-->
+<!--                        <option value="Poetry">Poetry</option>-->
+<!--                        <option value="Life Lessons">Life Lessons</option>-->
+<!--                        <option value="Poetry">Poetry</option>-->
+<!--                    </select>-->
+<!--                </div>-->
 
-                <div>
-                    <label>Image</label>
-                    <input type="file" name="image" id="image" class="text-input">
-                </div>
+<!--                <div>-->
+<!--                    <button type="submit" class="btn btn-big">Add Post</button>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; // Admin Content End &ndash;&gt;-->
 
-                <div>
-                    <label>Topic</label>
-                    <select name="topic" id="topic" class="text-input">
-                        <option value="Poetry">Poetry</option>
-                        <option value="Life Lessons">Life Lessons</option>
-                        <option value="Poetry">Poetry</option>
-                    </select>
-                </div>
-
-                <div>
-                    <button type="submit" class="btn btn-big">Add Post</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <!-- // Admin Content End -->
 </section>
 <!-- // Page Wrapper End -->
 

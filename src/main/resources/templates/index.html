@@ -6,179 +6,273 @@
 <title>JDong's Blog</title>
 
 <section>
-    <!-- sidebar-xxl 레이아웃에 옮기자-->
-    <div class="bg-light sidebar col-xxl-2 d-none d-xxl-block p-0 overflow-auto">
-        <div class="p-4 sidebar-inner bg-light">
-            <div th:replace="fragments/sideBar.html :: sideBar"></div>
+<!--    &lt;!&ndash; sidebar-xxl 레이아웃에 옮기자&ndash;&gt;-->
+<!--    <div class="bg-light sidebar col-xxl-2 d-none d-xxl-block p-0 overflow-auto">-->
+<!--        <div class="p-4 sidebar-inner bg-light">-->
+<!--            <div th:replace="fragments/sideBar.html :: sideBar"></div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; sidebar e &ndash;&gt;-->
+<!--    &lt;!&ndash; xxl dummy &ndash;&gt;-->
+<!--    <div class="bg-light col-xxl-2 d-none d-xxl-block p-0">-->
+<!--    </div>-->
+
+<!--    <div class="col-xxl-10 p-0 sections-container">-->
+
+
+<!--        <div class="main-view">-->
+<!--            <a href="#">메인 페이지</a>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; Page Wrapper &ndash;&gt;-->
+<!--        <div class="page-wrapper">-->
+
+<!--            &lt;!&ndash; Poge Slider &ndash;&gt;-->
+<!--            <div class="post-slider">-->
+<!--                <h1 class="slider-title">Trending Posts</h1>-->
+<!--                <i class="fas fa-chevron-left prev"></i>-->
+<!--                <i class="fas fa-chevron-right next"></i>-->
+
+<!--                <div class="post-wrapper">-->
+
+<!--                    <div class="post">-->
+<!--                        <img src="images/logo.png" alt="" class="slider-image">-->
+<!--                        <div class="post-info">-->
+<!--                            <h4><a href="single.html">One day your life will flash before your eyes</a></h4>-->
+<!--                            <i class="far fa-user">Awa Melvine</i>-->
+<!--                            &nbsp;-->
+<!--                            <i class="far fa-calender"> Mar 8, 2019</i>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    <div class="post">-->
+<!--                        <img src="images/logo.png" alt="" class="slider-image">-->
+<!--                        <div class="post-info">-->
+<!--                            <h4><a href="single.html">One day your life will flash before your eyes</a></h4>-->
+<!--                            <i class="far fa-user">Awa Melvine</i>-->
+<!--                            &nbsp;-->
+<!--                            <i class="far fa-calender"> Mar 8, 2019</i>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    <div class="post">-->
+<!--                        <img src="images/logo.png" alt="" class="slider-image">-->
+<!--                        <div class="post-info">-->
+<!--                            <h4><a href="single.html">One day your life will flash before your eyes</a></h4>-->
+<!--                            <i class="far fa-user">Awa Melvine</i>-->
+<!--                            &nbsp;-->
+<!--                            <i class="far fa-calender"> Mar 8, 2019</i>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    <div class="post">-->
+<!--                        <img src="images/logo.png" alt="" class="slider-image">-->
+<!--                        <div class="post-info">-->
+<!--                            <h4><a href="single.html">One day your life will flash before your eyes</a></h4>-->
+<!--                            <i class="far fa-user">Awa Melvine</i>-->
+<!--                            &nbsp;-->
+<!--                            <i class="far fa-calender"> Mar 8, 2019</i>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    <div class="post">-->
+<!--                        <img src="images/logo.png" alt="" class="slider-image">-->
+<!--                        <div class="post-info">-->
+<!--                            <h4><a href="single.html">One day your life will flash before your eyes</a></h4>-->
+<!--                            <i class="far fa-user">Awa Melvine</i>-->
+<!--                            &nbsp;-->
+<!--                            <i class="far fa-calender"> Mar 8, 2019</i>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                </div>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; // Page Slider End &ndash;&gt;-->
+
+<!--            <div class="recent-cards mt-5 ms-4 me-4">-->
+
+<!--                <div class="cards-container container p-0" id="infiniteScrollBox">-->
+<!--                    <h1 class="text-center">최신 포스팅</h1>-->
+<!--                    <hr>-->
+<!--                    &lt;!&ndash;     infinityScroll     &ndash;&gt;-->
+<!--                    <div id="nextPagination">-->
+<!--                        `-->
+<!--                        <div class="card mb-3 recent-card wow fadeInUp ">-->
+<!--                            <a href="/article/view">-->
+<!--                                <div class="row g-0">-->
+<!--                                    <div class="col-3">-->
+<!--                                        <div class="ratio ratio-1x1 test"></div>-->
+<!--                                    </div>-->
+<!--                                    <div class="col-9 row row-cols-1 align-self-center">-->
+<!--                                        <h3 class="card-title col mb-3 text-truncate">타이틀</h3>-->
+<!--                                        <p class="d-none d-md-block col recent-card-text">내용</p>-->
+<!--                                        <p class="col mb-0"><small class="text-muted">2022.05.21</small></p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                        </div>-->
+
+<!--                        <div class="card mb-3 recent-card wow fadeInUp ">-->
+<!--                            <a href="/article/view">-->
+<!--                                <div class="row g-0">-->
+<!--                                    <div class="col-3">-->
+<!--                                        <div class="ratio ratio-1x1 test"></div>-->
+<!--                                    </div>-->
+<!--                                    <div class="col-9 row row-cols-1 align-self-center">-->
+<!--                                        <h3 class="card-title col mb-3 text-truncate">타이틀</h3>-->
+<!--                                        <p class="d-none d-md-block col recent-card-text">내용</p>-->
+<!--                                        <p class="col mb-0"><small class="text-muted">2022.05.21</small></p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                        </div>-->
+
+
+<!--                        <div class="card mb-3 recent-card wow fadeInUp ">-->
+<!--                            <a href="/article/view">-->
+<!--                                <div class="row g-0">-->
+<!--                                    <div class="col-3">-->
+<!--                                        <div class="ratio ratio-1x1 test"></div>-->
+<!--                                    </div>-->
+<!--                                    <div class="col-9 row row-cols-1 align-self-center">-->
+<!--                                        <h3 class="card-title col mb-3 text-truncate">타이틀</h3>-->
+<!--                                        <p class="d-none d-md-block col recent-card-text">내용</p>-->
+<!--                                        <p class="col mb-0"><small class="text-muted">2022.05.21</small></p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                        </div>-->
+
+
+<!--                        `-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; // Page Wrapper End &ndash;&gt;-->
+
+<!--    </div>-->
+
+    <div id="carouselForMain" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+        <!-- 상단 화면 -->
+        <div class="carousel-inner">
+            <div class="carousel-item mainItem active">
+                <a href="#">
+                    <img src="images/logo.png"
+                         class="w-100 vh-100 cover main-image" alt="...">
+                    <div class="card-img-overlay text-white text-center row justify-content-center align-content-center text-shadow">
+                        <h1 class="">첫번째 이미지</h1>
+                    </div>
+                </a>
+            </div>
+            <div class="carousel-item mainItem">
+                <a href="#">
+                    <img src="images/logo.png"
+                         class="w-100 vh-100 cover main-image" alt="...">
+                    <div class="card-img-overlay text-white text-center row justify-content-center align-content-center text-shadow">
+                        <h1 class="">두번째 이미지</h1>
+                    </div>
+                </a>
+            </div>
+            <div class="carousel-item mainItem">
+                <a href="#">
+                    <img src="images/logo.png"
+                         class="w-100 vh-100 cover main-image" alt="...">
+                    <div class="card-img-overlay text-white text-center row justify-content-center align-content-center text-shadow">
+                        <h1 class="">세번째 이미지</h1>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselForMain"
+                data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselForMain"
+                data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+
+    </div>
+
+
+    <div class="mt-5 pt-2 popular-card-section ">
+        <div class="post-slider">
+            <h1 class="slider-title">Trending Posts</h1>
+            <i class="fas fa-chevron-left prev"></i>
+            <i class="fas fa-chevron-right next"></i>
+
+            <div class="post-wrapper">
+
+                <div class="post">
+                    <img src="images/logo.png" alt="" class="slider-image">
+                    <div class="post-info">
+                        <h4><a href="single.html">One day your life will flash before your eyes</a></h4>
+                        <i class="far fa-user">Awa Melvine</i>
+                        &nbsp;
+                        <i class="far fa-calender"> Mar 8, 2019</i>
+                    </div>
+                </div>
+
+                <div class="post">
+                    <img src="images/logo.png" alt="" class="slider-image">
+                    <div class="post-info">
+                        <h4><a href="single.html">One day your life will flash before your eyes</a></h4>
+                        <i class="far fa-user">Awa Melvine</i>
+                        &nbsp;
+                        <i class="far fa-calender"> Mar 8, 2019</i>
+                    </div>
+                </div>
+
+                <div class="post">
+                    <img src="images/logo.png" alt="" class="slider-image">
+                    <div class="post-info">
+                        <h4><a href="single.html">One day your life will flash before your eyes</a></h4>
+                        <i class="far fa-user">Awa Melvine</i>
+                        &nbsp;
+                        <i class="far fa-calender"> Mar 8, 2019</i>
+                    </div>
+                </div>
+
+                <div class="post">
+                    <img src="images/logo.png" alt="" class="slider-image">
+                    <div class="post-info">
+                        <h4><a href="single.html">One day your life will flash before your eyes</a></h4>
+                        <i class="far fa-user">Awa Melvine</i>
+                        &nbsp;
+                        <i class="far fa-calender"> Mar 8, 2019</i>
+                    </div>
+                </div>
+
+                <div class="post">
+                    <img src="images/logo.png" alt="" class="slider-image">
+                    <div class="post-info">
+                        <h4><a href="single.html">One day your life will flash before your eyes</a></h4>
+                        <i class="far fa-user">Awa Melvine</i>
+                        &nbsp;
+                        <i class="far fa-calender"> Mar 8, 2019</i>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
-    <!-- sidebar e -->
-    <!-- xxl dummy -->
-    <div class="bg-light col-xxl-2 d-none d-xxl-block p-0">
+
+    <hr class="py-1 mt-5" style="color: rgb(212, 200, 184);">
+
+    <div class="recent-cards mt-5 ms-4 me-4">
+
+        <div class="cards-container container p-0" id="infiniteScrollBox">
+            <h1 class="text-center">최신 포스팅</h1>
+            <hr>
+            <!--     infinityScroll     -->
+            <div id="nextPagination"></div>
+        </div>
     </div>
-
-
-  <div class="main-view">
-    <a href="#">메인 페이지</a>
-  </div>
-
-  <!-- Page Wrapper -->
-  <div class="page-wrapper">
-
-    <!-- Poge Slider -->
-    <div class="post-slider">
-      <h1 class="slider-title">Trending Posts</h1>
-      <i class="fas fa-chevron-left prev"></i>
-      <i class="fas fa-chevron-right next"></i>
-
-      <div class="post-wrapper">
-
-        <div class="post">
-          <img src="images/logo.png" alt="" class="slider-image">
-          <div class="post-info">
-            <h4><a href="single.html">One day your life will flash before your eyes</a></h4>
-            <i class="far fa-user">Awa Melvine</i>
-            &nbsp;
-            <i class="far fa-calender"> Mar 8, 2019</i>
-          </div>
-        </div>
-
-        <div class="post">
-          <img src="images/logo.png" alt="" class="slider-image">
-          <div class="post-info">
-            <h4><a href="single.html">One day your life will flash before your eyes</a></h4>
-            <i class="far fa-user">Awa Melvine</i>
-            &nbsp;
-            <i class="far fa-calender"> Mar 8, 2019</i>
-          </div>
-        </div>
-
-        <div class="post">
-          <img src="images/logo.png" alt="" class="slider-image">
-          <div class="post-info">
-            <h4><a href="single.html">One day your life will flash before your eyes</a></h4>
-            <i class="far fa-user">Awa Melvine</i>
-            &nbsp;
-            <i class="far fa-calender"> Mar 8, 2019</i>
-          </div>
-        </div>
-
-        <div class="post">
-          <img src="images/logo.png" alt="" class="slider-image">
-          <div class="post-info">
-            <h4><a href="single.html">One day your life will flash before your eyes</a></h4>
-            <i class="far fa-user">Awa Melvine</i>
-            &nbsp;
-            <i class="far fa-calender"> Mar 8, 2019</i>
-          </div>
-        </div>
-
-        <div class="post">
-          <img src="images/logo.png" alt="" class="slider-image">
-          <div class="post-info">
-            <h4><a href="single.html">One day your life will flash before your eyes</a></h4>
-            <i class="far fa-user">Awa Melvine</i>
-            &nbsp;
-            <i class="far fa-calender"> Mar 8, 2019</i>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <!-- // Page Slider End -->
-
-    <!-- Content -->
-    <div class="content clearfix">
-
-      <!-- ㅡMain Content -->
-      <div class="main-content">
-        <h1 class="recent-post-title">Recent Posts</h1>
-
-        <div class="post clearfix">
-          <img src="images/logo.png" alt="" class="post-image">
-          <div class="post-preview">
-            <h2><a href="single.html">The Strongest and sweetest songs yet remain to be sung</a></h2>
-            <i class="far fa-user">Awa Melvine</i>
-            &nbsp;
-            <i class="far calendar"> Mar 11, 2019</i>
-            <p class="preview-text">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit,
-              Excercitationem optio possimus a inventore maxime laborum.
-            </p>
-            <a href="single.html" class="btn read-more">Read More</a>
-          </div>
-        </div>
-        <div class="post clearfix">
-          <img src="images/logo.png" alt="" class="post-image">
-          <div class="post-preview">
-            <h2><a href="single.html">The Strongest and sweetest songs yet remain to be sung</a></h2>
-            <i class="far fa-user">Awa Melvine</i>
-            &nbsp;
-            <i class="far calendar"> Mar 11, 2019</i>
-            <p class="preview-text">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit,
-              Excercitationem optio possimus a inventore maxime laborum.
-            </p>
-            <a href="single.html" class="btn read-more">Read More</a>
-          </div>
-        </div>
-        <div class="post clearfix">
-          <img src="images/logo.png" alt="" class="post-image">
-          <div class="post-preview">
-            <h2><a href="single.html">The Strongest and sweetest songs yet remain to be sung</a></h2>
-            <i class="far fa-user">Awa Melvine</i>
-            &nbsp;
-            <i class="far calendar"> Mar 11, 2019</i>
-            <p class="preview-text">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit,
-              Excercitationem optio possimus a inventore maxime laborum.
-            </p>
-            <a href="single.html" class="btn read-more">Read More</a>
-          </div>
-        </div>
-        <div class="post clearfix">
-          <img src="images/logo.png" alt="" class="post-image">
-          <div class="post-preview">
-            <h2><a href="single.html">The Strongest and sweetest songs yet remain to be sung</a></h2>
-            <i class="far fa-user">Awa Melvine</i>
-            &nbsp;
-            <i class="far calendar"> Mar 11, 2019</i>
-            <p class="preview-text">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit,
-              Excercitationem optio possimus a inventore maxime laborum.
-            </p>
-            <a href="single.html" class="btn read-more">Read More</a>
-          </div>
-        </div>
-      </div>
-      <!-- // Main Content End -->
-
-      <div class="sidebar">
-        <div class="section search">
-          <h2 class="section-title">Search</h2>
-          <form action="index.html" method="post">
-            <input type="text" name="search-term" class="text-input" placeholder="Search...">
-          </form>
-        </div>
-
-        <div class="section topics">
-          <h2 class="seaction-title">Topics</h2>
-          <ul>
-            <li><a href="#">Poems</a></li>
-            <li><a href="#">Quotes</a></li>
-            <li><a href="#">Fiction</a></li>
-            <li><a href="#">Biography</a></li>
-            <li><a href="#">Motivation</a></li>
-            <li><a href="#">Inspiration</a></li>
-            <li><a href="#">Life Lessons</a></li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-
-  </div>
-  <!-- // Page Wrapper End -->
 </section>
 
 <!-- Slick Carousel -->

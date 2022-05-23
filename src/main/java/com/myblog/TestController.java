@@ -16,18 +16,25 @@ public class TestController {
         return "login";
     }
 
+    @GetMapping("/article")
+    public String article() {
+        return "article/articleView";
+    }
+
+
     @GetMapping("/admin/articles")
     public String articles() {
         return "admin/article/articleList";
     }
 
     @GetMapping("/admin/article")
-    public String article() {
+    public String articlesWrite() {
         return "admin/article/articleWriteForm";
     }
 
+
     @GetMapping("/admin/categories")
-    public String articel() {
+    public String adminArticle() {
         return "admin/category/categoryList";
     }
 
@@ -44,6 +51,11 @@ public class TestController {
     @GetMapping("/admin/user")
     public String user() {
         return "admin/user/userEditForm";
+    }
+
+    @GetMapping("/admin")
+    public String admin() {
+        return "admin/index";
     }
 
 }

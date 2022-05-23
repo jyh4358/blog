@@ -4,29 +4,33 @@
 
 <title>Login</title>
 
-<section>
-    <div class="auth-content">
-        <form action="login.html" method="post">
-            <h2 class="form-title">Login</h2>
+<section  class="login-section">
 
-            <div>
-                <label>Username</label>
-                <input type="text" name="username" id="username" class="text-input">
+    <div class=""></div>
+
+    <div class="card container login-box">
+        <P class="text-center alert" id="capsAlert">로그인 오류</P>
+        <div class="d-flex flex-column card-body align-items-center justify-content-center">
+            <h5>
+                SNS 간편 가입/로그인
+            </h5>
+
+            <hr/>
+
+            <div class="col m-2">
+                <a href="/oauth2/authorization/google">
+                    <button class="btnCtm btn-google">구글 로그인</button>
+                </a>
             </div>
 
-            <div>
-                <label>Password</label>
-                <input type="password" name="password" id="password" class="text-input">
+            <div class="col m-2">
+                <a href="/oauth2/authorization/naver">
+                    <button class="btnCtm btn-naver">네이버 로그인<div>(검토중)</div></button>
+                </a>
             </div>
-
-            <div>
-                <button type="submit" name="login-btn" class="btn btn-big">Register</button>
-            </div>
-
-            <p>Or <a href="register.html">Sign Up</a></p>
-
-        </form>
+        </div>
     </div>
+
 </section>
 
 <script></script>

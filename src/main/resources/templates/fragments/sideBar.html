@@ -50,16 +50,14 @@
 
         <li class="mb-1" >
             <div class="btn-group">
-                <button class="btn btn-toggle align-items-center rounded collapsed
-                           me-0 pe-0" data-bs-toggle="collapse"
-                        aria-expanded="true">
+                <button class="btn btn-toggle align-items-center rounded collapsed me-0 pe-0"
+                        data-bs-toggle="collapse" data-bs-target="#superCategoryId" aria-expanded="true">
                 </button>
                 <a th:href="@{/article/list}"
-                   class="ms-0 superCategory btn fs-5"
-                   >슈퍼</a>
+                   class="ms-0 superCategory btn fs-5">슈퍼</a>
             </div>
             <div class="collapse show" >
-                <ul class="ms-1 btn-toggle-nav list-unstyled fw-normal pb-1">
+                <ul class="ms-1 btn-toggle-nav list-unstyled fw-normal pb-1" id="superCategoryId">
                     <li><a th:href="@{/article/list}"
                            class="link-dark rounded"
                            >서브</a></li>
@@ -77,7 +75,12 @@
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li>
                         <a class="comment-side rounded">댓글1</a>
+
+                    </li>
+                    <li>
                         <a class="comment-side rounded">비밀댓글</a>
+                    </li>
+                    <li>
                         <a class="comment-side rounded">댓글2</a>
                     </li>
                 </ul>

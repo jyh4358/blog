@@ -310,8 +310,8 @@ a {
 
 .post-slider .post-wrapper {
     width: 84%;
-    height: 350px;
-    margin: 0px auto;
+    height: 400px;
+    margin: 0px auto 20px auto;
     overflow: hidden;
     padding: 10px 0px 10px 0px;
 
@@ -319,7 +319,7 @@ a {
 
 .post-slider .post-wrapper .post {
     width: 300px;
-    height: 330px;
+    height: 400px;
     margin: 0px 10px;
     display: inline-block;
     background: white;
@@ -641,14 +641,7 @@ a {
         width: 100%;
     }
 
-    .content .sidebar {
-        width: 100%;
-        padding: 10px;
-    }
 
-    .content .sidebar .section.search {
-        margin-top: 30px;
-    }
 
     .footer {
         height: auto;
@@ -670,9 +663,9 @@ a {
 
 @media only screen and (max-width: 770px) {
 
-    /*header {*/
-    /*    position: relative;*/
-    /*}*/
+    .post-wrapper {
+        font-size: 0.8em;
+    }
 
     .auth-content {
         width: 60%;
@@ -724,4 +717,22 @@ a {
     .post-slider .prev {
         left: 10px;
     }
+}
+
+@media only screen and (max-width: 480px) {
+
+    .post-slider .post-wrapper {
+        height: 300px;
+    }
+
+    .post-slider .post-wrapper .post {
+        height: 300px;
+    }
+}
+
+
+.test {
+    background-image: url( "../images/logo.png" );
+    background-position: center;
+    background-size: cover;
 }
