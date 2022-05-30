@@ -1,57 +1,66 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{/layout/adminLayout :: layout(~{::title}, ~{::section}, ~{::script})}">
+      th:replace="~{/layout/adminLayout :: adminLayout(~{::title}, ~{::section}, ~{::script})}">
 
 
 <title>JDong's Blog</title>
 
 <!-- Admin Page Wrapper -->
-<section class="admin-wrapper">
-    <!-- Left Sidebar -->
-    <div class="left-sidebar">
-        <ul>
-            <li><a href="../posts/index.html">Manage Posts</a></li>
-            <li><a href="../user/userList.html">Manage Users</a></li>
-            <li><a href="index.html">Manage Topics</a></li>
-        </ul>
+<section>
+    <div style="margin-bottom: 100px"></div>
 
-    </div>
-    <!-- // Left Sidebar End -->
-
-
-    <!-- Admin Content -->
-    <div class="admin-content">
-        <div class="button-group">
-            <a href="categoryAddForm.html" class="btn btn-big">Add Topic</a>
-            <a href="index.html" class="btn btn-big">Manage Topics</a>
-        </div>
-
-        <div class="content">
-            <h2 class="page-title">Manage Topics</h2>
-
-            <div class="category-list">
-                <ul>
-                    <li id="parent-list">
-                        <div class="category-list">
-                            <div class="child-list">Poetry</div>
-                            <div class="child-list">
-                                <a href="#" class="add" id="elem2">추가</a> <a href="#" class="delete">삭제</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li id="parent-list2">
-                        <div class="category-list">
-                            <div class="child-list">Poetry</div>
-                            <div class="child-list">
-                                <a href="#" class="add">추가</a> <a href="#" class="delete">삭제</a>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+    <div class="container">
+        <h1 class="text-center">카테고리 편집</h1>
+        <hr class="mb-5">
+        <div class="row g-0">
+            <div class="col text-right">
+                <button class="btn btn-primary">카테고리 저장</button>
             </div>
         </div>
+        <div class="row g-9 ms-3 mt-3 me-3">
+            <div class="col-3 text-center">
+                <h4> 1 </h4>
+            </div>
+            <div class="col-9">
+                카테고리 1
+            </div>
+        </div>
+
     </div>
-    <!-- // Admin Content End -->
+
+<!--    &lt;!&ndash; Admin Content &ndash;&gt;-->
+<!--    <div class="admin-content">-->
+<!--        <div class="button-group">-->
+<!--            <a href="categoryAddForm.html" class="btn btn-big">Add Topic</a>-->
+<!--            <a href="index.html" class="btn btn-big">Manage Topics</a>-->
+<!--        </div>-->
+
+<!--        <div class="content">-->
+<!--            <h2 class="page-title">Manage Topics</h2>-->
+
+<!--            <div class="category-list">-->
+<!--                <ul>-->
+<!--                    <li id="parent-list">-->
+<!--                        <div class="category-list">-->
+<!--                            <div class="child-list">Poetry</div>-->
+<!--                            <div class="child-list">-->
+<!--                                <a href="#" class="add" id="elem2">추가</a> <a href="#" class="delete">삭제</a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                    <li id="parent-list2">-->
+<!--                        <div class="category-list">-->
+<!--                            <div class="child-list">Poetry</div>-->
+<!--                            <div class="child-list">-->
+<!--                                <a href="#" class="add">추가</a> <a href="#" class="delete">삭제</a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; // Admin Content End &ndash;&gt;-->
 
 </section>
 <!-- // Page Wrapper End -->
