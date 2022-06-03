@@ -18,21 +18,21 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = false, length = 20)
+    @Column(nullable = false, unique = true, length = 20)
     private String title;
 
     // tier 필요한가..?
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parents_id")
-    private Category parents;
+    @JoinColumn(name = "parent_id")
+    private Category parent;
 
-    @OneToMany(mappedBy = "parents")
-    private List<Category> categories = new ArrayList<>();
+    @OneToMany(mappedBy = "parent")
+    private List<Category> child = new ArrayList<>();
 
     @Builder
-    public Category(String title, Category parents) {
+    public Category(String title, Category parent) {
         this.title = title;
-        this.parents = parents;
+        this.parent = parent;
     }
 }

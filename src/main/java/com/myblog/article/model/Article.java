@@ -1,11 +1,16 @@
 package com.myblog.article.model;
 
+import com.myblog.category.model.Category;
+import com.myblog.comment.model.Comment;
 import com.myblog.member.model.Member;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -33,6 +38,28 @@ public class Article {
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
+    @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<ArticleTag> articleTags = new ArrayList<>();
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
+
+    @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Comment> parentComments = new ArrayList<>();
+
+    @Builder
+    public Article(String title,
+                   String content,
+                   String thumbnailUrl,
+                   Member member,
+                   Category category) {
+        this.title = title;
+        this.content = content;
+        this.hit = 0L;
+        this.thumbnailUrl = thumbnailUrl;
+        this.member = member;
+        this.category = category;
+    }
 }
 
