@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <th:block th:fragment="header">
     <header class="fixed-top d-xxl-none p-0">
@@ -12,15 +13,15 @@
                 <div id="nav-brand" class="nav-brand">
                     <a th:href="@{/}">Jinia's LOG</a>
                 </div>
-                <div id="nav-login">
+                <div id="nav-login" sec:authorize="isAnonymous()">
                     <a th:href="@{/login}"><span class="pe-2">로그인</span></a>
                 </div>
-<!--                <div class="pe-2">-->
-<!--                    <span>조윤호님</span>-->
-<!--                    <a th:href="@{/article/write}">-->
-<!--                        <span style="font-size: 21px"><i class="fas fa-edit"></i></span>-->
-<!--                    </a>-->
-<!--                </div>-->
+                <div sec:authorize="isAuthenticated()" class="pe-2">
+                    <span th:text="${#authentication.name} + '님'"></span>
+                    <a sec:authorize="hasRole('ADMIN')" th:href="@{/article/write}">
+                        <span style="font-size: 21px"><i class="fas fa-edit"></i></span>
+                    </a>
+                </div>
             </div>
         </nav>
 

@@ -25,7 +25,7 @@ button img{
 
 /* Social Buttons Style */
 .btnCtm {
-    background: none;
+    /*background: none;*/
     border: none;
     background-position: 1em;
     background-repeat: no-repeat;
@@ -47,7 +47,7 @@ button img{
 
 .btn-google {
     background-color: #dd4b39;
-    background-image: url("/img/google.svg");
+    background-image: url("/images/google.svg");
 }
 .btn-google:hover {
     background-color: #e47365;
