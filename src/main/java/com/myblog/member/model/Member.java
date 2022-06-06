@@ -2,6 +2,7 @@ package com.myblog.member.model;
 
 import com.myblog.article.model.Article;
 import com.myblog.comment.model.Comment;
+import com.myblog.security.oauth2.model.OAuth2Provider;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,6 +31,10 @@ public class Member {
 
     private String picUrl;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private OAuth2Provider provider;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -44,11 +49,24 @@ public class Member {
                   String username,
                   String email,
                   String picUrl,
+                  OAuth2Provider provider,
                   Role role) {
         this.userId = userId;
         this.username = username;
         this.email = email;
         this.picUrl = picUrl;
+        this.provider = provider;
         this.role = role;
+    }
+
+    public static Member createMember(String userId, String username, String email, String picUrl, OAuth2Provider provider) {
+        return Member.builder()
+                .userId(userId)
+                .username(username)
+                .email(email)
+                .picUrl(picUrl)
+                .provider(provider)
+                .role(Role.USER)
+                .build();
     }
 }

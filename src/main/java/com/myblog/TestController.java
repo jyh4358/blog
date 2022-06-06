@@ -1,5 +1,7 @@
 package com.myblog;
 
+import com.myblog.security.oauth2.CustomOauth2User;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
