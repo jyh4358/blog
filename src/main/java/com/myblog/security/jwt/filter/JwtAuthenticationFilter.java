@@ -45,11 +45,12 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
         String token = request.getHeader(AUTHORIZATION);
 
         if (Objects.isNull(token)) {
-
+            System.out.println(" ============1111======= ");
             return new AnonymousAuthenticationToken(UUID.randomUUID().toString(),
                     "anonymous",
                     List.of(new SimpleGrantedAuthority("ROLE_USER")));
         }
+            System.out.println(" ============2222======= ");
         JwtPreAuthenticationToken preAuthenticationToken = new JwtPreAuthenticationToken(token);
         return this.getAuthenticationManager().authenticate(preAuthenticationToken);
     }
