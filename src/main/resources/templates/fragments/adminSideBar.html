@@ -66,18 +66,6 @@
                     </li>
                 </ul>
             </div>
-
-
-<!--            <div class="collapse show" >-->
-<!--                <ul class="ms-1 btn-toggle-nav list-unstyled fw-normal pb-1" id="superCategoryId">-->
-<!--                    <li>-->
-<!--                        <a th:href="@{/article/list}" class="link-dark rounded">글 관리</a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a th:href="@{/article/list}" class="link-dark rounded">카테고리 관리</a>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--            </div>-->
         </li>
         <!--    카테고리 e    -->
         <!--   최신 댓글 s    -->
@@ -115,7 +103,8 @@
         <li class="mb-1">
             <div>
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <a th:href="@{/login}" class="link-dark rounded"><i class="fas fa-sign-in-alt"></i>&nbsp로그인</a>
+                    <li>
+                        <a th:href="@{/login}" class="link-dark rounded"><i class="fas fa-sign-in-alt"></i>&nbsp로그인</a>
                     </li>
                     <li sec:authorize="isAuthenticated()">
                         <form method="post" id="logout" name="logout" th:action="@{/logout}">
