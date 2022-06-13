@@ -66,7 +66,12 @@ public class Member {
                 .email(email)
                 .picUrl(picUrl)
                 .provider(provider)
-                .role(Role.USER)
+                .role(Role.ADMIN)
                 .build();
+    }
+
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

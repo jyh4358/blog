@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <div th:fragment="adminSideBar">
 
     <div class="m-4 sidebar-header" style="white-space: nowrap">
         <a th:href="@{/}"><h3 class="text-black-50">Jinia's LOG</h3></a>
         <a th:href="@{/aboutMe}"><h5 class="text-black-50">ABOUT ME(작성중)</h5></a>
-        <a th:href="@{/article/write}" href="#">
+        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/article/write}" href="#">
             <h5 class="text-black-50">NEW ARTICLE</h5>
         </a>
 
@@ -30,42 +31,53 @@
             </button>
             <div class="collapse show" id="collapse-link">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
-                    <li><a href="https://github.com/jinia91" class="link-dark rounded">
+                    <li><a href="https://github.com/jyh4358" class="link-dark rounded">
                         <i class="fab fa-github" style="font-size: 20px;"></i>&nbsp Github</a>
                     </li>
                 </ul>
                 <div class="git-box">
                     <div class="git-chart">
-                        <img src="https://ghchart.rshah.org/219138/jinia91">
+                        <img src="https://ghchart.rshah.org/219138/jyh4358">
                     </div>
                 </div>
             </div>
         </li>
 
         <!--   카테고리 s   -->
-        <li class="border-top my-3"></li>
-        <li class="mb-1 superCategory btn fs-5"><a th:href="@{/article}"
-                                                   th:text="|블로그 관리 Home|">토탈</a></li>
-<!--        <a th:href="@{/category/edit}" class="me-0 ps-0 btn"><i class="fas fa-pen"></i></a>-->
+        <div class="border-top my-3"></div>
+        <li class="mb-1 superCategory btn fs-5">
+            <a th:href="@{/admin}" th:text="|블로그 관리 Home|">블로그 관리 Home</a>
+        </li>
 
         <li class="mb-1" >
-            <div class="btn-group">
-                <button class="btn btn-toggle align-items-center rounded collapsed me-0 pe-0"
-                        data-bs-toggle="collapse" data-bs-target="#superCategoryId" aria-expanded="true">
-                </button>
-                <a th:href="@{/article/list}"
-                   class="ms-0 superCategory btn fs-5">콘텐츠</a>
-            </div>
-            <div class="collapse show" >
-                <ul class="ms-1 btn-toggle-nav list-unstyled fw-normal pb-1" id="superCategoryId">
+
+            <button class="btn btn-toggle align-items-center rounded collapsed fs-5"
+                    data-bs-toggle="collapse" data-bs-target="#tag-collapse-xl1" aria-expanded="true">
+                콘텐츠
+            </button>
+            <div class="collapse show" id="tag-collapse-xl1">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li>
-                        <a th:href="@{/article/list}" class="link-dark rounded">글 관리</a>
+                        <a th:href="@{/admin/article}" class="comment-side rounded">글 관리</a>
+
                     </li>
                     <li>
-                        <a th:href="@{/article/list}" class="link-dark rounded">카테고리 관리</a>
+                        <a class="comment-side rounded">카테고리 관리</a>
                     </li>
                 </ul>
             </div>
+
+
+<!--            <div class="collapse show" >-->
+<!--                <ul class="ms-1 btn-toggle-nav list-unstyled fw-normal pb-1" id="superCategoryId">-->
+<!--                    <li>-->
+<!--                        <a th:href="@{/article/list}" class="link-dark rounded">글 관리</a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a th:href="@{/article/list}" class="link-dark rounded">카테고리 관리</a>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </div>-->
         </li>
         <!--    카테고리 e    -->
         <!--   최신 댓글 s    -->
@@ -103,17 +115,15 @@
         <li class="mb-1">
             <div>
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a th:href="@{/login}"
-                           class="link-dark rounded"><i class="fas fa-sign-in-alt"></i>&nbsp로그인</a></li>
-
-                    <li>
+                    <a th:href="@{/login}" class="link-dark rounded"><i class="fas fa-sign-in-alt"></i>&nbsp로그인</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()">
                         <form method="post" id="logout" name="logout" th:action="@{/logout}">
                             <button class="btn"><a class="link-dark rounded ms-1 small"><i class="fas fa-sign-out-alt"></i></i>&nbsp로그아웃</a></button>
                         </form>
                     </li>
 
-                    <li class="ms-3 small">조윤호님 환영합니다</li>
-                    <li class="ms-4 small">(관리자 계정)</li>
+                    <li sec:authorize="hasRole('ADMIN')" class="ms-4 small" th:text="|(관리자계정)|"></li>
 
                 </ul>
             </div>

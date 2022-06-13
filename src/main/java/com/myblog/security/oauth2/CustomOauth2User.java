@@ -18,9 +18,9 @@ public class CustomOauth2User extends DefaultOAuth2User {
         this.member = member;
     }
 
-    // 시큐리티 컨텍스트 내의 인증 정보를 가져와 하는 작업을 수행할 경우 계정 식별자가 사용되도록 조치
+    // 시큐리티 컨텍스트 내의 인증 정보를 가져와 하는 작업을 수행할 경우 계정 사용자 명이 사용되도록 조치
     @Override
     public String getName() {
-        return member.getUserId();
+        return member.getUsername();
     }
 }

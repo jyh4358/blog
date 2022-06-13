@@ -25,21 +25,12 @@ public class Oauth2MemberService extends DefaultOAuth2UserService {
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
 
-        String provider = userRequest.getClientRegistration().getRegistrationId();
-        System.out.println("provider = " + provider);
-        String providerId = oAuth2User.getAttribute("sub");
-        System.out.println("providerId = " + providerId);
-        String userId = provider + "_" + providerId; // google_ + sub
-        String email = oAuth2User.getAttribute("email");
-        String role = "ROLE_USER";
-
-        System.out.println("oAuth2User.getAttribute(\"email\") = " + oAuth2User.getAttribute("email"));
-
+        // todo - factory 사용으로 나중에 변경
         OAuth2UserInfo userInfo = new GoogleUser(oAuth2User.getAttributes());
 
         // todo - Oauth2Provider를 바로 넣는로직은 유지보수 관점에 안좋음 나중에 변경하자
-        Member googleMember = Member.createMember(
-                userId,
+        Member oauthMember = Member.createMember(
+                oAuth2User.getAttribute("sub"),
                 oAuth2User.getAttribute("name"),
                 oAuth2User.getAttribute("email"),
                 oAuth2User.getAttribute("picture"),
@@ -47,11 +38,21 @@ public class Oauth2MemberService extends DefaultOAuth2UserService {
 
 
         Member member = memberRepository.findByEmail(oAuth2User.getAttribute("email"))
-                        .orElseGet(() -> memberRepository.save(googleMember));
-        System.out.println("member.getUserId() = " + member.getUserId());
+                        .orElseGet(() -> memberRepository.save(oauthMember));
+
+        changeMemberName(oAuth2User, member);
 
         return new CustomOauth2User(userInfo, member);
 
+    }
+
+
+    //동일 이름을 식별하기 위해 Google 식별키로 구분
+    private void changeMemberName(OAuth2User oAuth2User, Member member) {
+        String providerId = oAuth2User.getAttribute("sub");
+        String subProviderId = providerId.substring(0, 5);
+        String name = oAuth2User.getAttribute("name");
+        member.setUsername(name + "#" + subProviderId);
     }
 
 }
