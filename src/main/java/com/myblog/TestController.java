@@ -1,5 +1,6 @@
 package com.myblog;
 
+import com.myblog.member.model.Member;
 import com.myblog.security.oauth2.CustomOauth2User;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -7,6 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class TestController {
@@ -81,4 +85,17 @@ public class TestController {
         return "admin/index";
     }
 
+    @GetMapping("/test")
+    public String test(Model model) {
+        List<String> test1 = List.of("test1", "test2", "test3");
+        TestList testList1 = new TestList(1L, "categoryTest1", test1);
+        List<String> test2 = List.of("test11", "test22", "test33");
+        TestList testList2 = new TestList(2L, "categoryTest2", test2);
+
+        CategoryList categoryList = new CategoryList(List.of(testList1, testList2));
+
+        model.addAttribute("categoryList", categoryList);
+
+        return "test";
+    }
 }
