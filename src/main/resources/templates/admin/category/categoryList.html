@@ -12,31 +12,6 @@
     <div class="container">
         <h1 class="text-center">카테고리 편집</h1>
         <hr class="mb-5">
-<!--        <div class="row g-0">-->
-<!--            <div class="col text-right">-->
-<!--                <button class="btn btn-primary">카테고리 저장</button>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="row g-9 ms-3 mt-3 me-3" id="list-a">-->
-
-<!--            <div class="input-group mb-3">-->
-<!--                <input type="text" class="form-control" placeholder="Recipient\'s username"-->
-<!--                       aria-label="Recipient\'s username" aria-describedby="button-addon2" readonly>-->
-<!--                <button class="btn btn-outline-secondary" type="button">Button</button>-->
-<!--                <a href="#" class="add" id="elem2">추가</a> <a href="#" class="delete">삭제</a>-->
-<!--            </div>-->
-
-
-<!--        </div>-->
-<!--        <div class="input-group mb-3">-->
-<!--            <input type="text" class="form-control" placeholder="Recipient\'s username"-->
-<!--                   aria-label="Recipient\'s username" aria-describedby="button-addon2">-->
-<!--            <button class="btn btn-outline-secondary" type="button">Button</button>-->
-<!--        </div>-->
-<!--        <div class="input-group mb-3">-->
-<!--            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">-->
-<!--            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>-->
-<!--        </div>-->
         <div class="col justify-content-center my-1 mx-0">
             <form action="categoryList.html" th:action th:object="${categoryList}" method="post">
                 <th:block th:each="list, s : ${categoryList.testLists}">
@@ -69,49 +44,17 @@
             </form>
         </div>
 
-
-
     </div>
-
-<!--    &lt;!&ndash; Admin Content &ndash;&gt;-->
-<!--    <div class="admin-content">-->
-<!--        <div class="button-group">-->
-<!--            <a href="categoryAddForm.html" class="btn btn-big">Add Topic</a>-->
-<!--            <a href="index.html" class="btn btn-big">Manage Topics</a>-->
-<!--        </div>-->
-
-<!--        <div class="content">-->
-<!--            <h2 class="page-title">Manage Topics</h2>-->
-
-<!--            <div class="category-list">-->
-<!--                <ul>-->
-<!--                    <li id="parent-list">-->
-<!--                        <div class="category-list">-->
-<!--                            <div class="child-list">Poetry</div>-->
-<!--                            <div class="child-list">-->
-<!--                                <a href="#" class="add" id="elem2">추가</a> <a href="#" class="delete">삭제</a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                    <li id="parent-list2">-->
-<!--                        <div class="category-list">-->
-<!--                            <div class="child-list">Poetry</div>-->
-<!--                            <div class="child-list">-->
-<!--                                <a href="#" class="add">추가</a> <a href="#" class="delete">삭제</a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    &lt;!&ndash; // Admin Content End &ndash;&gt;-->
 
 </section>
 <!-- // Page Wrapper End -->
 
 <script th:inline="javascript">
     let count = 0;
+    const categoryList = [[${categoryList}]];
+    console.log(categoryList)
+    categoryList.testLists[0].childCategories.push('');
+    console.log(categoryList.testLists[0].childCategories.splice(1, 1));
     function deleteParentCategory(num) {
         let element = document.getElementById('category'+num);
         let node = element.parentNode.parentNode;
@@ -183,6 +126,7 @@
             console.log(lastElementChild);
 
             element.parentNode.parentNode.appendChild(lastElementChild);
+
         }
     }
 
