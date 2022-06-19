@@ -12,36 +12,53 @@
     <div class="container">
         <h1 class="text-center">카테고리 편집</h1>
         <hr class="mb-5">
-        <div class="col justify-content-center my-1 mx-0">
-            <form action="categoryList.html" th:action th:object="${categoryList}" method="post">
-                <th:block th:each="list, s : ${categoryList.testLists}">
-                    <!-- 입력 영역 -->
-                    <div class="row g-9 ms-3 mt-3 me-5" id="list-a">
+        <div class="col justify-content-center my-1 mx-0" id="list">
+            <form action="categoryList.html" th:action th:object="${categoryListResponse}" method="post">
+                <!-- 입력 영역 -->
+                <th:block th:each="list, s : ${categoryListResponse.categoryLists}">
+                    <div class="row g-9 ms-3 mt-3 me-5" th:id="'category-list'+${s.count}">
 
-                        <div th:text="${s}"></div>
-                        <div th:text="${s.index}"></div>
+                        <!--                        <div th:text="${s}"></div>-->
+                        <!--                        <div th:text="${s.index}"></div>-->
                         <div class="input-group mb-3" th:id="'parent'+${s.count}">
-                            <input type="text" class="form-control" placeholder="Recipient\'s username"
-                                   th:field="|${categoryList.testLists[__${s.index}__].parentCategory}|"
+                            <input type="text" class="form-control"
+                                   th:field="|${categoryListResponse.categoryLists[__${s.index}__].parentCategory}|"
                                    th:id="'category'+${s.count}" readonly>
-                            <button class="btn btn-outline-secondary" type="button" th:id="'modify'+${s.count}" th:onclick="|modifyParentCategory(${s.count})|">수정</button>
-                            <button class="btn btn-outline-secondary" type="button" th:id="'add'+${s.count}" th:onclick="|addParentCategory(${s.count}, ${s.current.childCategories.size()})|">추가</button>
-                            <button class="btn btn-outline-secondary" type="button" th:id="'delete'+${s.count}" th:onclick="|deleteParentCategory(${s.count})|">삭제</button>
+                            <button class="btn btn-outline-secondary" type="button" th:id="'modify'+${s.count}"
+                                    th:onclick="|modifyParentCategory(${s.count})|">수정
+                            </button>
+                            <button class="btn btn-outline-secondary" type="button" th:id="'add'+${s.count}"
+                                    th:onclick="|addCategory(${s.count}, ${s.current.childCategories.size()})|">추가
+                            </button>
+                            <button class="btn btn-outline-secondary" type="button" th:id="'delete'+${s.count}"
+                                    th:onclick="|deleteParentCategory(${s.count})|">삭제
+                            </button>
                         </div>
-                        <div class="input-group mb-3 ms-5" th:each="childCategories, ss : ${list.childCategories}" th:id="'child'+${s.count}+${ss.count}">
+                        <div class="input-group mb-3 ms-5" th:each="childCategories, ss : ${list.childCategories}"
+                             th:id="'child'+${s.count}+${ss.count}">
                             <input type="text" class="form-control" style="width: 80%"
-                                   th:field="|${categoryList.testLists[__${s.index}__].childCategories[__${ss.index}__]}|"
+                                   th:field="|${categoryListResponse.categoryLists[__${s.index}__].childCategories[__${ss.index}__]}|"
                                    th:id="'category'+${s.count}+${ss.count}" readonly>
-                            <button style="width: 10%" class="btn btn-outline-secondary" type="button" th:id="'modify'+${s.count}+${ss.count}" th:onclick="|modifyParentCategory(${s.count}${ss.count})|">수정</button>
-                            <button style="width: 10%" class="btn btn-outline-secondary" type="button" th:id="'delete'+${s.count}+${ss.count}" th:onclick="|deleteCategory(${s.count},${ss.count})|">삭제</button>
+                            <button style="width: 10%" class="btn btn-outline-secondary" type="button"
+                                    th:id="'modify'+${s.count}+${ss.count}"
+                                    th:onclick="|modifyCategory(${s.count}, ${ss.count})|">수정
+                            </button>
+                            <button style="width: 10%" class="btn btn-outline-secondary" type="button"
+                                    th:id="'delete'+${s.count}+${ss.count}"
+                                    th:onclick="|deleteCategory(${s.count},${ss.count})|">삭제
+                            </button>
                         </div>
 
                     </div>
                 </th:block>
-                <div class="row justify-content-evenly mt-4 mb-5 g-0">
-                    <button class="btn btn-secondary" type="submit">저 장</button>
-                </div>
             </form>
+        </div>
+        <div class="row justify-content-evenly mt-4 mb-1 g-0">
+            <button class="btn btn-secondary" type="button" th:onclick="addParentCategory()">카테고리 추가
+            </button>
+        </div>
+        <div class="row justify-content-evenly mt-1 mb-5 g-0">
+            <button class="btn btn-secondary" type="submit">저 장</button>
         </div>
 
     </div>
@@ -50,73 +67,128 @@
 <!-- // Page Wrapper End -->
 
 <script th:inline="javascript">
+
     let count = 0;
-    const categoryList = [[${categoryList}]];
-    console.log(categoryList)
-    categoryList.testLists[0].childCategories.push('');
-    console.log(categoryList.testLists[0].childCategories.splice(1, 1));
-    function deleteParentCategory(num) {
-        let element = document.getElementById('category'+num);
+    const categoryListResponse = [[${categoryListResponse}]];
+    console.log(categoryListResponse)
+
+    // 부모 카테고리 삭제 시 자식 카테고리도 삭제
+    function deleteParentCategory(pId) {
+        let element = document.getElementById('category' + pId);
         let node = element.parentNode.parentNode;
+        let count = 0;
 
         while (node.hasChildNodes()) {
             node.removeChild(
                 node.firstChild
             );
         }
+        while (categoryListResponse.categoryLists[pId - 1].childCategories.length > count) {
+            categoryListResponse.categoryLists[pId - 1].childCategories[count++] = '';
+        }
+        categoryListResponse.categoryLists[pId - 1].parentCategory = '';
+        console.log(categoryListResponse);
     };
 
-    function deleteCategory(parent, child) {
-        document.getElementById('child'+parent+child).remove();
+    // 자식 카테고리 삭제
+    function deleteCategory(pId, cId) {
+        document.getElementById('child' + pId + cId).remove();
+        console.log(pId, cId);
+        categoryListResponse.categoryLists[pId - 1].childCategories[cId - 1] = '';
+        console.log(categoryListResponse.categoryLists[pId - 1].childCategories[cId - 1]);
+        console.log(categoryListResponse);
+
     };
 
-    function addParentCategory(num, size) {
-        count++;
-        let num2 = count + size;
-        let element = document.getElementById('add'+num);
+    // 부모 카테고리 추가
+    function addParentCategory() {
+        let length = categoryListResponse.categoryLists.length;
+        console.log(length);
+        let arr = new Array();
+        categoryListResponse.categoryLists[length] = {
+            parentCategory: '',
+            childCategories: arr
+        };
+        console.log(categoryListResponse);
+
+
+        let a = '';
+        a += '                    <div class="row g-9 ms-3 mt-3 me-5" id="category-list' + (length + 1) + '">\n' +
+            '                        <div class="input-group mb-3" id="parent' + (length + 1) + '">\n' +
+            '                            <input type="text" class="form-control"\n' +
+            '                                   id="category' + (length + 1) + '" value="" readonly>' +
+            '                            <button class="btn btn-outline-secondary" type="button" id="modify' + (length + 1) + '"\n' +
+            '                                    onclick="modifyParentCategory(' + (length + 1) + ')">수정\n' +
+            '                            </button>\n' +
+            '                            <button class="btn btn-outline-secondary" type="button" id="add' + (length + 1) + '"\n' +
+            '                                    onclick="addCategory(' + (length + 1) + ', 1)">추가\n' +
+            '                            </button>\n' +
+            '                            <button class="btn btn-outline-secondary" type="button" id="delete' + (length + 1) + '"\n' +
+            '                                    onclick="deleteParentCategory(' + (length + 1) + ')">삭제\n' +
+            '                            </button>\n' +
+            '                        </div>\n' +
+            '                    </div>';
+
+        console.log(length);
+        if (length == 0) {
+            $(document.getElementById("list")).append(a);
+        } else {
+            $(document.getElementById("category-list" + length)).after(a);
+        }
+
+
+    }
+
+    // 자식 카테고리 추가
+    function addCategory(pId, childSize) {
+        // count++;
+        let num = categoryListResponse.categoryLists[pId - 1].childCategories.length;
+        num++;
+        console.log('=======' + num);
+        let element = document.getElementById('add' + pId);
         let lastElementChild = element.parentNode.parentNode.lastElementChild.cloneNode(true);
 
         console.log(element.parentNode.parentNode.lastElementChild.id);
+        console.log('=================');
 
-        if (element.parentNode.parentNode.lastElementChild.id === 'parent1') {
-            let a = '';
-            a += '            <div class="input-group mb-3 ms-5" id="child' + num + '1">\n' +
-                '                <input type="text" class="form-control" style="width: 80%"\n' +
-                '                       id="category' + num + '1" name="testLists[' + (num - 1) + '].childCategories[' + (num2 - 1) + ']">\n' +
-                '                <button style="width: 10%" class="btn btn-outline-secondary" type="button" id="modify' + num + '1" onclick="modifyParentCategory(' + num + '1)">확인</button>\n' +
-                '                <button style="width: 10%" class="btn btn-outline-secondary" type="button" id="deleteCategory(' + num + '1)" onclick="deleteCategory(' + num + ',1)">삭제</button>\n' +
-                '            </div>';
+        if (element.parentNode.parentNode.lastElementChild.id == 'parent' + pId) {
             let parentNode = element.parentNode.parentNode;
+            let a = '';
+            a += '            <div class="input-group mb-3 ms-5" id="child' + pId + num + '">\n' +
+                '                <input type="text" class="form-control" style="width: 80%"\n' +
+                '                       id="category' + pId + num + '" name="testLists[' + (pId - 1) + '].childCategories[' + (num - 1) + ']">\n' +
+                '                <button style="width: 10%" class="btn btn-outline-secondary" type="button" id="modify' + pId + num + '" onclick="modifyCategory(' + pId + ',' + num + ')">확인</button>\n' +
+                '                <button style="width: 10%" class="btn btn-outline-secondary" type="button" id="delete' + pId + num + '" onclick="deleteCategory(' + pId + ',' + num + ')">삭제</button>\n' +
+                '            </div>';
             $(parentNode).append(a);
         } else {
             console.log('else = ' + count);
-            console.log('num2 = ' + num2);
+            console.log('num2 = ' + num);
 
-            lastElementChild.setAttribute('id', 'child' + num + num2);
+            lastElementChild.setAttribute('id', 'child' + pId + num);
 
             let htmlInputElement = document.createElement('input');
             htmlInputElement.setAttribute('class', 'form-control');
             htmlInputElement.setAttribute('style', 'width: 80%');
-            htmlInputElement.setAttribute('id', 'category' + num + num2);
-            htmlInputElement.setAttribute('name', 'testLists[' + (num - 1) + '].childCategories[' + (num2 - 1) + ']');
+            htmlInputElement.setAttribute('id', 'category' + pId + num);
+            htmlInputElement.setAttribute('name', 'testLists[' + (pId - 1) + '].childCategories[' + (num - 1) + ']');
             htmlInputElement.readOnly = false;
 
             let htmlButtonElement = document.createElement('button');
             htmlButtonElement.setAttribute('style', 'width: 10%');
             htmlButtonElement.setAttribute('class', 'btn btn-outline-secondary');
-            htmlButtonElement.setAttribute('id', 'modify' + num + num2);
+            htmlButtonElement.setAttribute('id', 'modify' + pId + num);
             htmlButtonElement.setAttribute('type', 'button');
-            htmlButtonElement.setAttribute('onclick', 'modifyParentCategory(' + num + num2 + ')');
+            htmlButtonElement.setAttribute('onclick', 'modifyParentCategory(' + pId + num + ')');
             htmlButtonElement.innerHTML = '확인';
 
             let deleteElement = document.createElement('button');
             deleteElement.setAttribute('style', 'width: 10%');
             deleteElement.setAttribute('class', 'btn btn-outline-secondary');
-            deleteElement.setAttribute('id', 'delete' + num + num2);
+            deleteElement.setAttribute('id', 'delete' + pId + num);
             deleteElement.setAttribute('type', 'button');
-            deleteElement.setAttribute('onclick', 'deleteCategory(' + num + ',' + num2 + ')');
+            deleteElement.setAttribute('onclick', 'deleteCategory(' + pId + ',' + num + ')');
             deleteElement.innerHTML = '삭제';
-
 
 
             lastElementChild.replaceChild(htmlInputElement, lastElementChild.childNodes[1]);
@@ -125,14 +197,19 @@
             console.log(lastElementChild.childNodes);
             console.log(lastElementChild);
 
+
             element.parentNode.parentNode.appendChild(lastElementChild);
 
         }
+        categoryListResponse.categoryLists[pId - 1].childCategories[--num] = '';
     }
 
     function modifyParentCategory(id) {
-        let elem = document.getElementById('category'+id);
-        let buttonElem = document.getElementById('modify'+id);
+        let elem = document.getElementById('category' + id);
+        let buttonElem = document.getElementById('modify' + id);
+        categoryListResponse.categoryLists[id - 1] = elem.value;
+
+        console.log(categoryListResponse.categoryLists[id - 1]);
 
         if (buttonElem.innerText === '수정') {
             elem.readOnly = false;
@@ -141,6 +218,22 @@
             elem.readOnly = true;
             buttonElem.innerHTML = '수정';
         }
+    }
+
+    function modifyCategory(pId, cId) {
+        let elem = document.getElementById('category' + pId + cId);
+        let buttonElem = document.getElementById('modify' + pId + cId);
+        categoryListResponse.categoryLists[pId - 1].childCategories[cId - 1] = elem.value;
+
+        console.log(categoryListResponse.categoryLists[pId - 1].childCategories[cId - 1]);
+        if (buttonElem.innerText === '수정') {
+            elem.readOnly = false;
+            buttonElem.innerHTML = '확인';
+        } else {
+            elem.readOnly = true;
+            buttonElem.innerHTML = '수정';
+        }
+
     }
 
 

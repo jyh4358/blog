@@ -61,7 +61,7 @@ public class TestController {
     }
 
 
-    @GetMapping("/admin/categories")
+//    @GetMapping("/admin/categories")
     public String adminArticle(Model model) {
 
         List<String> list = new ArrayList<>();
