@@ -12,7 +12,12 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class CategoryList {
+    private Long id;
     private String parentCategory;
-    private List<String> childCategories = new ArrayList<>();
+    private List<ChildCategoryList> childCategories = new ArrayList<>();
+    private Boolean deleteCheck;
 
+    public boolean isNewCategory(){
+        return id == null;
+    }
 }

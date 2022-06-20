@@ -1,9 +1,6 @@
 package com.myblog.category.model;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -18,7 +15,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true, length = 20)
+    @Column(nullable = false, unique = false, length = 20)
     private String title;
 
     // tier 필요한가..?
@@ -27,12 +24,33 @@ public class Category {
     @JoinColumn(name = "parent_id")
     private Category parent;
 
-    @OneToMany(mappedBy = "parent")
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
     private List<Category> child = new ArrayList<>();
 
-    @Builder
+    public Category(String title) {
+        this.title = title;
+    }
+
     public Category(String title, Category parent) {
         this.title = title;
         this.parent = parent;
+    }
+
+    public Category(Long id, String title, Category parent) {
+        this.id = id;
+        this.title = title;
+        this.parent = parent;
+    }
+
+    public static Category createCategory(Long id, String title, Category parent) {
+        return new Category(id, title, parent);
+    }
+
+    public void setChild(List<Category> child) {
+        this.child = child;
+    }
+
+    public void changeTitle(String title) {
+        this.title = title;
     }
 }

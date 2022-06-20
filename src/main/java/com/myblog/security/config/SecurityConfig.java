@@ -32,14 +32,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf()
-                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                .and()
                 .formLogin().disable()
                 .httpBasic().disable()
 
                 .authorizeRequests()
-                .antMatchers("/admin/**").hasRole(Role.ADMIN.name())
+//                .antMatchers("/admin/**").hasRole(Role.ADMIN.name())
 //                .antMatchers("/").hasRole(Role.USER.name())
                 .antMatchers("/comment").hasRole(Role.USER.name())
                 .anyRequest().permitAll()
@@ -47,6 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutSuccessUrl("/")
+                .deleteCookies("JSESSIONID","remember-me")
 
                 .and()
                 .csrf()

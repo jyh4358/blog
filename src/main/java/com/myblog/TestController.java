@@ -86,7 +86,7 @@ public class TestController {
         return "admin/category/categoryList";
     }
 
-    @PostMapping("/admin/categories")
+//    @PostMapping("/admin/categories")
     public String adminCategory(CategoryList categoryList, Model model) {
         System.out.println("categoryList = " + categoryList);
         for (TestList testList : categoryList.getTestLists()) {
