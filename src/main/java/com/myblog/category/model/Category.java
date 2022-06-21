@@ -53,4 +53,13 @@ public class Category {
     public void changeTitle(String title) {
         this.title = title;
     }
+
+    public void setParent(Category category) {
+        this.parent = category;
+    }
+
+    public void addChildCategory(Category child) {
+        this.child.add(child);
+        child.setParent(this);
+    }
 }

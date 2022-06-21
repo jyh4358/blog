@@ -1,5 +1,6 @@
 package com.myblog.member.repository;
 
+import com.myblog.category.model.Category;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -23,6 +24,8 @@ class MemberRepositoryTest {
 
         System.out.println("ChronoUnit.DAYS.between(now, now1) = " + ChronoUnit.DAYS.between(now, now2));
 
+        Category title = new Category("title", null);
+        System.out.println("title.getId() = " + title.getId());
     }
 
 }

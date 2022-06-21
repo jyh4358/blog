@@ -12,32 +12,32 @@
     <div class="container">
         <h1 class="text-center">카테고리 편집</h1>
         <hr class="mb-5">
-        <form action="categoryList.html" th:action th:object="${categoryListResponse}" method="post">
+        <form action="parentCategoryList.html" th:action th:object="${categoryListDto}" method="post">
             <div class="col justify-content-center my-1 mx-0" id="list">
                 <!-- 입력 영역 -->
-                <th:block th:each="list, s : ${categoryListResponse.categoryLists}">
+                <th:block th:each="list, s : ${categoryListDto.parentCategoryLists}">
                     <div class="row g-9 ms-3 mt-3 me-5" th:id="'category-list'+${s.count}">
 
                         <!--                        <div th:text="${s}"></div>-->
                         <!--                        <div th:text="${s.index}"></div>-->
                         <div class="input-group mb-3" th:id="'parent'+${s.count}">
                             <input type="text" class="form-control"
-                                   th:field="|${categoryListResponse.categoryLists[__${s.index}__].parentCategory}|"
+                                   th:field="|${categoryListDto.parentCategoryLists[__${s.index}__].parentCategory}|"
                                    th:id="'category'+${s.count}" readonly>
                             <button class="btn btn-outline-secondary" type="button" th:id="'modify'+${s.count}"
                                     th:onclick="|modifyParentCategory(${s.count})|">수정
                             </button>
                             <button class="btn btn-outline-secondary" type="button" th:id="'add'+${s.count}"
-                                    th:onclick="|addCategory(${s.count}, ${s.current.childCategories.size()})|">추가
+                                    th:onclick="|addCategory(${s.count}, ${s.current.childCategoryLists.size()})|">추가
                             </button>
                             <button class="btn btn-outline-secondary" type="button" th:id="'delete'+${s.count}"
                                     th:onclick="|deleteParentCategory(${s.count})|">삭제
                             </button>
                         </div>
-                        <div class="input-group mb-3 ms-5" th:each="childCategories, ss : ${list.childCategories}"
+                        <div class="input-group mb-3 ms-5" th:each="childCategories, ss : ${list.childCategoryLists}"
                              th:id="'child'+${s.count}+${ss.count}">
                             <input type="text" class="form-control" style="width: 80%"
-                                   th:field="|${categoryListResponse.categoryLists[__${s.index}__].childCategories[__${ss.index}__].childCategory}|"
+                                   th:field="|${categoryListDto.parentCategoryLists[__${s.index}__].childCategoryLists[__${ss.index}__].childCategory}|"
                                    th:id="'category'+${s.count}+${ss.count}" readonly>
                             <button style="width: 10%" class="btn btn-outline-secondary" type="button"
                                     th:id="'modify'+${s.count}+${ss.count}"
@@ -69,8 +69,8 @@
 <script th:inline="javascript">
 
     let count = 0;
-    const categoryListResponse = [[${categoryListResponse}]];
-    console.log(categoryListResponse)
+    const categoryListDto = [[${categoryListDto}]];
+    console.log(categoryListDto)
 
     function getCookie(str) {
         const value = document.cookie.match('(^|;) ?' + str + '=([^;]*)(;|$)');
@@ -93,26 +93,26 @@
                 node.firstChild
             );
         }
-        while (categoryListResponse.categoryLists[pId - 1].childCategories.length > count) {
-            categoryListResponse.categoryLists[pId - 1].childCategories[count++].deleteCheck = true;
+        while (categoryListDto.parentCategoryLists[pId - 1].childCategoryLists.length > count) {
+            categoryListDto.parentCategoryLists[pId - 1].childCategoryLists[count++].deleteCheck = true;
         }
-        categoryListResponse.categoryLists[pId - 1].deleteCheck = true;
-        console.log(categoryListResponse);
+        categoryListDto.parentCategoryLists[pId - 1].deleteCheck = true;
+        console.log(categoryListDto);
     };
 
     // 자식 카테고리 삭제
     function deleteCategory(pId, cId) {
         document.getElementById('child' + pId + cId).remove();
         console.log(pId, cId);
-        categoryListResponse.categoryLists[pId - 1].childCategories[cId - 1].deleteCheck = true;
-        console.log(categoryListResponse.categoryLists[pId - 1].childCategories[cId - 1]);
-        console.log(categoryListResponse);
+        categoryListDto.parentCategoryLists[pId - 1].childCategoryLists[cId - 1].deleteCheck = true;
+        console.log(categoryListDto.parentCategoryLists[pId - 1].childCategoryLists[cId - 1]);
+        console.log(categoryListDto);
 
     };
 
     // 부모 카테고리 추가
     function addParentCategory() {
-        let length = categoryListResponse.categoryLists.length;
+        let length = categoryListDto.parentCategoryLists.length;
         console.log(length);
         let arr = new Array();
         // arr[0] = {
@@ -120,14 +120,14 @@
         //     childCategory: '',
         //     deleteCheck: true
         // };
-        categoryListResponse.categoryLists[length] = {
+        categoryListDto.parentCategoryLists[length] = {
             id : null,
             parentCategory: '',
             childCategories: arr,
             deleteCheck: false
 
         };
-        console.log(categoryListResponse);
+        console.log(categoryListDto);
 
 
         let a = '';
@@ -160,7 +160,7 @@
     // 자식 카테고리 추가
     function addCategory(pId, childSize) {
         // count++;
-        let num = categoryListResponse.categoryLists[pId - 1].childCategories.length;
+        let num = categoryListDto.parentCategoryLists[pId - 1].childCategoryLists.length;
         num++;
         console.log('=======' + num);
         let element = document.getElementById('add' + pId);
@@ -197,7 +197,7 @@
             htmlButtonElement.setAttribute('class', 'btn btn-outline-secondary');
             htmlButtonElement.setAttribute('id', 'modify' + pId + num);
             htmlButtonElement.setAttribute('type', 'button');
-            htmlButtonElement.setAttribute('onclick', 'modifyParentCategory(' + pId + num + ')');
+            htmlButtonElement.setAttribute('onclick', 'modifyCategory(' + pId +', ' + num + ')');
             htmlButtonElement.innerHTML = '확인';
 
             let deleteElement = document.createElement('button');
@@ -219,7 +219,7 @@
             element.parentNode.parentNode.appendChild(lastElementChild);
 
         }
-        categoryListResponse.categoryLists[pId - 1].childCategories[--num] = {
+        categoryListDto.parentCategoryLists[pId - 1].childCategoryLists[--num] = {
             id: null,
             childCategory: '',
             deleteCheck: false
@@ -230,15 +230,15 @@
         let elem = document.getElementById('category' + id);
         let buttonElem = document.getElementById('modify' + id);
 
-        console.log(categoryListResponse.categoryLists[id - 1]);
+        console.log(categoryListDto.parentCategoryLists[id - 1]);
 
         if (buttonElem.innerText === '수정') {
             elem.readOnly = false;
             buttonElem.innerHTML = '확인';
         } else {
             elem.readOnly = true;
-            categoryListResponse.categoryLists[id - 1].parentCategory = elem.value;
-            console.log(categoryListResponse.categoryLists[id - 1]);
+            categoryListDto.parentCategoryLists[id - 1].parentCategory = elem.value;
+            console.log(categoryListDto.parentCategoryLists[id - 1]);
             buttonElem.innerHTML = '수정';
         }
     }
@@ -246,9 +246,9 @@
     function modifyCategory(pId, cId) {
         let elem = document.getElementById('category' + pId + cId);
         let buttonElem = document.getElementById('modify' + pId + cId);
-        categoryListResponse.categoryLists[pId - 1].childCategories[cId - 1].childCategory = elem.value;
+        categoryListDto.parentCategoryLists[pId - 1].childCategoryLists[cId - 1].childCategory = elem.value;
 
-        console.log(categoryListResponse.categoryLists[pId - 1].childCategories[cId - 1]);
+        console.log(categoryListDto.parentCategoryLists[pId - 1].childCategoryLists[cId - 1]);
         if (buttonElem.innerText === '수정') {
             elem.readOnly = false;
             buttonElem.innerHTML = '확인';
@@ -267,7 +267,7 @@
             url: '/admin/categories',
             headers : { 'X-XSRF-TOKEN': token},
             contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify(categoryListResponse)
+            data: JSON.stringify(categoryListDto)
         }).done(function () {
             alert('변경 내용 저장 완료.');
             window.location.href = '/admin/categories';

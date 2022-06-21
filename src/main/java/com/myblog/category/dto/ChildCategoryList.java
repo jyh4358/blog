@@ -13,7 +13,8 @@ public class ChildCategoryList {
     private String childCategory;
     private Boolean deleteCheck;
 
-    public boolean isNewCategory(){
+    public boolean checkNewCategory(){
         return id == null;
     }
+
 }

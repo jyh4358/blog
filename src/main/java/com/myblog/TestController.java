@@ -55,46 +55,9 @@ public class TestController {
         return "admin/article/articleList";
     }
 
-    @GetMapping("/admin/article")
-    public String articlesWrite() {
-        return "admin/article/articleWriteForm";
-    }
 
 
-//    @GetMapping("/admin/categories")
-    public String adminArticle(Model model) {
 
-        List<String> list = new ArrayList<>();
-        list.add("test1");
-        list.add("test2");
-        list.add("test3");
-        TestList testList1 = new TestList("categoryTest1", list);
-        TestList testList2 = new TestList("categoryTest2", list);
-
-        for (String s : list) {
-            System.out.println("s = " + s);
-        }
-
-        List<TestList> testLists = new ArrayList<>();
-        testLists.add(testList1);
-        testLists.add(testList2);
-
-        CategoryList categoryList = new CategoryList(testLists);
-        System.out.println("categoryList = " + categoryList);
-
-        model.addAttribute("categoryList", categoryList);
-        return "admin/category/categoryList";
-    }
-
-//    @PostMapping("/admin/categories")
-    public String adminCategory(CategoryList categoryList, Model model) {
-        System.out.println("categoryList = " + categoryList);
-        for (TestList testList : categoryList.getTestLists()) {
-            System.out.println("testList = " + testList);
-        }
-        model.addAttribute("categoryList", categoryList);
-        return "admin/category/categoryList";
-    }
 
     @GetMapping("/admin/category")
     public String categories() {
@@ -116,38 +79,5 @@ public class TestController {
         return "admin/index";
     }
 
-    @GetMapping("/test")
-    public String test(Model model) {
-        List<String> list = new ArrayList<>();
-        list.add("test1");
-        list.add("test2");
-        list.add("test3");
-        TestList testList1 = new TestList("categoryTest1", list);
-        TestList testList2 = new TestList("categoryTest2", list);
 
-        for (String s : list) {
-            System.out.println("s = " + s);
-        }
-
-        List<TestList> testLists = new ArrayList<>();
-        testLists.add(testList1);
-        testLists.add(testList2);
-
-        CategoryList categoryList = new CategoryList(testLists);
-        System.out.println("categoryList = " + categoryList);
-
-        model.addAttribute("categoryList", categoryList);
-
-        return "test";
-    }
-
-    @PostMapping("/test")
-    public String testPost(CategoryList categoryList, Model model) {
-        System.out.println("categoryList = " + categoryList);
-        for (TestList testList : categoryList.getTestLists()) {
-            System.out.println("testList = " + testList);
-        }
-        model.addAttribute("categoryList", categoryList);
-        return "test";
-    }
 }

@@ -1,7 +1,7 @@
 package com.myblog.category.controller;
 
-import com.myblog.category.dto.CategoryListResponse;
-import com.myblog.category.model.Category;
+import com.myblog.category.dto.ParentCategoryList;
+import com.myblog.category.dto.CategoryListDto;
 import com.myblog.category.resposiotry.CategoryRepository;
 import com.myblog.category.service.CategoryService;
 import lombok.RequiredArgsConstructor;
@@ -23,17 +23,16 @@ public class CategoryController {
     @GetMapping("/admin/categories")
     public String categoryList(Model model) {
 
-        categoryRepository.save(new Category("category1"));
-        CategoryListResponse categoryListResponse = categoryService.findCategories();
-        model.addAttribute("categoryListResponse", categoryListResponse);
+        CategoryListDto categoryListDto = categoryService.findCategories();
+        model.addAttribute("categoryListDto", categoryListDto);
 
         return "admin/category/categoryList";
     }
 
 
     @PostMapping("/admin/categories")
-    public @ResponseBody String editCategory(@RequestBody CategoryListResponse categoryListResponse) {
-        categoryService.editCategory(categoryListResponse);
+    public @ResponseBody String editCategory(@RequestBody CategoryListDto categoryListDto) {
+        categoryService.editCategory(categoryListDto);
         return "성공";
     }
 }

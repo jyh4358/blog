@@ -11,11 +11,13 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class CategoryListResponse {
+public class ParentCategoryList {
+    private Long id;
+    private String parentCategory;
+    private List<ChildCategoryList> childCategoryLists = new ArrayList<>();
+    private Boolean deleteCheck;
 
-    private List<CategoryList> categoryLists = new ArrayList<>();
-
-    public static CategoryListResponse of(List<CategoryList> categoryLists) {
-        return new CategoryListResponse(categoryLists);
+    public boolean checkNewCategory(){
+        return id == null;
     }
 }

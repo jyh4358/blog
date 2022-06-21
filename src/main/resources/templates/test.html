@@ -12,8 +12,8 @@
 </head>
 <body>
 <div class="col justify-content-center my-1 mx-0">
-    <form action="categoryList.html" th:action th:object="${categoryList}" method="post">
-        <th:block th:each="list, s : ${categoryList.testLists}">
+    <form action="parentCategoryList.html" th:action th:object="${parentCategoryList}" method="post">
+        <th:block th:each="list, s : ${parentCategoryList.testLists}">
         <!-- 입력 영역 -->
         <div class="row g-9 ms-3 mt-3 me-5" id="list-a">
 
@@ -21,7 +21,7 @@
             <div th:text="${s.index}"></div>
             <div class="input-group mb-3" th:id="'parent'+${s.count}">
                 <input type="text" class="form-control" placeholder="Recipient\'s username"
-                       th:field="|${categoryList.testLists[__${s.index}__].parentCategory}|"
+                       th:field="|${parentCategoryList.testLists[__${s.index}__].parentCategory}|"
                        th:id="'category'+${s.count}" readonly>
                 <button class="btn btn-outline-secondary" type="button" th:id="'modify'+${s.count}" th:onclick="|modifyParentCategory(${s.count})|">수정</button>
                 <button class="btn btn-outline-secondary" type="button" th:id="'add'+${s.count}" th:onclick="|addParentCategory(${s.count}, ${s.current.childCategories.size()})|">추가</button>
@@ -29,7 +29,7 @@
             </div>
             <div class="input-group mb-3 ms-5" th:each="childCategories, ss : ${list.childCategories}" th:id="'child'+${s.count}+${ss.count}">
                 <input type="text" class="form-control" style="width: 80%"
-                       th:field="|${categoryList.testLists[__${s.index}__].childCategories[__${ss.index}__]}|"
+                       th:field="|${parentCategoryList.testLists[__${s.index}__].childCategories[__${ss.index}__]}|"
                        th:id="'category'+${s.count}+${ss.count}" readonly>
                 <button style="width: 10%" class="btn btn-outline-secondary" type="button" th:id="'modify'+${s.count}+${ss.count}" th:onclick="|modifyParentCategory(${s.count}${ss.count})|">수정</button>
                 <button style="width: 10%" class="btn btn-outline-secondary" type="button" th:id="'delete'+${s.count}+${ss.count}" th:onclick="|deleteCategory(${s.count},${ss.count})|">삭제</button>
@@ -117,7 +117,7 @@
             console.log(lastElementChild.childNodes);
             console.log(lastElementChild);
 
-            console.log(categoryList);
+            console.log(parentCategoryList);
             element.parentNode.parentNode.appendChild(lastElementChild);
         }
     }

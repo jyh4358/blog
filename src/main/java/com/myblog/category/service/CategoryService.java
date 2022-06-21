@@ -1,7 +1,7 @@
 package com.myblog.category.service;
 
-import com.myblog.category.dto.CategoryList;
-import com.myblog.category.dto.CategoryListResponse;
+import com.myblog.category.dto.ParentCategoryList;
+import com.myblog.category.dto.CategoryListDto;
 import com.myblog.category.dto.ChildCategoryList;
 import com.myblog.category.model.Category;
 import com.myblog.category.resposiotry.CategoryRepository;
@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,10 +21,11 @@ public class CategoryService {
     private final CategoryRepository categoryRepository;
 
 
-    public CategoryListResponse findCategories() {
-        List<Category> categories = categoryRepository.findAll();
-        List<CategoryList> categoryLists = categories.stream().map(
-                s -> new CategoryList(s.getId(),
+    public CategoryListDto findCategories() {
+        List<Category> findCategories = categoryRepository.findAll();
+        List<Category> parentCategories = findCategories.stream().filter(s -> s.getParent() == null).collect(Collectors.toList());
+        List<ParentCategoryList> parentCategoryLists = parentCategories.stream().map(
+                s -> new ParentCategoryList(s.getId(),
                         s.getTitle(),
                         s.getChild().stream().map(
                                 t -> new ChildCategoryList(
@@ -31,50 +33,105 @@ public class CategoryService {
                                         t.getTitle(),
                                         false)).collect(Collectors.toList()),
                         false)).collect(Collectors.toList());
-        return CategoryListResponse.of(categoryLists);
+        return CategoryListDto.of(parentCategoryLists);
     }
 
     @Transactional
-    public void editCategory(CategoryListResponse categoryListResponse) {
+    public void editCategory(CategoryListDto categoryListDto) {
 
         List<Category> categories = categoryRepository.findAll();
-        List<CategoryList> categoryLists = categoryListResponse.getCategoryLists();
+        List<ParentCategoryList> parentCategoryLists = categoryListDto.getParentCategoryLists();
 
-        for (CategoryList categoryList : categoryLists) {
-            changeCategoryTitle(categoryList, categories);
-            createNewCategory(categoryList, categories);
+        for (ParentCategoryList parentCategoryList : parentCategoryLists) {
+            modifyCategoryTitle(parentCategoryList, categories);
+            createNewCategory(parentCategoryList, categories);
+
+            deleteCategory(parentCategoryList, categories);
+
         }
     }
 
-    public void changeCategoryTitle(CategoryList categoryList, List<Category> categories) {
-        categories.forEach( s ->
+
+
+
+
+
+    public void modifyCategoryTitle(ParentCategoryList parentCategoryList, List<Category> categories) {
+        categories.forEach(s ->
         {
-            if (s.getId() == categoryList.getId()) {
-                s.changeTitle(categoryList.getParentCategory());
+            if (s.getId() == parentCategoryList.getId()) {
+                s.changeTitle(parentCategoryList.getParentCategory());
                 List<ChildCategoryList> collect =
-                        categoryList.getChildCategories().stream().filter(f -> !(f.isNewCategory()))
+                        parentCategoryList.getChildCategoryLists().stream().filter(f -> !(f.checkNewCategory()))
                                 .collect(Collectors.toList());
 
-                List<Category> children = collect.stream().map(t ->
-                        Category.createCategory(t.getId(), t.getChildCategory(), s)).collect(Collectors.toList()
-                );
-                s.setChild(children);
+//                이 방법은 영속 객체를 없애고 새로영속 객체를 넣을려는 시도를 하여 cascade쪽 문제가 발생
+//                List<Category> children = collect.stream().map(t ->
+//                        Category.createCategory(t.getId(), t.getChildCategory(), s)).collect(Collectors.toList()
+//                );
+//                s.setChild(children);
+
+                collect.forEach(t ->
+                        modifyChildCategoryTitle(t, s.getChild()));
             }
         });
     }
 
-    public void createNewCategory(CategoryList categoryList, List<Category> categories) {
-        if (categoryList.isNewCategory()) {
-            categoryRepository.save(Category.createCategory(null, categoryList.getParentCategory(), null));
+    public void modifyChildCategoryTitle(ChildCategoryList childCategoryList, List<Category> categories) {
+        for (Category category : categories) {
+            if (category.getId().equals(childCategoryList.getId())) {
+                category.changeTitle(childCategoryList.getChildCategory());
+            }
+        }
+    }
+
+    public void createNewCategory(ParentCategoryList parentCategoryList, List<Category> categories) {
+        if (parentCategoryList.checkNewCategory()) {
+            categoryRepository.save(new Category(parentCategoryList.getParentCategory()));
         }
         for (Category category : categories) {
-            if (categoryList.getId() == category.getId()) {
-                List<ChildCategoryList> collect = categoryList.getChildCategories().stream().filter(f -> f.isNewCategory())
+            if (parentCategoryList.getId() == category.getId()) {
+                List<ChildCategoryList> collect = parentCategoryList.getChildCategoryLists().stream().filter(f -> f.checkNewCategory())
                         .collect(Collectors.toList());
                 collect.stream().forEach(s ->
                         categoryRepository.save(Category.createCategory(null, s.getChildCategory(), category))
                 );
+//                for (ChildCategoryList childCategoryList : collect) {
+//                    categoryRepository.save(new Category(childCategoryList.getChildCategory(), category));
+//                }
+            }
+        }
+    }
 
+    public void deleteCategory(ParentCategoryList parentCategoryList, List<Category> categories) {
+        if (parentCategoryList.getDeleteCheck()) {
+            categories.forEach(s ->
+            {
+                if (s.getId().equals(parentCategoryList.getId())) {
+                    categoryRepository.delete(s);
+                }
+            });
+        } else {
+            List<ChildCategoryList> deleteChildCategories = parentCategoryList.getChildCategoryLists().stream().filter(s -> s.getDeleteCheck()).collect(Collectors.toList());
+            categories.forEach(s ->
+            {
+                if (s.getId().equals(parentCategoryList.getId())) {
+                    deleteChildCategories.forEach(t ->
+                            deleteChildCategoryTitle(t, s.getChild()));
+                    System.out.println("s.getChild().size() = " + s.getChild().size());
+                }
+            });
+
+        }
+
+    }
+
+    private void deleteChildCategoryTitle(ChildCategoryList childCategoryList, List<Category> child) {
+        for (Iterator<Category> it = child.iterator() ; it.hasNext() ;) {
+            Category category = it.next();
+            if (category.getId().equals(childCategoryList.getId())) {
+                it.remove();
+                categoryRepository.delete(category);
             }
         }
     }
