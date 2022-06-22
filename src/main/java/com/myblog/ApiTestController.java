@@ -18,15 +18,10 @@ public class ApiTestController {
 
         System.out.println("code = " + code);
 
-        ArticleWriteDto articleWriteDto = new ArticleWriteDto(
-                "title",
-                "content",
-                "category",
-                "tags"
-        );
 
 
-        return new ResponseEntity<>(articleWriteDto, HttpStatus.OK);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/google/login")

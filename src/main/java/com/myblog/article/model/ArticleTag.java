@@ -23,8 +23,20 @@ public class ArticleTag {
     @JoinColumn(name = "tag_id")
     private Tag tag;
 
+    public ArticleTag(Tag tag) {
+        this.tag = tag;
+    }
+
     public ArticleTag(Article article, Tag tag) {
         this.article = article;
         this.tag = tag;
+    }
+
+    public static ArticleTag createArticleTag(Tag tag) {
+        return new ArticleTag(tag);
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
     }
 }

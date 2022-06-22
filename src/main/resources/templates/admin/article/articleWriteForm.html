@@ -46,15 +46,21 @@
             </div>
 
 
-            <form method="post" enctype="multipart/form-data" id="wrtieArticleForm"
-                  th:action="@{/article/write}" th:object="${articleDto}">
+            <form action="/admin/articleWriteForm.html" th:action method="post" enctype="multipart/form-data" id="writeArticleForm"
+                  th:object="${articleWriteDto}">
 
                 <textarea type="text" name="thumbnailUrl" id="thumbnailUrl" hidden></textarea>
 
                 <div class="mt-3 mb-3">
                     <select id="category" name="category" class="form-select ps-3" aria-label="Select category">
                         <option selected>카테고리를 선택해주세요</option>
-                        <option th:each="categoryOption : ${categoryInput}"  th:value="${categoryOption.getTitle()}" th:text="${categoryOption.getTitle()}" >Java</option>
+                        <th:block th:each="parentCategoryList, p : ${categoryListDto.parentCategoryLists}">
+                            <option th:value="${parentCategoryList.id}"
+                                    th:text="${parentCategoryList.parentCategory}">Spring</option>
+                            <option th:each="childCategoryList, c : ${parentCategoryList.childCategoryLists}"
+                                    th:value="${childCategoryList.id}"
+                                    th:text="|  - ${childCategoryList.childCategory}|">JPA</option>
+                        </th:block>
                     </select>
                 </div>
 
@@ -73,6 +79,7 @@
                 <div class="mt-3">
                     <input id="tags" type="text" name="tags" placeholder="태그"
                            class="form-control tagify-outside ps-3" aria-describedby="tagHelp"/>
+
                 </div>
 
             </form>
@@ -92,4 +99,28 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 <script src="/js/articleWrite.js"></script>
+<script src="/js/tagify.js"></script>
+<script src="/js/jQuery.tagify.min.js"></script>
+<script>
+    // $('[name=tags]').tagify();
+
+    const input = document.querySelector('input[name="tags"]');
+    let whitelist = ["test", "test2", "test3"];
+
+
+    // init Tagify script on the above inputs
+    tagify = new Tagify(input, {
+        whitelist: whitelist, // 화이트리스트 배열
+        maxTags: 10, // 최대 허용 태그 갯수
+
+        dropdown: {
+            maxItems: 20,           // 드롭다운 메뉴에서 몇개 정도 항목을 보여줄지
+            classname: "tags-look", // 드롭다운 메뉴 엘리먼트 클래스 이름. 이걸로 css 선택자로 쓰면 된다.
+            enabled: 0,             // 단어 몇글자 입력했을떄 추천 드롭다운 메뉴가 나타날지
+            closeOnSelect: false    // 드롭다운 메뉴에서 태그 선택하면 자동으로 꺼지는지 안꺼지는지
+        }
+    })
+
+
+</script>
 </html>

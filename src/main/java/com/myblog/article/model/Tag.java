@@ -1,6 +1,7 @@
 package com.myblog.article.model;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Setter
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Tag {
 
@@ -25,5 +26,9 @@ public class Tag {
 
     public Tag(String name) {
         this.name = name;
+    }
+
+    public static Tag createTag(String name) {
+        return new Tag(name);
     }
 }

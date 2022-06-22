@@ -126,7 +126,7 @@ function post() {
         alert("내용은 1~ 65535자 이하여야합니다.")
         return;
     } else if (!checkCategory()) {
-        alert("카테고리를 입력해주세요")
+        alert("카테고리를 선택해주세요")
         return;
     } else if (!checkTags()) {
         alert("태그를 입력해주세요")

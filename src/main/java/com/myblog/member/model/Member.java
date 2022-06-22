@@ -3,10 +3,7 @@ package com.myblog.member.model;
 import com.myblog.article.model.Article;
 import com.myblog.comment.model.Comment;
 import com.myblog.security.oauth2.model.OAuth2Provider;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
