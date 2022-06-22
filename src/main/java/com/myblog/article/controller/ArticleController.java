@@ -41,7 +41,7 @@ public class ArticleController {
             @AuthenticationPrincipal CustomOauth2User customOauth2User) {
         
         articleService.writeArticle(articleWriteDto, customOauth2User);
-//        System.out.println("articleWriteDto = " + articleWriteDto);
+        System.out.println("articleWriteDto = " + articleWriteDto);
 //        System.out.println("customOauth2User.getMember() = " + customOauth2User.getMember());
 
         return "admin/article/articleList";

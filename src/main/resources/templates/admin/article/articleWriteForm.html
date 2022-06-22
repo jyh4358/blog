@@ -78,8 +78,7 @@
 
                 <div class="mt-3">
                     <input id="tags" type="text" name="tags" placeholder="태그"
-                           class="form-control tagify-outside ps-3" aria-describedby="tagHelp"/>
-
+                           class="form-control tagify-outside ps-3">
                 </div>
 
             </form>
@@ -99,8 +98,10 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 <script src="/js/articleWrite.js"></script>
-<script src="/js/tagify.js"></script>
-<script src="/js/jQuery.tagify.min.js"></script>
+<script src="/js/tagify/tagify.js"></script>
+<script src="/js/tagify/jQuery.tagify.min.js"></script>
+<script th:src="@{/js/getCsrf.js}"></script>
+<script th:src="@{/js/thumbnail.js}"></script>
 <script>
     // $('[name=tags]').tagify();
 

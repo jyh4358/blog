@@ -581,7 +581,6 @@ body::-webkit-scrollbar-track {
 
 .tagify{
     width: 100%;
-    max-width: 700px;
 }
 
 .tags-look .tagify__dropdown__item{
@@ -590,7 +589,7 @@ body::-webkit-scrollbar-track {
     padding: .3em .5em;
     border: 1px solid #CCC;
     background: #F3F3F3;
-    margin: .2em;
+    /*margin: .2em;*/
     font-size: .85em;
     color: black;
     transition: 0s;
@@ -603,8 +602,10 @@ body::-webkit-scrollbar-track {
 .tags-look .tagify__dropdown__item:hover{
     background: lightyellow;
     border-color: gold;
+    border-radius: 15px;
 }
 .tagify__tag div{
+    width: 100%;
     background: #e7e5e5;
 }
 
