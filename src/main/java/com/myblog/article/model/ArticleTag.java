@@ -1,5 +1,6 @@
 package com.myblog.article.model;
 
+import com.myblog.common.model.BasicEntity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,11 +10,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ArticleTag {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class ArticleTag extends BasicEntity {
 
     @ManyToOne
     @JoinColumn(name = "article_id")

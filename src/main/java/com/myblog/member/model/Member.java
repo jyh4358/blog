@@ -2,6 +2,7 @@ package com.myblog.member.model;
 
 import com.myblog.article.model.Article;
 import com.myblog.comment.model.Comment;
+import com.myblog.common.model.BasicEntity;
 import com.myblog.security.oauth2.model.OAuth2Provider;
 import lombok.*;
 
@@ -13,10 +14,7 @@ import java.util.List;
 @Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Member extends BasicEntity {
 
     @Column(nullable = false)
     private String userId;

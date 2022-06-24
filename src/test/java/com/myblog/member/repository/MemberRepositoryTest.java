@@ -1,15 +1,17 @@
 package com.myblog.member.repository;
 
 import com.myblog.category.model.Category;
+import com.myblog.category.resposiotry.CategoryRepository;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.time.temporal.ChronoUnit;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class MemberRepositoryTest {
+
+    @Autowired
+    CategoryRepository categoryRepository;
 
     @Test
     public void 날짜() {
@@ -26,6 +28,11 @@ class MemberRepositoryTest {
 
         Category title = new Category("title", null);
         System.out.println("title.getId() = " + title.getId());
+    }
+
+    @Test
+    public void 테스트() {
+
     }
 
 }

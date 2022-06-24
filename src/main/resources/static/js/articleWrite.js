@@ -75,22 +75,31 @@ const editor = new toastui.Editor({
 
 //내부 이미지 업로드
 function uploadImage(blob) {
+    let imgurl;
     let token = getCsrfToken();
     let formData = new FormData();
     formData.append('file', blob);
+    console.log(blob);
 
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "/file/upload", false);
-    xhr.setRequestHeader("contentType", "multipart/form-data");
-    xhr.setRequestHeader("X-XSRF-TOKEN", token);
-    xhr.send(formData);
+    $.ajax({
+        type: 'POST',
+        url: '/file/upload',
+        headers: {'X-XSRF-TOKEN': token},
+        processData: false,
+        contentType: false,
+        async: false,
+        data: formData
+    }).done(function (result) {
+        imgurl = result;
+    }).fail(function (error) {
+        alert(JSON.stringify(error));
+    });
 
-    if (xhr.readyState === 4 && xhr.status === 200) {
-        return xhr.response;
-    } else {
-        alert("이미지가 정상적으로 업로드되지 못했습니다.")
-    }
+    return imgurl;
+
+
 }
+
 
 
 // 유효성 검사

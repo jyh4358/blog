@@ -1,6 +1,7 @@
 package com.myblog.comment.model;
 
 import com.myblog.article.model.Article;
+import com.myblog.common.model.BasicEntity;
 import com.myblog.member.model.Member;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -14,11 +15,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Comment {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Comment extends BasicEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id")

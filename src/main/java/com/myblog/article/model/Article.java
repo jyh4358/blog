@@ -3,6 +3,7 @@ package com.myblog.article.model;
 import com.myblog.article.dto.ArticleWriteDto;
 import com.myblog.category.model.Category;
 import com.myblog.comment.model.Comment;
+import com.myblog.common.model.BasicEntity;
 import com.myblog.member.model.Member;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -16,10 +17,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Article {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Article extends BasicEntity {
 
     // todo - 나중에 조회수 기능 까지 넣어보자
 
@@ -32,7 +30,8 @@ public class Article {
     @Column(columnDefinition = "bigint default 0", nullable = false)
     private Long hit;
 
-    @Column(nullable = false)
+
+    @Column(columnDefinition = "varchar(255) default '/images/nothumbnail.jpg'", nullable = false)
     private String thumbnailUrl;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -72,6 +71,9 @@ public class Article {
                 .category(category)
                 .build();
         article.addArticleTags(articleTagDto);
+        if (article.getThumbnailUrl().isEmpty()) {
+            article.defaultThumbnailUrl();
+        }
         return article;
     }
 
@@ -80,6 +82,10 @@ public class Article {
             articleTags.add(articleTag);
             articleTag.setArticle(this);
         }
+    }
+
+    public void defaultThumbnailUrl() {
+        this.thumbnailUrl = "/images/nothumbnail.jpg";
     }
 }
 

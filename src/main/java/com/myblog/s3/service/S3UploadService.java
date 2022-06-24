@@ -7,7 +7,9 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.util.IOUtils;
 import com.myblog.s3.properties.AmazonS3BucketProperties;
 import com.myblog.s3.properties.AmazonS3CredentialsProperties;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -52,11 +55,23 @@ public class S3UploadService {
         return fileUrls;
     }
 
+    // No content length specified for stream data.  Stream contents will be buffered in memory and could result in out of memory errors.
+    // WARN 발생, 아래와 같이 코드 변경
+
     public String uploadForMultiFile(MultipartFile multipartFile) {
         try {
             String originalFilename = multipartFile.getOriginalFilename();
+            ObjectMetadata objMeta = new ObjectMetadata();
+            byte[] bytes = IOUtils.toByteArray(multipartFile.getInputStream());
 
-            putS3(multipartFile, originalFilename);
+            objMeta.setContentLength(bytes.length);
+            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
+
+            amazonS3.putObject(new PutObjectRequest(
+                    amazonS3BucketProperties.getBucket(),
+                    multipartFile.getOriginalFilename(),
+                    byteArrayInputStream,
+                    objMeta).withCannedAcl(CannedAccessControlList.PublicRead));
             return getThumbnailPath(originalFilename);
         } catch (IOException e) {
             e.printStackTrace();

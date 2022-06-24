@@ -1,5 +1,6 @@
 package com.myblog.article.model;
 
+import com.myblog.common.model.BasicEntity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,11 +13,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Tag {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Tag extends BasicEntity {
 
     @Column(unique = true, nullable = false, length = 20)
     private String name;
