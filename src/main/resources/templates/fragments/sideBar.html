@@ -7,7 +7,7 @@
     <div class="m-4 sidebar-header" style="white-space: nowrap">
         <a th:href="@{/}"><h3 class="text-black-50">JDong's BLOG</h3></a>
         <a th:href="@{/aboutMe}"><h5 class="text-black-50">ABOUT ME(작성중)</h5></a>
-        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/article/write}" href="#">
+        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/article/write}">
             <h5 class="text-black-50">NEW ARTICLE</h5>
         </a>
 
@@ -47,22 +47,28 @@
         <div class="border-top my-3"></div>
 
         <li class="mb-1 superCategory btn fs-5">
-            <a th:href="@{/article/list}" th:text="|전체글()|">토탈</a>
+            <a th:href="@{/article/list(page=1)}" th:text="|전체글(${sideBarCategoryListDto.totalCount})|">토탈</a>
         </li>
-        <li class="mb-1" >
-            <div class="btn-group">
-                <button class="btn btn-toggle align-items-center rounded collapsed me-0 pe-0"
-                        data-bs-toggle="collapse" data-bs-target="#superCategoryId" aria-expanded="true">
-                </button>
-                <a th:href="@{/article/list}" class="ms-0 superCategory btn fs-5">슈퍼</a>
-            </div>
-            <div class="collapse show" >
-                <ul class="ms-1 btn-toggle-nav list-unstyled fw-normal pb-1" id="superCategoryId">
-                    <li>
-                        <a th:href="@{/article/list}" class="link-dark rounded">서브</a>
-                    </li>
-                </ul>
-            </div>
+        <li class="mb-1" th:each="sideBarParentCategory : ${sideBarCategoryListDto.parentCategoryLists}">
+                <div class="btn-group">
+                    <button class="btn btn-toggle align-items-center rounded collapsed me-0 pe-0"
+                            data-bs-toggle="collapse"
+                            th:data-bs-target="|#parentCategory${sideBarParentCategory.id}|" aria-expanded="true">
+                    </button>
+                    <a th:href="@{/article/list}"
+                       class="ms-0 superCategory btn fs-5"
+                       th:text="|${sideBarParentCategory.parentCategory} (${sideBarParentCategory.count})|">슈퍼</a>
+                </div>
+                <div class="collapse show" th:id="|parentCategory${sideBarParentCategory.id}|">
+                    <ul class="ms-1 btn-toggle-nav list-unstyled fw-normal pb-1"
+                        th:each="sideBarChildCategory : ${sideBarParentCategory.childCategoryLists}">
+                        <li>
+                            <a th:href="@{/article/list}"
+                               class="link-dark rounded"
+                               th:text="|${sideBarChildCategory.childCategory} (${sideBarChildCategory.count})|">서브</a>
+                        </li>
+                    </ul>
+                </div>
         </li>
         <!--    카테고리 e    -->
         <!--   최신 댓글 s    -->

@@ -25,15 +25,7 @@ function uploadImg(input) {
             thumbUrl.value = xhr.response;
             previewThumb.src = thumbUrl.value;
 
-            // 썸네일 등록은 서버에서 하도록 리팩토링할것
-            // const reader = new FileReader();
-            // reader.onload = e => {
-            //     previewThumb.src = e.target.result;
-            // }
-            // reader.readAsDataURL(input.files[0])
-
             thumbBox.style.display = ''
-            myModal.hide();
 
         } else {
             alert("이미지가 정상적으로 업로드되지 못했습니다.")
@@ -49,8 +41,7 @@ thumbUrlUploadBtn.addEventListener("click", () =>{
     const url = thumbUrlUploadInput.value;
     previewThumb.src = url;
     thumbUrl.value = url;
-    thumbBox.style.display = ''
-    myModal.hide();
+    thumbBox.style.display = '';
 })
 
 uploadThumbBtn.addEventListener("change", e => {

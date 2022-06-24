@@ -1,5 +1,6 @@
 package com.myblog.category.model;
 
+import com.myblog.common.model.BasicEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,11 +10,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Category {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Category extends BasicEntity {
 
     @Column(nullable = false, unique = false, length = 20)
     private String title;

@@ -1,23 +1,30 @@
 package com.myblog;
 
+import com.myblog.category.dto.CategoryListDto;
+import com.myblog.category.dto.CategoryQueryDto;
+import com.myblog.category.resposiotry.CategoryRepository;
+import com.myblog.category.service.CategoryService;
 import com.myblog.security.oauth2.CustomOauth2User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class TestController {
+
+    private final CategoryService categoryService;
 
     @GetMapping("/")
     public String home() {
-
+//        CategoryListDto sidebarCategory = categoryService.findSidebarCategory();
+//        System.out.println("sidebarCategory = " + sidebarCategory);
         return "index";
     }
 
@@ -44,10 +51,7 @@ public class TestController {
         return "loginSuccess";
     }
 
-    @GetMapping("/article")
-    public String article() {
-        return "article/articleView";
-    }
+
 
 
     @GetMapping("/admin/articles")
@@ -74,9 +78,15 @@ public class TestController {
         return "admin/user/userEditForm";
     }
 
-    @GetMapping("/admin")
+    @GetMapping("/admin/main")
     public String admin() {
+        System.out.println("admin-----------------");
         return "admin/index";
+    }
+
+    @GetMapping("/test")
+    public String test() {
+        return "test";
     }
 
 

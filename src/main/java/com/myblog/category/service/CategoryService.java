@@ -1,8 +1,9 @@
 package com.myblog.category.service;
 
-import com.myblog.category.dto.ParentCategoryList;
 import com.myblog.category.dto.CategoryListDto;
+import com.myblog.category.dto.CategoryQueryDto;
 import com.myblog.category.dto.ChildCategoryList;
+import com.myblog.category.dto.ParentCategoryList;
 import com.myblog.category.model.Category;
 import com.myblog.category.resposiotry.CategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,16 +24,13 @@ public class CategoryService {
 
     public CategoryListDto findCategories() {
         List<Category> findCategories = categoryRepository.findAll();
-        List<Category> parentCategories = findCategories.stream().filter(s -> s.getParent() == null).collect(Collectors.toList());
+        List<Category> parentCategories = findCategories.stream().filter(s -> s.getParent() == null)
+                .collect(Collectors.toList());
+
         List<ParentCategoryList> parentCategoryLists = parentCategories.stream().map(
-                s -> new ParentCategoryList(s.getId(),
-                        s.getTitle(),
-                        s.getChild().stream().map(
-                                t -> new ChildCategoryList(
-                                        t.getId(),
-                                        t.getTitle(),
-                                        false)).collect(Collectors.toList()),
-                        false)).collect(Collectors.toList());
+                s -> ParentCategoryList.of(s)
+        ).collect(Collectors.toList());
+
         return CategoryListDto.of(parentCategoryLists);
     }
 
@@ -45,16 +43,44 @@ public class CategoryService {
         for (ParentCategoryList parentCategoryList : parentCategoryLists) {
             modifyCategoryTitle(parentCategoryList, categories);
             createNewCategory(parentCategoryList, categories);
-
             deleteCategory(parentCategoryList, categories);
 
         }
     }
 
 
+    public CategoryListDto findSidebarCategory() {
+        CategoryListDto categoryListDto = findCategories();
+        List<CategoryQueryDto> categoryCounts = categoryRepository.findCategoryCount();
+        for (CategoryQueryDto categoryCount : categoryCounts) {
+            categoryListDto.getParentCategoryLists().forEach(
+                    s -> {
+                        if (s.getId().equals(categoryCount.getId())) {
+                            s.setCount((categoryCount.getCount().intValue()));
+                        } else {
+                            insertChildCategoryCount(s, categoryCount);
+                        }
+                    }
+            );
+        }
+
+        parentCategoryTotalCalc(categoryListDto);
+        categoryTotalCalc(categoryListDto);
+
+
+        return categoryListDto;
+    }
 
 
 
+    // 서비스 로직
+    private void insertChildCategoryCount(ParentCategoryList parentCategoryList, CategoryQueryDto categoryCount) {
+        for (ChildCategoryList childCategoryList : parentCategoryList.getChildCategoryLists()) {
+            if (childCategoryList.getId().equals(categoryCount.getId())) {
+                childCategoryList.setCount(categoryCount.getCount().intValue());
+            }
+        }
+    }
 
     public void modifyCategoryTitle(ParentCategoryList parentCategoryList, List<Category> categories) {
         categories.forEach(s ->
@@ -133,6 +159,18 @@ public class CategoryService {
                 it.remove();
                 categoryRepository.delete(category);
             }
+        }
+    }
+
+    private void parentCategoryTotalCalc(CategoryListDto categoryListDto) {
+        for (ParentCategoryList parentCategoryList : categoryListDto.getParentCategoryLists()) {
+            parentCategoryList.getChildCategoryLists().forEach(s -> parentCategoryList.addParentCount(s.getCount()));
+        }
+    }
+
+    private void categoryTotalCalc(CategoryListDto categoryListDto) {
+        for (ParentCategoryList parentCategoryList : categoryListDto.getParentCategoryLists()) {
+            categoryListDto.addTotalCount(parentCategoryList.getCount());
         }
     }
 
