@@ -23,4 +23,9 @@ public class CustomOauth2User extends DefaultOAuth2User {
     public String getName() {
         return member.getUsername();
     }
+
+    public String getThumbnailUrl() {
+        return member.getPicUrl();
+    }
+
 }

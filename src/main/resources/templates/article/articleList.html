@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/layout/layout :: layout(~{::title}, ~{::section}, ~{::script})}">
+
+
+<title>JDong's Blog</title>
+
+<!-- Admin Page Wrapper -->
+<section>
+    <div style="margin-bottom: 100px"></div>
+
+    <div class="recent-cards mt-5 ms-4 me-4">
+        <div class="cards-container container p-0" id="infiniteScrollBox">
+            <h1 th:text="|${param.categoryTitle} (${articleCardBoxList.totalElements})|" class="text-center">ALL</h1>
+            <hr>
+            <div id="articlePage-0">
+                <th:block th:each="articleCardBox :${articleCardBoxList}">
+
+                    <div class="card mb-3 recent-card wow fadeInUp">
+                        <a th:href="@{/article/{articleId}(articleId=${articleCardBox.id})}">
+
+                            <div class="row g-0">
+                                <div class="col-1 mb-3 align-self-center">
+                                    <h4 class="text-center" th:text="${articleCardBox.id}"> 1 </h4>
+                                </div>
+                                <div class="col-3">
+                                    <div class="ratio ratio-1x1"
+                                         th:style="|background-image: url(${articleCardBox.thumbnailUrl}); background-position: center; background-size: cover;|">
+                                    </div>
+                                </div>
+                                <div class="col-8 row row-cols-1 align-self-center">
+                                    <h3 class="card-title col mb-3 text-truncate" th:text="${articleCardBox.title}">글
+                                        제목</h3>
+                                    <p class="d-none d-md-block col recent-card-text"
+                                       th:text="${articleCardBox.content}">글 내용</p>
+                                    <p class="col mb-0">
+                                        <small class="text-muted"
+                                               th:text="|작성일 : ${#temporals.format(articleCardBox.createDate, 'yyyy-MM-dd HH-mm')}|"></small>
+                                    </p>
+                                </div>
+
+                            </div>
+                        </a>
+                    </div>
+                </th:block>
+            </div>
+
+            <!--     infinityScroll     -->
+<!--            <div id="nextPagination"></div>-->
+
+        </div>
+
+        <!-- page s -->
+        <div class="pagination-section mt-4">
+            <nav class="pagination-outer" aria-label="Page navigation">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" aria-label="First"
+                           th:href="@{/article(page=0)}"
+                           th:if="${pageDto.currentPageNum} > 4">
+                            <span> « </span>
+                        </a>
+                    </li>
+
+                    <li class="page-item">
+                        <a class="page-link" aria-label="Previous"
+                           th:href="@{/article(page=${pageDto.currentPageNum - 5})}"
+                           th:if="${articleCardBoxList.number} > 4">
+                            <span> < </span>
+                        </a>
+                    </li>
+
+                    <th:block th:each="page : ${#numbers.sequence(pageDto.startPageNum, pageDto.endPageNum)}">
+                        <li th:classappend="${page == pageDto.currentPageNum} ? 'active'"
+                            class="page-item">
+                            <a th:text="${page + 1}" class="page-link"
+                               th:href="@{/article(categoryTitle=${param.categoryTitle}, page=${page})}"></a>
+                        </li>
+<!--                        <li th:unless="${pageDto.currentPageNum == page}" class="page-item">-->
+<!--                            <a th:text="${page + 1}" class="page-link"-->
+<!--                               th:href="@{/article/list(category=(${param.category}),tier=(${param.tier}),page=(${page}))}"></a>-->
+<!--                        </li>-->
+                    </th:block>
+                    <li class="page-item">
+                        <a class="page-link" aria-label="Next"
+                           th:href="@{/article(page=${pageDto.currentPageNum + 5})}"
+                           th:if="${pageDto.endPageNum < pageDto.lastPageNum}"
+                        >
+                            <span aria-hidden="true"> > </span>
+                        </a>
+                    </li>
+
+                    <li class="page-item">
+                        <a class="page-link" aria-label="Last"
+                           th:href="@{/article(page=${pageDto.lastPageNum})}"
+                           th:if="${pageDto.endPageNum < pageDto.lastPageNum}"
+                        >
+                            <span aria-hidden="true">»</span>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </nav>
+        </div>
+        <!--page e-->
+    </div>
+
+
+
+<!--    &lt;!&ndash; Admin Content &ndash;&gt;-->
+<!--    <div class="admin-content">-->
+<!--        <div class="button-group">-->
+<!--            <a href="create.html" class="btn btn-big">Add Post</a>-->
+<!--            <a href="index.html" class="btn btn-big">Manage Posts</a>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <form action="#" method="post">-->
+<!--                <select name="topic" id="topic" class="search-select">-->
+<!--                    <option value="title">제목</option>-->
+<!--                    <option value="content">내용</option>-->
+<!--                </select>-->
+<!--                <input type="text" class="search-input">-->
+<!--                <button type="submit" class="btn btn-big">Search</button>-->
+<!--            </form>-->
+<!--        </div>-->
+
+<!--        <div class="content">-->
+<!--            <h2 class="page-title">Manage Posts</h2>-->
+
+<!--            <table>-->
+<!--                <thead>-->
+<!--                <th>SN</th>-->
+<!--                <th>Title</th>-->
+<!--                <th>Author</th>-->
+<!--                <th colspan="3">Action</th>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                <tr>-->
+<!--                    <td>1</td>-->
+<!--                    <td>-->
+<!--                        <div>-->
+<!--                            This is the first post-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <span class="table-category">Java</span>-->
+<!--                            <span class="table-date">2013.05.19</span>-->
+<!--                        </div>-->
+<!--                    </td>-->
+<!--                    <td>Awa</td>-->
+<!--                    <td><a href="#" class="edit">edit</a></td>-->
+<!--                    <td><a href="#" class="delete">delete</a></td>-->
+<!--                    <td><a href="#" class="publish">publish</a></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td>2</td>-->
+<!--                    <td>-->
+<!--                        <div>-->
+<!--                            This is the second post-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <span class="table-category">Java</span>-->
+<!--                            <span class="table-date">2013.05.19</span>-->
+<!--                        </div>-->
+<!--                    </td>-->
+<!--                    <td>Awa</td>-->
+<!--                    <td><a href="#" class="edit">edit</a></td>-->
+<!--                    <td><a href="#" class="delete">delete</a></td>-->
+<!--                    <td><a href="#" class="publish">publish</a></td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+
+<!--        <ul class="pagination justify-content-center">-->
+<!--            <li class="page-item" >-->
+<!--                <a class="page-link" href="#">-->
+<!--                    <i class="fas fa-chevron-left prev"></i>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+<!--            <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--            <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+<!--            <li class="page-item" >-->
+<!--                <a class="page-link" href="#">-->
+<!--                    <i class="fas fa-chevron-right next"></i>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+
+</section>
+<!-- // Page Wrapper End -->
+
+<!-- Slick Carousel -->
+<script></script>
+</html>

@@ -9,6 +9,7 @@ import com.myblog.article.model.Article;
 import com.myblog.article.model.ArticleTag;
 import com.myblog.article.model.Tag;
 import com.myblog.article.repository.ArticleRepository;
+import com.myblog.article.repository.ArticleSearchRepository;
 import com.myblog.article.repository.ArticleTagRepository;
 import com.myblog.article.repository.TagRepository;
 import com.myblog.category.model.Category;
@@ -21,6 +22,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +34,7 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 public class ArticleService {
     private final ArticleRepository articleRepository;
+    private final ArticleSearchRepository articleSearchRepository;
     private final CategoryRepository categoryRepository;
     private final MemberRepository memberRepository;
     private final TagRepository tagRepository;
@@ -67,9 +70,10 @@ public class ArticleService {
                 );
     }
 
-    public ArticleDetailResponse findArticleDetail(Long articleId, CustomOauth2User customOauth2User) {
+    public ArticleDetailResponse findArticleDetail(Long articleId) {
+        // todo - fetch join으로 변경할
         Article article = articleRepository.findById(articleId).get();
-        ArticleDetailResponse detailResponse = ArticleDetailResponse.of(article, customOauth2User.getName());
+        ArticleDetailResponse detailResponse = ArticleDetailResponse.of(article, article.getMember().getUsername());
 
         List<SimpleArticle> simpleArticles = findArticleListByCategory(article.getCategory());
         detailResponse.setSimpleArticles(simpleArticles);
@@ -77,16 +81,22 @@ public class ArticleService {
         return detailResponse;
     }
 
-    public Page<ArticleCardBoxResponse> findArticleAll(Pageable pageable) {
+    public Page<ArticleCardBoxResponse> findSearchArticle(String categoryTitle, Pageable pageable) {
+        Page<Article> findArticle = null;
+        if (categoryTitle.equals("ALL")) {
+            findArticle = articleRepository.findAll(pageable);
+        } else {
+            Category category = categoryRepository.findByTitle(categoryTitle).get();
+            List<String> childCategoryTitles = category.getChild().stream().map(s -> s.getTitle()).collect(Collectors.toList());
+            for (String childCategoryTitle : childCategoryTitles) {
+                System.out.println("==============childCategoryTitle = " + childCategoryTitle);
+            }
+            findArticle = articleSearchRepository.findSearchArticle(categoryTitle, childCategoryTitles, pageable);
 
-//        List<Article> articles = articleRepository.findAll(pageable);
-        Page<Article> all = articleRepository.findAll(pageable);
-        Page<ArticleCardBoxResponse> map = all.map(s -> ArticleCardBoxResponse.of(s));
+        }
 
-//        return articles.stream().map(s ->
-//                ArticleCardBoxResponse.of(s)
-//        ).collect(Collectors.toList());
-        return map;
+        Page<ArticleCardBoxResponse> articleCardBoxResponses = findArticle.map(s -> ArticleCardBoxResponse.of(s));
+        return articleCardBoxResponses;
     }
 
 

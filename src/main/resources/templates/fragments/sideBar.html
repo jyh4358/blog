@@ -47,7 +47,7 @@
         <div class="border-top my-3"></div>
 
         <li class="mb-1 superCategory btn fs-5">
-            <a th:href="@{/article/list(page=1)}" th:text="|전체글(${sideBarCategoryListDto.totalCount})|">토탈</a>
+            <a th:href="@{/article(categoryTitle='ALL', page=0)}" th:text="|전체글(${sideBarCategoryListDto.totalCount})|">토탈</a>
         </li>
         <li class="mb-1" th:each="sideBarParentCategory : ${sideBarCategoryListDto.parentCategoryLists}">
                 <div class="btn-group">
@@ -55,7 +55,7 @@
                             data-bs-toggle="collapse"
                             th:data-bs-target="|#parentCategory${sideBarParentCategory.id}|" aria-expanded="true">
                     </button>
-                    <a th:href="@{/article/list}"
+                    <a th:href="@{/article(categoryTitle=${sideBarParentCategory.parentCategory})}"
                        class="ms-0 superCategory btn fs-5"
                        th:text="|${sideBarParentCategory.parentCategory} (${sideBarParentCategory.count})|">슈퍼</a>
                 </div>
@@ -63,7 +63,7 @@
                     <ul class="ms-1 btn-toggle-nav list-unstyled fw-normal pb-1"
                         th:each="sideBarChildCategory : ${sideBarParentCategory.childCategoryLists}">
                         <li>
-                            <a th:href="@{/article/list}"
+                            <a th:href="@{/article(categoryTitle=${sideBarChildCategory.childCategory})}"
                                class="link-dark rounded"
                                th:text="|${sideBarChildCategory.childCategory} (${sideBarChildCategory.count})|">서브</a>
                         </li>
