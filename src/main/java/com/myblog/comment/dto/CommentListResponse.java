@@ -16,10 +16,11 @@ import java.util.stream.Collectors;
 public class CommentListResponse {
     private Long id;
     private String content;
+    private Long memberId;
     private String username;
     private String userPictureUrl;
     private boolean secret;
-    private LocalDateTime localDateTime;
+    private LocalDateTime createDate;
 
     private List<ChildComment> childComments = new ArrayList<>();
 
@@ -27,6 +28,7 @@ public class CommentListResponse {
         return new CommentListResponse(
                 comment.getId(),
                 comment.getContent(),
+                member.getId(),
                 member.getUsername(),
                 member.getPicUrl(),
                 comment.isSecret(),

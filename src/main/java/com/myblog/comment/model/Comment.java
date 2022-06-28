@@ -17,6 +17,12 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment extends BasicEntity {
 
+    @Column(nullable = false, length = 300)
+    private String content;
+
+    @Column(columnDefinition = "boolean default false")
+    private boolean secret;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id")
     private Article article;
@@ -25,23 +31,34 @@ public class Comment extends BasicEntity {
     @JoinColumn(name = "parent_id")
     private Comment parent;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.REMOVE)
-    private List<Comment> child = new ArrayList<>();
-
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
-    private String content;
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.REMOVE)
+    private List<Comment> child = new ArrayList<>();
 
-    @Column(columnDefinition = "boolean default false")
-    private boolean secret;
 
     @Builder
-    public Comment(Article article, Comment parent, Member member, String content, boolean secret) {
+    public Comment(String content, boolean secret, Article article, Comment parent, Member member) {
+        this.content = content;
+        this.secret = secret;
         this.article = article;
         this.parent = parent;
         this.member = member;
-        this.content = content;
-        this.secret = secret;
+    }
+
+
+    public static Comment createComment(String content,
+                                        boolean secret,
+                                        Article article,
+                                        Comment parent,
+                                        Member member) {
+        return Comment.builder()
+                .content(content)
+                .secret(secret)
+                .article(article)
+                .parent(parent)
+                .member(member)
+                .build();
     }
 }

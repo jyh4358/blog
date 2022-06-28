@@ -28,4 +28,8 @@ public class CustomOauth2User extends DefaultOAuth2User {
         return member.getPicUrl();
     }
 
+    public Long getMemberId() {
+        return member.getId();
+    }
+
 }

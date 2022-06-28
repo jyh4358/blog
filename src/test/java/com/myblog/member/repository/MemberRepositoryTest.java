@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
 
 class MemberRepositoryTest {
 
@@ -32,11 +33,9 @@ class MemberRepositoryTest {
 
     @Test
     public void 테스트() {
-        int a = (int)Math.floor(5/5) * 5;
-        System.out.println("a = " + a);
-
-        int i = (int) Math.ceil(5 / 5 + 1) * 5 - 1;
-        System.out.println("i = " + i);
+        String[] test= {"12", "22", "32"};
+        boolean b = Arrays.stream(test).anyMatch(s -> s.equals("33"));
+        System.out.println("b = " + b);
     }
 
 }

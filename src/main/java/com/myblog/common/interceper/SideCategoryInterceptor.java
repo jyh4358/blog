@@ -22,11 +22,6 @@ public class SideCategoryInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         System.out.println("preHandle===================== ");
-//        HandlerMethod hm = (HandlerMethod) handler;
-//        System.out.println("hm.getMethod() = " + hm.getMethod());
-//        System.out.println("hm.getMethod() = " + hm.getReturnType());
-//        System.out.println("hm.getMethod() = " + hm.getResolvedFromHandlerMethod());
-
         return true;
     }
 

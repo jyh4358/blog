@@ -3,9 +3,16 @@ package com.myblog.comment.service;
 import com.myblog.article.model.Article;
 import com.myblog.article.repository.ArticleRepository;
 import com.myblog.comment.dto.CommentListResponse;
-import com.myblog.comment.exception.NotExistArticleException;
+import com.myblog.comment.dto.CommentSaveRequest;
+import com.myblog.article.exception.NotExistArticleException;
+import com.myblog.comment.exception.NotExistCommentException;
+import com.myblog.member.exception.NotExistMemberException;
 import com.myblog.comment.model.Comment;
 import com.myblog.comment.repository.CommentRepository;
+import com.myblog.common.checker.RightLoginChecker;
+import com.myblog.member.model.Member;
+import com.myblog.member.repository.MemberRepository;
+import com.myblog.security.oauth2.CustomOauth2User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +27,7 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
     private final ArticleRepository articleRepository;
+    private final MemberRepository memberRepository;
 
     public List<CommentListResponse> findCommentList(Long articleId) {
 
@@ -37,5 +45,42 @@ public class CommentService {
         return commentListResponses;
     }
 
+    @Transactional
+    public void saveComment(CustomOauth2User customOauth2User, CommentSaveRequest commentSaveRequest) {
+        RightLoginChecker.checkLoginMember(customOauth2User);
+
+        Member member = memberRepository.findById(customOauth2User.getMemberId()).orElseThrow(NotExistMemberException::new);
+        Article article = articleRepository.findById(commentSaveRequest.getArticleId()).orElseThrow(NotExistArticleException::new);
+
+        if (commentSaveRequest.checkParentCommentId()) {
+            Comment parentComment = commentRepository.findById(commentSaveRequest.getParentCommentId()).orElseThrow(NotExistCommentException::new);
+            commentRepository.save(
+                    Comment.createComment(
+                            commentSaveRequest.getContent(),
+                            commentSaveRequest.isSecret(),
+                            article,
+                            parentComment,
+                            member
+                    )
+            );
+        } else {
+            commentRepository.save(
+                    Comment.createComment(
+                            commentSaveRequest.getContent(),
+                            commentSaveRequest.isSecret(),
+                            article,
+                            null,
+                            member
+                    )
+            );
+        }
+    }
+
+    @Transactional
+    public void deleteComment(CustomOauth2User customOauth2User, Long commentId) {
+        RightLoginChecker.checkLoginMember(customOauth2User);
+        Comment comment = commentRepository.findById(commentId).orElseThrow(NotExistCommentException::new);
+        commentRepository.delete(comment);
+    }
 
 }

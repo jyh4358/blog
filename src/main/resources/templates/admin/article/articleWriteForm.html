@@ -46,7 +46,7 @@
             </div>
 
 
-            <form action="/admin/articleWriteForm.html" th:action method="post" enctype="multipart/form-data" id="writeArticleForm"
+            <form action="/admin/articleWriteForm.html" th:action="@{/admin/article}" method="post" enctype="multipart/form-data" id="writeArticleForm"
                   th:object="${articleWriteDto}">
 
                 <textarea type="text" name="thumbnailUrl" id="thumbnailUrl" hidden></textarea>
@@ -102,15 +102,20 @@
 <script src="/js/tagify/jQuery.tagify.min.js"></script>
 <script th:src="@{/js/getCsrf.js}"></script>
 <script th:src="@{/js/thumbnail.js}"></script>
-<script>
+<script th:inline="javascript" type="application/javascript">
     // $('[name=tags]').tagify();
 
-    const input = document.querySelector('input[name="tags"]');
-    let whitelist = ["test", "test2", "test3"];
+    const tags = [[${tagListDto}]];
 
+    let whitelist = [];
+    for (let tag of tags) {
+        whitelist.push(tag.name);
+    }
+
+    const input = document.querySelector('input[name="tags"]');
 
     // init Tagify script on the above inputs
-    tagify = new Tagify(input, {
+    const tagify = new Tagify(input, {
         whitelist: whitelist, // 화이트리스트 배열
         maxTags: 10, // 최대 허용 태그 갯수
 
