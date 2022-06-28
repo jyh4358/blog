@@ -1,10 +1,8 @@
 package com.myblog.article.service;
 
 import com.google.gson.Gson;
-import com.myblog.article.dto.ArticleCardBoxResponse;
-import com.myblog.article.dto.ArticleDetailResponse;
-import com.myblog.article.dto.ArticleWriteDto;
-import com.myblog.article.dto.SimpleArticle;
+import com.myblog.article.dto.*;
+import com.myblog.article.exception.NotExistArticleException;
 import com.myblog.article.model.Article;
 import com.myblog.article.model.ArticleTag;
 import com.myblog.article.model.Tag;
@@ -14,6 +12,7 @@ import com.myblog.article.repository.ArticleTagRepository;
 import com.myblog.article.repository.TagRepository;
 import com.myblog.category.model.Category;
 import com.myblog.category.resposiotry.CategoryRepository;
+import com.myblog.common.checker.RightLoginChecker;
 import com.myblog.member.repository.MemberRepository;
 import com.myblog.security.oauth2.CustomOauth2User;
 import lombok.RequiredArgsConstructor;
@@ -36,14 +35,25 @@ public class ArticleService {
     private final ArticleRepository articleRepository;
     private final ArticleSearchRepository articleSearchRepository;
     private final CategoryRepository categoryRepository;
-    private final MemberRepository memberRepository;
     private final TagRepository tagRepository;
     private final ArticleTagRepository articleTagRepository;
     private final Gson gson;
 
 
+
+    public List<PopularArticleResponse> findPopularArticle() {
+        List<Article> findPopularArticleList = articleRepository.findTop6ByOrderByHitDesc();
+        System.out.println("findPopularArticleList.size() = " + findPopularArticleList.size());
+
+        return findPopularArticleList.stream().map(s ->
+                PopularArticleResponse.of(s)
+        ).collect(Collectors.toList());
+    }
+
+
     @Transactional
     public void writeArticle(ArticleWriteDto articleWriteDto, CustomOauth2User customOauth2User) {
+        RightLoginChecker.checkLoginMember(customOauth2User);
 
         Category category = categoryRepository.findById(articleWriteDto.getCategory()).get();
 
@@ -63,23 +73,27 @@ public class ArticleService {
 
     }
 
-    public Tag findOrCreateTag(String tagName) {
-        return tagRepository.findByName(tagName)
-                .orElseGet(
-                        () -> tagRepository.save(Tag.createTag(tagName))
-                );
-    }
 
-    public ArticleDetailResponse findArticleDetail(Long articleId) {
+    @Transactional
+    public ArticleDetailResponse findArticleDetail(Long articleId, boolean hitCheck) {
         // todo - fetch join으로 변경할
-        Article article = articleRepository.findById(articleId).get();
-        ArticleDetailResponse detailResponse = ArticleDetailResponse.of(article, article.getMember().getUsername());
+        Article article = articleRepository.findById(articleId).orElseThrow(NotExistArticleException::new);
+        if (hitCheck) {
+            article.addHit();
+        }
+        List<ArticleTag> findArticleTag = articleTagRepository.findByArticle_Id(articleId);
+        List<String> tags = findArticleTag.stream().map(s ->
+                s.getTag().getName()).collect(Collectors.toList());
+
+        ArticleDetailResponse detailResponse = ArticleDetailResponse.of(
+                article, tags, article.getMember().getUsername());
 
         List<SimpleArticle> simpleArticles = findArticleListByCategory(article.getCategory());
         detailResponse.setSimpleArticles(simpleArticles);
 
         return detailResponse;
     }
+
 
     public Page<ArticleCardBoxResponse> findSearchArticle(String categoryTitle, Pageable pageable) {
         Page<Article> findArticle = null;
@@ -99,7 +113,6 @@ public class ArticleService {
         return articleCardBoxResponses;
     }
 
-
     /*
         서비스 로직
      */
@@ -108,6 +121,13 @@ public class ArticleService {
         return findArticleListByCategory.stream().map(
                 s -> SimpleArticle.of(s)
         ).collect(Collectors.toList());
+    }
+
+    public Tag findOrCreateTag(String tagName) {
+        return tagRepository.findByName(tagName)
+                .orElseGet(
+                        () -> tagRepository.save(Tag.createTag(tagName))
+                );
     }
 
 }

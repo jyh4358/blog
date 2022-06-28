@@ -1,6 +1,7 @@
 package com.myblog.article.dto;
 
 import com.myblog.article.model.Article;
+import com.myblog.article.model.Tag;
 import com.myblog.common.util.MarkdownUtils;
 import lombok.*;
 
@@ -48,7 +49,10 @@ public class ArticleDetailResponse {
         this.createDate = createDate;
     }
 
-    public static ArticleDetailResponse of(Article article, String username) {
+    public static ArticleDetailResponse of(
+            Article article,
+            List<String> tagList,
+            String username) {
         return ArticleDetailResponse.builder()
                 .id(article.getId())
                 .title(article.getTitle())
@@ -57,7 +61,7 @@ public class ArticleDetailResponse {
                 .username(username)
                 .thumbnailUrl(article.getThumbnailUrl())
                 .category(article.getCategory().getTitle())
-                .tags(Arrays.asList("test1", "test2", "test3"))
+                .tags(tagList)
                 .createDate(article.getCreatedDate())
                 .build();
 

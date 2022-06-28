@@ -84,6 +84,10 @@ public class Article extends BasicEntity {
         }
     }
 
+    public void addHit() {
+        hit++;
+    }
+
     public void defaultThumbnailUrl() {
         this.thumbnailUrl = "/images/nothumbnail.jpg";
     }
