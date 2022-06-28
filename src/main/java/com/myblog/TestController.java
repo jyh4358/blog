@@ -21,12 +21,6 @@ public class TestController {
 
     private final CategoryService categoryService;
 
-    @GetMapping("/")
-    public String home() {
-//        CategoryListDto sidebarCategory = categoryService.findSidebarCategory();
-//        System.out.println("sidebarCategory = " + sidebarCategory);
-        return "index";
-    }
 
     @GetMapping("/login")
     public String login(Model model) {
