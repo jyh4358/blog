@@ -160,6 +160,7 @@ public class CategoryService {
                 categoryRepository.delete(category);
             }
         }
+
     }
 
     private void parentCategoryTotalCalc(CategoryListDto categoryListDto) {
@@ -173,5 +174,6 @@ public class CategoryService {
             categoryListDto.addTotalCount(parentCategoryList.getCount());
         }
     }
+
 
 }

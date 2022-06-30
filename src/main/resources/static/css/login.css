@@ -55,27 +55,7 @@ button img{
 .btn-google:active {
     background-color: #c23321;
 }
-.btn-facebook {
-    background-color: #3b5998;
-    background-image: url("/img/facebook.svg");
-}
-.btn-facebook:hover {
-    background-color: #4c70ba;
-}
-.btn-facebook:active {
-    background-color: #2d4373;
-}
 
-.btn-naver {
-    background-color: #3e983b;
-    background-image: url("/img/naver.svg");
-}
-.btn-naver:hover {
-    background-color: #56b13e;
-}
-.btn-naver:active {
-    background-color: #56b13e;
-}
 
 hr{
     border:3px; height: 1px !important; display: block !important; width: 100% !important;

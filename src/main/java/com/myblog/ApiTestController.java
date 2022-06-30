@@ -1,24 +1,31 @@
 package com.myblog;
 
 import com.myblog.article.dto.ArticleWriteDto;
+import com.myblog.article.dto.PopularArticleResponse;
 import com.myblog.article.model.Article;
+import com.myblog.article.service.ArticleService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Slice;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-@RestController
-public class ApiTestController {
+import java.util.List;
+import java.util.stream.Collectors;
 
-//    @GetMapping("/login/test")
+@RestController
+@RequiredArgsConstructor
+public class ApiTestController {
+    
+    private final ArticleService articleService;
+
+    //    @GetMapping("/login/test")
     public ResponseEntity<ArticleWriteDto> test(@RequestParam String code) {
 
         System.out.println("code = " + code);
-
-
 
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -36,5 +43,20 @@ public class ApiTestController {
 
 
         return redirectUri;
+    }
+
+    @GetMapping("/api/v1/article")
+    public ResponseEntity<List<PopularArticleResponse>> index(@RequestParam int curPage) {
+
+        Slice<Article> recentArticle = articleService.findRecentArticle(curPage);
+        List<Article> content = recentArticle.getContent();
+        List<PopularArticleResponse> collect = content.stream().map(
+                s -> PopularArticleResponse.of(s)
+        ).collect(Collectors.toList());
+
+        System.out.println("recentArticle.getSize() = " + recentArticle.getSize());
+
+        System.out.println("curPage = " + curPage);
+        return new ResponseEntity<>(collect, HttpStatus.OK);
     }
 }

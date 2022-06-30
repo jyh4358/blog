@@ -10,7 +10,7 @@
 
         <div class="main ">
             <div class="carousel-inner ">
-                <div class="carousel-item active" style="cursor: default">
+                <div class="carousel-item active" style="cursor: default" id="article-id" th:value="${articleDetailResponse.id}">
                     <img th:src="${articleDetailResponse.thumbnailUrl}" class="w-100 vh-100 cover main-image"
                          alt="...">
                     <div class="card-img-overlay text-shadow text-white text-center row justify-content-center align-content-center p-0">
@@ -43,6 +43,19 @@
                     <div class="ms-2 me-2 mb-3 p-sm-4 p-2">
                         <div class="toolbox container pt-4 pb-4">
                             <div class=" ms-5 me-5 d-flex justify-content-end">
+                                <a class="btn btn-secondary" style="color: white"
+                                   type="button">수 정
+                                </a>
+                                <form id="deleteArticle"
+                                      method="post">
+                                </form>
+                                <button class="btn btn-secondary ms-2"
+                                        onclick="deleteArticle()">삭 제
+                                </button>
+
+                                <button class="btn btn-secondary ms-2" data-bs-toggle="modal"
+                                        data-bs-target="#shareContent">
+                                    <i class="fas fa-share-alt"></i></button>
 
                                 <button class="btn btn-secondary ms-2" data-bs-toggle="modal"
                                         data-bs-target="#shareContent">
@@ -152,7 +165,7 @@
                                                  width="40" height="40" class="rounded-circle me-2" alt="">
                                         </div>
                                         <div class="w-100">
-                                            <div class="d-flex justify-content-between align-items-center">
+                                            <div class="d-flex justify-content-between align-items-center" th:id="|comment${comment.id}">
                                                 <span th:text="${comment.username}" class="me-2">유저이름</span>
                                                 <div class="d-flex flex-row align-items-center">
                                                     <small th:text="${#temporals.format(comment.createDate, 'yyyy-MM-dd HH:mm')}">22-06-27 17:21:34</small>
@@ -169,7 +182,7 @@
                                                 </div>
                                             </div>
 
-                                            <!-- 비밀글 분기처리 -->
+                                            <!-- 댓글, 비밀 댓글 분기처리 -->
                                             <th:block sec:authorize="hasRole('ROLE_ADMIN')" th:if="${comment.secret}">
                                                 <p th:text="${comment.content}" class="text-justify comment-text mb-0" style="white-space:pre-wrap;">댓글 내용</p>
                                             </th:block>
@@ -227,7 +240,7 @@
                                                              width="40" height="40" class="rounded-circle me-2" alt="">
                                                     </div>
                                                     <div class="w-100">
-                                                        <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="d-flex justify-content-between align-items-center" th:id="|comment${childComment.id}">
                                                             <span th:text="${childComment.username}" class="me-2">유저 아이디</span>
                                                             <div class="d-flex flex-row align-items-center">
                                                                 <small th:text="${#temporals.format(childComment.createDate, 'yyyy-MM-dd HH:mm')}">22-06-27 17:30:36</small>
@@ -281,93 +294,7 @@
 
 <!-- Slick Carousel -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script src="/js/getCsrf.js"></script>
+<script src="/js/csrf.js"></script>
+<script src="/js/comment.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>
-<script th:inline="javascript" type="application/javascript">
-
-    let commentIndex = {
-        init: function () {
-            let _this = this;
-            $("#comment-save").on("click", function () {
-                let attr = $(this).attr("id");
-                _this.commentSave();
-            });
-            $("#child-comment-save").on("click", function () {
-                _this.commentSave($(this).attr("value"));
-            });
-            $(".comment-delete").on("click", function () {
-                _this.commentDelete($(this).attr("value"));
-            });
-
-
-        },
-        commentSave: function (parentCommentId) {
-            let token = getCsrfToken();
-            let data ={};
-            console.log("==============");
-            alert(!parentCommentId);
-            if (!parentCommentId) {
-                data = {
-                    articleId: [[${articleDetailResponse.id}]],
-                    content: $("#comment-content").val(),
-                    secret: $("#comment-secret").is(":checked"),
-                    parentCommentId: parentCommentId,
-                };
-                if(!data.content){
-                    alert("댓글을 작성해주세요");
-                    $('#parent-content-error').text('댓글을 작성해주세요')
-                    return;
-                }
-            } else {
-                data = {
-                    articleId: [[${articleDetailResponse.id}]],
-                    content: $("#child-comment-content").val(),
-                    secret: $("#child-comment-secret").is(":checked"),
-                    parentCommentId: parentCommentId,
-                };
-                if(!data.content){
-                    alert("댓글을 작성해주세요");
-                    $('#child-content-error').text('댓글을 작성해주세요')
-                    return;
-                }
-            }
-
-            $.ajax({
-                type: 'POST',
-                url: '/api/v1/comment',
-                headers: {'X-XSRF-TOKEN': token},
-                contentType: 'application/json; charset=utf-8',
-                async: false,
-                data: JSON.stringify(data)
-            }).done(function (res) {
-                window.location.reload();
-            }).fail(function (error) {
-                console.log(error);
-                alert("에러");
-            });
-
-        },
-        commentDelete: function (commentId) {
-            alert("해당 댓글을 삭제하시겠습니까?");
-            let token = getCsrfToken();
-
-            $.ajax({
-                type: 'DELETE',
-                url: '/api/v1/comment/' + commentId,
-                headers: {'X-XSRF-TOKEN': token},
-                contentType: 'application/json; charset=utf-8',
-            }).done(function (res) {
-                window.location.reload();
-            }).fail(function (error) {
-                console.log(error);
-                alert("에러");
-            });
-        },
-
-
-    }
-    commentIndex.init();
-
-
-</script>
 </html>

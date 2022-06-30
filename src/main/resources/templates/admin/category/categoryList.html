@@ -65,22 +65,13 @@
 
 </section>
 <!-- // Page Wrapper End -->
-
+<script src="/js/csrf.js"></script>
 <script th:inline="javascript">
 
     let count = 0;
     const categoryListDto = [[${categoryListDto}]];
     console.log(categoryListDto)
 
-    function getCookie(str) {
-        const value = document.cookie.match('(^|;) ?' + str + '=([^;]*)(;|$)');
-        return value ? value[2] : null;
-    }
-
-    function getCsrfToken() {
-        let token = getCookie("XSRF-TOKEN");
-        return token;
-    }
 
     // 부모 카테고리 삭제 시 자식 카테고리도 삭제
     function deleteParentCategory(pId) {
@@ -174,7 +165,7 @@
             let a = '';
             a += '            <div class="input-group mb-3 ms-5" id="child' + pId + num + '">\n' +
                 '                <input type="text" class="form-control" style="width: 80%"\n' +
-                '                       id="category' + pId + num + '" name="testLists[' + (pId - 1) + '].childCategories[' + (num - 1) + ']">\n' +
+                '                       id="category' + pId + num + '" name="parentList[' + (pId - 1) + '].childCategories[' + (num - 1) + ']">\n' +
                 '                <button style="width: 10%" class="btn btn-outline-secondary" type="button" id="modify' + pId + num + '" onclick="modifyCategory(' + pId + ',' + num + ')">확인</button>\n' +
                 '                <button style="width: 10%" class="btn btn-outline-secondary" type="button" id="delete' + pId + num + '" onclick="deleteCategory(' + pId + ',' + num + ')">삭제</button>\n' +
                 '            </div>';
@@ -189,7 +180,7 @@
             htmlInputElement.setAttribute('class', 'form-control');
             htmlInputElement.setAttribute('style', 'width: 80%');
             htmlInputElement.setAttribute('id', 'category' + pId + num);
-            htmlInputElement.setAttribute('name', 'testLists[' + (pId - 1) + '].childCategories[' + (num - 1) + ']');
+            htmlInputElement.setAttribute('name', 'parentList[' + (pId - 1) + '].childCategories[' + (num - 1) + ']');
             htmlInputElement.readOnly = false;
 
             let htmlButtonElement = document.createElement('button');
@@ -276,7 +267,6 @@
         });
 
     }
-
 
 </script>
 </html>

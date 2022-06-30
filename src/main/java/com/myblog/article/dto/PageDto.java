@@ -20,14 +20,14 @@ public class PageDto {
     private int endPageNum;
 
 
-    public static PageDto of(Page<ArticleCardBoxResponse> articleCardBoxResponses) {
-        Pageable articlePageable = articleCardBoxResponses.getPageable();
+    public static PageDto of(Page pageableDto) {
+        Pageable articlePageable = pageableDto.getPageable();
 
         return new PageDto(
                 articlePageable.getPageNumber(),
-                articleCardBoxResponses.getTotalPages() - 1,
+                pageableDto.getTotalPages() - 1,
                 (int) Math.floor(articlePageable.getPageNumber() / DISPLAY_PAGE_SIZE) * DISPLAY_PAGE_SIZE,
-                Math.min(articleCardBoxResponses.getTotalPages() - 1, (int)(Math.ceil(articlePageable.getPageNumber() / DISPLAY_PAGE_SIZE + 1) * DISPLAY_PAGE_SIZE - 1))
+                Math.min(pageableDto.getTotalPages() - 1, (int)(Math.ceil(articlePageable.getPageNumber() / DISPLAY_PAGE_SIZE + 1) * DISPLAY_PAGE_SIZE - 1))
         );
     }
 }

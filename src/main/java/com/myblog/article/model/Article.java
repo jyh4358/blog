@@ -62,7 +62,7 @@ public class Article extends BasicEntity {
         this.category = category;
     }
 
-    public static Article createArticle(ArticleWriteDto articleWriteDto, Member member, Category category, List<ArticleTag> articleTagDto) {
+    public static Article createArticle(ArticleWriteDto articleWriteDto, Member member, Category category, List<ArticleTag> articleTags) {
         Article article = Article.builder()
                 .title(articleWriteDto.getTitle())
                 .content(articleWriteDto.getContent())
@@ -70,7 +70,7 @@ public class Article extends BasicEntity {
                 .member(member)
                 .category(category)
                 .build();
-        article.addArticleTags(articleTagDto);
+        article.addArticleTags(articleTags);
         if (article.getThumbnailUrl().isEmpty()) {
             article.defaultThumbnailUrl();
         }
@@ -81,6 +81,15 @@ public class Article extends BasicEntity {
         for (ArticleTag articleTag : articleTagDto) {
             articleTags.add(articleTag);
             articleTag.setArticle(this);
+        }
+    }
+
+    public void modifyArticle(String title, String content, String thumbnailUrl, Category category) {
+        this.title = title;
+        this.content = content;
+        this.category = category;
+        if (thumbnailUrl.isEmpty()) {
+            defaultThumbnailUrl();
         }
     }
 

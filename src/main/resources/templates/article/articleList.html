@@ -29,8 +29,7 @@
                                     </div>
                                 </div>
                                 <div class="col-8 row row-cols-1 align-self-center">
-                                    <h3 class="card-title col mb-3 text-truncate" th:text="${articleCardBox.title}">글
-                                        제목</h3>
+                                    <h3 class="card-title col mb-3 text-truncate" th:text="${articleCardBox.title}">글 제목</h3>
                                     <p class="d-none d-md-block col recent-card-text"
                                        th:text="${articleCardBox.content}">글 내용</p>
                                     <p class="col mb-0">
@@ -56,7 +55,7 @@
                 <ul class="pagination">
                     <li class="page-item">
                         <a class="page-link" aria-label="First"
-                           th:href="@{/article(page=0)}"
+                           th:href="@{/article(categoryTitle=${param.categoryTitle}, page=0)}"
                            th:if="${pageDto.currentPageNum} > 4">
                             <span> « </span>
                         </a>
@@ -64,7 +63,7 @@
 
                     <li class="page-item">
                         <a class="page-link" aria-label="Previous"
-                           th:href="@{/article(page=${pageDto.currentPageNum - 5})}"
+                           th:href="@{/article(categoryTitle=${param.categoryTitle}, page=${pageDto.currentPageNum - 5})}"
                            th:if="${articleCardBoxList.number} > 4">
                             <span> < </span>
                         </a>
@@ -83,112 +82,30 @@
                     </th:block>
                     <li class="page-item">
                         <a class="page-link" aria-label="Next"
-                           th:href="@{/article(page=${pageDto.currentPageNum + 5})}"
-                           th:if="${pageDto.endPageNum < pageDto.lastPageNum}"
-                        >
+                           th:href="@{/article(categoryTitle=${param.categoryTitle}, page=${pageDto.currentPageNum + 5})}"
+                           th:if="${pageDto.endPageNum < pageDto.lastPageNum} and ${pageDto.currentPageNum + 5 < pageDto.lastPageNum}">
+                            <span aria-hidden="true"> > </span>
+                        </a>
+                        <a class="page-link" aria-label="Next"
+                           th:href="@{/article(categoryTitle=${param.categoryTitle}, page=${pageDto.lastPageNum})}"
+                           th:if="${pageDto.endPageNum < pageDto.lastPageNum} and ${pageDto.currentPageNum + 5 > pageDto.lastPageNum}">
                             <span aria-hidden="true"> > </span>
                         </a>
                     </li>
 
                     <li class="page-item">
                         <a class="page-link" aria-label="Last"
-                           th:href="@{/article(page=${pageDto.lastPageNum})}"
-                           th:if="${pageDto.endPageNum < pageDto.lastPageNum}"
-                        >
+                           th:href="@{/admin/article(categoryTitle=${param.categoryTitle}, page=${pageDto.lastPageNum})}"
+                           th:if="${pageDto.endPageNum < pageDto.lastPageNum}">
                             <span aria-hidden="true">»</span>
                         </a>
                     </li>
-
-
+                    [[${pageDto.currentPageNum}]], [[${pageDto.lastPageNum}]]
                 </ul>
             </nav>
         </div>
         <!--page e-->
     </div>
-
-
-
-<!--    &lt;!&ndash; Admin Content &ndash;&gt;-->
-<!--    <div class="admin-content">-->
-<!--        <div class="button-group">-->
-<!--            <a href="create.html" class="btn btn-big">Add Post</a>-->
-<!--            <a href="index.html" class="btn btn-big">Manage Posts</a>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <form action="#" method="post">-->
-<!--                <select name="topic" id="topic" class="search-select">-->
-<!--                    <option value="title">제목</option>-->
-<!--                    <option value="content">내용</option>-->
-<!--                </select>-->
-<!--                <input type="text" class="search-input">-->
-<!--                <button type="submit" class="btn btn-big">Search</button>-->
-<!--            </form>-->
-<!--        </div>-->
-
-<!--        <div class="content">-->
-<!--            <h2 class="page-title">Manage Posts</h2>-->
-
-<!--            <table>-->
-<!--                <thead>-->
-<!--                <th>SN</th>-->
-<!--                <th>Title</th>-->
-<!--                <th>Author</th>-->
-<!--                <th colspan="3">Action</th>-->
-<!--                </thead>-->
-<!--                <tbody>-->
-<!--                <tr>-->
-<!--                    <td>1</td>-->
-<!--                    <td>-->
-<!--                        <div>-->
-<!--                            This is the first post-->
-<!--                        </div>-->
-<!--                        <div>-->
-<!--                            <span class="table-category">Java</span>-->
-<!--                            <span class="table-date">2013.05.19</span>-->
-<!--                        </div>-->
-<!--                    </td>-->
-<!--                    <td>Awa</td>-->
-<!--                    <td><a href="#" class="edit">edit</a></td>-->
-<!--                    <td><a href="#" class="delete">delete</a></td>-->
-<!--                    <td><a href="#" class="publish">publish</a></td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td>2</td>-->
-<!--                    <td>-->
-<!--                        <div>-->
-<!--                            This is the second post-->
-<!--                        </div>-->
-<!--                        <div>-->
-<!--                            <span class="table-category">Java</span>-->
-<!--                            <span class="table-date">2013.05.19</span>-->
-<!--                        </div>-->
-<!--                    </td>-->
-<!--                    <td>Awa</td>-->
-<!--                    <td><a href="#" class="edit">edit</a></td>-->
-<!--                    <td><a href="#" class="delete">delete</a></td>-->
-<!--                    <td><a href="#" class="publish">publish</a></td>-->
-<!--                </tr>-->
-<!--                </tbody>-->
-<!--            </table>-->
-<!--        </div>-->
-
-<!--        <ul class="pagination justify-content-center">-->
-<!--            <li class="page-item" >-->
-<!--                <a class="page-link" href="#">-->
-<!--                    <i class="fas fa-chevron-left prev"></i>-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li class="page-item"><a class="page-link" href="#">1</a></li>-->
-<!--            <li class="page-item"><a class="page-link" href="#">2</a></li>-->
-<!--            <li class="page-item"><a class="page-link" href="#">3</a></li>-->
-<!--            <li class="page-item" >-->
-<!--                <a class="page-link" href="#">-->
-<!--                    <i class="fas fa-chevron-right next"></i>-->
-<!--                </a>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </div>-->
-
 </section>
 <!-- // Page Wrapper End -->
 

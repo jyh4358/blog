@@ -6,10 +6,6 @@
 
     <div class="m-4 sidebar-header" style="white-space: nowrap">
         <a th:href="@{/}"><h3 class="text-black-50">JDong's BLOG</h3></a>
-        <a th:href="@{/aboutMe}"><h5 class="text-black-50">ABOUT ME(작성중)</h5></a>
-        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/article/write}">
-            <h5 class="text-black-50">NEW ARTICLE</h5>
-        </a>
 
     </div>
 
@@ -78,16 +74,54 @@
                     data-bs-target="#tag-collapse-xl" aria-expanded="true">최신 댓글
             </button>
             <div class="collapse show" id="tag-collapse-xl">
-                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small" th:each="recentComment : ${sideBarRecentComment}">
                     <li>
-                        <a class="comment-side rounded">댓글1</a>
-
-                    </li>
-                    <li>
-                        <a class="comment-side rounded">비밀댓글</a>
-                    </li>
-                    <li>
-                        <a class="comment-side rounded">댓글2</a>
+                        <th:block sec:authorize="hasRole('ROLE_ADMIN')" th:if="${recentComment.secret}">
+                            <a class="comment-side col"
+                               th:href="|@{/article/{articleId}(articleId=${recentComment.articleId})}#commentBox|">
+                                <p class="text-truncate mb-0" th:text="${recentComment.content}">댓글 내용</p></a>
+                            <ul>
+                                <small class="col ms-2" th:text="| - ${recentComment.username}"> - 아이디</small>
+                            </ul>
+                        </th:block>
+                        <th:block sec:authorize="hasRole('ROLE_USER')" th:if="${recentComment.secret}">
+                            <a class="comment-side col text-truncate"
+                               th:if="${#authentication.principal.getMemberId} == ${recentComment.memberId}"
+                               th:href="|@{/article/{articleId}(articleId=${recentComment.articleId})}#commentBox|">
+                                <p class="text-truncate mb-0" th:text="${recentComment.content}">댓글 내용</p></a>
+                            <ul>
+                                <small class="col ms-2"
+                                       th:if="${#authentication.principal.getMemberId} == ${recentComment.memberId}"
+                                       th:text="| - ${recentComment.username}"> - 아이디</small>
+                            </ul>
+                            <a class="comment-side col text-truncate"
+                               th:unless="${#authentication.principal.getMemberId} == ${recentComment.memberId}"
+                               th:href="|@{/article/{articleId}(articleId=${recentComment.articleId})}#commentBox|">
+                                <p class="text-truncate mb-0">비밀 댓글</p></a>
+                            <ul>
+                                <small class="col ms-2"
+                                       th:unless="${#authentication.principal.getMemberId} == ${recentComment.memberId}"
+                                       th:text="| - ${recentComment.username}"> - 아이디</small>
+                            </ul>
+                        </th:block>
+                        <th:block sec:authorize="isAnonymous()" th:if="${recentComment.secret}">
+                            <a class="comment-side col text-truncate"
+                               th:href="|@{/article/{articleId}(articleId=${recentComment.articleId})}#commentBox|">
+                                <p class="text-truncate mb-0">비밀 댓글</p>
+                            </a>
+                            <ul>
+                                <small class="col ms-2" th:text="| - ${recentComment.username}"> - 아이디</small>
+                            </ul>
+                        </th:block>
+                        <a class="comment-side col text-truncate"
+                           th:unless="${recentComment.secret}"
+                           th:href="|@{/article/{articleId}(articleId=${recentComment.articleId})}#commentBox|">
+                            <p class="text-truncate mb-0" th:text="${recentComment.content}">댓글 내용</p></a>
+                        <ul>
+                            <small class="col ms-2"
+                                   th:unless="${recentComment.secret}"
+                                   th:text="| - ${recentComment.username}"> - 아이디</small>
+                        </ul>
                     </li>
                 </ul>
             </div>

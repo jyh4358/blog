@@ -1,10 +1,7 @@
 package com.myblog.article.controller;
 
 
-import com.myblog.article.dto.ArticleCardBoxResponse;
-import com.myblog.article.dto.ArticleDetailResponse;
-import com.myblog.article.dto.ArticleWriteDto;
-import com.myblog.article.dto.PageDto;
+import com.myblog.article.dto.*;
 import com.myblog.article.service.ArticleService;
 import com.myblog.article.service.TagService;
 import com.myblog.category.service.CategoryService;
@@ -21,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -49,13 +47,13 @@ public class ArticleController {
 
         model.addAttribute("tagListDto", tagService.findAllTag());
         model.addAttribute("categoryListDto", categoryService.findCategories());
-        model.addAttribute("articleWriteDto", ArticleWriteDto.createDefaultArticleWriteDto());
+        model.addAttribute("articleWriteDto", ArticleWriteDto.createDefaultArticleDto());
 
 //        model.addAttribute("tagsInput", collect);
         return "admin/article/articleWriteForm";
     }
 
-    @PostMapping("/admin/article")
+    @PostMapping("/admin/article-write")
     public String articleWrite(
             ArticleWriteDto articleWriteDto,
             @AuthenticationPrincipal CustomOauth2User customOauth2User
@@ -67,6 +65,34 @@ public class ArticleController {
 
         return "admin/article/articleList";
     }
+
+    @GetMapping("/admin/article-modify/{articleId}")
+    public String articleModifyForm(
+            Model model,
+            @PathVariable Long articleId
+    ) {
+        ArticleModifyResponse articleModifyResponse = articleService.findArticle(articleId);
+
+        model.addAttribute("articleModifyResponse", articleModifyResponse);
+        model.addAttribute("tagListDto", tagService.findAllTag());
+        model.addAttribute("categoryListDto", categoryService.findCategories());
+
+        return "admin/article/articleModifyForm";
+    }
+
+    @PostMapping("/admin/article-modify/{articleId}")
+    public String articleModify(
+            @PathVariable Long articleId,
+            ArticleWriteDto articleWriteDto,
+            RedirectAttributes redirectAttributes
+    ) {
+
+        redirectAttributes.addAttribute("articleId", articleService.modifyArticle(articleId, articleWriteDto));
+
+        return "redirect:/article/{articleId}";
+    }
+
+
     @GetMapping("/article/{articleId}")
     public String articleView(
             @PathVariable Long articleId,
@@ -75,6 +101,7 @@ public class ArticleController {
             Model model,
             HttpServletResponse response
     ) {
+
         boolean hitCheck = checkDuplicateHitCount(articleId, hitCookieValue, response);
 
         List<CommentListResponse> commentList = commentService.findCommentList(articleId);
@@ -87,8 +114,10 @@ public class ArticleController {
     }
 
 
+
+
     @GetMapping("/article")
-    public String findSearchArticle(
+    public String findArticle(
             @PageableDefault(size = 8, sort = "id",direction = Sort.Direction.DESC) Pageable pageable,
             @RequestParam String categoryTitle,
             Model model
@@ -102,6 +131,34 @@ public class ArticleController {
         System.out.println("articleAll = " + articleAll.getTotalElements());
         System.out.println("============================================================");
         return "article/articleList";
+    }
+
+    @GetMapping("/article-search")
+    public String findSearchArticle(
+            @PageableDefault(size = 8, sort = "id",direction = Sort.Direction.DESC) Pageable pageable,
+            @RequestParam String keyword
+    ) {
+
+
+
+        return null;
+    }
+
+    @GetMapping("/admin/article")
+    public String adminSearchArticle(
+            @PageableDefault(size = 8, sort = "id",direction = Sort.Direction.DESC) Pageable pageable,
+            @RequestParam String categoryTitle,
+            Model model
+    ) {
+//        List<ArticleCardBoxResponse> articleCardBoxList = articleService.findArticleAll(pageable);
+        Page<ArticleCardBoxResponse> articleAll = articleService.findSearchArticle(categoryTitle, pageable);
+        model.addAttribute("articleCardBoxList", articleAll);
+        model.addAttribute("pageDto", PageDto.of(articleAll));
+        List<ArticleCardBoxResponse> content = articleAll.getContent();
+        System.out.println("content = " + content);
+        System.out.println("articleAll = " + articleAll.getTotalElements());
+        System.out.println("============================================================");
+        return "/admin/index";
     }
 
 //    @GetMapping("/admin/api/article")

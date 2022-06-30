@@ -5,6 +5,8 @@ import com.myblog.article.repository.ArticleRepository;
 import com.myblog.comment.dto.CommentListResponse;
 import com.myblog.comment.dto.CommentSaveRequest;
 import com.myblog.article.exception.NotExistArticleException;
+import com.myblog.comment.dto.ManageCommentResponse;
+import com.myblog.comment.dto.RecentCommentResponse;
 import com.myblog.comment.exception.NotExistCommentException;
 import com.myblog.member.exception.NotExistMemberException;
 import com.myblog.comment.model.Comment;
@@ -14,6 +16,8 @@ import com.myblog.member.model.Member;
 import com.myblog.member.repository.MemberRepository;
 import com.myblog.security.oauth2.CustomOauth2User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -76,11 +80,30 @@ public class CommentService {
         }
     }
 
+    public Page<ManageCommentResponse> findAllComment(Pageable pageable) {
+        Page<Comment> findCommentList = commentRepository.findAll(pageable);
+        return findCommentList.map(s ->
+                ManageCommentResponse.of(s));
+    }
+
     @Transactional
     public void deleteComment(CustomOauth2User customOauth2User, Long commentId) {
         RightLoginChecker.checkLoginMember(customOauth2User);
         Comment comment = commentRepository.findById(commentId).orElseThrow(NotExistCommentException::new);
         commentRepository.delete(comment);
+    }
+
+    public List<RecentCommentResponse> findRecentComment() {
+        List<Comment> recentTop5ByOrderByIdDesc = commentRepository.findTop5ByOrderByIdDesc();
+        List<RecentCommentResponse> collect = recentTop5ByOrderByIdDesc.stream().map(s ->
+                RecentCommentResponse.of(
+                        s.getArticle().getId(),
+                        s.getContent(),
+                        s.getMember().getId(),
+                        s.getMember().getUsername(),
+                        s.isSecret())
+        ).collect(Collectors.toList());
+        return collect;
     }
 
 }

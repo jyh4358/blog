@@ -46,26 +46,36 @@
             </div>
 
 
-            <form action="/admin/articleWriteForm.html" th:action method="post" enctype="multipart/form-data" id="writeArticleForm"
-                  th:object="${articleWriteDto}">
+            <form action="/admin/articleWriteForm.html" th:action="|@{/admin/article-modify/{articleId}(articleId=${articleModifyResponse.id})}|" method="post" enctype="multipart/form-data" id="writeArticleForm">
 
                 <textarea type="text" name="thumbnailUrl" id="thumbnailUrl" hidden></textarea>
 
                 <div class="mt-3 mb-3">
                     <select id="category" name="category" class="form-select ps-3" aria-label="Select category">
-                        <option selected>카테고리를 선택해주세요</option>
+                        <option>카테고리를 선택해주세요</option>
                         <th:block th:each="parentCategoryList, p : ${categoryListDto.parentCategoryLists}">
-                            <option th:value="${parentCategoryList.id}"
+                            <option selected
+                                    th:if="${parentCategoryList.parentCategory} == ${articleModifyResponse.category}"
+                                    th:value="${parentCategoryList.id}"
                                     th:text="${parentCategoryList.parentCategory}">Spring</option>
-                            <option th:each="childCategoryList, c : ${parentCategoryList.childCategoryLists}"
-                                    th:value="${childCategoryList.id}"
-                                    th:text="|  - ${childCategoryList.childCategory}|">JPA</option>
+                            <option th:unless="${parentCategoryList.parentCategory} == ${articleModifyResponse.category}"
+                                    th:value="${parentCategoryList.id}"
+                                    th:text="${parentCategoryList.parentCategory}">Spring</option>
+                            <th:block th:each="childCategoryList, c : ${parentCategoryList.childCategoryLists}">
+                                <option selected
+                                        th:if="${childCategoryList.childCategory} == ${articleModifyResponse.category}"
+                                        th:value="${childCategoryList.id}"
+                                        th:text="|  - ${childCategoryList.childCategory}|">JPA</option>
+                                <option th:unless="${childCategoryList.childCategory} == ${articleModifyResponse.category}"
+                                        th:value="${childCategoryList.id}"
+                                        th:text="|  - ${childCategoryList.childCategory}|">JPA</option>
+                            </th:block>
                         </th:block>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <input id="title" name="title" type="text" class="form-control ps-3" placeholder="제목을 입력해주세요" required max="30">
+                    <input id="title" name="title" th:value="${articleModifyResponse.title}" type="text" class="form-control ps-3" placeholder="제목을 입력해주세요" required max="30">
                 </div>
                 <div class="form-group">
                     <textarea type="text" name="content" id="content" hidden></textarea>
@@ -78,7 +88,8 @@
 
                 <div class="mt-3">
                     <input id="tags" type="text" name="tags" placeholder="태그"
-                           class="form-control tagify-outside ps-3">
+                           class="form-control tagify-outside ps-3"
+                           th:value="${#strings.listJoin(articleModifyResponse.tags,',')}">
                 </div>
 
             </form>
@@ -97,7 +108,6 @@
 <!-- Ckeditor5 -->
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
-<script src="/js/articleWrite.js"></script>
 <script src="/js/tagify/tagify.js"></script>
 <script src="/js/tagify/jQuery.tagify.min.js"></script>
 <script src="/js/csrf.js"></script>
@@ -126,8 +136,9 @@
             enabled: 0,             // 단어 몇글자 입력했을떄 추천 드롭다운 메뉴가 나타날지
             closeOnSelect: false    // 드롭다운 메뉴에서 태그 선택하면 자동으로 꺼지는지 안꺼지는지
         }
-    });
+    })
 
+    editor.setMarkdown([[${articleModifyResponse.content}]]);
 
 </script>
 </html>

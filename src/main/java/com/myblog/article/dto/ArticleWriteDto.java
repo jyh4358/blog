@@ -16,7 +16,7 @@ public class ArticleWriteDto {
 
 
 
-    public static ArticleWriteDto createDefaultArticleWriteDto() {
+    public static ArticleWriteDto createDefaultArticleDto() {
         return new ArticleWriteDto();
     }
 

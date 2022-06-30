@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/layout/adminLayout :: adminLayout(~{::title}, ~{::section}, ~{::script})}">
+
+
+<title>JDong's Blog</title>
+
+<section>
+
+    <div style="margin-bottom: 100px"></div>
+
+    <div class="recent-comment mt-5 ms-4 me-4">
+        <h1 class="text-center">댓글 관리</h1>
+        <hr>
+
+        <ul class="list_post list_post_type3">
+            <li class="" th:each="manageComment : ${manageCommentList}">
+                <div class="post_cont">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="txt_cate text-primary" th:text="${manageComment.username}">작성자</span>
+                        <span class="txt_info txt_info_type1 me-5" th:text="${#temporals.format(manageComment.createDate, 'yyyy-MM-dd HH-mm')}">2022.06.30 02:08</span>
+                    </div>
+                    <div class="mt-2 mb-2">
+                        <strong class="tit_post fs-4">
+                            <a th:href="|@{/article/{articleId}(articleId=${manageComment.articleId})}#comment${manageComment.id}|"
+                               th:text="${manageComment.content}"
+                               target="_blank" class="link_cont">댓글 내용</a>
+                        </strong>
+                    </div>
+                    <div>
+                        <span th:text="${manageComment.articleTitle}"
+                              class="txt_info txt_ellip fst"><i class="fa fa-file-text-o" aria-hidden="true"></i>Spring Data JPA - 쿼리 메서드 사용과 @Query</span>
+                    </div>
+                </div>
+                <div class="post_btn">
+                    <a th:href="|@{/article/{articleId}(articleId=${manageComment.articleId})}#comment${manageComment.id}|" class="btn_post">답글</a>
+                    <button class="btn_post comment-delete" th:value="${manageComment.id}">삭제</button>
+                </div>
+            </li>
+        </ul>
+
+
+        <!-- page s -->
+                <div class="pagination-section mt-4">
+                    <nav class="pagination-outer" aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" aria-label="First"
+                                   th:href="@{/admin/comments(page=0)}"
+                                   th:if="${pageDto.currentPageNum} > 4">
+                                    <span> « </span>
+                                </a>
+                            </li>
+
+                            <li class="page-item">
+                                <a class="page-link" aria-label="Previous"
+                                   th:href="@{/admin/comments(page=${pageDto.currentPageNum - 5})}"
+                                   th:if="${manageCommentList.number} > 4">
+                                    <span> < </span>
+                                </a>
+                            </li>
+
+                            <th:block th:each="page : ${#numbers.sequence(pageDto.startPageNum, pageDto.endPageNum)}">
+                                <li th:classappend="${page == pageDto.currentPageNum} ? 'active'"
+                                    class="page-item">
+                                    <a th:text="${page + 1}" class="page-link"
+                                       th:href="@{/admin/comments(page=${page})}"></a>
+                                </li>
+                            </th:block>
+                            <li class="page-item">
+                                <a class="page-link" aria-label="Next"
+                                   th:href="@{/admin/comments(page=${pageDto.currentPageNum + 5})}"
+                                   th:if="${pageDto.endPageNum < pageDto.lastPageNum} and ${pageDto.currentPageNum + 5 <= pageDto.lastPageNum}">
+                                    <span aria-hidden="true"> > </span>
+                                </a>
+                                <a class="page-link" aria-label="Next"
+                                   th:href="@{/admin/comments(page=${pageDto.lastPageNum})}"
+                                   th:if="${pageDto.endPageNum < pageDto.lastPageNum} and ${pageDto.currentPageNum + 5 > pageDto.lastPageNum}">
+                                    <span aria-hidden="true"> > </span>
+                                </a>
+                            </li>
+
+                            <li class="page-item">
+                                <a class="page-link" aria-label="Last"
+                                   th:href="@{/admin/comments(page=${pageDto.lastPageNum})}"
+                                   th:if="${pageDto.endPageNum < pageDto.lastPageNum}">
+                                    <span aria-hidden="true">»</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+<!--        page e-->
+    </div>
+
+
+</section>
+
+<!-- Slick Carousel -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="/js/csrf.js"></script>
+<script src="/js/comment.js"></script>
+
+</html>

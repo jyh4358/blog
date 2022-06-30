@@ -11,32 +11,102 @@
 
     <div class="recent-cards mt-5 ms-4 me-4">
         <div class="cards-container container p-0" id="infiniteScrollBox">
-            <h1 class="text-center">카테고리 명</h1>
+            <h1 th:text="|${param.categoryTitle} (${articleCardBoxList.totalElements})|" class="text-center">ALL</h1>
             <hr>
-            <div id="articlePage-0">
-                <div class="card mb-3 recent-card wow fadeInUp">
-                    <a th:href="@{/article/view}">
-                        <div class="row g-0">
-                            <div class="col-3">
-                                <div class="ratio ratio-1x1"
-                                     th:style="|background-image: url('iamges/logo.png'); background-position: center; background-size: cover;|"></div>
+            <div class="row me-0">
+                <th:block th:each="articleCardBox :${articleCardBoxList}">
+
+                    <div class="col-11 card mb-3 recent-card wow fadeInUp">
+                        <a th:href="@{/article/{articleId}(articleId=${articleCardBox.id})}">
+
+                            <div class="row g-0 me-0">
+                                <div class="col-1 mb-3 align-self-center">
+                                    <h4 class="text-center" th:text="${articleCardBox.id}"> 1 </h4>
+                                </div>
+                                <div class="col-3">
+                                    <div class="ratio ratio-1x1"
+                                         th:style="|background-image: url(${articleCardBox.thumbnailUrl}); background-position: center; background-size: cover;|">
+                                    </div>
+                                </div>
+                                <div class="col-8 row row-cols-1 align-self-center">
+                                    <h3 class="card-title col mb-3 text-truncate" th:text="${articleCardBox.title}">글 제목</h3>
+                                    <p class="d-none d-md-block col recent-card-text"
+                                       th:text="${articleCardBox.content}">글 내용</p>
+                                    <p class="col mb-0">
+                                        <small class="text-muted"
+                                               th:text="|작성일 : ${#temporals.format(articleCardBox.createDate, 'yyyy-MM-dd HH-mm')}|"></small>
+                                    </p>
+                                </div>
                             </div>
-                            <div class="col-9 row row-cols-1 align-self-center">
-                                <h3 class="card-title col mb-3 text-truncate">글 제목</h3>
-                                <p class="d-none d-md-block col recent-card-text">글 내용</p>
-                                <p class="col mb-0">
-                                    <small class="text-muted"
-                                           th:text="|작성일 :|"></small>
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                        </a>
+                    </div>
+                    <div class="col-1 row row-col-1 align-self-center mb-3">
+                        <a class="col btn align-items-center btn-block h-50 fs-3"
+                           th:href="|@{/admin/article-modify/{articleId}(articleId=${articleCardBox.id})}|">수정</a>
+                        <button class="col btn align-items-center btn-block h-50 fs-3 article-delete" th:value="${articleCardBox.id}">삭제</button>
+                    </div>
+
+                </th:block>
+
             </div>
+
             <!--     infinityScroll     -->
-            <div id="nextPagination"></div>
+            <!--            <div id="nextPagination"></div>-->
 
         </div>
+
+        <!-- page s -->
+        <div class="pagination-section mt-4">
+            <nav class="pagination-outer" aria-label="Page navigation">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" aria-label="First"
+                           th:href="@{/admin/article(categoryTitle=${param.categoryTitle}, page=0)}"
+                           th:if="${pageDto.currentPageNum} > 4">
+                            <span> « </span>
+                        </a>
+                    </li>
+
+                    <li class="page-item">
+                        <a class="page-link" aria-label="Previous"
+                           th:href="@{/admin/article(categoryTitle=${param.categoryTitle}, page=${pageDto.currentPageNum - 5})}"
+                           th:if="${articleCardBoxList.number} > 4">
+                            <span> < </span>
+                        </a>
+                    </li>
+
+                    <th:block th:each="page : ${#numbers.sequence(pageDto.startPageNum, pageDto.endPageNum)}">
+                        <li th:classappend="${page == pageDto.currentPageNum} ? 'active'"
+                            class="page-item">
+                            <a th:text="${page + 1}" class="page-link"
+                               th:href="@{/admin/article(categoryTitle=${param.categoryTitle}, page=${page})}"></a>
+                        </li>
+                    </th:block>
+                    <li class="page-item">
+                        <a class="page-link" aria-label="Next"
+                           th:href="@{/admin/article(categoryTitle=${param.categoryTitle}, page=${pageDto.currentPageNum + 5})}"
+                           th:if="${pageDto.endPageNum < pageDto.lastPageNum} and ${pageDto.currentPageNum + 5 <= pageDto.lastPageNum}">
+                            <span aria-hidden="true"> > </span>
+                        </a>
+                        <a class="page-link" aria-label="Next"
+                           th:href="@{/admin/article(categoryTitle=${param.categoryTitle}, page=${pageDto.lastPageNum})}"
+                           th:if="${pageDto.endPageNum < pageDto.lastPageNum} and ${pageDto.currentPageNum + 5 > pageDto.lastPageNum}">
+                            <span aria-hidden="true"> > </span>
+                        </a>
+                    </li>
+
+                    <li class="page-item">
+                        <a class="page-link" aria-label="Last"
+                           th:href="@{/admin/article(categoryTitle=${param.categoryTitle}, page=${pageDto.lastPageNum})}"
+                           th:if="${pageDto.endPageNum < pageDto.lastPageNum}">
+                            <span aria-hidden="true">»</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+        <!--page e-->
     </div>
 
 
@@ -45,5 +115,34 @@
 
 <!-- Slick Carousel -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="/js/csrf.js"></script>
+<script th:inline="javascript" type="application/javascript">
+    let adminArticleIndex = {
+        init: function () {
+            let _this = this;
+            $(".article-delete").on("click", function () {
+                console.log("hello");
+                _this.deleteArticle($(this).attr("value"));
+            });
+        },
+        deleteArticle: function (articleId) {
+            // 나중에 confirm 으로 변경하자
+            alert("해당 댓글을 삭제하시겠습니까?");
+            let token = getCsrfToken();
 
+            $.ajax({
+                type: 'DELETE',
+                url: '/api/v1/admin/article-delete/' + articleId,
+                headers: {'X-XSRF-TOKEN': token},
+                contentType: 'application/json; charset=utf-8',
+            }).done(function (res) {
+                window.location.reload();
+            }).fail(function (error) {
+                console.log(error);
+                alert("에러");
+            });
+        },
+    }
+    adminArticleIndex.init();
+</script>
 </html>
