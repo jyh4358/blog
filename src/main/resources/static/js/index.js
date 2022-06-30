@@ -1,6 +1,41 @@
 $(document).ready(function () {
     mainIndex.init();
-    console.log("1");
+    $('.post-wrapper').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        dots: false,
+        autoplaySpeed: 3000,
+        nextArrow: $('.next'),
+        prevArrow: $('.prev'),
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+            // You can unslick at a given breakpoint now by adding:
+            // settings: "unslick"
+            // instead of a settings object
+        ]
+    });
 });
 
 let mainIndex ={
@@ -11,10 +46,15 @@ let mainIndex ={
     init: function () {
         let _this = this;
         _this.scrollEvent();
+
     },
     scrollEvent: function () {
         // 스크롤이 움직일때마다 호출되는 이벤트
         $(window).scroll(function () {
+            console.log(mainIndex.data.dataCheck);
+            console.log($(window).scrollTop());
+            console.log($(document).height());
+            console.log($(window).height())
             if (($(window).scrollTop() == $(document).height() - $(window).height()) && mainIndex.data.dataCheck) {
                 mainIndex.getArticleList();
                 mainIndex.data.curPage++;

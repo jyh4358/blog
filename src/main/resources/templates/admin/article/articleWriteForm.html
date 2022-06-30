@@ -86,7 +86,7 @@
         <!--        -->
 
         <div class="row justify-content-evenly mt-4 mb-5 g-0">
-            <button class="btn btn-secondary col-4" onclick="post()">등 록</button>
+            <button class="btn btn-secondary col-4" id="article-write">등 록</button>
             <button class="btn btn-secondary col-4" onclick="javascript:history.back()">취 소</button>
         </div>
     </div>
@@ -97,12 +97,11 @@
 <!-- Ckeditor5 -->
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
-<script src="/js/articleWrite.js"></script>
 <script src="/js/tagify/tagify.js"></script>
 <script src="/js/tagify/jQuery.tagify.min.js"></script>
+<script src="/js/article.js"></script>
 <script src="/js/csrf.js"></script>
 <script src="/js/thumbnail.js"></script>
-<script src="/js/tag.js"></script>
 <script th:inline="javascript" type="application/javascript">
 
     const tags = [[${tagListDto}]];
