@@ -33,6 +33,11 @@ public class ArticleController {
     private final CommentService commentService;
     private final TagService tagService;
 
+    /**
+     * 메인 페이지 요청
+     * @model - popularArticleResponse : 인기 게시물
+     * @return
+     */
     @GetMapping("/")
     public String index(Model model) {
 
@@ -41,33 +46,49 @@ public class ArticleController {
         return "index";
     }
 
+    /**
+     * 게시물 작성 페이지 요청
+     * @model - tagListDto : tag list
+     *        - categoryListDto : category list
+     *        - articleWriteDto : article form dto
+     * @return
+     */
     @GetMapping("/admin/article-write")
     public String articleWriteForm(Model model) {
-
 
         model.addAttribute("tagListDto", tagService.findAllTag());
         model.addAttribute("categoryListDto", categoryService.findCategories());
         model.addAttribute("articleWriteDto", ArticleWriteDto.createDefaultArticleDto());
 
-//        model.addAttribute("tagsInput", collect);
         return "admin/article/articleWriteForm";
     }
 
+    /**
+     * 게시물 작성 요청
+     * @param articleWriteDto : article form dto
+     * @param customOauth2User : login user principal
+     * @return
+     */
     @PostMapping("/admin/article-write")
-    public String articleWrite(
+    public String writeArticle(
             ArticleWriteDto articleWriteDto,
             @AuthenticationPrincipal CustomOauth2User customOauth2User
     ) {
         
         articleService.writeArticle(articleWriteDto, customOauth2User);
-        System.out.println("articleWriteDto = " + articleWriteDto);
-//        System.out.println("customOauth2User.getMember() = " + customOauth2User.getMember());
-
         return "admin/article/articleList";
     }
 
+    /**
+     * 게시물 수정 페이지 요청
+     * @param articleId - article 식별자
+     * @model - articleModifyResponse : article detail dto
+     *        - tagListDto : tag list
+     *        - categoryListDto : category list
+     * @return
+     */
     @GetMapping("/admin/article-modify/{articleId}")
-    public String articleModifyForm(
+    public String modifyArticleForm(
             Model model,
             @PathVariable Long articleId
     ) {
@@ -80,8 +101,14 @@ public class ArticleController {
         return "admin/article/articleModifyForm";
     }
 
+    /**
+     * 게시물 수정 요청
+     * @param articleId - article 식별자
+     * @param articleWriteDto - article form dto
+     * @return
+     */
     @PostMapping("/admin/article-modify/{articleId}")
-    public String articleModify(
+    public String modifyArticle(
             @PathVariable Long articleId,
             ArticleWriteDto articleWriteDto,
             RedirectAttributes redirectAttributes
@@ -93,10 +120,17 @@ public class ArticleController {
     }
 
 
+    /**
+     * 게시물 상세 페이지 요청
+     * @param articleId : article 식별자
+     * @param hitCookieValue : 중복 조회 방지 cookie value
+     * @model - articleDetailResponse : article detail dto
+     *        - commentList : 게시물 comment list
+     * @return
+     */
     @GetMapping("/article/{articleId}")
     public String articleView(
             @PathVariable Long articleId,
-            @AuthenticationPrincipal CustomOauth2User customOauth2User,
             @CookieValue(required = false, name = "hit") String hitCookieValue,
             Model model,
             HttpServletResponse response
@@ -114,34 +148,54 @@ public class ArticleController {
     }
 
 
-
-
+    /**
+     * 게시물 카테고리별 조회
+     * @param pageable : 페이지 정보
+     * @param categoryTitle : category title
+     * @return
+     */
     @GetMapping("/article")
-    public String findArticle(
+    public String findArticleByCategory(
             @PageableDefault(size = 8, sort = "id",direction = Sort.Direction.DESC) Pageable pageable,
             @RequestParam String categoryTitle,
             Model model
     ) {
-//        List<ArticleCardBoxResponse> articleCardBoxList = articleService.findArticleAll(pageable);
-        Page<ArticleCardBoxResponse> articleAll = articleService.findSearchArticle(categoryTitle, pageable);
+        Page<ArticleCardBoxResponse> articleAll = articleService.findArticleByCategory(categoryTitle, pageable);
         model.addAttribute("articleCardBoxList", articleAll);
         model.addAttribute("pageDto", PageDto.of(articleAll));
-        List<ArticleCardBoxResponse> content = articleAll.getContent();
-        System.out.println("content = " + content);
-        System.out.println("articleAll = " + articleAll.getTotalElements());
-        System.out.println("============================================================");
+
         return "article/articleList";
     }
 
+    /**
+     * 검색어로 게시물 조회
+     * @param pageable
+     * @param keyword
+     * @return
+     */
     @GetMapping("/article-search")
-    public String findSearchArticle(
+    public String findSearchArticleByKeyword(
             @PageableDefault(size = 8, sort = "id",direction = Sort.Direction.DESC) Pageable pageable,
-            @RequestParam String keyword
+            @RequestParam String keyword,
+            Model model
     ) {
+        Page<ArticleCardBoxResponse> articleByKeywordResponse = articleService.findSearchArticle(keyword, pageable);
+        model.addAttribute("articleCardBoxList", articleByKeywordResponse);
+        model.addAttribute("pageDto", PageDto.of(articleByKeywordResponse));
+        return "article/articleList";
+    }
 
-
-
-        return null;
+    @GetMapping("article-tag")
+    public String findArticleByTag(
+            @PageableDefault(size = 8, sort = "id",direction = Sort.Direction.DESC) Pageable pageable,
+            @RequestParam String tag,
+            Model model
+    ) {
+        Page<ArticleCardBoxResponse> articleByTagResponse = articleService.findArticleByTag(tag, pageable);
+        model.addAttribute("articleCardBoxList", articleByTagResponse);
+        model.addAttribute("pageDto", PageDto.of(articleByTagResponse));
+        System.out.println("PageDto.of(articleByTagResponse) = " + PageDto.of(articleByTagResponse));
+        return "article/articleList";
     }
 
     @GetMapping("/admin/article")
@@ -150,14 +204,10 @@ public class ArticleController {
             @RequestParam String categoryTitle,
             Model model
     ) {
-//        List<ArticleCardBoxResponse> articleCardBoxList = articleService.findArticleAll(pageable);
-        Page<ArticleCardBoxResponse> articleAll = articleService.findSearchArticle(categoryTitle, pageable);
+
+        Page<ArticleCardBoxResponse> articleAll = articleService.findArticleByCategory(categoryTitle, pageable);
         model.addAttribute("articleCardBoxList", articleAll);
         model.addAttribute("pageDto", PageDto.of(articleAll));
-        List<ArticleCardBoxResponse> content = articleAll.getContent();
-        System.out.println("content = " + content);
-        System.out.println("articleAll = " + articleAll.getTotalElements());
-        System.out.println("============================================================");
         return "/admin/index";
     }
 

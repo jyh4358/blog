@@ -104,7 +104,6 @@
 <script src="/js/thumbnail.js"></script>
 <script src="/js/tag.js"></script>
 <script th:inline="javascript" type="application/javascript">
-    // $('[name=tags]').tagify();
 
     const tags = [[${tagListDto}]];
 
@@ -127,7 +126,6 @@
             closeOnSelect: false    // 드롭다운 메뉴에서 태그 선택하면 자동으로 꺼지는지 안꺼지는지
         }
     });
-
 
 </script>
 </html>

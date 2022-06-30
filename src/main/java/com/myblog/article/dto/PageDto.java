@@ -6,12 +6,12 @@ import org.springframework.data.domain.Pageable;
 
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class PageDto {
 
     private static final int DISPLAY_PAGE_SIZE = 5;
-    private static final int DISPLAY_SIZE_PER_PAGE = 3;
 
     private int currentPageNum;
     private int lastPageNum;

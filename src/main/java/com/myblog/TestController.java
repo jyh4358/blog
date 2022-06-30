@@ -79,7 +79,10 @@ public class TestController {
     }
 
     @GetMapping("/test")
-    public String test() {
+    public String test(
+            @RequestParam(required = false) String title
+    ) {
+        System.out.println("title = " + title);
         return "test";
     }
 

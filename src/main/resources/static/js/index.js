@@ -9,7 +9,8 @@ let mainIndex ={
         dataCheck: true,
     },
     init: function () {
-        this.scrollEvent()
+        let _this = this;
+        _this.scrollEvent();
     },
     scrollEvent: function () {
         // 스크롤이 움직일때마다 호출되는 이벤트

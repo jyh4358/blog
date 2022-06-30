@@ -43,7 +43,9 @@ public class ArticleService {
     private final Gson gson;
 
 
-
+    /*
+        - 메인 페이지 인기 게시물 6개 요청
+     */
     public List<PopularArticleResponse> findPopularArticle() {
         List<Article> findPopularArticleList = articleRepository.findTop6ByOrderByHitDesc();
         System.out.println("findPopularArticleList.size() = " + findPopularArticleList.size());
@@ -76,6 +78,7 @@ public class ArticleService {
 
     }
 
+
     public ArticleModifyResponse findArticle(Long articleId) {
         Article article = articleRepository.findById(articleId).orElseThrow(NotExistArticleException::new);
         List<ArticleTag> findArticleTag = articleTagRepository.findByArticle_Id(articleId);
@@ -86,6 +89,7 @@ public class ArticleService {
 
         return articleModifyResponse;
     }
+
 
     @Transactional
     public Long modifyArticle(Long articleId, ArticleWriteDto articleWriteDto) {
@@ -113,6 +117,9 @@ public class ArticleService {
         return article.getId();
     }
 
+    /*
+        - 게시물 상세 데이터 요청 및 조회 수 count
+     */
     @Transactional
     public ArticleDetailResponse findArticleDetail(Long articleId, boolean hitCheck) {
         // todo - fetch join으로 변경할
@@ -127,14 +134,17 @@ public class ArticleService {
         ArticleDetailResponse detailResponse = ArticleDetailResponse.of(
                 article, tags, article.getMember().getUsername());
 
-        List<SimpleArticle> simpleArticles = findArticleListByCategory(article.getCategory());
+        List<SimpleArticle> simpleArticles = getSimpleArticleByCategory(article.getCategory());
         detailResponse.setSimpleArticles(simpleArticles);
 
         return detailResponse;
     }
 
 
-    public Page<ArticleCardBoxResponse> findSearchArticle(String categoryTitle, Pageable pageable) {
+    /*
+        - 카테고리별 최신 게시물 8개 요청
+     */
+    public Page<ArticleCardBoxResponse> findArticleByCategory(String categoryTitle, Pageable pageable) {
         Page<Article> findArticle = null;
 
         if (categoryTitle.equals("ALL")) {
@@ -142,10 +152,8 @@ public class ArticleService {
         } else {
             Category category = categoryRepository.findByTitle(categoryTitle).get();
             List<String> childCategoryTitles = category.getChild().stream().map(s -> s.getTitle()).collect(Collectors.toList());
-            for (String childCategoryTitle : childCategoryTitles) {
-                System.out.println("==============childCategoryTitle = " + childCategoryTitle);
-            }
-            findArticle = articleSearchRepository.findSearchArticle(categoryTitle, childCategoryTitles, pageable);
+
+            findArticle = articleSearchRepository.findSearchArticleByCategory(categoryTitle, childCategoryTitles, pageable);
 
         }
 
@@ -153,22 +161,48 @@ public class ArticleService {
         return articleCardBoxResponses;
     }
 
-    public Slice<Article> findRecentArticle(int page) {
+    /*
+        - 무한 스크롤를 위한 최신 게시물 8개 씩 요청
+     */
+    public List<PopularArticleResponse> findRecentArticle(int page) {
         Slice<Article> findRecentArticle = articleRepository.findByOrderByIdDesc(PageRequest.of(page, PAGE_SIZE));
+        Slice<PopularArticleResponse> popularArticleResponses = findRecentArticle.map(s ->
+                PopularArticleResponse.of(s));
+        return popularArticleResponses.getContent();
 
-        return findRecentArticle;
+    }
 
+    public Page<ArticleCardBoxResponse> findSearchArticle(String keyword, Pageable pageable) {
+        Page<Article> findArticleByKeyword = articleSearchRepository.findSearchArticleBykeyword(keyword, pageable);
+        Page<ArticleCardBoxResponse> articleByKeywordResponse = findArticleByKeyword.map(s -> ArticleCardBoxResponse.of(s));
+
+
+        return articleByKeywordResponse;
+    }
+
+    public Page<ArticleCardBoxResponse> findArticleByTag(String tag, Pageable pageable) {
+        Page<Article> findArticleByTag = articleSearchRepository.findSearchArticleByTag(tag, pageable);
+        Page<ArticleCardBoxResponse> articleByTagResponse = findArticleByTag.map(s -> ArticleCardBoxResponse.of(s));
+
+        return articleByTagResponse;
+    }
+
+    @Transactional
+    public void deleteArticle(Long articleId) {
+        Article article = articleRepository.findById(articleId).orElseThrow(NotExistArticleException::new);
+        articleRepository.delete(article);
     }
 
     /*
         서비스 로직
      */
-    public List<SimpleArticle> findArticleListByCategory(Category category) {
-        List<Article> findArticleListByCategory = articleRepository.findTop6ByCategoryOrderByCreatedDateDesc(category);
-        return findArticleListByCategory.stream().map(
+    public List<SimpleArticle> getSimpleArticleByCategory(Category category) {
+        List<Article> simpleArticleByCategory = articleRepository.findTop6ByCategoryOrderByCreatedDateDesc(category);
+        return simpleArticleByCategory.stream().map(
                 s -> SimpleArticle.of(s)
         ).collect(Collectors.toList());
     }
+
 
     public Tag findOrCreateTag(String tagName) {
         return tagRepository.findByName(tagName)
@@ -178,9 +212,5 @@ public class ArticleService {
     }
 
 
-    @Transactional
-    public void deleteArticle(Long articleId) {
-        Article article = articleRepository.findById(articleId).orElseThrow(NotExistArticleException::new);
-        articleRepository.delete(article);
-    }
+
 }

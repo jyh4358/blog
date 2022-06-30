@@ -104,7 +104,7 @@
                             </ul>
                             <div class="mt-2 ms-5 me-5">
                                 <a class="me-2" th:each="tag : ${articleDetailResponse.tags}"
-                                   th:href="@{/article/list/tag}">
+                                   th:href="@{/article-tag(tag=${tag})}">
                                     <button class="badge rounded-pill bg-secondary" th:text="${tag}">태그</button>
                                 </a>
                             </div>

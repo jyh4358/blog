@@ -48,15 +48,8 @@ public class ApiTestController {
     @GetMapping("/api/v1/article")
     public ResponseEntity<List<PopularArticleResponse>> index(@RequestParam int curPage) {
 
-        Slice<Article> recentArticle = articleService.findRecentArticle(curPage);
-        List<Article> content = recentArticle.getContent();
-        List<PopularArticleResponse> collect = content.stream().map(
-                s -> PopularArticleResponse.of(s)
-        ).collect(Collectors.toList());
+        List<PopularArticleResponse> popularArticleResponse = articleService.findRecentArticle(curPage);
 
-        System.out.println("recentArticle.getSize() = " + recentArticle.getSize());
-
-        System.out.println("curPage = " + curPage);
-        return new ResponseEntity<>(collect, HttpStatus.OK);
+        return new ResponseEntity<>(popularArticleResponse, HttpStatus.OK);
     }
 }
