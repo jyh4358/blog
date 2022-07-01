@@ -46,7 +46,9 @@ public class TempArticleService {
 
     @Transactional
     public void deleteAutoSavedArticle(Long tempArticleId) {
-        tempArticleRepository.deleteById(tempArticleId);
+        if (tempArticleRepository.findAll().size() > 0) {
+            tempArticleRepository.deleteById(tempArticleId);
+        }
     }
 
     public String extractedTag(String tagDto) {

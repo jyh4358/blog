@@ -77,11 +77,16 @@ let articleIndex = {
     init: function () {
         let _this = this;
         $('#article-write').on("click", function () {
-            _this.writeAndUpdateArticle();
+            _this.writeArticle();
+        });
+        $('#article-modify').on("click", function () {
+            console.log("modify 버튼 호출");
+            console.log($(this).attr("value"));
+            _this.modifyArticle($(this).attr("value"));
         });
 
     },
-    uploadImage(blob) {
+    uploadImage: function(blob) {
         let url = '';
         let token = getCsrfToken();
         let formData = new FormData();
@@ -104,25 +109,82 @@ let articleIndex = {
 
         return url;
     },
-    writeAndUpdateArticle() {
+
+    writeArticle: function () {
         contents.val(editor.getMarkdown());
         if (!checkTitle()) {
             alert("제목을 입력해주세요")
             return;
-        }
-        else if (!checkContent()) {
+        } else if (!checkContent()) {
             alert("내용은 65000자 이하로 작성하거나 내용을 입력해주세요.")
             return;
-        }else if (!checkCategory()) {
+        } else if (!checkCategory()) {
             alert("카테고리를 입력해주세요")
             return;
-        }else if (!checkTags()) {
+        } else if (!checkTags()) {
             alert("태그를 입력해주세요")
             return;
         }
+        let token = getCsrfToken();
+        let data = {
+            thumbnailUrl: $("#thumbnailUrl").val(),
+            category: $("#category").val(),
+            title: $("#title").val(),
+            content: contents.val(),
+            tags: $("#tags").val(),
+        };
 
-        $('#writeArticleForm').submit();
-        autoSaveArticleIndex.deleteAutoSavedArticle();
+        $.ajax({
+            type: 'POST',
+            url: '/api/v1/admin/article-save',
+            headers: {'X-XSRF-TOKEN': token},
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function (res) {
+            autoSaveArticleIndex.deleteAutoSavedArticle();
+            window.location.href = "/admin/article?categoryTitle=ALL";
+        }).fail(function (error) {
+            console.log(error);
+            alert("에러");
+        });
+    },
+    modifyArticle: function (articleId) {
+        contents.val(editor.getMarkdown());
+        if (!checkTitle()) {
+            alert("제목을 입력해주세요")
+            return;
+        } else if (!checkContent()) {
+            alert("내용은 65000자 이하로 작성하거나 내용을 입력해주세요.")
+            return;
+        } else if (!checkCategory()) {
+            alert("카테고리를 입력해주세요")
+            return;
+        } else if (!checkTags()) {
+            alert("태그를 입력해주세요")
+            return;
+        }
+        let token = getCsrfToken();
+        let data = {
+            thumbnailUrl: $("#thumbnailUrl").val(),
+            category: $("#category").val(),
+            title: $("#title").val(),
+            content: contents.val(),
+            tags: $("#tags").val(),
+        };
+        console.log(articleId);
+        $.ajax({
+            type: 'PATCH',
+            url: '/api/v1/admin/article-modify/' + articleId,
+            headers: {'X-XSRF-TOKEN': token},
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function () {
+            autoSaveArticleIndex.deleteAutoSavedArticle();
+            window.location.href = "/article/" + articleId;
+        }).fail(function (error) {
+            console.log(error);
+            alert("에러");
+        });
     },
 
 }

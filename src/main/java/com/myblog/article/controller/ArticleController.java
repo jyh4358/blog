@@ -7,18 +7,15 @@ import com.myblog.article.service.TagService;
 import com.myblog.category.service.CategoryService;
 import com.myblog.comment.dto.CommentListResponse;
 import com.myblog.comment.service.CommentService;
-import com.myblog.security.oauth2.CustomOauth2User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -50,7 +47,6 @@ public class ArticleController {
      * 게시물 작성 페이지 요청
      * @model - tagListDto : tag list
      *        - categoryListDto : category list
-     *        - articleWriteDto : article form dto
      * @return
      */
     @GetMapping("/admin/article-write")
@@ -58,26 +54,11 @@ public class ArticleController {
 
         model.addAttribute("tagListDto", tagService.findAllTag());
         model.addAttribute("categoryListDto", categoryService.findCategories());
-        model.addAttribute("articleWriteDto", ArticleWriteDto.createDefaultArticleDto());
+//        model.addAttribute("articleWriteDto", ArticleWriteDto.createDefaultArticleDto());
 
         return "admin/article/articleWriteForm";
     }
 
-    /**
-     * 게시물 작성 요청
-     * @param articleWriteDto : article form dto
-     * @param customOauth2User : login user principal
-     * @return
-     */
-    @PostMapping("/admin/article-write")
-    public String writeArticle(
-            ArticleWriteDto articleWriteDto,
-            @AuthenticationPrincipal CustomOauth2User customOauth2User
-    ) {
-        
-        articleService.writeArticle(articleWriteDto, customOauth2User);
-        return "admin/article/articleList";
-    }
 
     /**
      * 게시물 수정 페이지 요청
@@ -99,24 +80,6 @@ public class ArticleController {
         model.addAttribute("categoryListDto", categoryService.findCategories());
 
         return "admin/article/articleModifyForm";
-    }
-
-    /**
-     * 게시물 수정 요청
-     * @param articleId - article 식별자
-     * @param articleWriteDto - article form dto
-     * @return
-     */
-    @PostMapping("/admin/article-modify/{articleId}")
-    public String modifyArticle(
-            @PathVariable Long articleId,
-            ArticleWriteDto articleWriteDto,
-            RedirectAttributes redirectAttributes
-    ) {
-
-        redirectAttributes.addAttribute("articleId", articleService.modifyArticle(articleId, articleWriteDto));
-
-        return "redirect:/article/{articleId}";
     }
 
 
@@ -185,7 +148,7 @@ public class ArticleController {
         return "article/articleList";
     }
 
-    @GetMapping("article-tag")
+    @GetMapping("/article-tag")
     public String findArticleByTag(
             @PageableDefault(size = 8, sort = "id",direction = Sort.Direction.DESC) Pageable pageable,
             @RequestParam String tag,
@@ -208,7 +171,7 @@ public class ArticleController {
         Page<ArticleCardBoxResponse> articleAll = articleService.findArticleByCategory(categoryTitle, pageable);
         model.addAttribute("articleCardBoxList", articleAll);
         model.addAttribute("pageDto", PageDto.of(articleAll));
-        return "/admin/index";
+        return "admin/article/adminArticleList";
     }
 
 //    @GetMapping("/admin/api/article")

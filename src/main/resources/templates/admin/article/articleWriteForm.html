@@ -46,8 +46,6 @@
             </div>
 
 
-            <form action="/admin/articleWriteForm.html" th:action method="post" enctype="multipart/form-data" id="writeArticleForm"
-                  th:object="${articleWriteDto}">
 
                 <textarea type="text" name="thumbnailUrl" id="thumbnailUrl" hidden></textarea>
 
@@ -81,7 +79,6 @@
                            class="form-control tagify-outside ps-3">
                 </div>
 
-            </form>
         </div>
         <!--        -->
 
@@ -102,7 +99,7 @@
 <script src="/js/article.js"></script>
 <script src="/js/csrf.js"></script>
 <script src="/js/thumbnail.js"></script>
-<script src="/js/autoSaveArticle.js"></script>
+<script src="/js/autoSave.js"></script>
 <script th:inline="javascript" type="application/javascript">
 
     const tags = [[${tagListDto}]];

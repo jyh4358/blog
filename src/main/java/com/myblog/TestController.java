@@ -1,8 +1,5 @@
 package com.myblog;
 
-import com.myblog.category.dto.CategoryListDto;
-import com.myblog.category.dto.CategoryQueryDto;
-import com.myblog.category.resposiotry.CategoryRepository;
 import com.myblog.category.service.CategoryService;
 import com.myblog.security.oauth2.CustomOauth2User;
 import lombok.RequiredArgsConstructor;
@@ -12,8 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -75,7 +70,7 @@ public class TestController {
     @GetMapping("/admin/main")
     public String admin() {
         System.out.println("admin-----------------");
-        return "admin/index";
+        return "adminArticleList";
     }
 
     @GetMapping("/test")

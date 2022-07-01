@@ -1,7 +1,7 @@
 let autoSaveArticleIndex = {
     init: function () {
         let _this = this;
-        setInterval("autoSaveArticleIndex.autoSave()",10000);
+        setInterval("autoSaveArticleIndex.autoSave()",100000);
         _this.getAutoSavedArticle();
     },
     autoSave: function () {
