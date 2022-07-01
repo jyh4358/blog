@@ -43,7 +43,7 @@ public class ArticleApiController {
             @AuthenticationPrincipal CustomOauth2User customOauth2User
     ) {
 
-        articleService.modifyArticle(articleId, articleWriteDto);
+        articleService.modifyArticle(articleId, articleWriteDto, customOauth2User);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

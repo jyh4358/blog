@@ -62,21 +62,15 @@ public class ArticleService {
 
         Category category = categoryRepository.findById(articleWriteDto.getCategory()).get();
 
-
-        List<Map<String,String>> tagsDtoArrayList = gson.fromJson(articleWriteDto.getTags(), ArrayList.class);
-        List<Tag> tags = tagsDtoArrayList.stream().map(s ->
-                findOrCreateTag(s.get("value"))
-        ).collect(Collectors.toList());
-
-        List<ArticleTag> collect = tags.stream().map(
-                tag -> ArticleTag.createArticleTag(tag)
-                ).collect(Collectors.toList());
+        List<Tag> tagList = getTags(articleWriteDto.getTags());
+        List<ArticleTag> collect = getArticleTags(tagList);
 
 
         Article article = Article.createArticle(articleWriteDto, customOauth2User.getMember(), category, collect);
         articleRepository.save(article);
 
     }
+
 
 
     public ArticleModifyResponse findArticle(Long articleId) {
@@ -92,20 +86,16 @@ public class ArticleService {
 
 
     @Transactional
-    public Long modifyArticle(Long articleId, ArticleWriteDto articleWriteDto) {
+    public Long modifyArticle(Long articleId, ArticleWriteDto articleWriteDto, CustomOauth2User customOauth2User) {
+        RightLoginChecker.checkLoginMember(customOauth2User);
         Article article = articleRepository.findById(articleId).orElseThrow(NotExistArticleException::new);
         Category category = categoryRepository.findById(articleWriteDto.getCategory()).orElseThrow(NotExistCategoryException::new);
-        List<ArticleTag> byArticle_id = articleTagRepository.findByArticle_Id(article.getId());
-        articleTagRepository.deleteAll(byArticle_id);
-        List<Map<String,String>> tagsDtoArrayList = gson.fromJson(articleWriteDto.getTags(), ArrayList.class);
+        List<ArticleTag> findArticleTagList = articleTagRepository.findByArticle_Id(article.getId());
+        articleTagRepository.deleteAll(findArticleTagList);
 
-        List<Tag> tags = tagsDtoArrayList.stream().map(s ->
-                findOrCreateTag(s.get("value"))
-        ).collect(Collectors.toList());
+        List<Tag> tags = getTags(articleWriteDto.getTags());
 
-        List<ArticleTag> collect = tags.stream().map(
-                tag -> ArticleTag.createArticleTag(tag)
-        ).collect(Collectors.toList());
+        List<ArticleTag> collect = getArticleTags(tags);
 
         article.modifyArticle(
                 articleWriteDto.getTitle(),
@@ -196,19 +186,33 @@ public class ArticleService {
     /*
         서비스 로직
      */
-    public List<SimpleArticle> getSimpleArticleByCategory(Category category) {
+    private List<SimpleArticle> getSimpleArticleByCategory(Category category) {
         List<Article> simpleArticleByCategory = articleRepository.findTop6ByCategoryOrderByCreatedDateDesc(category);
         return simpleArticleByCategory.stream().map(
                 s -> SimpleArticle.of(s)
         ).collect(Collectors.toList());
     }
 
+    private List<ArticleTag> getArticleTags(List<Tag> tagList) {
+        List<ArticleTag> collect = tagList.stream().map(
+                s -> ArticleTag.createArticleTag(s)
+        ).collect(Collectors.toList());
+        return collect;
+    }
 
-    public Tag findOrCreateTag(String tagName) {
+    private Tag findOrCreateTag(String tagName) {
         return tagRepository.findByName(tagName)
                 .orElseGet(
                         () -> tagRepository.save(Tag.createTag(tagName))
                 );
+    }
+
+    private List<Tag> getTags(String tags) {
+        List<Map<String,String>> tagsDtoArrayList = gson.fromJson(tags, ArrayList.class);
+        List<Tag> tagList = tagsDtoArrayList.stream().map(s ->
+                findOrCreateTag(s.get("value"))
+        ).collect(Collectors.toList());
+        return tagList;
     }
 
 
