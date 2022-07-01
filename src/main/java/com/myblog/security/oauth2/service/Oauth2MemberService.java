@@ -36,7 +36,6 @@ public class Oauth2MemberService extends DefaultOAuth2UserService {
                 oAuth2User.getAttribute("picture"),
                 userInfo.getOAuth2Provider());
 
-
         Member member = memberRepository.findByEmail(oAuth2User.getAttribute("email"))
                         .orElseGet(() -> memberRepository.save(oauthMember));
 

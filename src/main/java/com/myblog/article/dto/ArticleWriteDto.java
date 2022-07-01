@@ -4,7 +4,6 @@ import lombok.*;
 
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString
 @AllArgsConstructor
 public class ArticleWriteDto {
 
