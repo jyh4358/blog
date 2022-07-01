@@ -6,6 +6,8 @@ import com.myblog.category.dto.ChildCategoryList;
 import com.myblog.category.dto.ParentCategoryList;
 import com.myblog.category.model.Category;
 import com.myblog.category.resposiotry.CategoryRepository;
+import com.myblog.common.checker.RightLoginChecker;
+import com.myblog.security.oauth2.model.CustomOauth2User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,7 +37,8 @@ public class CategoryService {
     }
 
     @Transactional
-    public void editCategory(CategoryListDto categoryListDto) {
+    public void editCategory(CategoryListDto categoryListDto, CustomOauth2User customOauth2User) {
+        RightLoginChecker.checkAdminMember(customOauth2User);
 
         List<Category> categories = categoryRepository.findAll();
         List<ParentCategoryList> parentCategoryLists = categoryListDto.getParentCategoryLists();
@@ -82,7 +85,7 @@ public class CategoryService {
         }
     }
 
-    public void modifyCategoryTitle(ParentCategoryList parentCategoryList, List<Category> categories) {
+    private void modifyCategoryTitle(ParentCategoryList parentCategoryList, List<Category> categories) {
         categories.forEach(s ->
         {
             if (s.getId() == parentCategoryList.getId()) {
@@ -91,19 +94,13 @@ public class CategoryService {
                         parentCategoryList.getChildCategoryLists().stream().filter(f -> !(f.checkNewCategory()))
                                 .collect(Collectors.toList());
 
-//                이 방법은 영속 객체를 없애고 새로영속 객체를 넣을려는 시도를 하여 cascade쪽 문제가 발생
-//                List<Category> children = collect.stream().map(t ->
-//                        Category.createCategory(t.getId(), t.getChildCategory(), s)).collect(Collectors.toList()
-//                );
-//                s.setChild(children);
-
                 collect.forEach(t ->
                         modifyChildCategoryTitle(t, s.getChild()));
             }
         });
     }
 
-    public void modifyChildCategoryTitle(ChildCategoryList childCategoryList, List<Category> categories) {
+    private void modifyChildCategoryTitle(ChildCategoryList childCategoryList, List<Category> categories) {
         for (Category category : categories) {
             if (category.getId().equals(childCategoryList.getId())) {
                 category.changeTitle(childCategoryList.getChildCategory());
@@ -111,7 +108,7 @@ public class CategoryService {
         }
     }
 
-    public void createNewCategory(ParentCategoryList parentCategoryList, List<Category> categories) {
+    private void createNewCategory(ParentCategoryList parentCategoryList, List<Category> categories) {
         if (parentCategoryList.checkNewCategory()) {
             categoryRepository.save(new Category(parentCategoryList.getParentCategory()));
         }
@@ -122,14 +119,11 @@ public class CategoryService {
                 collect.stream().forEach(s ->
                         categoryRepository.save(Category.createCategory(null, s.getChildCategory(), category))
                 );
-//                for (ChildCategoryList childCategoryList : collect) {
-//                    categoryRepository.save(new Category(childCategoryList.getChildCategory(), category));
-//                }
             }
         }
     }
 
-    public void deleteCategory(ParentCategoryList parentCategoryList, List<Category> categories) {
+    private void deleteCategory(ParentCategoryList parentCategoryList, List<Category> categories) {
         if (parentCategoryList.getDeleteCheck()) {
             categories.forEach(s ->
             {
@@ -144,7 +138,6 @@ public class CategoryService {
                 if (s.getId().equals(parentCategoryList.getId())) {
                     deleteChildCategories.forEach(t ->
                             deleteChildCategoryTitle(t, s.getChild()));
-                    System.out.println("s.getChild().size() = " + s.getChild().size());
                 }
             });
 

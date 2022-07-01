@@ -14,7 +14,7 @@ import com.myblog.article.repository.TagRepository;
 import com.myblog.category.model.Category;
 import com.myblog.category.resposiotry.CategoryRepository;
 import com.myblog.common.checker.RightLoginChecker;
-import com.myblog.security.oauth2.CustomOauth2User;
+import com.myblog.security.oauth2.model.CustomOauth2User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -58,7 +58,7 @@ public class ArticleService {
 
     @Transactional
     public void writeArticle(ArticleWriteDto articleWriteDto, CustomOauth2User customOauth2User) {
-        RightLoginChecker.checkLoginMember(customOauth2User);
+        RightLoginChecker.checkAdminMember(customOauth2User);
 
         Category category = categoryRepository.findById(articleWriteDto.getCategory()).get();
 
@@ -73,7 +73,8 @@ public class ArticleService {
 
 
 
-    public ArticleModifyResponse findArticle(Long articleId) {
+    public ArticleModifyResponse findModifyArticle(Long articleId, CustomOauth2User customOauth2User) {
+        RightLoginChecker.checkAdminMember(customOauth2User);
         Article article = articleRepository.findById(articleId).orElseThrow(NotExistArticleException::new);
         List<ArticleTag> findArticleTag = articleTagRepository.findByArticle_Id(articleId);
         List<String> tags = findArticleTag.stream().map(s ->
@@ -87,7 +88,7 @@ public class ArticleService {
 
     @Transactional
     public Long modifyArticle(Long articleId, ArticleWriteDto articleWriteDto, CustomOauth2User customOauth2User) {
-        RightLoginChecker.checkLoginMember(customOauth2User);
+        RightLoginChecker.checkAdminMember(customOauth2User);
         Article article = articleRepository.findById(articleId).orElseThrow(NotExistArticleException::new);
         Category category = categoryRepository.findById(articleWriteDto.getCategory()).orElseThrow(NotExistCategoryException::new);
         List<ArticleTag> findArticleTagList = articleTagRepository.findByArticle_Id(article.getId());
@@ -178,7 +179,8 @@ public class ArticleService {
     }
 
     @Transactional
-    public void deleteArticle(Long articleId) {
+    public void deleteArticle(Long articleId, CustomOauth2User customOauth2User) {
+        RightLoginChecker.checkLoginMember(customOauth2User);
         Article article = articleRepository.findById(articleId).orElseThrow(NotExistArticleException::new);
         articleRepository.delete(article);
     }

@@ -10,8 +10,10 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.util.IOUtils;
+import com.myblog.common.checker.RightLoginChecker;
 import com.myblog.s3.properties.AmazonS3BucketProperties;
 import com.myblog.s3.properties.AmazonS3CredentialsProperties;
+import com.myblog.security.oauth2.model.CustomOauth2User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -58,7 +60,8 @@ public class S3UploadService {
     // No content length specified for stream data.  Stream contents will be buffered in memory and could result in out of memory errors.
     // WARN 발생, 아래와 같이 코드 변경
 
-    public String uploadForMultiFile(MultipartFile multipartFile) {
+    public String uploadForMultiFile(MultipartFile multipartFile, CustomOauth2User customOauth2User) {
+        RightLoginChecker.checkAdminMember(customOauth2User);
         try {
             String originalFilename = multipartFile.getOriginalFilename();
             ObjectMetadata objMeta = new ObjectMetadata();

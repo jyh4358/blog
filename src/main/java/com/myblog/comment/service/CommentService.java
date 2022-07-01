@@ -14,7 +14,7 @@ import com.myblog.comment.repository.CommentRepository;
 import com.myblog.common.checker.RightLoginChecker;
 import com.myblog.member.model.Member;
 import com.myblog.member.repository.MemberRepository;
-import com.myblog.security.oauth2.CustomOauth2User;
+import com.myblog.security.oauth2.model.CustomOauth2User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -80,7 +80,8 @@ public class CommentService {
         }
     }
 
-    public Page<ManageCommentResponse> findAllComment(Pageable pageable) {
+    public Page<ManageCommentResponse> findAllComment(Pageable pageable, CustomOauth2User customOauth2User) {
+        RightLoginChecker.checkAdminMember(customOauth2User);
         Page<Comment> findCommentList = commentRepository.findAll(pageable);
         return findCommentList.map(s ->
                 ManageCommentResponse.of(s));
@@ -89,7 +90,7 @@ public class CommentService {
     @Transactional
     public void deleteComment(CustomOauth2User customOauth2User, Long commentId) {
         RightLoginChecker.checkLoginMember(customOauth2User);
-        Comment comment = commentRepository.findById(commentId).orElseThrow(NotExistCommentException::new);
+        Comment comment = commentRepository.findCommentByIdAndMember_id(commentId, customOauth2User.getMemberId()).orElseThrow(NotExistCommentException::new);
         commentRepository.delete(comment);
     }
 

@@ -4,7 +4,7 @@ import com.myblog.temparticle.model.TempArticle;
 import lombok.*;
 
 @Getter
-@ToString
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class TempArticleDto {
     private String title;
@@ -13,8 +13,6 @@ public class TempArticleDto {
     private String thumbnailUrl;
     private String tag;
 
-    public TempArticleDto() {
-    }
 
     public static TempArticleDto of(TempArticle tempArticle) {
         return new TempArticleDto(

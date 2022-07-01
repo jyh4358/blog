@@ -1,7 +1,7 @@
 package com.myblog;
 
 import com.myblog.category.service.CategoryService;
-import com.myblog.security.oauth2.CustomOauth2User;
+import com.myblog.security.oauth2.model.CustomOauth2User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;

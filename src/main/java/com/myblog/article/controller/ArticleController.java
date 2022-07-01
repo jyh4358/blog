@@ -7,11 +7,16 @@ import com.myblog.article.service.TagService;
 import com.myblog.category.service.CategoryService;
 import com.myblog.comment.dto.CommentListResponse;
 import com.myblog.comment.service.CommentService;
+import com.myblog.common.checker.RightLoginChecker;
+import com.myblog.security.oauth2.model.CustomOauth2User;
 import lombok.RequiredArgsConstructor;
+import org.apache.http.HttpStatus;
+import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -71,9 +76,10 @@ public class ArticleController {
     @GetMapping("/admin/article-modify/{articleId}")
     public String modifyArticleForm(
             Model model,
-            @PathVariable Long articleId
-    ) {
-        ArticleModifyResponse articleModifyResponse = articleService.findArticle(articleId);
+            @PathVariable Long articleId,
+            @AuthenticationPrincipal CustomOauth2User customOauth2User
+            ) {
+        ArticleModifyResponse articleModifyResponse = articleService.findModifyArticle(articleId, customOauth2User);
 
         model.addAttribute("articleModifyResponse", articleModifyResponse);
         model.addAttribute("tagListDto", tagService.findAllTag());
@@ -165,9 +171,10 @@ public class ArticleController {
     public String adminSearchArticle(
             @PageableDefault(size = 8, sort = "id",direction = Sort.Direction.DESC) Pageable pageable,
             @RequestParam String categoryTitle,
+            @AuthenticationPrincipal CustomOauth2User customOauth2User,
             Model model
     ) {
-
+        RightLoginChecker.checkAdminMember(customOauth2User);
         Page<ArticleCardBoxResponse> articleAll = articleService.findArticleByCategory(categoryTitle, pageable);
         model.addAttribute("articleCardBoxList", articleAll);
         model.addAttribute("pageDto", PageDto.of(articleAll));

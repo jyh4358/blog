@@ -1,6 +1,8 @@
 package com.myblog.temparticle.service;
 
 import com.google.gson.Gson;
+import com.myblog.common.checker.RightLoginChecker;
+import com.myblog.security.oauth2.model.CustomOauth2User;
 import com.myblog.temparticle.dto.TempArticleDto;
 import com.myblog.temparticle.model.TempArticle;
 import com.myblog.temparticle.repository.TempArticleRepository;
@@ -22,7 +24,8 @@ public class TempArticleService {
     private final Gson gson;
 
     @Transactional
-    public void saveTempArticle(TempArticleDto tempArticleDto) {
+    public void saveTempArticle(TempArticleDto tempArticleDto, CustomOauth2User customOauth2User) {
+        RightLoginChecker.checkAdminMember(customOauth2User);
 
         String tags = extractedTag(tempArticleDto.getTag());
 
@@ -36,7 +39,8 @@ public class TempArticleService {
         tempArticleRepository.save(tempArticle);
     }
 
-    public TempArticleDto findAutoSavedArticle() {
+    public TempArticleDto findAutoSavedArticle(CustomOauth2User customOauth2User) {
+        RightLoginChecker.checkAdminMember(customOauth2User);
         TempArticle tempArticle = tempArticleRepository.findById(1L).orElseGet(
                 () -> new TempArticle()
         );
@@ -45,7 +49,8 @@ public class TempArticleService {
     }
 
     @Transactional
-    public void deleteAutoSavedArticle(Long tempArticleId) {
+    public void deleteAutoSavedArticle(Long tempArticleId, CustomOauth2User customOauth2User) {
+        RightLoginChecker.checkAdminMember(customOauth2User);
         if (tempArticleRepository.findAll().size() > 0) {
             tempArticleRepository.deleteById(tempArticleId);
         }

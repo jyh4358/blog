@@ -3,7 +3,7 @@ package com.myblog.comment.controller;
 import com.myblog.comment.dto.CommentListResponse;
 import com.myblog.comment.dto.CommentSaveRequest;
 import com.myblog.comment.service.CommentService;
-import com.myblog.security.oauth2.CustomOauth2User;
+import com.myblog.security.oauth2.model.CustomOauth2User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +25,6 @@ public class CommentApiController {
             @PathVariable Long articleId
     ) {
         List<CommentListResponse> commentListResponses = commentService.findCommentList(articleId);
-        System.out.println("commentListResponses = " + commentListResponses);
         return new ResponseEntity<>(commentListResponses, HttpStatus.OK);
     }
 
@@ -34,7 +33,6 @@ public class CommentApiController {
             @AuthenticationPrincipal CustomOauth2User customOauth2User,
             @Validated @RequestBody CommentSaveRequest commentSaveRequest
     ) {
-        System.out.println("commentSaveRequest = " + commentSaveRequest);
         commentService.saveComment(customOauth2User, commentSaveRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -54,7 +52,6 @@ public class CommentApiController {
             @AuthenticationPrincipal CustomOauth2User customOauth2User,
             @PathVariable Long commentId
     ) {
-        System.out.println("commentId = " + commentId);
         commentService.deleteComment(customOauth2User, commentId);
         return new ResponseEntity<>(HttpStatus.OK);
     }

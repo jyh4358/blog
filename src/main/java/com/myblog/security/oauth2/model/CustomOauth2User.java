@@ -1,5 +1,6 @@
-package com.myblog.security.oauth2;
+package com.myblog.security.oauth2.model;
 
+import com.myblog.member.model.Role;
 import com.myblog.security.oauth2.model.OAuth2UserInfo;
 import com.myblog.member.model.Member;
 import lombok.Getter;
@@ -30,6 +31,10 @@ public class CustomOauth2User extends DefaultOAuth2User {
 
     public Long getMemberId() {
         return member.getId();
+    }
+
+    public Role getMemberRole() {
+        return member.getRole();
     }
 
 }

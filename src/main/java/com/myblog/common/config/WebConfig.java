@@ -21,7 +21,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(new SideBarInterceptor(categoryService, commentService))
                 .order(1)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/css/**", "/images/**", "/*.ico", "/js/**", "/error", "/admin/**", "/file/**", "/article/temp/getTemp", "/api/**");
+                .excludePathPatterns("/css/**", "/images/**", "/*.ico", "/js/**", "/admin/**", "/file/**", "/api/**");
     }
 
 

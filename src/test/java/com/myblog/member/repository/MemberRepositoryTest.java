@@ -2,6 +2,7 @@ package com.myblog.member.repository;
 
 import com.myblog.category.model.Category;
 import com.myblog.category.resposiotry.CategoryRepository;
+import com.myblog.member.model.Role;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -33,9 +34,8 @@ class MemberRepositoryTest {
 
     @Test
     public void 테스트() {
-        String[] test= {"12", "22", "32"};
-        boolean b = Arrays.stream(test).anyMatch(s -> s.equals("33"));
-        System.out.println("b = " + b);
+        Role admin = Role.ADMIN;
+        System.out.println("admin = " + admin.equals(Role.ADMIN));
     }
 
 }
