@@ -62,7 +62,7 @@ public class Member extends BasicEntity {
                 .email(email)
                 .picUrl(picUrl)
                 .provider(provider)
-                .role(Role.ADMIN)
+                .role(Role.USER)
                 .build();
     }
 

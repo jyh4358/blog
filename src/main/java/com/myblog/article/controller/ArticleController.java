@@ -55,8 +55,11 @@ public class ArticleController {
      * @return
      */
     @GetMapping("/admin/article-write")
-    public String articleWriteForm(Model model) {
-
+    public String articleWriteForm(
+            Model model,
+            @AuthenticationPrincipal CustomOauth2User customOauth2User
+    ) {
+        RightLoginChecker.checkAdminMember(customOauth2User);
         model.addAttribute("tagListDto", tagService.findAllTag());
         model.addAttribute("categoryListDto", categoryService.findCategories());
 //        model.addAttribute("articleWriteDto", ArticleWriteDto.createDefaultArticleDto());
