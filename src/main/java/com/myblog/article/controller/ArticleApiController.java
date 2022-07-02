@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -28,7 +29,7 @@ public class ArticleApiController {
 
     @PostMapping("/api/v1/admin/article-save")
     public ResponseEntity<Void> saveArticle(
-            @RequestBody ArticleWriteDto articleWriteDto,
+            @RequestBody @Valid ArticleWriteDto articleWriteDto,
             @AuthenticationPrincipal CustomOauth2User customOauth2User
     ) {
         System.out.println("articleWriteDto = " + articleWriteDto);
@@ -52,7 +53,7 @@ public class ArticleApiController {
     @PatchMapping("/api/v1/admin/article-modify/{articleId}")
     public ResponseEntity<Void> modifyArticle(
             @PathVariable Long articleId,
-            @RequestBody ArticleWriteDto articleWriteDto,
+            @RequestBody @Valid ArticleWriteDto articleWriteDto,
             @AuthenticationPrincipal CustomOauth2User customOauth2User
     ) {
 

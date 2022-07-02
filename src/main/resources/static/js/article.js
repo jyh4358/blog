@@ -102,7 +102,7 @@ let articleIndex = {
         }).done(function (result) {
             url = result;
         }).fail(function (error) {
-            alert(error.responseJSON.errorMessage);
+            alert(error.responseJSON.message);
         });
 
         return url;
@@ -142,7 +142,13 @@ let articleIndex = {
             autoSaveArticleIndex.deleteAutoSavedArticle();
             window.location.href = "/admin/article?categoryTitle=ALL";
         }).fail(function (error) {
-            alert(error.responseJSON.errorMessage);
+            if (error.responseJSON.code == 701 || error.responseJSON.code == 702) {
+                alert(error.responseJSON.message);
+                window.location.href = "/login";
+            }
+            if (error.responseJSON.code == 400) {
+                alert(error.responseJSON.message[0]);
+            }
         });
     },
     modifyArticle: function (articleId) {
@@ -154,7 +160,7 @@ let articleIndex = {
             alert("내용은 65000자 이하로 작성하거나 내용을 입력해주세요.")
             return;
         } else if (!checkCategory()) {
-            alert("카테고리를 입력해주세요")
+            alert("카테고리를 선택해주세요")
             return;
         } else if (!checkTags()) {
             alert("태그를 입력해주세요")
@@ -179,7 +185,14 @@ let articleIndex = {
             autoSaveArticleIndex.deleteAutoSavedArticle();
             window.location.href = "/article/" + articleId;
         }).fail(function (error) {
-            alert(error.responseJSON.errorMessage);
+            if (error.responseJSON.code == 701 || error.responseJSON.code == 702) {
+                alert(error.responseJSON.message);
+                window.location.href = "/login";
+            }
+            if (error.responseJSON.code == 400) {
+                alert(error.responseJSON.message[0]);
+            }
+
         });
     },
 

@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum ExceptionMessage {
-    NOT_FOUND_MEMBER(new NotExistException("해당하는 유저를 찾을 수 없습니다.", 601)),
+    NOT_FOUND_MEMBER(new NotExistException("해당 유저를 찾을 수 없습니다.", 601)),
     NOT_FOUND_CATEGORY(new NotExistException("카테고리가 존재하지 않습니다.", 602)),
     NOT_FOUNT_COMMENT(new NotExistException("댓글이 존재하지 않습니다.", 603)),
     NOT_FOUNT_ARTICLE(new NotExistException("해당 글이 존재하지 않습니다.", 604)),

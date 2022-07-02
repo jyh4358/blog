@@ -31,7 +31,13 @@ let thumbnailIndex = {
             $("#thumbBox").css("display", "");
             $('#thumbnailModal').modal('hide');
         }).fail(function (error) {
-            alert(error.responseJSON.errorMessage);
+            if (error.responseJSON.code == 701 || error.responseJSON.code == 702) {
+                alert(error.responseJSON.message);
+                window.location.href = "/login";
+            }
+            if (error.responseJSON.code == 801) {
+                alert(error.responseJSON.message);
+            }
         });
     },
     uploadThumbnailUrl: function () {

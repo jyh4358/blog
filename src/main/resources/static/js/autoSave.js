@@ -29,8 +29,10 @@ let autoSaveArticleIndex = {
             data: JSON.stringify(autoSaveArticle)
         }).done(function () {
         }).fail(function (error) {
-            alert(error.responseJSON.errorMessage);
-            window.location.href = "/login";
+            if (error.responseJSON.code == 701 || error.responseJSON.code == 702) {
+                alert(error.responseJSON.message);
+                window.location.href = "/login";
+            }
         });
     },
     getAutoSavedArticle: function () {
@@ -49,7 +51,6 @@ let autoSaveArticleIndex = {
                     $('#category').val(res.category).attr("selected", "selected");
                 }
             }
-            console.log(res);
         }).fail(function (error) {
             alert(error.responseJSON.errorMessage);
             window.location.href = "/login";
@@ -63,10 +64,10 @@ let autoSaveArticleIndex = {
             headers: {'X-XSRF-TOKEN': token},
             contentType: 'application/json; charset=utf-8',
         }).done(function () {
-            console.log("삭제 성공");
         }).fail(function (error) {
-            alert(error.responseJSON.errorMessage);
-            window.location.href = "/login";
+            if (error.responseJSON.code == 701 || error.responseJSON.code == 702) {
+                window.location.href = "/login";
+            }
         });
     },
 }

@@ -17,9 +17,6 @@ let commentIndex = {
     commentSave: function (parentCommentId) {
         let token = getCsrfToken();
         let data ={};
-        console.log("==============");
-        console.log($("#child-comment-content"+ parentCommentId).val());
-
         if (!parentCommentId) {
             data = {
                 articleId: $("#article-id").attr("value"),
@@ -28,7 +25,6 @@ let commentIndex = {
                 parentCommentId: parentCommentId,
             };
             if(!data.content){
-                alert("부모 댓글을 작성해주세요");
                 $('#parent-content-error').text('댓글을 작성해주세요')
                 return;
             }
@@ -41,7 +37,7 @@ let commentIndex = {
             };
             if(!data.content){
                 alert("자식 댓글을 작성해주세요");
-                $('#child-content-error').text('댓글을 작성해주세요')
+                $("#child-content-error"+ parentCommentId).text('댓글을 작성해주세요')
                 return;
             }
         }
@@ -56,7 +52,14 @@ let commentIndex = {
         }).done(function (res) {
             window.location.reload();
         }).fail(function (error) {
-            alert(error.responseJSON.errorMessage);
+            if (error.responseJSON.code == 701 || error.responseJSON.code == 601) {
+                alert(error.responseJSON.message);
+                window.location.href = "/login";
+            }
+            if (error.responseJSON.code == 604) {
+                alert(error.responseJSON.message);
+                window.location.href ="/";
+            }
         });
 
     },
@@ -74,7 +77,14 @@ let commentIndex = {
         }).done(function (res) {
             window.location.reload();
         }).fail(function (error) {
-            alert(error.responseJSON.errorMessage);
+            if (error.responseJSON.code == 701) {
+                alert(error.responseJSON.message);
+                window.location.href = "/login";
+            }
+            if (error.responseJSON.code == 603) {
+                alert(error.responseJSON.message);
+                window.location.reload();
+            }
         });
     },
 

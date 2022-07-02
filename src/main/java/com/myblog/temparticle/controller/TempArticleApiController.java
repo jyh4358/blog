@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 public class TempArticleApiController {
@@ -30,7 +32,6 @@ public class TempArticleApiController {
             @RequestBody TempArticleDto tempArticleDto,
             @AuthenticationPrincipal CustomOauth2User customOauth2User
     ) {
-        System.out.println("tempArticleDto = " + tempArticleDto);
 
         tempArticleService.saveTempArticle(tempArticleDto, customOauth2User);
         return new ResponseEntity<>(HttpStatus.OK);

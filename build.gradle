@@ -42,8 +42,7 @@ dependencies {
 	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
 	annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}"
 
-	implementation 'com.auth0:java-jwt:3.18.2'
-	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+	implementation group: 'org.kohsuke', name: 'github-api', version: '1.133'
 	implementation 'com.google.code.gson:gson'
 
 	compileOnly 'org.projectlombok:lombok'
