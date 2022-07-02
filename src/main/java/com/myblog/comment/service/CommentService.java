@@ -13,6 +13,7 @@ import com.myblog.comment.model.Comment;
 import com.myblog.comment.repository.CommentRepository;
 import com.myblog.common.checker.RightLoginChecker;
 import com.myblog.member.model.Member;
+import com.myblog.member.model.Role;
 import com.myblog.member.repository.MemberRepository;
 import com.myblog.security.oauth2.model.CustomOauth2User;
 import lombok.RequiredArgsConstructor;
@@ -90,8 +91,16 @@ public class CommentService {
     @Transactional
     public void deleteComment(CustomOauth2User customOauth2User, Long commentId) {
         RightLoginChecker.checkLoginMember(customOauth2User);
-        Comment comment = commentRepository.findCommentByIdAndMember_id(commentId, customOauth2User.getMemberId()).orElseThrow(NotExistCommentException::new);
-        commentRepository.delete(comment);
+
+        if (customOauth2User.getMemberRole().equals(Role.ADMIN)) {
+            commentRepository.delete(
+                    commentRepository.findById(commentId).orElseThrow(NotExistCommentException::new)
+            );
+        } else {
+            commentRepository.delete(
+                    commentRepository.findCommentByIdAndMember_id(commentId, customOauth2User.getMemberId()).orElseThrow(NotExistCommentException::new)
+            );
+        }
     }
 
     public List<RecentCommentResponse> findRecentComment() {

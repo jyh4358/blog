@@ -45,11 +45,4 @@ public class ApiTestController {
         return redirectUri;
     }
 
-    @GetMapping("/api/v1/article")
-    public ResponseEntity<List<PopularArticleResponse>> index(@RequestParam int curPage) {
-
-        List<PopularArticleResponse> popularArticleResponse = articleService.findRecentArticle(curPage);
-
-        return new ResponseEntity<>(popularArticleResponse, HttpStatus.OK);
-    }
 }

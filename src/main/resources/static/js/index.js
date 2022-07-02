@@ -51,10 +51,6 @@ let mainIndex ={
     scrollEvent: function () {
         // 스크롤이 움직일때마다 호출되는 이벤트
         $(window).scroll(function () {
-            console.log(mainIndex.data.dataCheck);
-            console.log($(window).scrollTop());
-            console.log($(document).height());
-            console.log($(window).height())
             if (($(window).scrollTop() == $(document).height() - $(window).height()) && mainIndex.data.dataCheck) {
                 mainIndex.getArticleList();
                 mainIndex.data.curPage++;
@@ -74,7 +70,7 @@ let mainIndex ={
             mainIndex.makeNextPage(popularArticleResponse)
         }).fail(function (error) {
             console.log(error);
-            alert("에러");
+            alert("데이터를 가져오지 못했습니다.");
         });
     },
     makeNextPage: function (popularArticleResponse) {
@@ -85,7 +81,7 @@ let mainIndex ={
         for (const popularArticleResponseElement of popularArticleResponse) {
             articleHtmlSource +=
                 `<div class=\"card mb-3 recent-card wow fadeInUp ">
-                        <a href="/article/view?articleId=${popularArticleResponseElement.id}">
+                        <a href="/article/${popularArticleResponseElement.id}">
                             <div class="row g-0">
                                 <div class="col-1 mb-3 align-self-center">
                                     <h4 class="text-center">${popularArticleResponseElement.id}</h4>

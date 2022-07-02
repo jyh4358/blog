@@ -6,13 +6,10 @@ let autoSaveArticleIndex = {
     },
     autoSave: function () {
         contents.val(editor.getMarkdown());
-        console.log("autoSave 호출")
         if (!checkTitle()) {
-            console.log("확인 체크")
             return;
         }
         else if (!checkContent()) {
-            console.log("확인 content 체크")
             return;
         }
 
@@ -31,9 +28,9 @@ let autoSaveArticleIndex = {
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(autoSaveArticle)
         }).done(function () {
-            console.log("저장 성공")
         }).fail(function (error) {
-            alert(JSON.stringify(error));
+            alert(error.responseJSON.errorMessage);
+            window.location.href = "/login";
         });
     },
     getAutoSavedArticle: function () {
@@ -54,7 +51,8 @@ let autoSaveArticleIndex = {
             }
             console.log(res);
         }).fail(function (error) {
-            alert(JSON.stringify(error));
+            alert(error.responseJSON.errorMessage);
+            window.location.href = "/login";
         });
     },
     deleteAutoSavedArticle: function () {
@@ -67,7 +65,8 @@ let autoSaveArticleIndex = {
         }).done(function () {
             console.log("삭제 성공");
         }).fail(function (error) {
-            alert(JSON.stringify(error));
+            alert(error.responseJSON.errorMessage);
+            window.location.href = "/login";
         });
     },
 }

@@ -60,7 +60,7 @@ public class ArticleService {
     public void writeArticle(ArticleWriteDto articleWriteDto, CustomOauth2User customOauth2User) {
         RightLoginChecker.checkAdminMember(customOauth2User);
 
-        Category category = categoryRepository.findById(articleWriteDto.getCategory()).get();
+        Category category = categoryRepository.findById(articleWriteDto.getCategory()).orElseThrow(NotExistCategoryException::new);
 
         List<Tag> tagList = getTags(articleWriteDto.getTags());
         List<ArticleTag> collect = getArticleTags(tagList);

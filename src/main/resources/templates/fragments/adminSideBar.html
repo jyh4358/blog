@@ -5,11 +5,7 @@
 <div th:fragment="adminSideBar">
 
     <div class="m-4 sidebar-header" style="white-space: nowrap">
-        <a th:href="@{/}"><h3 class="text-black-50">Jinia's LOG</h3></a>
-        <a th:href="@{/aboutMe}"><h5 class="text-black-50">ABOUT ME(작성중)</h5></a>
-        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/article/write}" href="#">
-            <h5 class="text-black-50">NEW ARTICLE</h5>
-        </a>
+        <a th:href="@{/}"><h3 class="text-black-50">JDong's BLOG</h3></a>
 
     </div>
 
@@ -17,8 +13,7 @@
 
     <div class="mb-1 link-dark">
         <div class="searchBox">
-            <input id="searchInput" name="searchInput" class="searchInput form-control ps-4" type="text"
-                   onkeyup="if(window.event.keyCode==13){searchKeyword()}">
+            <input id="searchInput" name="searchInput" class="searchInput form-control ps-4" type="text">
             <i class="fas fa-search"></i>
         </div>
     </div>

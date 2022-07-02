@@ -80,7 +80,6 @@ let articleIndex = {
             _this.writeArticle();
         });
         $('#article-modify').on("click", function () {
-            console.log("modify 버튼 호출");
             console.log($(this).attr("value"));
             _this.modifyArticle($(this).attr("value"));
         });
@@ -91,7 +90,6 @@ let articleIndex = {
         let token = getCsrfToken();
         let formData = new FormData();
         formData.append('file', blob);
-        console.log(blob);
 
         $.ajax({
             type: 'POST',
@@ -104,7 +102,7 @@ let articleIndex = {
         }).done(function (result) {
             url = result;
         }).fail(function (error) {
-            alert(JSON.stringify(error));
+            alert(error.responseJSON.errorMessage);
         });
 
         return url;
@@ -144,8 +142,7 @@ let articleIndex = {
             autoSaveArticleIndex.deleteAutoSavedArticle();
             window.location.href = "/admin/article?categoryTitle=ALL";
         }).fail(function (error) {
-            console.log(error);
-            alert("에러");
+            alert(error.responseJSON.errorMessage);
         });
     },
     modifyArticle: function (articleId) {
@@ -182,8 +179,7 @@ let articleIndex = {
             autoSaveArticleIndex.deleteAutoSavedArticle();
             window.location.href = "/article/" + articleId;
         }).fail(function (error) {
-            console.log(error);
-            alert("에러");
+            alert(error.responseJSON.errorMessage);
         });
     },
 

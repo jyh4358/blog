@@ -184,12 +184,12 @@
 
                                             <!-- 댓글, 비밀 댓글 분기처리 -->
                                             <th:block sec:authorize="hasRole('ROLE_ADMIN')" th:if="${comment.secret}">
-                                                <p th:text="${comment.content}" class="text-justify comment-text mb-0" style="white-space:pre-wrap;">댓글 내용</p>
+                                                <p class="text-justify comment-text mb-0" style="white-space:pre-wrap;"><i class="fa fa-lock me-1" aria-hidden="true"></i>[[${comment.content}]]</p>
                                             </th:block>
                                             <th:block sec:authorize="hasRole('ROLE_USER')" th:if="${comment.secret}">
                                                 <p class="text-justify comment-text mb-0" style="white-space:pre-wrap;"
-                                                   th:if="${#authentication.principal.getMemberId} == ${comment.id}"
-                                                   th:text="${comment.content}">댓글 내용</p>
+                                                   th:if="${#authentication.principal.getMemberId} == ${comment.memberId}"
+                                                   ><i class="fa fa-lock me-1" aria-hidden="true"></i>[[${comment.content}]]</p>
                                                 <p class="text-justify comment-text mb-0" style="white-space:pre-wrap;"
                                                    th:unless="${#authentication.principal.getMemberId} == ${comment.memberId}"><i class="fa fa-lock me-1" aria-hidden="true"></i> 비밀 댓글</p>
                                             </th:block>
@@ -213,20 +213,20 @@
                                                             <div class="mt-3 d-flex flex-row align-items-center p-2 form-color">
                                                                 <div>
                                                                 </div>
-                                                                <textarea id="child-comment-content" class="form-control"></textarea>
+                                                                <textarea class="form-control" th:id="|child-comment-content${comment.id}|"></textarea>
                                                             </div>
 
                                                             <div class="d-flex">
 
                                                                 <div class="ms-1 mt-2 secretBox">
                                                                     <label class="lock">
-                                                                        <input type="checkbox" id="child-comment-secret" value="true">
-                                                                        <small id="child-content-error" class="ms-3 text-danger"></small>
+                                                                        <input type="checkbox" th:id="|child-comment-secret${comment.id}|" value="true">
+                                                                        <span></span>
                                                                     </label>
                                                                 </div>
 
                                                                 <div class="ms-auto ms-1 me-2">
-                                                                    <button id="child-comment-save" th:value="${comment.id}" class="btn btn-sm btn-secondary">등 록</button>
+                                                                    <button th:value="${comment.id}" class="btn btn-sm btn-secondary child-comment-save">등 록</button>
                                                                 </div>
                                                             </div>
                                                         </li>
@@ -259,14 +259,14 @@
 
                                                         <!-- 비밀글 분기처리 -->
                                                         <th:block sec:authorize="hasRole('ROLE_ADMIN')" th:if="${childComment.secret}">
-                                                            <p th:text="${childComment.content}" class="text-justify comment-text mb-0" style="white-space:pre-wrap;">댓글 내용</p>
+                                                            <p class="text-justify comment-text mb-0" style="white-space:pre-wrap;"><i class="fa fa-lock me-1" aria-hidden="true"></i>[[${childComment.content}]]</p>
                                                         </th:block>
                                                         <th:block sec:authorize="hasRole('ROLE_USER')" th:if="${childComment.secret}">
                                                             <p class="text-justify comment-text mb-0" style="white-space:pre-wrap;"
-                                                               th:if="${#authentication.principal.getMemberId} == ${childComment.id}"
-                                                               th:text="${childComment.content}">댓글 내용</p>
+                                                               th:if="${#authentication.principal.getMemberId} == ${childComment.memberId}"
+                                                               ><i class="fa fa-lock me-1" aria-hidden="true"></i>[[${comment.content}]]</p>
                                                             <p class="text-justify comment-text mb-0" style="white-space:pre-wrap;"
-                                                               th:unless="${#authentication.principal.getMemberId} == ${childComment.id}"><i class="fa fa-lock me-1" aria-hidden="true"></i> 비밀 댓글</p>
+                                                               th:unless="${#authentication.principal.getMemberId} == ${childComment.memberId}"><i class="fa fa-lock me-1" aria-hidden="true"></i> 비밀 댓글</p>
                                                         </th:block>
                                                         <th:block sec:authorize="isAnonymous()" th:if="${childComment.secret}">
                                                             <p class="text-justify comment-text mb-0" style="white-space:pre-wrap;"><i class="fa fa-lock me-1" aria-hidden="true"></i>비밀 댓글</p>

@@ -5,7 +5,7 @@ let commentIndex = {
             let attr = $(this).attr("id");
             _this.commentSave();
         });
-        $("#child-comment-save").on("click", function () {
+        $(".child-comment-save").on("click", function () {
             _this.commentSave($(this).attr("value"));
         });
         $(".comment-delete").on("click", function () {
@@ -18,7 +18,8 @@ let commentIndex = {
         let token = getCsrfToken();
         let data ={};
         console.log("==============");
-        alert(!parentCommentId);
+        console.log($("#child-comment-content"+ parentCommentId).val());
+
         if (!parentCommentId) {
             data = {
                 articleId: $("#article-id").attr("value"),
@@ -27,19 +28,19 @@ let commentIndex = {
                 parentCommentId: parentCommentId,
             };
             if(!data.content){
-                alert("댓글을 작성해주세요");
+                alert("부모 댓글을 작성해주세요");
                 $('#parent-content-error').text('댓글을 작성해주세요')
                 return;
             }
         } else {
             data = {
-                articleId: $("#article-id").val(),
-                content: $("#child-comment-content").val(),
-                secret: $("#child-comment-secret").is(":checked"),
+                articleId: $("#article-id").attr("value"),
+                content: $("#child-comment-content"+ parentCommentId).val(),
+                secret: $("#child-comment-secret" + parentCommentId).is(":checked"),
                 parentCommentId: parentCommentId,
             };
             if(!data.content){
-                alert("댓글을 작성해주세요");
+                alert("자식 댓글을 작성해주세요");
                 $('#child-content-error').text('댓글을 작성해주세요')
                 return;
             }
@@ -55,13 +56,14 @@ let commentIndex = {
         }).done(function (res) {
             window.location.reload();
         }).fail(function (error) {
-            console.log(error);
-            alert("에러");
+            alert(error.responseJSON.errorMessage);
         });
 
     },
     commentDelete: function (commentId) {
-        alert("해당 댓글을 삭제하시겠습니까?");
+        if (!confirm("해당 댓글을 삭제하시겠습니까?")) {
+            return;
+        }
         let token = getCsrfToken();
 
         $.ajax({
@@ -72,8 +74,7 @@ let commentIndex = {
         }).done(function (res) {
             window.location.reload();
         }).fail(function (error) {
-            console.log(error);
-            alert("에러");
+            alert(error.responseJSON.errorMessage);
         });
     },
 

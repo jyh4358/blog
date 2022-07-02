@@ -11,6 +11,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.util.IOUtils;
 import com.myblog.common.checker.RightLoginChecker;
+import com.myblog.s3.exception.S3ImageUploadException;
 import com.myblog.s3.properties.AmazonS3BucketProperties;
 import com.myblog.s3.properties.AmazonS3CredentialsProperties;
 import com.myblog.security.oauth2.model.CustomOauth2User;
@@ -76,9 +77,8 @@ public class S3UploadService {
                     byteArrayInputStream,
                     objMeta).withCannedAcl(CannedAccessControlList.PublicRead));
             return getThumbnailPath(originalFilename);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+        } catch (Exception e) {
+            throw new S3ImageUploadException();
         }
 
     }

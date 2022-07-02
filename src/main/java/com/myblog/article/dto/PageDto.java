@@ -23,6 +23,10 @@ public class PageDto {
     public static PageDto of(Page pageableDto) {
         Pageable articlePageable = pageableDto.getPageable();
 
+        if (pageableDto.getTotalPages() == 0) {
+            return new PageDto(0, 0, 0, 0);
+        }
+
         return new PageDto(
                 articlePageable.getPageNumber(),
                 pageableDto.getTotalPages() - 1,
