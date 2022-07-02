@@ -2,8 +2,6 @@ package com.myblog.article.service;
 
 import com.google.gson.Gson;
 import com.myblog.article.dto.*;
-import com.myblog.article.exception.NotExistArticleException;
-import com.myblog.category.exception.NotExistCategoryException;
 import com.myblog.article.model.Article;
 import com.myblog.article.model.ArticleTag;
 import com.myblog.article.model.Tag;
@@ -27,6 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import static com.myblog.common.exception.ExceptionMessage.NOT_FOUND_CATEGORY;
+import static com.myblog.common.exception.ExceptionMessage.NOT_FOUNT_ARTICLE;
 
 @Service
 @RequiredArgsConstructor
@@ -60,7 +61,7 @@ public class ArticleService {
     public void writeArticle(ArticleWriteDto articleWriteDto, CustomOauth2User customOauth2User) {
         RightLoginChecker.checkAdminMember(customOauth2User);
 
-        Category category = categoryRepository.findById(articleWriteDto.getCategory()).orElseThrow(NotExistCategoryException::new);
+        Category category = categoryRepository.findById(articleWriteDto.getCategory()).orElseThrow(NOT_FOUND_CATEGORY::getException);
 
         List<Tag> tagList = getTags(articleWriteDto.getTags());
         List<ArticleTag> collect = getArticleTags(tagList);
@@ -75,7 +76,7 @@ public class ArticleService {
 
     public ArticleModifyResponse findModifyArticle(Long articleId, CustomOauth2User customOauth2User) {
         RightLoginChecker.checkAdminMember(customOauth2User);
-        Article article = articleRepository.findById(articleId).orElseThrow(NotExistArticleException::new);
+        Article article = articleRepository.findById(articleId).orElseThrow(NOT_FOUNT_ARTICLE::getException);
         List<ArticleTag> findArticleTag = articleTagRepository.findByArticle_Id(articleId);
         List<String> tags = findArticleTag.stream().map(s ->
                 s.getTag().getName()).collect(Collectors.toList());
@@ -89,8 +90,8 @@ public class ArticleService {
     @Transactional
     public Long modifyArticle(Long articleId, ArticleWriteDto articleWriteDto, CustomOauth2User customOauth2User) {
         RightLoginChecker.checkAdminMember(customOauth2User);
-        Article article = articleRepository.findById(articleId).orElseThrow(NotExistArticleException::new);
-        Category category = categoryRepository.findById(articleWriteDto.getCategory()).orElseThrow(NotExistCategoryException::new);
+        Article article = articleRepository.findById(articleId).orElseThrow(NOT_FOUNT_ARTICLE::getException);
+        Category category = categoryRepository.findById(articleWriteDto.getCategory()).orElseThrow(NOT_FOUND_CATEGORY::getException);
         List<ArticleTag> findArticleTagList = articleTagRepository.findByArticle_Id(article.getId());
         articleTagRepository.deleteAll(findArticleTagList);
 
@@ -114,7 +115,7 @@ public class ArticleService {
     @Transactional
     public ArticleDetailResponse findArticleDetail(Long articleId, boolean hitCheck) {
         // todo - fetch join으로 변경할
-        Article article = articleRepository.findById(articleId).orElseThrow(NotExistArticleException::new);
+        Article article = articleRepository.findById(articleId).orElseThrow(NOT_FOUNT_ARTICLE::getException);
         if (hitCheck) {
             article.addHit();
         }
@@ -181,7 +182,7 @@ public class ArticleService {
     @Transactional
     public void deleteArticle(Long articleId, CustomOauth2User customOauth2User) {
         RightLoginChecker.checkLoginMember(customOauth2User);
-        Article article = articleRepository.findById(articleId).orElseThrow(NotExistArticleException::new);
+        Article article = articleRepository.findById(articleId).orElseThrow(NOT_FOUNT_ARTICLE::getException);
         articleRepository.delete(article);
     }
 

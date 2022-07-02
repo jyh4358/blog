@@ -4,11 +4,8 @@ import com.myblog.article.model.Article;
 import com.myblog.article.repository.ArticleRepository;
 import com.myblog.comment.dto.CommentListResponse;
 import com.myblog.comment.dto.CommentSaveRequest;
-import com.myblog.article.exception.NotExistArticleException;
 import com.myblog.comment.dto.ManageCommentResponse;
 import com.myblog.comment.dto.RecentCommentResponse;
-import com.myblog.comment.exception.NotExistCommentException;
-import com.myblog.member.exception.NotExistMemberException;
 import com.myblog.comment.model.Comment;
 import com.myblog.comment.repository.CommentRepository;
 import com.myblog.common.checker.RightLoginChecker;
@@ -25,6 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.myblog.common.exception.ExceptionMessage.*;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -36,7 +35,7 @@ public class CommentService {
 
     public List<CommentListResponse> findCommentList(Long articleId) {
 
-        Article article = articleRepository.findById(articleId).orElseThrow(NotExistArticleException::new);
+        Article article = articleRepository.findById(articleId).orElseThrow(NOT_FOUNT_ARTICLE::getException);
 
         List<Comment> findComments = commentRepository.findByArticle_Id(article.getId());
 
@@ -54,11 +53,11 @@ public class CommentService {
     public void saveComment(CustomOauth2User customOauth2User, CommentSaveRequest commentSaveRequest) {
         RightLoginChecker.checkLoginMember(customOauth2User);
 
-        Member member = memberRepository.findById(customOauth2User.getMemberId()).orElseThrow(NotExistMemberException::new);
-        Article article = articleRepository.findById(commentSaveRequest.getArticleId()).orElseThrow(NotExistArticleException::new);
+        Member member = memberRepository.findById(customOauth2User.getMemberId()).orElseThrow(NOT_FOUND_MEMBER::getException);
+        Article article = articleRepository.findById(commentSaveRequest.getArticleId()).orElseThrow(NOT_FOUNT_ARTICLE::getException);
 
         if (commentSaveRequest.checkParentCommentId()) {
-            Comment parentComment = commentRepository.findById(commentSaveRequest.getParentCommentId()).orElseThrow(NotExistCommentException::new);
+            Comment parentComment = commentRepository.findById(commentSaveRequest.getParentCommentId()).orElseThrow(NOT_FOUND_CATEGORY::getException);
             commentRepository.save(
                     Comment.createComment(
                             commentSaveRequest.getContent(),
@@ -94,11 +93,11 @@ public class CommentService {
 
         if (customOauth2User.getMemberRole().equals(Role.ADMIN)) {
             commentRepository.delete(
-                    commentRepository.findById(commentId).orElseThrow(NotExistCommentException::new)
+                    commentRepository.findById(commentId).orElseThrow(NOT_FOUNT_COMMENT::getException)
             );
         } else {
             commentRepository.delete(
-                    commentRepository.findCommentByIdAndMember_id(commentId, customOauth2User.getMemberId()).orElseThrow(NotExistCommentException::new)
+                    commentRepository.findCommentByIdAndMember_id(commentId, customOauth2User.getMemberId()).orElseThrow(NOT_FOUNT_COMMENT::getException)
             );
         }
     }

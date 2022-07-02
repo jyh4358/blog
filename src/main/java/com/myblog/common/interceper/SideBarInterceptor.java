@@ -23,20 +23,13 @@ public class SideBarInterceptor implements HandlerInterceptor {
 
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
-        System.out.println("preHandle===================== ");
-        return true;
-    }
-
-    @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        CategoryListDto sideBarCategoryListDto = categoryService.findSidebarCategory();
-//        System.out.println("sideBarCategoryListDto = " + sideBarCategoryListDto);
-        List<RecentCommentResponse> sideBarRecentComment = commentService.findRecentComment();
-        System.out.println("sideBarRecentComment = " + sideBarRecentComment);
-        modelAndView.addObject("sideBarCategoryListDto", sideBarCategoryListDto);
-        modelAndView.addObject("sideBarRecentComment", sideBarRecentComment);
+        if (modelAndView != null) {
+            CategoryListDto sideBarCategoryListDto = categoryService.findSidebarCategory();
+            List<RecentCommentResponse> sideBarRecentComment = commentService.findRecentComment();
+            modelAndView.addObject("sideBarCategoryListDto", sideBarCategoryListDto);
+            modelAndView.addObject("sideBarRecentComment", sideBarRecentComment);
+        }
     }
 
 

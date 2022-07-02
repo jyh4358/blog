@@ -11,7 +11,6 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.util.IOUtils;
 import com.myblog.common.checker.RightLoginChecker;
-import com.myblog.s3.exception.S3ImageUploadException;
 import com.myblog.s3.properties.AmazonS3BucketProperties;
 import com.myblog.s3.properties.AmazonS3CredentialsProperties;
 import com.myblog.security.oauth2.model.CustomOauth2User;
@@ -28,6 +27,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static com.myblog.common.exception.ExceptionMessage.FAIL_IMAGE_UPLOAD;
 
 @Service
 @RequiredArgsConstructor
@@ -78,7 +79,7 @@ public class S3UploadService {
                     objMeta).withCannedAcl(CannedAccessControlList.PublicRead));
             return getThumbnailPath(originalFilename);
         } catch (Exception e) {
-            throw new S3ImageUploadException();
+            throw FAIL_IMAGE_UPLOAD.getException();
         }
 
     }
