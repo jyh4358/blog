@@ -36,9 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic().disable()
 
                 .authorizeRequests()
-//                .antMatchers("/admin/**").hasRole(Role.ADMIN.name())
-//                .antMatchers("/").hasRole(Role.USER.name())
-                .antMatchers("/comment").hasRole(Role.USER.name())
+                .antMatchers("/api/v1/admin/**", "/admin/**").hasRole(Role.ADMIN.name())
+                .antMatchers("/comments/**").hasRole(Role.USER.name())
                 .anyRequest().permitAll()
 
                 .and()

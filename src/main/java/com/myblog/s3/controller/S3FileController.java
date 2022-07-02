@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class S3FileController {
     private final S3UploadService s3UploadService;
 
-    @PostMapping("/file/upload")
+    @PostMapping("/api/v1/admin/file/upload")
     public String uploadFile(
             MultipartFile file,
             @AuthenticationPrincipal CustomOauth2User customOauth2User

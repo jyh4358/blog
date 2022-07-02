@@ -6,7 +6,6 @@ import com.myblog.common.exception.ExceptionMessage;
 import com.myblog.common.exception.NonAuthenticationException;
 import com.myblog.common.exception.NonLoginMemberException;
 import com.myblog.member.exception.NotExistMemberException;
-import com.myblog.s3.exception.S3ImageUploadException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,26 +24,26 @@ public class ExceptionAdviceController {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ExceptionMessage> handleException(Exception e) {
         log.error(e.getClass() + ": " + e.getMessage() + "\n" + Arrays.toString(e.getStackTrace()));
-        return new ResponseEntity<ExceptionMessage>(ExceptionMessage.of(Arrays.toString(e.getStackTrace())), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<ExceptionMessage>(ExceptionMessage.of(Arrays.toString(e.getStackTrace())), HttpStatus.BAD_REQUEST);
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotExistMemberException.class)
     public ResponseEntity<ExceptionMessage> handleNotExistMemberException(Exception e) {
         log.error(e.getClass() + ": " + e.getMessage() + "\n" + Arrays.toString(e.getStackTrace()));
-        return new ResponseEntity<>(ExceptionMessage.of(e.getMessage()), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(ExceptionMessage.of(e.getMessage()), HttpStatus.NOT_FOUND);
     }
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotExistCommentException.class)
     public ResponseEntity<ExceptionMessage> handleNotExistCommentException(Exception e) {
         log.error(e.getClass() + ": " + e.getMessage() + "\n" + Arrays.toString(e.getStackTrace()));
-        return new ResponseEntity<>(ExceptionMessage.of(e.getMessage()), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(ExceptionMessage.of(e.getMessage()), HttpStatus.NOT_FOUND);
     }
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotExistArticleException.class)
     public ResponseEntity<ExceptionMessage> handleNotExistArticleException(Exception e) {
         log.error(e.getClass() + ": " + e.getMessage() + "\n" + Arrays.toString(e.getStackTrace()));
-        return new ResponseEntity<>(ExceptionMessage.of(e.getMessage()), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(ExceptionMessage.of(e.getMessage()), HttpStatus.NOT_FOUND);
     }
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(NonLoginMemberException.class)
@@ -55,12 +54,6 @@ public class ExceptionAdviceController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(NonAuthenticationException.class)
     public ResponseEntity<ExceptionMessage> NonAuthenticationException(Exception e) {
-        log.error(e.getClass() + ": " + e.getMessage() + "\n" + Arrays.toString(e.getStackTrace()));
-        return new ResponseEntity<>(ExceptionMessage.of(e.getMessage()), HttpStatus.BAD_REQUEST);
-    }
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(S3ImageUploadException.class)
-    public ResponseEntity<ExceptionMessage> NonS3ImageUploadException(Exception e) {
         log.error(e.getClass() + ": " + e.getMessage() + "\n" + Arrays.toString(e.getStackTrace()));
         return new ResponseEntity<>(ExceptionMessage.of(e.getMessage()), HttpStatus.BAD_REQUEST);
     }
