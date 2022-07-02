@@ -149,6 +149,9 @@ let articleIndex = {
             if (error.responseJSON.code == 400) {
                 alert(error.responseJSON.message[0]);
             }
+            if (error.responseJSON.code == 901) {
+                alert(error.responseJSON.message)
+            }
         });
     },
     modifyArticle: function (articleId) {

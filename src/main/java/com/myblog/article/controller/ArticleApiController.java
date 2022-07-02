@@ -2,7 +2,9 @@ package com.myblog.article.controller;
 
 import com.myblog.article.dto.ArticleWriteDto;
 import com.myblog.article.dto.PopularArticleResponse;
+import com.myblog.article.model.Article;
 import com.myblog.article.service.ArticleService;
+import com.myblog.article.service.GitHubBackupService;
 import com.myblog.security.oauth2.model.CustomOauth2User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,7 @@ import java.util.List;
 public class ArticleApiController {
 
     private final ArticleService articleService;
+    private final GitHubBackupService gitHubBackupService;
 
     @GetMapping("/api/v1/article")
     public ResponseEntity<List<PopularArticleResponse>> infinityScroll(@RequestParam int curPage) {
@@ -34,7 +37,8 @@ public class ArticleApiController {
     ) {
         System.out.println("articleWriteDto = " + articleWriteDto);
 
-        articleService.writeArticle(articleWriteDto, customOauth2User);
+        Article savedArticle = articleService.writeArticle(articleWriteDto, customOauth2User);
+        gitHubBackupService.backupArticleToGitHub(savedArticle);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

@@ -2,6 +2,7 @@ package com.myblog.common.exception.exceptionadvice;
 
 import com.myblog.common.exception.httpexception.AuthorizationException;
 import com.myblog.common.exception.ErrorResponse;
+import com.myblog.common.exception.httpexception.GithubBackupException;
 import com.myblog.common.exception.httpexception.NotExistException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -47,6 +48,13 @@ public class ExceptionAdviceController {
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ExceptionHandler(AuthorizationException.class)
     public ErrorResponse handleAuthenticationException(AuthorizationException e) {
+        log.error(e.getClass() + ": " + e.getMessage() + "\n" + Arrays.toString(e.getStackTrace()));
+        return ErrorResponse.error(e.getCode(), e.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(AuthorizationException.class)
+    public ErrorResponse handleGithubBackupException(GithubBackupException e) {
         log.error(e.getClass() + ": " + e.getMessage() + "\n" + Arrays.toString(e.getStackTrace()));
         return ErrorResponse.error(e.getCode(), e.getMessage());
     }

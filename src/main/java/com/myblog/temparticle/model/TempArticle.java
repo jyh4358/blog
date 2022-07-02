@@ -14,8 +14,6 @@ public class TempArticle {
 
     @Id
     private Long id;
-
-
     @Column(nullable = false, length = 50)
     private String title;
     @Column(nullable = false, length = 10000)

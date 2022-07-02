@@ -58,7 +58,7 @@ public class ArticleService {
 
 
     @Transactional
-    public void writeArticle(ArticleWriteDto articleWriteDto, CustomOauth2User customOauth2User) {
+    public Article writeArticle(ArticleWriteDto articleWriteDto, CustomOauth2User customOauth2User) {
         RightLoginChecker.checkAdminMember(customOauth2User);
 
         Category category = categoryRepository.findById(articleWriteDto.getCategory()).orElseThrow(NOT_FOUND_CATEGORY::getException);
@@ -68,7 +68,7 @@ public class ArticleService {
 
 
         Article article = Article.createArticle(articleWriteDto, customOauth2User.getMember(), category, collect);
-        articleRepository.save(article);
+        return articleRepository.save(article);
 
     }
 

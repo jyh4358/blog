@@ -1,9 +1,6 @@
 package com.myblog.common.exception;
 
-import com.myblog.common.exception.httpexception.AuthorizationException;
-import com.myblog.common.exception.httpexception.BaseHttpException;
-import com.myblog.common.exception.httpexception.NotExistException;
-import com.myblog.common.exception.httpexception.S3ImageUploadException;
+import com.myblog.common.exception.httpexception.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -18,7 +15,9 @@ public enum ExceptionMessage {
     INVALID_LOGIN(new AuthorizationException("로그인 후 이용해 주세요.", 701)),
     INVALID_AUTHORIZATION(new AuthorizationException("관리자 계정이 아닙니다.", 702)),
 
-    FAIL_IMAGE_UPLOAD(new S3ImageUploadException("이미지 업로드에 실패했습니다.", 801));
+    FAIL_IMAGE_UPLOAD(new S3ImageUploadException("이미지 업로드에 실패했습니다.", 801)),
+
+    FAIL_BACKUP(new GithubBackupException("백업 저장에 실패하였습니다.", 901));
 
     private final RuntimeException exception;
 
