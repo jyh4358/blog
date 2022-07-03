@@ -38,6 +38,8 @@ dependencies {
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 	implementation 'org.commonmark:commonmark-ext-gfm-tables:0.18.0'
 
+	implementation 'io.sentry:sentry-spring-boot-starter:6.1.4'
+
 	//querydsl 추가
 	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
 	annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}"
