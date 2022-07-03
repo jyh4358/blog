@@ -53,7 +53,7 @@ public class ExceptionAdviceController {
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler(AuthorizationException.class)
+    @ExceptionHandler(GithubBackupException.class)
     public ErrorResponse handleGithubBackupException(GithubBackupException e) {
         log.error(e.getClass() + ": " + e.getMessage() + "\n" + Arrays.toString(e.getStackTrace()));
         return ErrorResponse.error(e.getCode(), e.getMessage());
