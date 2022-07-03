@@ -11,10 +11,10 @@
         <div class="main ">
             <div class="carousel-inner ">
                 <div class="carousel-item active" style="cursor: default" id="article-id" th:value="${articleDetailResponse.id}">
-                    <img th:src="${articleDetailResponse.thumbnailUrl}" class="w-100 vh-100 cover main-image"
+                    <img id="article-thumb" th:src="${articleDetailResponse.thumbnailUrl}" class="w-100 vh-100 cover main-image"
                          alt="...">
                     <div class="card-img-overlay text-shadow text-white text-center row justify-content-center align-content-center p-0">
-                        <h1 style="font-size: 2.5rem;" th:text="${articleDetailResponse.title}">아티클 제목</h1>
+                        <h1 id="article-title" style="font-size: 2.5rem;" th:text="${articleDetailResponse.title}">아티클 제목</h1>
                         <h5 th:text="|작성일 : ${#temporals.format(articleDetailResponse.createDate, 'yyyy-MM-dd HH:mm')}|">작성일</h5>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                 <div class="paper">
 
                     <div class="container p-3 p-sm-5">
-                        <div class="toastui-editor-contents"
+                        <div id="article-content" class="toastui-editor-contents"
                              th:utext="${articleDetailResponse.content}">
                             내요오오오오옹
                             내요오오오오옹
@@ -57,10 +57,6 @@
                                         data-bs-target="#shareContent">
                                     <i class="fas fa-share-alt"></i></button>
 
-                                <button class="btn btn-secondary ms-2" data-bs-toggle="modal"
-                                        data-bs-target="#shareContent">
-                                    <i class="fas fa-share-alt"></i></button>
-
                                 <div class="modal fade " id="shareContent" tabindex="-1" aria-labelledby="shareContent"
                                      aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
@@ -72,14 +68,14 @@
                                             </div>
                                             <div class="modal-body">
                                                 <div class="list-unstyled social-icon-wrap d-flex justify-content-around">
-                                                    <a class="social-icon link-icon-facebook">
+                                                    <button id="facebook-share" class="social-icon link-icon-facebook">
                                                         <i class=" fa fa-facebook"></i>
-                                                    </a>
-                                                    <a class="social-icon link-icon-kakao">
+                                                    </button>
+                                                    <button id="kakao-share" class="social-icon link-icon-kakao">
                                                         <i class="fa fa-comment"></i>
-                                                    </a>
-                                                    <a class="social-icon link-icon-naver">
-                                                    </a>
+                                                    </button>
+                                                    <button id="naver-share" class="social-icon link-icon-naver">
+                                                    </button>
                                                 </div>
 
                                             </div>
@@ -298,4 +294,6 @@
 <script src="/js/csrf.js"></script>
 <script src="/js/comment.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script src="/js/share.js"></script>
 </html>

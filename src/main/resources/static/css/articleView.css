@@ -809,20 +809,24 @@ ul.toolList .curArticle:before  {
 .link-icon-facebook {
     background: #1f70de;
     color: white !important;
+    border: 0;
 
 }
 
 .link-icon-kakao {
     background: yellow;
     color: black;
+    border: 0;
 }
 
 .link-icon-naver{
-    background-image: url("/images/logo.png");
+    background-image: url("/images/naver-blog.png");
     background-repeat: no-repeat;
     background-size: contain;
-
+    border: 0;
 }
+
+
 
 .text-block{
     overflow:hidden;
