@@ -6,3 +6,4 @@ spring:
       - aws
       - git
       - sentry
+      - key
