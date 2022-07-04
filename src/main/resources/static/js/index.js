@@ -75,8 +75,6 @@ let mainIndex ={
     },
     makeNextPage: function (popularArticleResponse) {
 
-
-
         let articleHtmlSource = ' ';
         for (const popularArticleResponseElement of popularArticleResponse) {
             articleHtmlSource +=
