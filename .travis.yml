@@ -5,16 +5,16 @@ branches:
   only:
   - master
 before_install:
-- openssl aes-256-cbc -K $encrypted_05569c8d5f8c_key -iv $encrypted_05569c8d5f8c_iv
-  -in application-sentry.yml.enc -out application-sentry.yml -d
-- openssl aes-256-cbc -K $encrypted_2e8be43b8f53_key -iv $encrypted_2e8be43b8f53_iv
-  -in application-oauth.yml.enc -out application-oauth.yml -d
-- openssl aes-256-cbc -K $encrypted_00ae6c5e2188_key -iv $encrypted_00ae6c5e2188_iv
-  -in application-git.yml.enc -out application-git.yml -d
-- openssl aes-256-cbc -K $encrypted_36fa70e438b7_key -iv $encrypted_36fa70e438b7_iv
-  -in application-aws.yml.enc -out application-aws.yml -d
-- openssl aes-256-cbc -K $encrypted_d8f3cd46c62c_key -iv $encrypted_d8f3cd46c62c_iv
-  -in application-db.yml.enc -out application-db.yml -d
+- openssl aes-256-cbc -K $encrypted_f549d91b60ba_key -iv $encrypted_f549d91b60ba_iv
+  -in application-sentry.yml.enc -out src/main/resources/application-sentry.yml -d
+- openssl aes-256-cbc -K $encrypted_0970f69e32ca_key -iv $encrypted_0970f69e32ca_iv
+  -in application-oauth.yml.enc -out src/main/resources/application-oauth.yml -d
+- openssl aes-256-cbc -K $encrypted_b10d9d709ee2_key -iv $encrypted_b10d9d709ee2_iv
+  -in application-git.yml.enc -out src/main/resources/application-git.yml -d
+- openssl aes-256-cbc -K $encrypted_8407c44c2dc8_key -iv $encrypted_8407c44c2dc8_iv
+  -in application-aws.yml.enc -out src/main/resources/application-aws.yml -d
+- openssl aes-256-cbc -K $encrypted_51962345a7ea_key -iv $encrypted_51962345a7ea_iv
+  -in application-db.yml.enc -out src/main/resources/application-db.yml -d
 - chmod +x gradlew
 cache:
   directories:
