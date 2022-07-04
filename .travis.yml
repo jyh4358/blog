@@ -5,10 +5,10 @@ branches:
   only:
   - master
 before_install:
-- openssl aes-256-cbc -K $encrypted_f549d91b60ba_key -iv $encrypted_f549d91b60ba_iv
-  -in application-sentry.yml.enc -out src/main/resources/application-sentry.yml -d
 - openssl aes-256-cbc -K $encrypted_0970f69e32ca_key -iv $encrypted_0970f69e32ca_iv
   -in application-oauth.yml.enc -out src/main/resources/application-oauth.yml -d
+- openssl aes-256-cbc -K $encrypted_f549d91b60ba_key -iv $encrypted_f549d91b60ba_iv
+  -in application-sentry.yml.enc -out src/main/resources/application-sentry.yml -d
 - openssl aes-256-cbc -K $encrypted_b10d9d709ee2_key -iv $encrypted_b10d9d709ee2_iv
   -in application-git.yml.enc -out src/main/resources/application-git.yml -d
 - openssl aes-256-cbc -K $encrypted_8407c44c2dc8_key -iv $encrypted_8407c44c2dc8_iv
