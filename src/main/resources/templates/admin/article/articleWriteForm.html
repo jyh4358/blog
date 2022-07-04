@@ -46,15 +46,19 @@
             </div>
 
 
-            <form method="post" enctype="multipart/form-data" id="wrtieArticleForm"
-                  th:action="@{/article/write}" th:object="${articleDto}">
 
                 <textarea type="text" name="thumbnailUrl" id="thumbnailUrl" hidden></textarea>
 
                 <div class="mt-3 mb-3">
                     <select id="category" name="category" class="form-select ps-3" aria-label="Select category">
                         <option selected>카테고리를 선택해주세요</option>
-                        <option th:each="categoryOption : ${categoryInput}"  th:value="${categoryOption.getTitle()}" th:text="${categoryOption.getTitle()}" >Java</option>
+                        <th:block th:each="parentCategoryList, p : ${categoryListDto.parentCategoryLists}">
+                            <option th:value="${parentCategoryList.id}"
+                                    th:text="${parentCategoryList.parentCategory}">Spring</option>
+                            <option th:each="childCategoryList, c : ${parentCategoryList.childCategoryLists}"
+                                    th:value="${childCategoryList.id}"
+                                    th:text="|  - ${childCategoryList.childCategory}|">JPA</option>
+                        </th:block>
                     </select>
                 </div>
 
@@ -72,15 +76,14 @@
 
                 <div class="mt-3">
                     <input id="tags" type="text" name="tags" placeholder="태그"
-                           class="form-control tagify-outside ps-3" aria-describedby="tagHelp"/>
+                           class="form-control tagify-outside ps-3">
                 </div>
 
-            </form>
         </div>
         <!--        -->
 
         <div class="row justify-content-evenly mt-4 mb-5 g-0">
-            <button class="btn btn-secondary col-4" onclick="post()">등 록</button>
+            <button class="btn btn-secondary col-4" id="article-write">등 록</button>
             <button class="btn btn-secondary col-4" onclick="javascript:history.back()">취 소</button>
         </div>
     </div>
@@ -91,5 +94,35 @@
 <!-- Ckeditor5 -->
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
-<script src="/js/articleWrite.js"></script>
+<script src="/js/tagify/tagify.js"></script>
+<script src="/js/tagify/jQuery.tagify.min.js"></script>
+<script src="/js/article.js"></script>
+<script src="/js/csrf.js"></script>
+<script src="/js/thumbnail.js"></script>
+<script src="/js/autoSave.js"></script>
+<script th:inline="javascript" type="application/javascript">
+
+    const tags = [[${tagListDto}]];
+
+    let whitelist = [];
+    for (let tag of tags) {
+        whitelist.push(tag.name);
+    }
+
+    const input = document.querySelector('input[name="tags"]');
+
+    // init Tagify script on the above inputs
+    const tagify = new Tagify(input, {
+        whitelist: whitelist, // 화이트리스트 배열
+        maxTags: 10, // 최대 허용 태그 갯수
+
+        dropdown: {
+            maxItems: 20,           // 드롭다운 메뉴에서 몇개 정도 항목을 보여줄지
+            classname: "tags-look", // 드롭다운 메뉴 엘리먼트 클래스 이름. 이걸로 css 선택자로 쓰면 된다.
+            enabled: 0,             // 단어 몇글자 입력했을떄 추천 드롭다운 메뉴가 나타날지
+            closeOnSelect: false    // 드롭다운 메뉴에서 태그 선택하면 자동으로 꺼지는지 안꺼지는지
+        }
+    });
+
+</script>
 </html>

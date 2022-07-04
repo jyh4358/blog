@@ -1,6 +1,6 @@
 package com.myblog.security.oauth2.service;
 
-import com.myblog.security.oauth2.CustomOauth2User;
+import com.myblog.security.oauth2.model.CustomOauth2User;
 import com.myblog.security.oauth2.model.GoogleUser;
 import com.myblog.security.oauth2.model.OAuth2UserInfo;
 import com.myblog.member.model.Member;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 @RequiredArgsConstructor
 public class Oauth2MemberService extends DefaultOAuth2UserService {
 
@@ -36,11 +36,11 @@ public class Oauth2MemberService extends DefaultOAuth2UserService {
                 oAuth2User.getAttribute("picture"),
                 userInfo.getOAuth2Provider());
 
-
         Member member = memberRepository.findByEmail(oAuth2User.getAttribute("email"))
                         .orElseGet(() -> memberRepository.save(oauthMember));
 
         changeMemberName(oAuth2User, member);
+
 
         return new CustomOauth2User(userInfo, member);
 

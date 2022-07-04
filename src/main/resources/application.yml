@@ -3,3 +3,6 @@ spring:
     include:
       - db
       - oauth
+      - aws
+      - git
+      - sentry

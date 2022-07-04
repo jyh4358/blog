@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       th:replace="~{/layout/layout :: layout(~{::title}, ~{::section}, ~{::script})}">
 
 
@@ -10,30 +11,16 @@
 
         <!-- 상단 화면 -->
         <div class="carousel-inner">
-            <div class="carousel-item mainItem active">
-                <a href="#">
-                    <img src="images/logo.png"
+            <div class="carousel-item mainItem"
+                 th:each="popularArticle, num : ${popularArticleResponse}"
+                 th:classappend="${num.index} == 0 ? 'active'">
+                <a th:href="@{/article/{articleId}(articleId=${popularArticle.id})}">
+                    <img src="images/logo.png" th:src="${popularArticle.thumbnailUrl}"
                          class="w-100 vh-100 cover main-image" alt="...">
                     <div class="card-img-overlay text-white text-center row justify-content-center align-content-center text-shadow">
-                        <h1 class="">첫번째 이미지</h1>
-                    </div>
-                </a>
-            </div>
-            <div class="carousel-item mainItem">
-                <a href="#">
-                    <img src="images/logo.png"
-                         class="w-100 vh-100 cover main-image" alt="...">
-                    <div class="card-img-overlay text-white text-center row justify-content-center align-content-center text-shadow">
-                        <h1 class="">두번째 이미지</h1>
-                    </div>
-                </a>
-            </div>
-            <div class="carousel-item mainItem">
-                <a href="#">
-                    <img src="images/logo.png"
-                         class="w-100 vh-100 cover main-image" alt="...">
-                    <div class="card-img-overlay text-white text-center row justify-content-center align-content-center text-shadow">
-                        <h1 class="">세번째 이미지</h1>
+                        <h1 th:text="${popularArticle.title}">첫번째 게시물</h1>
+                        <h5 th:text="|작성일 : ${#temporals.format(popularArticle.createDate, 'yyyy-MM-dd HH:mm')}|">
+                            작성일</h5>
                     </div>
                 </a>
             </div>
@@ -52,65 +39,32 @@
 
     </div>
 
+    <hr class="py-1" style="color: rgb(212, 200, 184);">
 
     <div class="mt-5 pt-2 popular-card-section ">
         <div class="post-slider">
-            <h1 class="slider-title">Trending Posts</h1>
+            <h1 class="text-center">인기 포스팅</h1>
+            <hr>
+
             <i class="fas fa-chevron-left prev"></i>
             <i class="fas fa-chevron-right next"></i>
-
             <div class="post-wrapper">
 
-                <div class="post">
-                    <img src="images/logo.png" alt="" class="slider-image">
-                    <div class="post-info">
-                        <h4><a href="single.html">One day your life will flash before your eyes</a></h4>
-                        <i class="far fa-user">Awa Melvine</i>
-                        &nbsp;
-                        <i class="far fa-calender"> Mar 8, 2019</i>
-                    </div>
-                </div>
+                <div class="post carousel-item mainItem"
+                     th:each="popularArticle, num : ${popularArticleResponse}"
+                     th:classappend="${num.index} == 0 ? 'active'">
+                    <a th:href="@{/article/{articleId}(articleId=${popularArticle.id})}">
+                        <img src="images/logo.png" th:src="${popularArticle.thumbnailUrl}"
+                             class="slider-image" alt="...">
+                        <div class="post-info text-center mt-2">
+                            <p class="text-truncate mb-0 fw-bold" th:text="${popularArticle.title}">첫번째 게시물</p>
+                            <div class="post-day text-center">
+                                <small><small th:text="${#temporals.format(popularArticle.createDate, 'yyyy-MM-dd HH:mm')}">작성일</small></small>
+                            </div>
+                        </div>
+                    </a>
 
-                <div class="post">
-                    <img src="images/logo.png" alt="" class="slider-image">
-                    <div class="post-info">
-                        <h4><a href="single.html">One day your life will flash before your eyes</a></h4>
-                        <i class="far fa-user">Awa Melvine</i>
-                        &nbsp;
-                        <i class="far fa-calender"> Mar 8, 2019</i>
-                    </div>
                 </div>
-
-                <div class="post">
-                    <img src="images/logo.png" alt="" class="slider-image">
-                    <div class="post-info">
-                        <h4><a href="single.html">One day your life will flash before your eyes</a></h4>
-                        <i class="far fa-user">Awa Melvine</i>
-                        &nbsp;
-                        <i class="far fa-calender"> Mar 8, 2019</i>
-                    </div>
-                </div>
-
-                <div class="post">
-                    <img src="images/logo.png" alt="" class="slider-image">
-                    <div class="post-info">
-                        <h4><a href="single.html">One day your life will flash before your eyes</a></h4>
-                        <i class="far fa-user">Awa Melvine</i>
-                        &nbsp;
-                        <i class="far fa-calender"> Mar 8, 2019</i>
-                    </div>
-                </div>
-
-                <div class="post">
-                    <img src="images/logo.png" alt="" class="slider-image">
-                    <div class="post-info">
-                        <h4><a href="single.html">One day your life will flash before your eyes</a></h4>
-                        <i class="far fa-user">Awa Melvine</i>
-                        &nbsp;
-                        <i class="far fa-calender"> Mar 8, 2019</i>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
@@ -123,12 +77,12 @@
             <h1 class="text-center">최신 포스팅</h1>
             <hr>
             <!--     infinityScroll     -->
-            <div id="nextPagination"></div>
+            <div id="autoScroll"></div>
         </div>
     </div>
 </section>
 
 <!-- Slick Carousel -->
+<script src="/js/index.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-
 </html>

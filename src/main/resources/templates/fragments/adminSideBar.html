@@ -5,11 +5,7 @@
 <div th:fragment="adminSideBar">
 
     <div class="m-4 sidebar-header" style="white-space: nowrap">
-        <a th:href="@{/}"><h3 class="text-black-50">Jinia's LOG</h3></a>
-        <a th:href="@{/aboutMe}"><h5 class="text-black-50">ABOUT ME(작성중)</h5></a>
-        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/article/write}" href="#">
-            <h5 class="text-black-50">NEW ARTICLE</h5>
-        </a>
+        <a th:href="@{/}"><h3 class="text-black-50">JDong's BLOG</h3></a>
 
     </div>
 
@@ -17,8 +13,7 @@
 
     <div class="mb-1 link-dark">
         <div class="searchBox">
-            <input id="searchInput" name="searchInput" class="searchInput form-control ps-4" type="text"
-                   onkeyup="if(window.event.keyCode==13){searchKeyword()}">
+            <input id="searchInput" name="searchInput" class="searchInput form-control ps-4" type="text">
             <i class="fas fa-search"></i>
         </div>
     </div>
@@ -58,11 +53,14 @@
             <div class="collapse show" id="tag-collapse-xl1">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li>
-                        <a th:href="@{/admin/article}" class="comment-side rounded">글 관리</a>
+                        <a th:href="@{/admin/article(categoryTitle=ALL)}">글 관리</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/admin/article-write}" >글 작성</a>
 
                     </li>
                     <li>
-                        <a class="comment-side rounded">카테고리 관리</a>
+                        <a th:href="@{/admin/categories}">카테고리 관리</a>
                     </li>
                 </ul>
             </div>
@@ -77,11 +75,7 @@
             <div class="collapse show" id="tag-collapse-xl">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li>
-                        <a class="comment-side rounded">댓글 관리</a>
-
-                    </li>
-                    <li>
-                        <a class="comment-side rounded">방명록 관리</a>
+                        <a th:href="@{/admin/comments}">댓글 관리</a>
                     </li>
                 </ul>
             </div>
@@ -103,7 +97,7 @@
         <li class="mb-1">
             <div>
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li>
+                    <li sec:authorize="isAnonymous()">
                         <a th:href="@{/login}" class="link-dark rounded"><i class="fas fa-sign-in-alt"></i>&nbsp로그인</a>
                     </li>
                     <li sec:authorize="isAuthenticated()">

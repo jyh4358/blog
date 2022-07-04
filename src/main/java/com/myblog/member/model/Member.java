@@ -2,11 +2,9 @@ package com.myblog.member.model;
 
 import com.myblog.article.model.Article;
 import com.myblog.comment.model.Comment;
+import com.myblog.common.model.BasicEntity;
 import com.myblog.security.oauth2.model.OAuth2Provider;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,10 +13,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Member extends BasicEntity {
 
     @Column(nullable = false)
     private String userId;
@@ -66,7 +61,7 @@ public class Member {
                 .email(email)
                 .picUrl(picUrl)
                 .provider(provider)
-                .role(Role.ADMIN)
+                .role(Role.USER)
                 .build();
     }
 

@@ -1,6 +1,8 @@
 package com.myblog.article.model;
 
+import com.myblog.common.model.BasicEntity;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -9,13 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Setter
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Tag {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Tag extends BasicEntity {
 
     @Column(unique = true, nullable = false, length = 20)
     private String name;
@@ -25,5 +23,9 @@ public class Tag {
 
     public Tag(String name) {
         this.name = name;
+    }
+
+    public static Tag createTag(String name) {
+        return new Tag(name);
     }
 }

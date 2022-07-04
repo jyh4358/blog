@@ -1,32 +1,34 @@
 package com.myblog;
 
 import com.myblog.article.dto.ArticleWriteDto;
+import com.myblog.article.dto.PopularArticleResponse;
 import com.myblog.article.model.Article;
+import com.myblog.article.service.ArticleService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Slice;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-@RestController
-public class ApiTestController {
+import java.util.List;
+import java.util.stream.Collectors;
 
-//    @GetMapping("/login/test")
+@RestController
+@RequiredArgsConstructor
+public class ApiTestController {
+    
+    private final ArticleService articleService;
+
+    //    @GetMapping("/login/test")
     public ResponseEntity<ArticleWriteDto> test(@RequestParam String code) {
 
         System.out.println("code = " + code);
 
-        ArticleWriteDto articleWriteDto = new ArticleWriteDto(
-                "title",
-                "content",
-                "category",
-                "tags"
-        );
 
-
-        return new ResponseEntity<>(articleWriteDto, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/google/login")
@@ -42,4 +44,5 @@ public class ApiTestController {
 
         return redirectUri;
     }
+
 }

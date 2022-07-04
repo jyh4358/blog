@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/layout/adminLayout :: adminLayout(~{::title}, ~{::section}, ~{::script})}">
+
+
+<title>JDong's Blog</title>
+
+<!-- Admin Page Wrapper -->
+<section>
+    <div id="thumbBox" style="display: none">
+        <div class="card d-flex align-items-center justify-content-center thumbBox">
+            <img src="" id="thumbnailPreView" class="card-img-top w-100 vh-100 cover thumbImg" alt="">
+            <button id="thumbDelBtn" class="thumbDelBtn"><i class="far fa-trash-alt "></i></button>
+        </div>
+    </div>
+
+    <div class="d-xxl-none p-0" style="margin-bottom: 100px"></div>
+
+    <div class="container">
+        <div class="row justify-content-center mt-5 mb-3 g-0">
+
+            <div class="d-flex flex-row-reverse">
+
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#thumbnailModal">
+                    썸네일 등록
+                </button>
+
+                <div class="modal fade" id="thumbnailModal" tabindex="-1" aria-labelledby="thumbnailModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="thumbnailModalLabel">썸네일 등록</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-footer">
+
+                                <input type="text" id="thumbnail-url-upload-input" class="form-control">
+                                <button class="btn btn-secondary" id="thumbnail-url-upload-btn">URL 업로드</button>
+                                <label class="btn btn-secondary" for="thumbnail">파일 업로드</label>
+                                <input type="file" id="thumbnail" name="thumbnail" accept="image/*" class="d-none">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+                <textarea type="text" name="thumbnailUrl" id="thumbnailUrl" hidden></textarea>
+
+                <div class="mt-3 mb-3">
+                    <select id="category" name="category" class="form-select ps-3" aria-label="Select category">
+                        <option>카테고리를 선택해주세요</option>
+                        <th:block th:each="parentCategoryList, p : ${categoryListDto.parentCategoryLists}">
+                            <option selected
+                                    th:if="${parentCategoryList.parentCategory} == ${articleModifyResponse.category}"
+                                    th:value="${parentCategoryList.id}"
+                                    th:text="${parentCategoryList.parentCategory}">Spring</option>
+                            <option th:unless="${parentCategoryList.parentCategory} == ${articleModifyResponse.category}"
+                                    th:value="${parentCategoryList.id}"
+                                    th:text="${parentCategoryList.parentCategory}">Spring</option>
+                            <th:block th:each="childCategoryList, c : ${parentCategoryList.childCategoryLists}">
+                                <option selected
+                                        th:if="${childCategoryList.childCategory} == ${articleModifyResponse.category}"
+                                        th:value="${childCategoryList.id}"
+                                        th:text="|  - ${childCategoryList.childCategory}|">JPA</option>
+                                <option th:unless="${childCategoryList.childCategory} == ${articleModifyResponse.category}"
+                                        th:value="${childCategoryList.id}"
+                                        th:text="|  - ${childCategoryList.childCategory}|">JPA</option>
+                            </th:block>
+                        </th:block>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <input id="title" name="title" th:value="${articleModifyResponse.title}" type="text" class="form-control ps-3" placeholder="제목을 입력해주세요" required max="30">
+                </div>
+                <div class="form-group">
+                    <textarea type="text" name="content" id="content" hidden></textarea>
+                </div>
+
+                <div class="row justify-content-center mt-4 mb-3 g-0">
+                    <label for="editor"></label>
+                    <div class=" "><div style="background: white" id="editor"></div></div>
+                </div>
+
+                <div class="mt-3">
+                    <input id="tags" type="text" name="tags" placeholder="태그"
+                           class="form-control tagify-outside ps-3"
+                           th:value="${#strings.listJoin(articleModifyResponse.tags,',')}">
+                </div>
+        </div>
+        <!--        -->
+
+        <div class="row justify-content-evenly mt-4 mb-5 g-0">
+            <button class="btn btn-secondary col-4" id="article-modify" th:value="${articleModifyResponse.id}">등 록</button>
+            <button class="btn btn-secondary col-4" onclick="javascript:history.back()">취 소</button>
+        </div>
+    </div>
+
+</section>
+<!-- // Page Wrapper End -->
+
+<!-- Ckeditor5 -->
+<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+<script src="/js/tagify/tagify.js"></script>
+<script src="/js/tagify/jQuery.tagify.min.js"></script>
+<script src="/js/article.js"></script>
+<script src="/js/csrf.js"></script>
+<script src="/js/thumbnail.js"></script>
+<script src="/js/autoSave.js"></script>
+<script th:inline="javascript" type="application/javascript">
+    // $('[name=tags]').tagify();
+
+    const tags = [[${tagListDto}]];
+
+    let whitelist = [];
+    for (let tag of tags) {
+        whitelist.push(tag.name);
+    }
+
+    const input = document.querySelector('input[name="tags"]');
+
+    // init Tagify script on the above inputs
+    const tagify = new Tagify(input, {
+        whitelist: whitelist, // 화이트리스트 배열
+        maxTags: 10, // 최대 허용 태그 갯수
+
+        dropdown: {
+            maxItems: 20,           // 드롭다운 메뉴에서 몇개 정도 항목을 보여줄지
+            classname: "tags-look", // 드롭다운 메뉴 엘리먼트 클래스 이름. 이걸로 css 선택자로 쓰면 된다.
+            enabled: 0,             // 단어 몇글자 입력했을떄 추천 드롭다운 메뉴가 나타날지
+            closeOnSelect: false    // 드롭다운 메뉴에서 태그 선택하면 자동으로 꺼지는지 안꺼지는지
+        }
+    })
+
+    editor.setMarkdown([[${articleModifyResponse.content}]]);
+
+</script>
+</html>

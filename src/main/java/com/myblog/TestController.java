@@ -1,6 +1,8 @@
 package com.myblog;
 
-import com.myblog.security.oauth2.CustomOauth2User;
+import com.myblog.category.service.CategoryService;
+import com.myblog.security.oauth2.model.CustomOauth2User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,13 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Controller
+@RequiredArgsConstructor
 public class TestController {
 
-    @GetMapping("/")
-    public String home() {
+    private final CategoryService categoryService;
 
-        return "index";
-    }
 
     @GetMapping("/login")
     public String login(Model model) {
@@ -29,6 +29,7 @@ public class TestController {
         model.addAttribute("redirectUri", redirectUri);
         return "login";
     }
+
     @GetMapping("/login/test")
     public String loginTest(
             @AuthenticationPrincipal CustomOauth2User customOauth2User,
@@ -39,10 +40,7 @@ public class TestController {
         return "loginSuccess";
     }
 
-    @GetMapping("/article")
-    public String article() {
-        return "article/articleView";
-    }
+
 
 
     @GetMapping("/admin/articles")
@@ -50,16 +48,9 @@ public class TestController {
         return "admin/article/articleList";
     }
 
-    @GetMapping("/admin/article")
-    public String articlesWrite() {
-        return "admin/article/articleWriteForm";
-    }
 
 
-    @GetMapping("/admin/categories")
-    public String adminArticle() {
-        return "admin/category/categoryList";
-    }
+
 
     @GetMapping("/admin/category")
     public String categories() {
@@ -76,9 +67,19 @@ public class TestController {
         return "admin/user/userEditForm";
     }
 
-    @GetMapping("/admin")
+    @GetMapping("/admin/main")
     public String admin() {
-        return "admin/index";
+        System.out.println("admin-----------------");
+        return "adminArticleList";
     }
+
+    @GetMapping("/test")
+    public String test(
+            @RequestParam(required = false) String title
+    ) {
+        System.out.println("title = " + title);
+        return "test";
+    }
+
 
 }
