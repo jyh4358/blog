@@ -107,24 +107,38 @@
 
 Spring Security와 OAuth2 인증방식을 통해 소셜 로그인을 구현하였으며 현재는 구글 소셜 로그인만 가능하지만 이후에 소셜 provider에 따른 
 추가 확장 할 수 있도록 OAuth2UserInfo 추상 클래스를 이용하여 구현하였습니다.
+![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%EB%A1%9C%EA%B7%B8%EC%9D%B8gif.gif)
+
 
 ### 로그 추적기
 
-Spring AOP를 이용하여 Controller, Service, Repository에 포링트컷을 지정하여 로그 추적기 기능을 구현하였으며 또한
+Spring AOP를 이용하여 Controller, Service, Repository에 포인트컷을 지정하여 로그 추적기 기능을 구현하였으며 또한
 요청별로 로그를 추적할 수 있도록 쓰레드 로컬을 이용하였습니다.
 
+
+![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%EB%A1%9C%EA%B7%B8.JPG)
+
+
+
 해당 기능 개발을 위해 인프런, 김영한님의 스프링 핵심 원리 - 고급편을 참고하였습니다.
+
+<br/>
+<br/>
 
 ### 게시물 깃헙 백업 기능
 
 Github api를 이용하여 게시물 작성 시 자동으로 Github repository에 게시글이 push 되도록 구현하였습니다.
+![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%EA%B9%83%ED%97%99+%EB%B0%B1%EC%97%85.gif)
 
+<br/>
+<br/>
 
 ### TOAST UI Editor
 
 블로그 글을 게시할 때 확장성이 좋고 소스 코드 입력에 수월한 마크다운 에디터를 사용하기 위해 국내에서 개발한 TOAST UI Editor를
 사용하였습니다. TOAST UI Editor는 기본적으로 컨텐츠 내에서 이미지 삽입 시 blob로 컨텐츠에 포함되기 때문에 DB에 부담이 되지 않도록 
 컨텐츠에 이미지 삽입 시 해당 이미지 파일은 AWS S3에 저장하여 반환된 이미지 경로 url를 컨텐츠에 포함시켰습니다.
+![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%EA%B8%80%EC%9E%91%EC%84%B1.JPG)
 
 ### 이미지 저장 - AWS S3
 

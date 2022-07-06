@@ -49,7 +49,6 @@ public class ArticleService {
      */
     public List<PopularArticleResponse> findPopularArticle() {
         List<Article> findPopularArticleList = articleRepository.findTop6ByOrderByHitDesc();
-        System.out.println("findPopularArticleList.size() = " + findPopularArticleList.size());
 
         return findPopularArticleList.stream().map(s ->
                 PopularArticleResponse.of(s)
