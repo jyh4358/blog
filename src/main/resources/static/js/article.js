@@ -169,6 +169,7 @@ let articleIndex = {
             alert("태그를 입력해주세요")
             return;
         }
+        console.log($("#thumbnailUrl").val());
         let token = getCsrfToken();
         let data = {
             thumbnailUrl: $("#thumbnailUrl").val(),

@@ -90,7 +90,10 @@ public class Article extends BasicEntity {
         this.category = category;
         if (thumbnailUrl.isEmpty()) {
             defaultThumbnailUrl();
+        } else {
+            this.thumbnailUrl = thumbnailUrl;
         }
+
     }
 
     public void addHit() {

@@ -7,9 +7,9 @@
 
 <!-- Admin Page Wrapper -->
 <section>
-    <div id="thumbBox" style="display: none">
+    <div id="thumbBox">
         <div class="card d-flex align-items-center justify-content-center thumbBox">
-            <img src="" id="thumbnailPreView" class="card-img-top w-100 vh-100 cover thumbImg" alt="">
+            <img th:src="${articleModifyResponse.thumbnailUrl}" id="thumbnailPreView" class="card-img-top w-100 vh-100 cover thumbImg" alt="">
             <button id="thumbDelBtn" class="thumbDelBtn"><i class="far fa-trash-alt "></i></button>
         </div>
     </div>
@@ -46,7 +46,7 @@
             </div>
 
 
-                <textarea type="text" name="thumbnailUrl" id="thumbnailUrl" hidden></textarea>
+                <textarea type="text" name="thumbnailUrl" id="thumbnailUrl" th:text="${articleModifyResponse.thumbnailUrl}" hidden></textarea>
 
                 <div class="mt-3 mb-3">
                     <select id="category" name="category" class="form-select ps-3" aria-label="Select category">

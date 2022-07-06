@@ -50,12 +50,8 @@ button img{
     background-image: url("/images/google.svg");
 }
 .btn-google:hover {
-    background-color: #e47365;
-}
-.btn-google:active {
     background-color: #c23321;
 }
-
 
 hr{
     border:3px; height: 1px !important; display: block !important; width: 100% !important;

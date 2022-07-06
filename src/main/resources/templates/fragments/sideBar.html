@@ -5,8 +5,10 @@
 <div th:fragment="sideBar">
 
     <div class="m-4 sidebar-header" style="white-space: nowrap">
-        <a th:href="@{/}"><h3 class="text-black-50">JDong's BLOG</h3></a>
-
+        <a th:href="@{/}"><h4 class="text-black-50">JDong's BLOG</h4></a>
+        <a sec:authorize="hasRole('ADMIN')" th:href="@{/admin/article(categoryTitle=ALL)}">
+            <h5 class="text-black-50">관리자 페이지 이동</h5>
+        </a>
     </div>
 
     <div class="border-top my-3"></div>
