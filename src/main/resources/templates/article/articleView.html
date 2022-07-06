@@ -261,7 +261,7 @@
                                                         <th:block sec:authorize="hasRole('ROLE_USER')" th:if="${childComment.secret}">
                                                             <p class="text-justify comment-text mb-0" style="white-space:pre-wrap;"
                                                                th:if="${#authentication.principal.getMemberId} == ${childComment.memberId}"
-                                                               ><i class="fa fa-lock me-1" aria-hidden="true"></i>[[${comment.content}]]</p>
+                                                               ><i class="fa fa-lock me-1" aria-hidden="true"></i>[[${childComment.content}]]</p>
                                                             <p class="text-justify comment-text mb-0" style="white-space:pre-wrap;"
                                                                th:unless="${#authentication.principal.getMemberId} == ${childComment.memberId}"><i class="fa fa-lock me-1" aria-hidden="true"></i> 비밀 댓글</p>
                                                         </th:block>

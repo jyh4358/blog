@@ -93,7 +93,7 @@ let articleIndex = {
 
         $.ajax({
             type: 'POST',
-            url: '/file/upload',
+            url: '/api/v1/admin/file/upload',
             headers: {'X-XSRF-TOKEN': token},
             processData: false,
             contentType: false,

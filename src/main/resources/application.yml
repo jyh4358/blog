@@ -7,3 +7,4 @@ spring:
       - git
       - sentry
       - key
+    active: local

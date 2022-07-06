@@ -112,7 +112,6 @@ public class ArticleController {
 
         List<CommentListResponse> commentList = commentService.findCommentList(articleId);
         ArticleDetailResponse articleDetailResponse = articleService.findArticleDetail(articleId, hitCheck);
-        System.out.println("articleDetailResponse = " + articleDetailResponse);
         model.addAttribute("articleDetailResponse", articleDetailResponse);
         model.addAttribute("commentList", commentList);
 

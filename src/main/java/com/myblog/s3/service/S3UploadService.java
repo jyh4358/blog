@@ -64,6 +64,7 @@ public class S3UploadService {
 
     public String uploadForMultiFile(MultipartFile multipartFile, CustomOauth2User customOauth2User) {
         RightLoginChecker.checkAdminMember(customOauth2User);
+        System.out.println("multipartFile.getOriginalFilename() = " + multipartFile.getOriginalFilename());
         try {
             String originalFilename = multipartFile.getOriginalFilename();
             ObjectMetadata objMeta = new ObjectMetadata();

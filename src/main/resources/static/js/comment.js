@@ -36,7 +36,7 @@ let commentIndex = {
                 parentCommentId: parentCommentId,
             };
             if(!data.content){
-                alert("자식 댓글을 작성해주세요");
+                alert("댓글을 작성해주세요");
                 $("#child-content-error"+ parentCommentId).text('댓글을 작성해주세요')
                 return;
             }

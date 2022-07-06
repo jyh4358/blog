@@ -21,15 +21,6 @@ public class GitHubBackupService {
     private GitHub github;
     private GHRepository repository;
 
-    @PostConstruct
-    public void setGithub() {
-        try {
-            github = new GitHubBuilder().withOAuthToken(githubProperties.getToken()).build();
-            repository = github.getRepository(githubProperties.getRepository());
-        } catch (IOException e) {
-            throw FAIL_BACKUP.getException();
-        }
-    }
 
 
     public void backupArticleToGitHub(Article article) {;
@@ -41,6 +32,8 @@ public class GitHubBackupService {
             path = article.getCategory().getTitle() + "/[" + article.getCreatedDate() + "]" + article.getTitle() + ".md";
         }
         try {
+            github = new GitHubBuilder().withOAuthToken(githubProperties.getToken()).build();
+            repository = github.getRepository(githubProperties.getRepository());
             repository.createContent()
                     .path(path)
                     .content(article.getContent())
