@@ -28,7 +28,6 @@ public class Oauth2MemberService extends DefaultOAuth2UserService {
         // todo - factory 사용으로 나중에 변경
         OAuth2UserInfo userInfo = new GoogleUser(oAuth2User.getAttributes());
 
-        // todo - Oauth2Provider를 바로 넣는로직은 유지보수 관점에 안좋음 나중에 변경하자
         Member oauthMember = Member.createMember(
                 oAuth2User.getAttribute("sub"),
                 oAuth2User.getAttribute("name"),

@@ -24,10 +24,6 @@ public class ArticleTag extends BasicEntity {
         this.tag = tag;
     }
 
-    public ArticleTag(Article article, Tag tag) {
-        this.article = article;
-        this.tag = tag;
-    }
 
     public static ArticleTag createArticleTag(Tag tag) {
         return new ArticleTag(tag);
