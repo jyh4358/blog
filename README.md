@@ -118,7 +118,7 @@ Spring Security와 OAuth2 인증방식을 통해 소셜 로그인을 구현하�
 Spring AOP를 이용하여 Controller, Service, Repository에 포인트컷을 지정하여 로그 추적기 기능을 구현하였으며 또한
 요청별로 로그를 추적할 수 있도록 쓰레드 로컬을 이용하였습니다.
 
-
+[로그 추적기 패키지](https://github.com/jyh4358/blog/tree/master/src/main/java/com/myblog/common/log)
 
 ![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%EB%A1%9C%EA%B7%B8.JPG)
 
@@ -131,6 +131,10 @@ Spring AOP를 이용하여 Controller, Service, Repository에 포인트컷을 �
 
 페이지 요청을 제외한 get, post, patch, delete 요청은 rest api 방식으로 구현하여 자원의 행위를 보다 직관적으로 나타내도록 했습니다.
 
+예시 코드
+- [ArticleApiController 코드](https://github.com/jyh4358/blog/blob/master/src/main/java/com/myblog/article/controller/ArticleApiController.java)
+- [article.js ajax 요청](https://github.com/jyh4358/blog/blob/master/src/main/resources/static/js/article.js)
+
 
 <br/>
 <br/>
@@ -139,7 +143,7 @@ Spring AOP를 이용하여 Controller, Service, Repository에 포인트컷을 �
 
 Github api를 이용하여 게시물 작성 시 자동으로 Github repository에 게시글이 push 되도록 구현하였습니다.
 
-![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%EA%B9%83%ED%97%99+%EB%B0%B1%EC%97%85.gif)
+![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%EA%B9%83%ED%97%99+%EB%B0%B1%EC%97%85%EC%88%98%EC%A0%95.gif)
 
 <br/>
 <br/>
@@ -160,7 +164,7 @@ Github api를 이용하여 게시물 작성 시 자동으로 Github repository�
 썸네일 이미지와 게시글 작성시 첨부되는 이미지들은 첨부되는 순간 비동기 통신으로 AWS S3에 저장한 뒤 이미지 url을 가져오는 방식을
 사용했습니다.
 
-동영상 추가
+![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%EC%9D%B4%EB%AF%B8%EC%A7%80+%EC%82%BD%EC%9E%85.gif)
 
 
 <br/>
@@ -174,13 +178,20 @@ Github api를 이용하여 게시물 작성 시 자동으로 Github repository�
 자식 카테고리 검색의 경우 분기처리를 해줘야 했습니다. 하지만 QueryDSL을 이용하여 분기처리 없이 동적 쿼리 메서드를 이용하여 검색이 가능하도록
 구현하였습니다.
 
+![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%EA%B2%80%EC%83%89.gif)
+
 <br/>
 <br/>
 
 
 ### 작성중인 게시물 자동 저장 기능
 
-글작성 도중 5분마다 글을 저장하는 기능을 구현했습니다.
+글작성 도중 5분마다 글을 저장하여 새로 글작성 시 저장한 글을 가져오도록 구현하였습니다.
+
+[자동 저장 코드](https://github.com/jyh4358/blog/blob/master/src/main/resources/static/js/autoSave.js)
+
+![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%EC%9E%90%EB%8F%99%EC%A0%80%EC%9E%A5.gif)
+
 
 <br/>
 <br/>
@@ -190,6 +201,10 @@ Github api를 이용하여 게시물 작성 시 자동으로 Github repository�
 카테고리 엔티티는 셀프조인으로 자식 카테고리가 부모 카테고리를 참조할 수 있도록 구현하였습니다.
 추가, 삭제, 수정 기능을 가진 api를 구현하여 백단에서는 변경된 카테고리 리스트와 기존 카테고리 리스트 두개를 비교하여 신규 카테고리 생성, 
 기존 카테고리명 변경, 기존 카테고리 삭제를 할 수 있도록 구현하였습니다.
+
+[백단 category 코드](https://github.com/jyh4358/blog/blob/master/src/main/java/com/myblog/category/service/CategoryService.java)
+
+![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%EC%B9%B4%ED%85%8C%EA%B3%A0%EB%A6%AC.gif)
 
 <br/>
 <br/>
@@ -201,8 +216,9 @@ Github api를 이용하여 게시물 작성 시 자동으로 Github repository�
 
 또한 댓글에 비밀 기능을 추가하여 본인과 관리자만 비밀 댓글을 볼 수 있도록 하였습니다.
 
-[//]: # (링크)
-![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%EB%8C%93%EA%B8%80+%EC%88%98%EC%A0%95.JPG)
+[ajax 요청 코드](https://github.com/jyh4358/blog/blob/master/src/main/resources/static/js/comment.js)
+
+![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%EB%8C%93%EA%B8%80.gif)
 
 <br/>
 <br/>

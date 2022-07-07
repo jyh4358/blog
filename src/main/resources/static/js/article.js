@@ -142,9 +142,10 @@ let articleIndex = {
             headers: {'X-XSRF-TOKEN': token},
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data)
-        }).done(function (res) {
+        }).done(function (id) {
+            console.log(id);
             autoSaveArticleIndex.deleteAutoSavedArticle();
-            window.location.href = "/admin/article?categoryTitle=ALL";
+            window.location.href = "/article/" + id;
         }).fail(function (error) {
             if (error.responseJSON.code == 701 || error.responseJSON.code == 702) {
                 alert(error.responseJSON.message);
@@ -182,7 +183,6 @@ let articleIndex = {
             content: contents.val(),
             tags: $("#tags").val(),
         };
-        console.log(articleId);
         $.ajax({
             type: 'PATCH',
             url: '/api/v1/admin/article/' + articleId,

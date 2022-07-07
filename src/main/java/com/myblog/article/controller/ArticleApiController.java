@@ -31,7 +31,7 @@ public class ArticleApiController {
     }
 
     @PostMapping("/api/v1/admin/article")
-    public ResponseEntity<Void> saveArticle(
+    public ResponseEntity<Long> saveArticle(
             @RequestBody @Valid ArticleWriteDto articleWriteDto,
             @AuthenticationPrincipal CustomOauth2User customOauth2User
     ) {
@@ -39,7 +39,7 @@ public class ArticleApiController {
 
         Article savedArticle = articleService.writeArticle(articleWriteDto, customOauth2User);
         gitHubBackupService.backupArticleToGitHub(savedArticle);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(savedArticle.getId(), HttpStatus.OK);
     }
 
     @DeleteMapping("/api/v1/admin/article/{articleId}")
