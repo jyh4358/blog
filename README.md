@@ -18,6 +18,8 @@
 6. 핵심 기능
     - 소셜 로그인
     - 로그 추적기
+    - rest api
+    - 에러 처리
     - Toast Ui editor
     - 댓글 기능
     - 카테고리 편집 기능
@@ -97,6 +99,7 @@
 - api
 - 게시물 깃헙 백업 기능
 - Toast Ui editor
+- tagify를 이용한 태그 기능 구현
 - 댓글 기능
 - QueryDSL의 동적 쿼리를 이용한 검색 기능
 - 게시물 자동 저장 기능
@@ -134,6 +137,19 @@ Spring AOP를 이용하여 Controller, Service, Repository에 포인트컷을 �
 예시 코드
 - [ArticleApiController 코드](https://github.com/jyh4358/blog/blob/master/src/main/java/com/myblog/article/controller/ArticleApiController.java)
 - [article.js ajax 요청](https://github.com/jyh4358/blog/blob/master/src/main/resources/static/js/article.js)
+
+
+<br/>
+<br/>
+
+### 에러 처리
+
+스프링 부트에서 제공하는 BasicErrorController를 이용하여 Html 오류 페이지를 처리하였고 
+api 관련 예외는 RestControllerAdvice를 이용하여 예외 처리 메서드들을 관리하였습니다.
+
+예외에 따른 메시지와 코드를 관리하기 쉽도록 enum 클래스를 만들어 이후에 유지보수가 용이하도록 구현하였습니다.
+
+[ExceptionMessage](https://github.com/jyh4358/blog/blob/master/src/main/java/com/myblog/common/exception/ExceptionMessage.java)
 
 
 <br/>
@@ -188,7 +204,7 @@ Github api를 이용하여 게시물 작성 시 자동으로 Github repository�
 
 글작성 도중 5분마다 글을 저장하여 새로 글작성 시 저장한 글을 가져오도록 구현하였습니다.
 
-[자동 저장 코드](https://github.com/jyh4358/blog/blob/master/src/main/resources/static/js/autoSave.js)
+[자동 저장 ajax 요청 코드](https://github.com/jyh4358/blog/blob/master/src/main/resources/static/js/autoSave.js)
 
 ![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%EC%9E%90%EB%8F%99%EC%A0%80%EC%9E%A5.gif)
 
@@ -205,6 +221,16 @@ Github api를 이용하여 게시물 작성 시 자동으로 Github repository�
 [백단 category 코드](https://github.com/jyh4358/blog/blob/master/src/main/java/com/myblog/category/service/CategoryService.java)
 
 ![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%EC%B9%B4%ED%85%8C%EA%B3%A0%EB%A6%AC.gif)
+
+<br/>
+<br/>
+
+
+### tagify를 이용한 태그 기능 구현
+
+tagify 라이브러리를 이용하여 태그 기능을 이용하여 게시물 작성시 기존의 등록한 태그를 사용하거나 새로 태그를 추가할 수 있도록 구현했습니다.
+
+![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%ED%83%9C%EA%B7%B8%ED%8C%8C%EC%9D%B4.gif)
 
 <br/>
 <br/>
@@ -228,6 +254,7 @@ Github api를 이용하여 게시물 작성 시 자동으로 Github repository�
 블로그의 접근성을 높이기 위해 카카오톡, 네이버 블로그, 페이스북 공유 기능을 추가하였습니다.
 
 **카카오 공유 예시**
+
 ![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%EC%B9%B4%EC%B9%B4%EC%98%A4+%EA%B3%B5%EC%9C%A0.JPG)
 
 
@@ -235,6 +262,17 @@ Github api를 이용하여 게시물 작성 시 자동으로 Github repository�
 <br/>
 
 
+## 프로젝트를 마무리하며
+
+공부를 한지 이제 6개월이 지나가면서 이번 1인 프로젝트를 완성하면서 아직 부족한 점도 많이 느낌과 동시에 많이 성장하고 있구나 라고
+느끼게 되었습니다. 코드를 구현하면서 구현한 코드를 보며 성취감를 맛보고, 더 좋은 구현 방법을 보며 코드를 리펙토링하여 성장함을 맛보고, 
+또한 문제를 직면했을 때 해당 문제를 해결하기 위해 머리를 싸매며 몰두하는 제 자신을 발견했습니다.
+
+잠깐 휴식을 취할때나, 밥먹을 때도 직면한 문제에 대해 생각하고, 고민하면서 좋은 방법이 생각나면 다시 돌아가서 코딩하여 
+해결하는 저의 모습을 보면서 어떤 문제가 닥치더라도 해결할 수 있는 자신감을 갖게되었습니다.
+
+이번 프로젝트 경험을 밑바탕으로 아직은 공부하며 배워가야할 부분들이 많지만 꾸준한 공부를 통하여 현재의 '나'보다 내일의 '내가' 
+더 성장한 개발자가 되는 제 모습을 그리게 되는 값진 경험을 갖게 되었습니다.
 
 
 
