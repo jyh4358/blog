@@ -35,7 +35,9 @@ class MemberRepositoryTest {
     @Test
     public void 테스트() {
         Role admin = Role.ADMIN;
-        System.out.println("admin = " + admin.equals(Role.ADMIN));
+        String d = "ROLE_ADMIN";
+        System.out.println(d.equals(Role.ADMIN.getDesc()));
+        System.out.println("d = " + d);
     }
 
 }

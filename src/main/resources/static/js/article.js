@@ -83,6 +83,10 @@ let articleIndex = {
             console.log($(this).attr("value"));
             _this.modifyArticle($(this).attr("value"));
         });
+        $(".article-delete").on("click", function () {
+            console.log("hello");
+            _this.deleteArticle($(this).attr("value"));
+        });
 
     },
     uploadImage: function(blob) {
@@ -134,7 +138,7 @@ let articleIndex = {
 
         $.ajax({
             type: 'POST',
-            url: '/api/v1/admin/article-save',
+            url: '/api/v1/admin/article',
             headers: {'X-XSRF-TOKEN': token},
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data)
@@ -181,7 +185,7 @@ let articleIndex = {
         console.log(articleId);
         $.ajax({
             type: 'PATCH',
-            url: '/api/v1/admin/article-modify/' + articleId,
+            url: '/api/v1/admin/article/' + articleId,
             headers: {'X-XSRF-TOKEN': token},
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data)
@@ -196,9 +200,28 @@ let articleIndex = {
             if (error.responseJSON.code == 400) {
                 alert(error.responseJSON.message[0]);
             }
-
         });
     },
+    deleteArticle: function (articleId) {
+        // 나중에 confirm 으로 변경하자
+        if (!confirm("해당 글을 삭제 하시겠습니까?")) {
+            return;
+        }
+        let token = getCsrfToken();
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/v1/admin/article/' + articleId,
+            headers: {'X-XSRF-TOKEN': token},
+            contentType: 'application/json; charset=utf-8',
+        }).done(function (res) {
+            window.location.href = "/admin/article?categoryTitle=ALL"
+        }).fail(function (error) {
+            console.log(error);
+            alert("에러");
+        });
+    },
+
 
 }
 

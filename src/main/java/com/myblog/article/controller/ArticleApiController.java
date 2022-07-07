@@ -30,7 +30,7 @@ public class ArticleApiController {
         return new ResponseEntity<>(popularArticleResponse, HttpStatus.OK);
     }
 
-    @PostMapping("/api/v1/admin/article-save")
+    @PostMapping("/api/v1/admin/article")
     public ResponseEntity<Void> saveArticle(
             @RequestBody @Valid ArticleWriteDto articleWriteDto,
             @AuthenticationPrincipal CustomOauth2User customOauth2User
@@ -42,7 +42,7 @@ public class ArticleApiController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("/api/v1/admin/article-delete/{articleId}")
+    @DeleteMapping("/api/v1/admin/article/{articleId}")
     public ResponseEntity<Void> deleteArticle(
             @PathVariable Long articleId,
             @AuthenticationPrincipal CustomOauth2User customOauth2User
@@ -54,7 +54,7 @@ public class ArticleApiController {
 
 
 
-    @PatchMapping("/api/v1/admin/article-modify/{articleId}")
+    @PatchMapping("/api/v1/admin/article/{articleId}")
     public ResponseEntity<Void> modifyArticle(
             @PathVariable Long articleId,
             @RequestBody @Valid ArticleWriteDto articleWriteDto,

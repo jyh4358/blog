@@ -47,7 +47,6 @@ let commentIndex = {
             url: '/api/v1/comment',
             headers: {'X-XSRF-TOKEN': token},
             contentType: 'application/json; charset=utf-8',
-            async: false,
             data: JSON.stringify(data)
         }).done(function (res) {
             window.location.reload();

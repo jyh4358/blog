@@ -134,7 +134,7 @@
 
             $.ajax({
                 type: 'DELETE',
-                url: '/api/v1/admin/article-delete/' + articleId,
+                url: '/api/v1/admin/article/' + articleId,
                 headers: {'X-XSRF-TOKEN': token},
                 contentType: 'application/json; charset=utf-8',
             }).done(function (res) {

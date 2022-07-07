@@ -43,16 +43,9 @@
                     <div class="ms-2 me-2 mb-3 p-sm-4 p-2">
                         <div class="toolbox container pt-4 pb-4">
                             <div class=" ms-5 me-5 d-flex justify-content-end">
-                                <a class="btn btn-secondary" style="color: white"
-                                   type="button">수 정
+                                <a sec:authorize="hasRole('ADMIN')" class="btn btn-secondary" style="color: white" type="button"
+                                        th:href="|@{/admin/article-modify/{articleId}(articleId=${articleDetailResponse.id})}|">수 정
                                 </a>
-                                <form id="deleteArticle"
-                                      method="post">
-                                </form>
-                                <button class="btn btn-secondary ms-2"
-                                        onclick="deleteArticle()">삭 제
-                                </button>
-
                                 <button class="btn btn-secondary ms-2" data-bs-toggle="modal"
                                         data-bs-target="#shareContent">
                                     <i class="fas fa-share-alt"></i></button>
@@ -290,7 +283,6 @@
 </section>
 
 <!-- Slick Carousel -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script src="/js/csrf.js"></script>
 <script src="/js/comment.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>
