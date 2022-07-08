@@ -42,12 +42,11 @@
 
 ### Back-End
 
-- Java : Java 11 openJDK
-- Spring 
-  - SpringBoot 2.6.6
-  - Spring Security
-  - Spring Data JPA
-  - QueryDSL
+- Java 11 openJDK
+- SpringBoot 2.6.6
+- Spring Security
+- Spring Data JPA
+- QueryDSL
 
 ### Front-End
 
@@ -193,6 +192,8 @@ Github api를 이용하여 게시물 작성 시 자동으로 Github repository�
 특히 카테고리 경우 부모 카테고리로 검색할때는 하위 자식 카테고리에 포함된 모든 게시물들을 검색해야 했기 때문에 부모 카테고리 검색과,
 자식 카테고리 검색의 경우 분기처리를 해줘야 했습니다. 하지만 QueryDSL을 이용하여 분기처리 없이 동적 쿼리 메서드를 이용하여 검색이 가능하도록
 구현하였습니다.
+
+[QeuryDSL을 적용한 repository](https://github.com/jyh4358/blog/blob/master/src/main/java/com/myblog/article/repository/ArticleSearchRepository.java)
 
 ![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%EA%B2%80%EC%83%89.gif)
 
