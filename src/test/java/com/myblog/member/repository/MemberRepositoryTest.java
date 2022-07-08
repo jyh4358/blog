@@ -15,7 +15,7 @@ class MemberRepositoryTest {
     @Autowired
     CategoryRepository categoryRepository;
 
-    @Test
+//    @Test
     public void 날짜() {
 
         LocalDateTime now = LocalDateTime.now();
@@ -32,7 +32,7 @@ class MemberRepositoryTest {
         System.out.println("title.getId() = " + title.getId());
     }
 
-    @Test
+//    @Test
     public void 테스트() {
         Role admin = Role.ADMIN;
         String d = "ROLE_ADMIN";
