@@ -10,7 +10,7 @@
 
 <br/>
 
-1. [개발 환경](#개발-환경)
+1. [개발 환경](#개발환경)
 2. 사용 기술
 3. 블로그 프로젝트를 기획한 이유
 4. 패키지 구조
@@ -61,6 +61,7 @@
 - AWS EC2
 - AWS S3
 - Jenkins
+- Enginx
 
 ### 기타 라이브러리
 - Lombok
@@ -152,7 +153,8 @@ Spring AOP를 이용하여 Controller, Service, Repository에 포인트컷을 �
 스프링 부트에서 제공하는 BasicErrorController를 이용하여 Html 오류 페이지를 처리하였고 
 api 관련 예외는 RestControllerAdvice를 이용하여 예외 처리 메서드들을 관리하였습니다.
 
-예외에 따른 메시지와 코드를 관리하기 쉽도록 enum 클래스를 만들어 이후에 유지보수가 용이하도록 구현하였습니다.
+에러관련 구현 시 비슷한 Exception 클래스들의 중복 코드가 발생하였습니다. 이러한 중복된 클래스들을 줄이기 위해 
+ErrorMessage enum 클래스를 생성하여 중복 클래스들을 줄이고 이후에 유지보수가 용이하도록 에러 처리를 하였습니다.
 
 [ExceptionMessage](https://github.com/jyh4358/blog/blob/master/src/main/java/com/myblog/common/exception/ExceptionMessage.java)
 
