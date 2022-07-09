@@ -18,7 +18,6 @@ public class ProfileController {
     public String profile() {
         List<String> profiles = Arrays.asList(env.getActiveProfiles());
         List<String> realProfiles = Arrays.asList("real1", "real2");
-
         return Arrays.stream(env.getActiveProfiles())
                 .filter(realProfiles::contains)
                 .findAny()
