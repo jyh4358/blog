@@ -21,6 +21,6 @@ public class ProfileController {
         return Arrays.stream(env.getActiveProfiles())
                 .filter(realProfiles::contains)
                 .findAny()
-                .orElse("");
+                .orElse("NotFound");
     }
 }
