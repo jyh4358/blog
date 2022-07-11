@@ -29,6 +29,7 @@
     - [작성중인 게시물 자동 저장 기능](#작성중인-게시물-자동-저장-기능)
     - [카테고리 편집 기능](#카테고리-편집-기능)
     - [tagify를 이용한 태그 기능](#tagify를-이용한-태그-기능)
+    - [오프셋 페이징과 커서 페이징](#오프셋-페이징과-커서-페이징)
     - [댓글 기능](#댓글-기능)
     - [게시글 공유하기 기능](#게시글-공유하기-기능-구현)
 8. [프로젝트를 마무리하며](#프로젝트를-마무리하며)
@@ -245,6 +246,21 @@ Github api를 이용하여 게시물 작성 시 자동으로 Github repository�
 tagify 라이브러리를 이용하여 태그 기능을 이용하여 게시물 작성시 기존의 등록한 태그를 사용하거나 새로 태그를 추가할 수 있도록 구현했습니다.
 
 ![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%ED%83%9C%EA%B7%B8%ED%8C%8C%EC%9D%B4.gif)
+
+<br/>
+<br/>
+
+### 오프셋 페이징과 커서 페이징
+
+카테고리, 태그, 키워드별 게시물 조회 시 오프셋 페이징 쿼리를 이용하여 페이징 처리를 하였으며 이후에 페이징 관련 유지보수를 위해
+별도의 페이징 Utill을 만들어 관리하였습니다.
+
+[PageUtil](https://github.com/jyh4358/blog/blob/master/src/main/java/com/myblog/common/util/PagingUtill.java)
+
+메인 화면 하단에 최신 게시물 리스트는 스크롤 감지에 따라 다음 게시물을 조회하는 커서 페이징으로 처리하였습니다.
+
+[무한 스크롤 로직(index.js)](https://github.com/jyh4358/blog/blob/master/src/main/resources/static/js/index.js)
+
 
 <br/>
 <br/>
