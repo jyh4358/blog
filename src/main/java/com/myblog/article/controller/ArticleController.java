@@ -8,10 +8,9 @@ import com.myblog.category.service.CategoryService;
 import com.myblog.comment.dto.CommentListResponse;
 import com.myblog.comment.service.CommentService;
 import com.myblog.common.checker.RightLoginChecker;
+import com.myblog.common.util.PagingUtill;
 import com.myblog.security.oauth2.model.CustomOauth2User;
 import lombok.RequiredArgsConstructor;
-import org.apache.http.HttpStatus;
-import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -133,7 +132,7 @@ public class ArticleController {
     ) {
         Page<ArticleCardBoxResponse> articleAll = articleService.findArticleByCategory(categoryTitle, pageable);
         model.addAttribute("articleCardBoxList", articleAll);
-        model.addAttribute("pageDto", PageDto.of(articleAll));
+        model.addAttribute("pageDto", PagingUtill.createPageDto(articleAll));
 
         return "article/articleList";
     }
@@ -152,7 +151,7 @@ public class ArticleController {
     ) {
         Page<ArticleCardBoxResponse> articleByKeywordResponse = articleService.findSearchArticle(keyword, pageable);
         model.addAttribute("articleCardBoxList", articleByKeywordResponse);
-        model.addAttribute("pageDto", PageDto.of(articleByKeywordResponse));
+        model.addAttribute("pageDto", PagingUtill.createPageDto(articleByKeywordResponse));
         return "article/articleList";
     }
 
@@ -164,8 +163,7 @@ public class ArticleController {
     ) {
         Page<ArticleCardBoxResponse> articleByTagResponse = articleService.findArticleByTag(tag, pageable);
         model.addAttribute("articleCardBoxList", articleByTagResponse);
-        model.addAttribute("pageDto", PageDto.of(articleByTagResponse));
-        System.out.println("PageDto.of(articleByTagResponse) = " + PageDto.of(articleByTagResponse));
+        model.addAttribute("pageDto", PagingUtill.createPageDto(articleByTagResponse));
         return "article/articleList";
     }
 
@@ -179,22 +177,9 @@ public class ArticleController {
         RightLoginChecker.checkAdminMember(customOauth2User);
         Page<ArticleCardBoxResponse> articleAll = articleService.findArticleByCategory(categoryTitle, pageable);
         model.addAttribute("articleCardBoxList", articleAll);
-        model.addAttribute("pageDto", PageDto.of(articleAll));
+        model.addAttribute("pageDto", PagingUtill.createPageDto(articleAll));
         return "admin/article/adminArticleList";
     }
-
-//    @GetMapping("/admin/api/article")
-//    @ResponseBody
-//    public PageDto findArticleAll1(
-//            @PageableDefault(
-//                    size = 5, sort = "id",direction = Sort.Direction.DESC) Pageable pageable) {
-////        List<ArticleCardBoxResponse> articleCardBoxList = articleService.findArticleAll(pageable);
-//        Page<ArticleCardBoxResponse> articleAll = articleService.findArticleAll(pageable);
-//        List<ArticleCardBoxResponse> content = articleAll.getContent();
-//        System.out.println("content = " + content);
-//        System.out.println("============================================================");
-//        return PageDto.of(articleAll);
-//    }
 
     /*
         조회 수 중복 방지 로직

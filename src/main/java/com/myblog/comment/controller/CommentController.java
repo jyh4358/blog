@@ -1,8 +1,8 @@
 package com.myblog.comment.controller;
 
-import com.myblog.article.dto.PageDto;
 import com.myblog.comment.dto.ManageCommentResponse;
 import com.myblog.comment.service.CommentService;
+import com.myblog.common.util.PagingUtill;
 import com.myblog.security.oauth2.model.CustomOauth2User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -34,7 +34,7 @@ public class CommentController {
     ) {
         Page<ManageCommentResponse> manageCommentList = commentService.findAllComment(pageable, customOauth2User);
         model.addAttribute("manageCommentList", manageCommentList);
-        model.addAttribute("pageDto", PageDto.of(manageCommentList));
+        model.addAttribute("pageDto", PagingUtill.createPageDto(manageCommentList));
 
 
         return "admin/comment/commentList";

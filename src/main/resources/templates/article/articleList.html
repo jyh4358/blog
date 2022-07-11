@@ -78,17 +78,17 @@
                     <li class="page-item">
                         <a class="page-link" aria-label="Previous"
                            th:href="@{/article(categoryTitle=${param.categoryTitle}, page=${pageDto.currentPageNum - 5})}"
-                           th:if="${articleCardBoxList.number} > 4">
+                           th:if="${articleCardBoxList.number} > 4 and ${param.categoryTitle}">
                             <span> < </span>
                         </a>
                         <a class="page-link" aria-label="Previous"
                            th:href="@{/article-search(keyword=${param.keyword}, page=${pageDto.currentPageNum - 5})}"
-                           th:if="${articleCardBoxList.number} > 4">
+                           th:if="${articleCardBoxList.number} > 4 and ${param.keyword}">
                             <span> < </span>
                         </a>
                         <a class="page-link" aria-label="Previous"
                            th:href="@{/article-tag(tag=${param.tag}, page=${pageDto.currentPageNum - 5})}"
-                           th:if="${articleCardBoxList.number} > 4">
+                           th:if="${articleCardBoxList.number} > 4 and ${param.tag}">
                             <span> < </span>
                         </a>
                     </li>
