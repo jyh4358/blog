@@ -2,6 +2,7 @@ package com.myblog.article.dto;
 
 import com.myblog.article.model.Article;
 import lombok.*;
+import org.jsoup.Jsoup;
 
 import java.time.LocalDateTime;
 
@@ -36,6 +37,7 @@ public class ArticleCardBoxResponse {
         if (this.content.length() > 300) {
             this.content = this.content.substring(0, 300);
         }
-        getHtmlRenderer().render(getParser().parse(this.content));
+        this.content = Jsoup.parse(getHtmlRenderer().render(getParser().parse(this.content))).text();
+
     }
 }

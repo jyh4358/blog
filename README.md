@@ -167,6 +167,8 @@ ErrorMessage enum 클래스를 생성하여 중복 클래스들을 줄이고 이
 
 Github api를 이용하여 게시물 작성 시 자동으로 Github repository에 게시글이 push 되도록 구현하였습니다.
 
+[백업 Repository](https://github.com/jyh4358/blog-backup)
+
 ![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%EA%B9%83%ED%97%99+%EB%B0%B1%EC%97%85%EC%88%98%EC%A0%95.gif)
 
 <br/>

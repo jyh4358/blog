@@ -155,10 +155,10 @@ public class ArticleService {
     /*
         - 무한 스크롤를 위한 최신 게시물 8개 씩 요청
      */
-    public List<PopularArticleResponse> findRecentArticle(int page) {
+    public List<ArticleCardBoxResponse> findRecentArticle(int page) {
         Slice<Article> findRecentArticle = articleRepository.findByOrderByIdDesc(PageRequest.of(page, PAGE_SIZE));
-        Slice<PopularArticleResponse> popularArticleResponses = findRecentArticle.map(s ->
-                PopularArticleResponse.of(s));
+        Slice<ArticleCardBoxResponse> popularArticleResponses = findRecentArticle.map(s ->
+                ArticleCardBoxResponse.of(s));
         return popularArticleResponses.getContent();
 
     }

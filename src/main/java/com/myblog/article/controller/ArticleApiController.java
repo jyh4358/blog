@@ -1,5 +1,6 @@
 package com.myblog.article.controller;
 
+import com.myblog.article.dto.ArticleCardBoxResponse;
 import com.myblog.article.dto.ArticleWriteDto;
 import com.myblog.article.dto.PopularArticleResponse;
 import com.myblog.article.model.Article;
@@ -23,9 +24,9 @@ public class ArticleApiController {
     private final GitHubBackupService gitHubBackupService;
 
     @GetMapping("/api/v1/article")
-    public ResponseEntity<List<PopularArticleResponse>> infinityScroll(@RequestParam int curPage) {
+    public ResponseEntity<List<ArticleCardBoxResponse>> infinityScroll(@RequestParam int curPage) {
 
-        List<PopularArticleResponse> popularArticleResponse = articleService.findRecentArticle(curPage);
+        List<ArticleCardBoxResponse> popularArticleResponse = articleService.findRecentArticle(curPage);
 
         return new ResponseEntity<>(popularArticleResponse, HttpStatus.OK);
     }
