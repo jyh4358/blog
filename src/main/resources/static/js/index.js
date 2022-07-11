@@ -51,7 +51,7 @@ let mainIndex ={
     scrollEvent: function () {
         // 스크롤이 움직일때마다 호출되는 이벤트
         $(window).scroll(function () {
-            if (($(window).scrollTop() == $(document).height() - $(window).height() - 200) && mainIndex.data.dataCheck) {
+            if (($(window).scrollTop() >= $(document).height() - $(window).height() - 300) && mainIndex.data.dataCheck) {
                 mainIndex.getArticleList();
                 mainIndex.data.curPage++;
             }
