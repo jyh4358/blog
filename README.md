@@ -38,16 +38,17 @@
 ## 1. 개발 환경
 
 - IntelliJ
+- SpringBoot 2.6.6
+- Gradle 7.4.1
 - Github
-- Mysql Workbench 8.0
+- MySQL 8.0.23
 - Postman
 
-## 2. 사용 기술
+## 2. 기술 스택
 
 ### Back-End
 
 - Java 11 openJDK
-- SpringBoot 2.6.6
 - Spring Security
 - Spring Data JPA
 - QueryDSL
