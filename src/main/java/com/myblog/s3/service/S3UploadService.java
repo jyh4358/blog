@@ -77,7 +77,8 @@ public class S3UploadService {
                     amazonS3BucketProperties.getBucket(),
                     multipartFile.getOriginalFilename(),
                     byteArrayInputStream,
-                    objMeta).withCannedAcl(CannedAccessControlList.PublicRead));
+                    objMeta
+            ).withCannedAcl(CannedAccessControlList.PublicRead));
             return getThumbnailPath(originalFilename);
         } catch (Exception e) {
             throw FAIL_IMAGE_UPLOAD.getException();
