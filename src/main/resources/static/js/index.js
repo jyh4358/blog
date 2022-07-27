@@ -65,13 +65,14 @@ let mainIndex ={
         }).done(function (popularArticleResponse) {
             if (popularArticleResponse.length == 0) {
                 mainIndex.data.dataCheck = false;
-                mainIndex.data.curPage++;
             }
             mainIndex.makeNextPage(popularArticleResponse);
         }).fail(function (error) {
             console.log(error);
             alert("데이터를 가져오지 못했습니다.");
-        });
+        }).then(function () {
+            mainIndex.data.curPage++;
+        })
     },
     makeNextPage: function (popularArticleResponse) {
 
