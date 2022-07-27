@@ -53,7 +53,7 @@ let mainIndex ={
         $(window).scroll(function () {
             if (($(window).scrollTop() >= $(document).height() - $(window).height() - 100) && mainIndex.data.dataCheck) {
                 mainIndex.getArticleList();
-                // mainIndex.data.curPage++;
+                mainIndex.data.curPage++;
             }
         });
 
@@ -97,6 +97,5 @@ let mainIndex ={
                     </div>`
         }
         $('#autoScroll').append(articleHtmlSource);
-        mainIndex.data.curPage++;
     },
 }
