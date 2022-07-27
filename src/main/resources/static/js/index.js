@@ -53,7 +53,6 @@ let mainIndex ={
         $(window).scroll(function () {
             if (($(window).scrollTop() >= $(document).height() - $(window).height() - 100) && mainIndex.data.dataCheck) {
                 mainIndex.getArticleList();
-                mainIndex.data.curPage++;
             }
         });
 
@@ -66,6 +65,7 @@ let mainIndex ={
         }).done(function (popularArticleResponse) {
             if (popularArticleResponse.length == 0) {
                 mainIndex.data.dataCheck = false;
+                mainIndex.data.curPage++;
             }
             mainIndex.makeNextPage(popularArticleResponse);
         }).fail(function (error) {
