@@ -42,6 +42,7 @@ let mainIndex ={
     data : {
         curPage: 0,
         dataCheck: true,
+        dataLoadCheck: true
     },
     init: function () {
         let _this = this;
@@ -51,9 +52,13 @@ let mainIndex ={
     scrollEvent: function () {
         // 스크롤이 움직일때마다 호출되는 이벤트
         $(window).scroll(function () {
-            if (($(window).scrollTop() >= $(document).height() - $(window).height() - 100) && mainIndex.data.dataCheck) {
+            if (($(window).scrollTop() >= $(document).height() - $(window).height() - 100) &&
+                mainIndex.data.dataCheck &&
+                mainIndex.data.dataLoadCheck
+            ) {
                 mainIndex.getArticleList();
                 mainIndex.data.curPage++;
+                mainIndex.data.dataLoadCheck = false;
             }
         });
 
@@ -68,6 +73,7 @@ let mainIndex ={
                 mainIndex.data.dataCheck = false;
             }
             mainIndex.makeNextPage(popularArticleResponse);
+            mainIndex.data.dataLoadCheck = true;
         }).fail(function (error) {
             console.log(error);
             alert("데이터를 가져오지 못했습니다.");
