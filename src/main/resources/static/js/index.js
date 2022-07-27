@@ -53,6 +53,7 @@ let mainIndex ={
         $(window).scroll(function () {
             if (($(window).scrollTop() >= $(document).height() - $(window).height() - 100) && mainIndex.data.dataCheck) {
                 mainIndex.getArticleList();
+                // mainIndex.data.curPage++;
             }
         });
 
@@ -70,9 +71,7 @@ let mainIndex ={
         }).fail(function (error) {
             console.log(error);
             alert("데이터를 가져오지 못했습니다.");
-        }).then(function () {
-            mainIndex.data.curPage++;
-        })
+        });
     },
     makeNextPage: function (popularArticleResponse) {
 
@@ -98,5 +97,6 @@ let mainIndex ={
                     </div>`
         }
         $('#autoScroll').append(articleHtmlSource);
+        mainIndex.data.curPage++;
     },
 }
