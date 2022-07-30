@@ -14,6 +14,7 @@ import com.myblog.member.model.Role;
 import com.myblog.member.repository.MemberRepository;
 import com.myblog.security.oauth2.model.CustomOauth2User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -102,6 +103,7 @@ public class CommentService {
         }
     }
 
+    @Cacheable(value = "sideBarRecentCommentCaching", key = "0")
     public List<RecentCommentResponse> findRecentComment() {
         List<Comment> recentTop5ByOrderByIdDesc = commentRepository.findTop5ByOrderByIdDesc();
         List<RecentCommentResponse> collect = recentTop5ByOrderByIdDesc.stream().map(s ->

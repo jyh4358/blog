@@ -9,6 +9,7 @@ import com.myblog.category.resposiotry.CategoryRepository;
 import com.myblog.common.checker.RightLoginChecker;
 import com.myblog.security.oauth2.model.CustomOauth2User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,6 +53,7 @@ public class CategoryService {
     }
 
 
+    @Cacheable(value = "sideBarCategoryCaching", key = "0")
     public CategoryListDto findSidebarCategory() {
         CategoryListDto categoryListDto = findCategories();
         List<CategoryQueryDto> categoryCounts = categoryRepository.findCategoryCount();
