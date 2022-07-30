@@ -1241,3 +1241,1024 @@
 [2022-07-27 11:48:36:12636][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/d419e877] |<--Return:List com.myblog.article.service.ArticleService.findRecentArticle(int) time = 1ms
 [2022-07-27 11:48:36:12637][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/d419e877] Return:ResponseEntity com.myblog.article.controller.ArticleApiController.infinityScroll(int) time = 4ms
 [2022-07-27 11:48:36:12637][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - -------------------------------0:0:0:0:0:0:0:1/d419e877's transaction end/4ms-------------------------
+[2022-07-27 12:50:14:3710280][http-nio-8080-exec-2] WARN  o.a.c.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [420] milliseconds.
+[2022-07-27 13:05:09:4605988][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - ------------------------------81.25.70.139/e124b307's transaction start------------------------------
+[2022-07-27 13:05:09:4605989][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [81.25.70.139/e124b307] Return:String com.myblog.article.controller.ArticleController.index(Model) ,args = [{}]
+[2022-07-27 13:05:09:4605998][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [81.25.70.139/e124b307] |-->Return:List com.myblog.article.service.ArticleService.findPopularArticle() ,args = []
+[2022-07-27 13:05:09:4605998][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [81.25.70.139/e124b307] |   |-->Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() ,args = []
+[2022-07-27 13:05:09:4606004][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [81.25.70.139/e124b307] |   |<--Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() time = 6ms
+[2022-07-27 13:05:09:4606004][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [81.25.70.139/e124b307] |<--Return:List com.myblog.article.service.ArticleService.findPopularArticle() time = 6ms
+[2022-07-27 13:05:09:4606005][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [81.25.70.139/e124b307] Return:String com.myblog.article.controller.ArticleController.index(Model) time = 17ms
+[2022-07-27 13:05:09:4606005][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - -------------------------------81.25.70.139/e124b307's transaction end/17ms-------------------------
+[2022-07-27 13:05:09:4606006][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - ------------------------------81.25.70.139/f526a585's transaction start------------------------------
+[2022-07-27 13:05:09:4606006][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [81.25.70.139/f526a585] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() ,args = []
+[2022-07-27 13:05:09:4606012][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [81.25.70.139/f526a585] |-->Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() ,args = []
+[2022-07-27 13:05:09:4606014][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [81.25.70.139/f526a585] |<--Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() time = 2ms
+[2022-07-27 13:05:09:4606014][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [81.25.70.139/f526a585] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() time = 8ms
+[2022-07-27 13:05:09:4606014][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - -------------------------------81.25.70.139/f526a585's transaction end/8ms-------------------------
+[2022-07-27 13:05:09:4606015][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - ------------------------------81.25.70.139/cfaefa12's transaction start------------------------------
+[2022-07-27 13:05:09:4606015][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [81.25.70.139/cfaefa12] Return:List com.myblog.comment.service.CommentService.findRecentComment() ,args = []
+[2022-07-27 13:05:09:4606015][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [81.25.70.139/cfaefa12] |-->Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() ,args = []
+[2022-07-27 13:05:09:4606017][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [81.25.70.139/cfaefa12] |<--Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() time = 2ms
+[2022-07-27 13:05:09:4606019][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [81.25.70.139/cfaefa12] Return:List com.myblog.comment.service.CommentService.findRecentComment() time = 4ms
+[2022-07-27 13:05:09:4606019][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - -------------------------------81.25.70.139/cfaefa12's transaction end/4ms-------------------------
+[2022-07-27 13:13:39:5115558][http-nio-8080-exec-9] INFO  o.a.coyote.http11.Http11Processor - Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x00{0x010x000x00w0x030x030xb60xa80xfa.0xdbzk{0x860x17-0x8e0xa90x010xef0xf90xed@0xd00xb9A0xccu0x880x180x1b0xaaE0xd80xbce0x910x000x000x1a0xc0/0xc0+0xc00x110xc00x070xc00x130xc00x090xc00x140xc00x0a0x000x050x00/0x0050xc00x120x000x0a0x010x000x0040x000x050x000x050x010x000x000x000x000x000x0a0x000x080x000x060x000x170x000x180x000x190x000x0b0x000x020x010x000x000x0d0x000x100x000x0e0x040x010x040x030x020x010x020x030x040x010x050x010x060x010xff0x010x000x010x00...]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:419)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:271)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:889)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1743)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+[2022-07-27 13:13:40:5116587][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - ------------------------------161.35.8.175/0f99cc8c's transaction start------------------------------
+[2022-07-27 13:13:40:5116588][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [161.35.8.175/0f99cc8c] Return:String com.myblog.article.controller.ArticleController.index(Model) ,args = [{}]
+[2022-07-27 13:13:40:5116589][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [161.35.8.175/0f99cc8c] |-->Return:List com.myblog.article.service.ArticleService.findPopularArticle() ,args = []
+[2022-07-27 13:13:40:5116589][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [161.35.8.175/0f99cc8c] |   |-->Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() ,args = []
+[2022-07-27 13:13:40:5116591][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [161.35.8.175/0f99cc8c] |   |<--Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() time = 2ms
+[2022-07-27 13:13:40:5116592][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [161.35.8.175/0f99cc8c] |<--Return:List com.myblog.article.service.ArticleService.findPopularArticle() time = 3ms
+[2022-07-27 13:13:40:5116592][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [161.35.8.175/0f99cc8c] Return:String com.myblog.article.controller.ArticleController.index(Model) time = 5ms
+[2022-07-27 13:13:40:5116592][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - -------------------------------161.35.8.175/0f99cc8c's transaction end/5ms-------------------------
+[2022-07-27 13:13:40:5116593][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - ------------------------------161.35.8.175/bdd93e24's transaction start------------------------------
+[2022-07-27 13:13:40:5116593][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [161.35.8.175/bdd93e24] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() ,args = []
+[2022-07-27 13:13:40:5116599][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [161.35.8.175/bdd93e24] |-->Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() ,args = []
+[2022-07-27 13:13:40:5116600][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [161.35.8.175/bdd93e24] |<--Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() time = 1ms
+[2022-07-27 13:13:40:5116600][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [161.35.8.175/bdd93e24] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() time = 7ms
+[2022-07-27 13:13:40:5116600][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - -------------------------------161.35.8.175/bdd93e24's transaction end/7ms-------------------------
+[2022-07-27 13:13:40:5116601][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - ------------------------------161.35.8.175/e7e79952's transaction start------------------------------
+[2022-07-27 13:13:40:5116601][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [161.35.8.175/e7e79952] Return:List com.myblog.comment.service.CommentService.findRecentComment() ,args = []
+[2022-07-27 13:13:40:5116602][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [161.35.8.175/e7e79952] |-->Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() ,args = []
+[2022-07-27 13:13:40:5116603][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [161.35.8.175/e7e79952] |<--Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() time = 1ms
+[2022-07-27 13:13:40:5116606][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [161.35.8.175/e7e79952] Return:List com.myblog.comment.service.CommentService.findRecentComment() time = 5ms
+[2022-07-27 13:13:40:5116606][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - -------------------------------161.35.8.175/e7e79952's transaction end/5ms-------------------------
+[2022-07-27 13:21:25:5581544][SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+[2022-07-27 13:21:25:5581548][SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+[2022-07-27 13:21:25:5581555][SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+[2022-07-27 13:21:29:932][restartedMain] INFO  com.myblog.MyblogApplication - Starting MyblogApplication using Java 11.0.13 on DESKTOP-P1F89EE with PID 8292 (C:\tools\spring\project\myblog\build\classes\java\main started by joddo in C:\tools\spring\project\myblog)
+[2022-07-27 13:21:29:933][background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.3.Final
+[2022-07-27 13:21:29:935][restartedMain] INFO  com.myblog.MyblogApplication - The following 7 profiles are active: "db", "oauth", "aws", "git", "sentry", "key", "local"
+[2022-07-27 13:21:29:977][restartedMain] WARN  o.s.b.c.c.ConfigDataEnvironment - Property 'spring.profiles' imported from location 'class path resource [application-db.yml]' is invalid and should be replaced with 'spring.config.activate.on-profile' [origin: class path resource [application-db.yml] - 65:13]
+[2022-07-27 13:21:29:977][restartedMain] WARN  o.s.b.c.c.ConfigDataEnvironment - Property 'spring.profiles' imported from location 'class path resource [application-db.yml]' is invalid and should be replaced with 'spring.config.activate.on-profile' [origin: class path resource [application-db.yml] - 43:13]
+[2022-07-27 13:21:29:978][restartedMain] WARN  o.s.b.c.c.ConfigDataEnvironment - Property 'spring.profiles' imported from location 'class path resource [application-db.yml]' is invalid and should be replaced with 'spring.config.activate.on-profile' [origin: class path resource [application-db.yml] - 22:13]
+[2022-07-27 13:21:29:978][restartedMain] WARN  o.s.b.c.c.ConfigDataEnvironment - Property 'spring.profiles' imported from location 'class path resource [application-db.yml]' is invalid and should be replaced with 'spring.config.activate.on-profile' [origin: class path resource [application-db.yml] - 2:13]
+[2022-07-27 13:21:29:979][restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[2022-07-27 13:21:29:979][restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[2022-07-27 13:21:30:1954][restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2022-07-27 13:21:30:2084][restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 122 ms. Found 7 JPA repository interfaces.
+[2022-07-27 13:21:31:2523][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'io.sentry.spring.tracing.SentryAdviceConfiguration' of type [io.sentry.spring.tracing.SentryAdviceConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 13:21:31:2529][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'io.sentry.spring.tracing.SentrySpanPointcutConfiguration' of type [io.sentry.spring.tracing.SentrySpanPointcutConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 13:21:31:2532][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentrySpanPointcut' of type [org.springframework.aop.support.ComposablePointcut] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 13:21:31:2533][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'io.sentry.spring.boot.SentryAutoConfiguration$HubConfiguration' of type [io.sentry.spring.boot.SentryAutoConfiguration$HubConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 13:21:31:2540][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'io.sentry.spring.boot.SentryAutoConfiguration$HubConfiguration$ContextTagsEventProcessorConfiguration' of type [io.sentry.spring.boot.SentryAutoConfiguration$HubConfiguration$ContextTagsEventProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 13:21:32:3615][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentry-io.sentry.spring.boot.SentryProperties' of type [io.sentry.spring.boot.SentryProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 13:21:32:3632][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'contextTagsEventProcessor' of type [io.sentry.spring.ContextTagsEventProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 13:21:32:3636][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'inAppPackagesResolver' of type [io.sentry.spring.boot.InAppIncludesResolver] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 13:21:32:3638][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentryOptionsConfiguration' of type [io.sentry.spring.boot.SentryAutoConfiguration$HubConfiguration$$Lambda$600/0x0000000800556c40] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 13:21:32:3647][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'myblogApplication' of type [com.myblog.MyblogApplication$$EnhancerBySpringCGLIB$$f8ba42f0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 13:21:32:3666][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentryHub' of type [io.sentry.HubAdapter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 13:21:32:3678][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentrySpanAdvice' of type [io.sentry.spring.tracing.SentrySpanAdvice] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 13:21:32:3678][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentrySpanAdvisor' of type [org.springframework.aop.support.DefaultPointcutAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 13:21:32:3679][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'io.sentry.spring.tracing.SentryTransactionPointcutConfiguration' of type [io.sentry.spring.tracing.SentryTransactionPointcutConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 13:21:32:3680][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentryTransactionPointcut' of type [org.springframework.aop.support.ComposablePointcut] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 13:21:32:3682][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentryTransactionAdvice' of type [io.sentry.spring.tracing.SentryTransactionAdvice] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 13:21:32:3682][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentryTransactionAdvisor' of type [org.springframework.aop.support.DefaultPointcutAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 13:21:32:4086][restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+[2022-07-27 13:21:32:4095][restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+[2022-07-27 13:21:32:4095][restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+[2022-07-27 13:21:32:4095][restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.60]
+[2022-07-27 13:21:33:4231][restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+[2022-07-27 13:21:33:4231][restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3251 ms
+[2022-07-27 13:21:33:4290][restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+[2022-07-27 13:21:33:4412][restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+[2022-07-27 13:21:33:4420][restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/myblog?allowPublicKeyRetrieval=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&cacheDefaultTimezone=false'
+[2022-07-27 13:21:33:4587][restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+[2022-07-27 13:21:33:4633][restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.7.Final
+[2022-07-27 13:21:33:4774][restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+[2022-07-27 13:21:33:4881][restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+[2022-07-27 13:21:34:5678][restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[2022-07-27 13:21:34:5691][restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+[2022-07-27 13:21:35:6947][restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[2022-07-27 13:21:36:7148][restartedMain] WARN  o.s.s.c.a.web.builders.WebSecurity - You are asking Spring Security to ignore org.springframework.boot.autoconfigure.security.servlet.StaticResourceRequest$StaticResourceRequestMatcher@11592b1a. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+[2022-07-27 13:21:36:7149][restartedMain] INFO  o.s.s.w.DefaultSecurityFilterChain - Will secure org.springframework.boot.autoconfigure.security.servlet.StaticResourceRequest$StaticResourceRequestMatcher@11592b1a with []
+[2022-07-27 13:21:36:7253][restartedMain] INFO  o.s.s.w.DefaultSecurityFilterChain - Will not secure any request
+[2022-07-27 13:21:36:7597][restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+[2022-07-27 13:21:36:7963][restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+[2022-07-27 13:21:36:7987][restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+[2022-07-27 13:21:36:8006][restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+[2022-07-27 13:21:36:8016][restartedMain] INFO  com.myblog.MyblogApplication - Started MyblogApplication in 7.577 seconds (JVM running for 9.055)
+[2022-07-27 13:21:36:8065][http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[2022-07-27 13:21:36:8065][http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+[2022-07-27 13:21:36:8066][http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+[2022-07-27 13:21:37:8119][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - ------------------------------0:0:0:0:0:0:0:1/97552f3f's transaction start------------------------------
+[2022-07-27 13:21:37:8120][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/97552f3f] Return:String com.myblog.article.controller.ArticleController.index(Model) ,args = [{}]
+[2022-07-27 13:21:37:8131][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/97552f3f] |-->Return:List com.myblog.article.service.ArticleService.findPopularArticle() ,args = []
+[2022-07-27 13:21:37:8135][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/97552f3f] |   |-->Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() ,args = []
+[2022-07-27 13:21:37:8186][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/97552f3f] |   |<--Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() time = 51ms
+[2022-07-27 13:21:37:8187][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/97552f3f] |<--Return:List com.myblog.article.service.ArticleService.findPopularArticle() time = 57ms
+[2022-07-27 13:21:37:8188][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/97552f3f] Return:String com.myblog.article.controller.ArticleController.index(Model) time = 69ms
+[2022-07-27 13:21:37:8192][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - -------------------------------0:0:0:0:0:0:0:1/97552f3f's transaction end/69ms-------------------------
+[2022-07-27 13:21:37:8197][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - ------------------------------0:0:0:0:0:0:0:1/b30d6210's transaction start------------------------------
+[2022-07-27 13:21:37:8197][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/b30d6210] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() ,args = []
+[2022-07-27 13:21:37:8224][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/b30d6210] |-->Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() ,args = []
+[2022-07-27 13:21:37:8229][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/b30d6210] |<--Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() time = 5ms
+[2022-07-27 13:21:37:8229][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/b30d6210] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() time = 32ms
+[2022-07-27 13:21:37:8230][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - -------------------------------0:0:0:0:0:0:0:1/b30d6210's transaction end/32ms-------------------------
+[2022-07-27 13:21:37:8231][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - ------------------------------0:0:0:0:0:0:0:1/7982262f's transaction start------------------------------
+[2022-07-27 13:21:37:8231][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/7982262f] Return:List com.myblog.comment.service.CommentService.findRecentComment() ,args = []
+[2022-07-27 13:21:37:8233][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/7982262f] |-->Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() ,args = []
+[2022-07-27 13:21:37:8237][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/7982262f] |<--Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() time = 4ms
+[2022-07-27 13:21:37:8241][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/7982262f] Return:List com.myblog.comment.service.CommentService.findRecentComment() time = 10ms
+[2022-07-27 13:21:37:8241][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - -------------------------------0:0:0:0:0:0:0:1/7982262f's transaction end/10ms-------------------------
+[2022-07-27 13:21:43:14481][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - ------------------------------127.0.0.1/af7adfc8's transaction start------------------------------
+[2022-07-27 13:21:43:14481][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/af7adfc8] Return:String com.myblog.article.controller.ArticleController.findArticleByCategory(Pageable,String,Model) ,args = [Page request [number: 0, size 8, sort: id: DESC], JPA, {}]
+[2022-07-27 13:21:43:14482][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/af7adfc8] |-->Return:Page com.myblog.article.service.ArticleService.findArticleByCategory(String,Pageable) ,args = [JPA, Page request [number: 0, size 8, sort: id: DESC]]
+[2022-07-27 13:21:43:14482][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/af7adfc8] |   |-->Return:Optional com.myblog.category.resposiotry.CategoryRepository.findByTitle(String) ,args = [JPA]
+[2022-07-27 13:21:43:14489][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/af7adfc8] |   |<--Return:Optional com.myblog.category.resposiotry.CategoryRepository.findByTitle(String) time = 7ms
+[2022-07-27 13:21:43:14490][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/af7adfc8] |   |-->Return:Page com.myblog.article.repository.ArticleSearchRepository.findSearchArticleByCategory(String,List,Pageable) ,args = [JPA, [], Page request [number: 0, size 8, sort: id: DESC]]
+[2022-07-27 13:21:43:14567][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/af7adfc8] |   |<--Return:Page com.myblog.article.repository.ArticleSearchRepository.findSearchArticleByCategory(String,List,Pageable) time = 77ms
+[2022-07-27 13:21:43:14656][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/af7adfc8] |<--Return:Page com.myblog.article.service.ArticleService.findArticleByCategory(String,Pageable) time = 174ms
+[2022-07-27 13:21:43:14660][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/af7adfc8] Return:String com.myblog.article.controller.ArticleController.findArticleByCategory(Pageable,String,Model) time = 179ms
+[2022-07-27 13:21:43:14660][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - -------------------------------127.0.0.1/af7adfc8's transaction end/179ms-------------------------
+[2022-07-27 13:21:43:14664][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - ------------------------------127.0.0.1/9058039e's transaction start------------------------------
+[2022-07-27 13:21:43:14664][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/9058039e] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() ,args = []
+[2022-07-27 13:21:43:14670][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/9058039e] |-->Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() ,args = []
+[2022-07-27 13:21:43:14672][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/9058039e] |<--Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() time = 2ms
+[2022-07-27 13:21:43:14672][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/9058039e] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() time = 8ms
+[2022-07-27 13:21:43:14672][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - -------------------------------127.0.0.1/9058039e's transaction end/8ms-------------------------
+[2022-07-27 13:21:43:14673][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - ------------------------------127.0.0.1/76ba25eb's transaction start------------------------------
+[2022-07-27 13:21:43:14673][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/76ba25eb] Return:List com.myblog.comment.service.CommentService.findRecentComment() ,args = []
+[2022-07-27 13:21:43:14673][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/76ba25eb] |-->Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() ,args = []
+[2022-07-27 13:21:43:14676][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/76ba25eb] |<--Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() time = 3ms
+[2022-07-27 13:21:43:14678][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/76ba25eb] Return:List com.myblog.comment.service.CommentService.findRecentComment() time = 5ms
+[2022-07-27 13:21:43:14679][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - -------------------------------127.0.0.1/76ba25eb's transaction end/5ms-------------------------
+[2022-07-27 13:21:46:17706][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - ------------------------------127.0.0.1/e805d660's transaction start------------------------------
+[2022-07-27 13:21:46:17706][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/e805d660] Return:String com.myblog.article.controller.ArticleController.index(Model) ,args = [{}]
+[2022-07-27 13:21:46:17707][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/e805d660] |-->Return:List com.myblog.article.service.ArticleService.findPopularArticle() ,args = []
+[2022-07-27 13:21:46:17708][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/e805d660] |   |-->Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() ,args = []
+[2022-07-27 13:21:46:17711][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/e805d660] |   |<--Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() time = 3ms
+[2022-07-27 13:21:46:17711][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/e805d660] |<--Return:List com.myblog.article.service.ArticleService.findPopularArticle() time = 4ms
+[2022-07-27 13:21:46:17712][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/e805d660] Return:String com.myblog.article.controller.ArticleController.index(Model) time = 6ms
+[2022-07-27 13:21:46:17712][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - -------------------------------127.0.0.1/e805d660's transaction end/6ms-------------------------
+[2022-07-27 13:21:46:17713][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - ------------------------------127.0.0.1/8d613fc2's transaction start------------------------------
+[2022-07-27 13:21:46:17713][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/8d613fc2] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() ,args = []
+[2022-07-27 13:21:46:17718][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/8d613fc2] |-->Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() ,args = []
+[2022-07-27 13:21:46:17719][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/8d613fc2] |<--Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() time = 1ms
+[2022-07-27 13:21:46:17719][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/8d613fc2] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() time = 6ms
+[2022-07-27 13:21:46:17719][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - -------------------------------127.0.0.1/8d613fc2's transaction end/6ms-------------------------
+[2022-07-27 13:21:46:17720][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - ------------------------------127.0.0.1/e405a637's transaction start------------------------------
+[2022-07-27 13:21:46:17720][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/e405a637] Return:List com.myblog.comment.service.CommentService.findRecentComment() ,args = []
+[2022-07-27 13:21:46:17721][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/e405a637] |-->Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() ,args = []
+[2022-07-27 13:21:46:17722][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/e405a637] |<--Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() time = 2ms
+[2022-07-27 13:21:46:17725][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/e405a637] Return:List com.myblog.comment.service.CommentService.findRecentComment() time = 5ms
+[2022-07-27 13:21:46:17725][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - -------------------------------127.0.0.1/e405a637's transaction end/5ms-------------------------
+[2022-07-27 13:21:47:18958][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - ------------------------------127.0.0.1/0ea467b2's transaction start------------------------------
+[2022-07-27 13:21:47:18958][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/0ea467b2] Return:ResponseEntity com.myblog.article.controller.ArticleApiController.infinityScroll(int) ,args = [0]
+[2022-07-27 13:21:47:18961][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/0ea467b2] |-->Return:List com.myblog.article.service.ArticleService.findRecentArticle(int) ,args = [0]
+[2022-07-27 13:21:47:18963][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/0ea467b2] |   |-->Return:Slice com.myblog.article.repository.ArticleRepository.findByOrderByIdDesc(Pageable) ,args = [Page request [number: 0, size 8, sort: UNSORTED]]
+[2022-07-27 13:21:47:18968][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/0ea467b2] |   |<--Return:Slice com.myblog.article.repository.ArticleRepository.findByOrderByIdDesc(Pageable) time = 5ms
+[2022-07-27 13:21:47:18969][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/0ea467b2] |<--Return:List com.myblog.article.service.ArticleService.findRecentArticle(int) time = 8ms
+[2022-07-27 13:21:47:18970][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/0ea467b2] Return:ResponseEntity com.myblog.article.controller.ArticleApiController.infinityScroll(int) time = 12ms
+[2022-07-27 13:21:47:18971][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - -------------------------------127.0.0.1/0ea467b2's transaction end/12ms-------------------------
+[2022-07-27 13:21:49:21059][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - ------------------------------127.0.0.1/f9f95859's transaction start------------------------------
+[2022-07-27 13:21:49:21059][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/f9f95859] Return:ResponseEntity com.myblog.article.controller.ArticleApiController.infinityScroll(int) ,args = [1]
+[2022-07-27 13:21:49:21060][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/f9f95859] |-->Return:List com.myblog.article.service.ArticleService.findRecentArticle(int) ,args = [1]
+[2022-07-27 13:21:49:21060][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/f9f95859] |   |-->Return:Slice com.myblog.article.repository.ArticleRepository.findByOrderByIdDesc(Pageable) ,args = [Page request [number: 1, size 8, sort: UNSORTED]]
+[2022-07-27 13:21:49:21064][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/f9f95859] |   |<--Return:Slice com.myblog.article.repository.ArticleRepository.findByOrderByIdDesc(Pageable) time = 4ms
+[2022-07-27 13:21:49:21076][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/f9f95859] |<--Return:List com.myblog.article.service.ArticleService.findRecentArticle(int) time = 16ms
+[2022-07-27 13:21:49:21076][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [127.0.0.1/f9f95859] Return:ResponseEntity com.myblog.article.controller.ArticleApiController.infinityScroll(int) time = 17ms
+[2022-07-27 13:21:49:21077][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - -------------------------------127.0.0.1/f9f95859's transaction end/17ms-------------------------
+[2022-07-27 13:32:23:654861][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - ------------------------------51.159.178.181/63628d2b's transaction start------------------------------
+[2022-07-27 13:32:23:654861][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - [51.159.178.181/63628d2b] Return:String com.myblog.article.controller.ArticleController.index(Model) ,args = [{}]
+[2022-07-27 13:32:23:654862][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - [51.159.178.181/63628d2b] |-->Return:List com.myblog.article.service.ArticleService.findPopularArticle() ,args = []
+[2022-07-27 13:32:23:654863][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - [51.159.178.181/63628d2b] |   |-->Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() ,args = []
+[2022-07-27 13:32:23:654867][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - [51.159.178.181/63628d2b] |   |<--Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() time = 4ms
+[2022-07-27 13:32:23:654868][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - [51.159.178.181/63628d2b] |<--Return:List com.myblog.article.service.ArticleService.findPopularArticle() time = 5ms
+[2022-07-27 13:32:23:654868][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - [51.159.178.181/63628d2b] Return:String com.myblog.article.controller.ArticleController.index(Model) time = 7ms
+[2022-07-27 13:32:23:654869][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - -------------------------------51.159.178.181/63628d2b's transaction end/7ms-------------------------
+[2022-07-27 13:32:23:654870][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - ------------------------------51.159.178.181/26df91f5's transaction start------------------------------
+[2022-07-27 13:32:23:654870][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - [51.159.178.181/26df91f5] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() ,args = []
+[2022-07-27 13:32:23:654876][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - [51.159.178.181/26df91f5] |-->Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() ,args = []
+[2022-07-27 13:32:23:654877][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - [51.159.178.181/26df91f5] |<--Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() time = 1ms
+[2022-07-27 13:32:23:654877][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - [51.159.178.181/26df91f5] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() time = 7ms
+[2022-07-27 13:32:23:654878][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - -------------------------------51.159.178.181/26df91f5's transaction end/7ms-------------------------
+[2022-07-27 13:32:23:654878][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - ------------------------------51.159.178.181/05026f87's transaction start------------------------------
+[2022-07-27 13:32:23:654878][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - [51.159.178.181/05026f87] Return:List com.myblog.comment.service.CommentService.findRecentComment() ,args = []
+[2022-07-27 13:32:23:654878][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - [51.159.178.181/05026f87] |-->Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() ,args = []
+[2022-07-27 13:32:23:654880][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - [51.159.178.181/05026f87] |<--Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() time = 2ms
+[2022-07-27 13:32:23:654881][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - [51.159.178.181/05026f87] Return:List com.myblog.comment.service.CommentService.findRecentComment() time = 3ms
+[2022-07-27 13:32:23:654881][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - -------------------------------51.159.178.181/05026f87's transaction end/3ms-------------------------
+[2022-07-27 13:34:25:776708][http-nio-8080-exec-10] INFO  o.a.coyote.http11.Http11Processor - Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x00{0x010x000x00w0x030x030x9eOt0x0c0x0b0xab0xba0xd70x8dJ0xcaPm0xdb0x96C0x12.{`0x96C0xf60x9f0xa8TG0x9d0xe40x8a0xe30xcc0x000x000x1a0xc0/0xc0+0xc00x110xc00x070xc00x130xc00x090xc00x140xc00x0a0x000x050x00/0x0050xc00x120x000x0a0x010x000x0040x000x050x000x050x010x000x000x000x000x000x0a0x000x080x000x060x000x170x000x180x000x190x000x0b0x000x020x010x000x000x0d0x000x100x000x0e0x040x010x040x030x020x010x020x030x040x010x050x010x060x010xff0x010x000x010x00...]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:419)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:271)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:889)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1743)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+[2022-07-27 13:39:05:1056949][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - ------------------------------61.52.152.143/de429b5f's transaction start------------------------------
+[2022-07-27 13:39:05:1056949][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/de429b5f] Return:String com.myblog.article.controller.ArticleController.index(Model) ,args = [{}]
+[2022-07-27 13:39:05:1056950][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/de429b5f] |-->Return:List com.myblog.article.service.ArticleService.findPopularArticle() ,args = []
+[2022-07-27 13:39:05:1056950][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/de429b5f] |   |-->Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() ,args = []
+[2022-07-27 13:39:05:1056952][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/de429b5f] |   |<--Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() time = 2ms
+[2022-07-27 13:39:05:1056952][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/de429b5f] |<--Return:List com.myblog.article.service.ArticleService.findPopularArticle() time = 2ms
+[2022-07-27 13:39:05:1056953][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/de429b5f] Return:String com.myblog.article.controller.ArticleController.index(Model) time = 4ms
+[2022-07-27 13:39:05:1056953][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - -------------------------------61.52.152.143/de429b5f's transaction end/4ms-------------------------
+[2022-07-27 13:39:05:1056954][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - ------------------------------61.52.152.143/fd5c71b0's transaction start------------------------------
+[2022-07-27 13:39:05:1056954][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/fd5c71b0] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() ,args = []
+[2022-07-27 13:39:05:1056958][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/fd5c71b0] |-->Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() ,args = []
+[2022-07-27 13:39:05:1056958][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/fd5c71b0] |<--Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() time = 0ms
+[2022-07-27 13:39:05:1056958][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/fd5c71b0] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() time = 4ms
+[2022-07-27 13:39:05:1056958][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - -------------------------------61.52.152.143/fd5c71b0's transaction end/4ms-------------------------
+[2022-07-27 13:39:05:1056960][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - ------------------------------61.52.152.143/d1de3ea5's transaction start------------------------------
+[2022-07-27 13:39:05:1056960][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/d1de3ea5] Return:List com.myblog.comment.service.CommentService.findRecentComment() ,args = []
+[2022-07-27 13:39:05:1056960][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/d1de3ea5] |-->Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() ,args = []
+[2022-07-27 13:39:05:1056962][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/d1de3ea5] |<--Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() time = 2ms
+[2022-07-27 13:39:05:1056963][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/d1de3ea5] Return:List com.myblog.comment.service.CommentService.findRecentComment() time = 3ms
+[2022-07-27 13:39:05:1056963][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - -------------------------------61.52.152.143/d1de3ea5's transaction end/3ms-------------------------
+[2022-07-27 13:39:06:1057319][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - ------------------------------61.52.152.143/18eb5421's transaction start------------------------------
+[2022-07-27 13:39:06:1057319][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/18eb5421] Return:String com.myblog.article.controller.ArticleController.index(Model) ,args = [{}]
+[2022-07-27 13:39:06:1057320][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/18eb5421] |-->Return:List com.myblog.article.service.ArticleService.findPopularArticle() ,args = []
+[2022-07-27 13:39:06:1057320][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/18eb5421] |   |-->Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() ,args = []
+[2022-07-27 13:39:06:1057322][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/18eb5421] |   |<--Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() time = 2ms
+[2022-07-27 13:39:06:1057322][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/18eb5421] |<--Return:List com.myblog.article.service.ArticleService.findPopularArticle() time = 2ms
+[2022-07-27 13:39:06:1057322][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/18eb5421] Return:String com.myblog.article.controller.ArticleController.index(Model) time = 3ms
+[2022-07-27 13:39:06:1057322][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - -------------------------------61.52.152.143/18eb5421's transaction end/3ms-------------------------
+[2022-07-27 13:39:06:1057323][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - ------------------------------61.52.152.143/b2246dce's transaction start------------------------------
+[2022-07-27 13:39:06:1057323][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/b2246dce] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() ,args = []
+[2022-07-27 13:39:06:1057327][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/b2246dce] |-->Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() ,args = []
+[2022-07-27 13:39:06:1057328][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/b2246dce] |<--Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() time = 1ms
+[2022-07-27 13:39:06:1057328][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/b2246dce] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() time = 5ms
+[2022-07-27 13:39:06:1057328][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - -------------------------------61.52.152.143/b2246dce's transaction end/5ms-------------------------
+[2022-07-27 13:39:06:1057329][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - ------------------------------61.52.152.143/99d35f6e's transaction start------------------------------
+[2022-07-27 13:39:06:1057329][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/99d35f6e] Return:List com.myblog.comment.service.CommentService.findRecentComment() ,args = []
+[2022-07-27 13:39:06:1057329][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/99d35f6e] |-->Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() ,args = []
+[2022-07-27 13:39:06:1057330][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/99d35f6e] |<--Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() time = 1ms
+[2022-07-27 13:39:06:1057332][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/99d35f6e] Return:List com.myblog.comment.service.CommentService.findRecentComment() time = 3ms
+[2022-07-27 13:39:06:1057332][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - -------------------------------61.52.152.143/99d35f6e's transaction end/3ms-------------------------
+[2022-07-27 13:39:11:1062152][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - ------------------------------61.52.152.143/401e95fc's transaction start------------------------------
+[2022-07-27 13:39:11:1062152][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/401e95fc] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() ,args = []
+[2022-07-27 13:39:11:1062156][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/401e95fc] |-->Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() ,args = []
+[2022-07-27 13:39:11:1062157][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/401e95fc] |<--Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() time = 1ms
+[2022-07-27 13:39:11:1062157][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/401e95fc] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() time = 5ms
+[2022-07-27 13:39:11:1062157][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - -------------------------------61.52.152.143/401e95fc's transaction end/5ms-------------------------
+[2022-07-27 13:39:11:1062159][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - ------------------------------61.52.152.143/f1a648e4's transaction start------------------------------
+[2022-07-27 13:39:11:1062159][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/f1a648e4] Return:List com.myblog.comment.service.CommentService.findRecentComment() ,args = []
+[2022-07-27 13:39:11:1062159][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/f1a648e4] |-->Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() ,args = []
+[2022-07-27 13:39:11:1062160][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/f1a648e4] |<--Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() time = 1ms
+[2022-07-27 13:39:11:1062162][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - [61.52.152.143/f1a648e4] Return:List com.myblog.comment.service.CommentService.findRecentComment() time = 3ms
+[2022-07-27 13:39:11:1062162][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - -------------------------------61.52.152.143/f1a648e4's transaction end/3ms-------------------------
+[2022-07-27 14:18:57:3448412][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - ------------------------------163.172.229.185/23279148's transaction start------------------------------
+[2022-07-27 14:18:57:3448413][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [163.172.229.185/23279148] Return:String com.myblog.article.controller.ArticleController.index(Model) ,args = [{}]
+[2022-07-27 14:18:57:3448414][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [163.172.229.185/23279148] |-->Return:List com.myblog.article.service.ArticleService.findPopularArticle() ,args = []
+[2022-07-27 14:18:57:3448414][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [163.172.229.185/23279148] |   |-->Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() ,args = []
+[2022-07-27 14:18:57:3448417][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [163.172.229.185/23279148] |   |<--Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() time = 3ms
+[2022-07-27 14:18:57:3448417][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [163.172.229.185/23279148] |<--Return:List com.myblog.article.service.ArticleService.findPopularArticle() time = 3ms
+[2022-07-27 14:18:57:3448418][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [163.172.229.185/23279148] Return:String com.myblog.article.controller.ArticleController.index(Model) time = 6ms
+[2022-07-27 14:18:57:3448418][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - -------------------------------163.172.229.185/23279148's transaction end/6ms-------------------------
+[2022-07-27 14:18:57:3448419][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - ------------------------------163.172.229.185/99d08488's transaction start------------------------------
+[2022-07-27 14:18:57:3448419][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [163.172.229.185/99d08488] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() ,args = []
+[2022-07-27 14:18:57:3448425][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [163.172.229.185/99d08488] |-->Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() ,args = []
+[2022-07-27 14:18:57:3448426][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [163.172.229.185/99d08488] |<--Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() time = 1ms
+[2022-07-27 14:18:57:3448426][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [163.172.229.185/99d08488] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() time = 7ms
+[2022-07-27 14:18:57:3448426][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - -------------------------------163.172.229.185/99d08488's transaction end/7ms-------------------------
+[2022-07-27 14:18:57:3448427][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - ------------------------------163.172.229.185/74a880c9's transaction start------------------------------
+[2022-07-27 14:18:57:3448427][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [163.172.229.185/74a880c9] Return:List com.myblog.comment.service.CommentService.findRecentComment() ,args = []
+[2022-07-27 14:18:57:3448427][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [163.172.229.185/74a880c9] |-->Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() ,args = []
+[2022-07-27 14:18:57:3448429][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [163.172.229.185/74a880c9] |<--Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() time = 2ms
+[2022-07-27 14:18:57:3448430][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [163.172.229.185/74a880c9] Return:List com.myblog.comment.service.CommentService.findRecentComment() time = 3ms
+[2022-07-27 14:18:57:3448431][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - -------------------------------163.172.229.185/74a880c9's transaction end/3ms-------------------------
+[2022-07-27 15:46:50:8721147][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - ------------------------------46.174.191.32/04cae997's transaction start------------------------------
+[2022-07-27 15:46:50:8721148][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - [46.174.191.32/04cae997] Return:String com.myblog.article.controller.ArticleController.index(Model) ,args = [{}]
+[2022-07-27 15:46:50:8721149][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - [46.174.191.32/04cae997] |-->Return:List com.myblog.article.service.ArticleService.findPopularArticle() ,args = []
+[2022-07-27 15:46:50:8721149][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - [46.174.191.32/04cae997] |   |-->Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() ,args = []
+[2022-07-27 15:46:50:8721151][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - [46.174.191.32/04cae997] |   |<--Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() time = 2ms
+[2022-07-27 15:46:50:8721151][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - [46.174.191.32/04cae997] |<--Return:List com.myblog.article.service.ArticleService.findPopularArticle() time = 2ms
+[2022-07-27 15:46:50:8721152][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - [46.174.191.32/04cae997] Return:String com.myblog.article.controller.ArticleController.index(Model) time = 5ms
+[2022-07-27 15:46:50:8721152][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - -------------------------------46.174.191.32/04cae997's transaction end/5ms-------------------------
+[2022-07-27 15:46:50:8721153][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - ------------------------------46.174.191.32/f58e31d5's transaction start------------------------------
+[2022-07-27 15:46:50:8721153][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - [46.174.191.32/f58e31d5] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() ,args = []
+[2022-07-27 15:46:50:8721157][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - [46.174.191.32/f58e31d5] |-->Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() ,args = []
+[2022-07-27 15:46:50:8721158][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - [46.174.191.32/f58e31d5] |<--Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() time = 1ms
+[2022-07-27 15:46:50:8721158][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - [46.174.191.32/f58e31d5] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() time = 5ms
+[2022-07-27 15:46:50:8721158][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - -------------------------------46.174.191.32/f58e31d5's transaction end/5ms-------------------------
+[2022-07-27 15:46:50:8721159][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - ------------------------------46.174.191.32/303042d0's transaction start------------------------------
+[2022-07-27 15:46:50:8721159][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - [46.174.191.32/303042d0] Return:List com.myblog.comment.service.CommentService.findRecentComment() ,args = []
+[2022-07-27 15:46:50:8721159][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - [46.174.191.32/303042d0] |-->Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() ,args = []
+[2022-07-27 15:46:50:8721160][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - [46.174.191.32/303042d0] |<--Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() time = 1ms
+[2022-07-27 15:46:50:8721162][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - [46.174.191.32/303042d0] Return:List com.myblog.comment.service.CommentService.findRecentComment() time = 3ms
+[2022-07-27 15:46:50:8721162][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - -------------------------------46.174.191.32/303042d0's transaction end/3ms-------------------------
+[2022-07-27 17:32:06:15037381][SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+[2022-07-27 17:32:06:15037384][SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+[2022-07-27 17:32:06:15037388][SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+[2022-07-27 17:55:31:927][background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.3.Final
+[2022-07-27 17:55:31:927][restartedMain] INFO  com.myblog.MyblogApplication - Starting MyblogApplication using Java 11.0.13 on DESKTOP-P1F89EE with PID 13540 (C:\tools\spring\project\myblog\build\classes\java\main started by joddo in C:\tools\spring\project\myblog)
+[2022-07-27 17:55:31:930][restartedMain] INFO  com.myblog.MyblogApplication - The following 7 profiles are active: "db", "oauth", "aws", "git", "sentry", "key", "local"
+[2022-07-27 17:55:31:973][restartedMain] WARN  o.s.b.c.c.ConfigDataEnvironment - Property 'spring.profiles' imported from location 'class path resource [application-db.yml]' is invalid and should be replaced with 'spring.config.activate.on-profile' [origin: class path resource [application-db.yml] - 65:13]
+[2022-07-27 17:55:31:973][restartedMain] WARN  o.s.b.c.c.ConfigDataEnvironment - Property 'spring.profiles' imported from location 'class path resource [application-db.yml]' is invalid and should be replaced with 'spring.config.activate.on-profile' [origin: class path resource [application-db.yml] - 43:13]
+[2022-07-27 17:55:31:973][restartedMain] WARN  o.s.b.c.c.ConfigDataEnvironment - Property 'spring.profiles' imported from location 'class path resource [application-db.yml]' is invalid and should be replaced with 'spring.config.activate.on-profile' [origin: class path resource [application-db.yml] - 22:13]
+[2022-07-27 17:55:31:973][restartedMain] WARN  o.s.b.c.c.ConfigDataEnvironment - Property 'spring.profiles' imported from location 'class path resource [application-db.yml]' is invalid and should be replaced with 'spring.config.activate.on-profile' [origin: class path resource [application-db.yml] - 2:13]
+[2022-07-27 17:55:31:975][restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[2022-07-27 17:55:31:975][restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[2022-07-27 17:55:32:1992][restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2022-07-27 17:55:32:2122][restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 121 ms. Found 7 JPA repository interfaces.
+[2022-07-27 17:55:33:2584][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'io.sentry.spring.tracing.SentryAdviceConfiguration' of type [io.sentry.spring.tracing.SentryAdviceConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:55:33:2590][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'io.sentry.spring.tracing.SentrySpanPointcutConfiguration' of type [io.sentry.spring.tracing.SentrySpanPointcutConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:55:33:2592][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentrySpanPointcut' of type [org.springframework.aop.support.ComposablePointcut] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:55:33:2594][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'io.sentry.spring.boot.SentryAutoConfiguration$HubConfiguration' of type [io.sentry.spring.boot.SentryAutoConfiguration$HubConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:55:33:2601][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'io.sentry.spring.boot.SentryAutoConfiguration$HubConfiguration$ContextTagsEventProcessorConfiguration' of type [io.sentry.spring.boot.SentryAutoConfiguration$HubConfiguration$ContextTagsEventProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:55:34:3664][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentry-io.sentry.spring.boot.SentryProperties' of type [io.sentry.spring.boot.SentryProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:55:34:3681][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'contextTagsEventProcessor' of type [io.sentry.spring.ContextTagsEventProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:55:34:3685][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'inAppPackagesResolver' of type [io.sentry.spring.boot.InAppIncludesResolver] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:55:34:3688][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentryOptionsConfiguration' of type [io.sentry.spring.boot.SentryAutoConfiguration$HubConfiguration$$Lambda$600/0x0000000800556c40] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:55:34:3695][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'myblogApplication' of type [com.myblog.MyblogApplication$$EnhancerBySpringCGLIB$$6b582c03] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:55:34:3715][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentryHub' of type [io.sentry.HubAdapter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:55:34:3725][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentrySpanAdvice' of type [io.sentry.spring.tracing.SentrySpanAdvice] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:55:34:3726][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentrySpanAdvisor' of type [org.springframework.aop.support.DefaultPointcutAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:55:34:3726][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'io.sentry.spring.tracing.SentryTransactionPointcutConfiguration' of type [io.sentry.spring.tracing.SentryTransactionPointcutConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:55:34:3727][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentryTransactionPointcut' of type [org.springframework.aop.support.ComposablePointcut] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:55:34:3728][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentryTransactionAdvice' of type [io.sentry.spring.tracing.SentryTransactionAdvice] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:55:34:3729][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentryTransactionAdvisor' of type [org.springframework.aop.support.DefaultPointcutAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:55:35:4130][restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+[2022-07-27 17:55:35:4139][restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+[2022-07-27 17:55:35:4139][restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+[2022-07-27 17:55:35:4139][restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.60]
+[2022-07-27 17:55:35:4288][restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+[2022-07-27 17:55:35:4289][restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3314 ms
+[2022-07-27 17:55:35:4349][restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+[2022-07-27 17:55:35:4471][restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+[2022-07-27 17:55:35:4480][restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/myblog?allowPublicKeyRetrieval=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&cacheDefaultTimezone=false'
+[2022-07-27 17:55:35:4652][restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+[2022-07-27 17:55:35:4700][restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.7.Final
+[2022-07-27 17:55:35:4839][restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+[2022-07-27 17:55:35:4951][restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+[2022-07-27 17:55:36:5777][restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[2022-07-27 17:55:36:5786][restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+[2022-07-27 17:55:37:7117][restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[2022-07-27 17:55:38:7311][restartedMain] WARN  o.s.s.c.a.web.builders.WebSecurity - You are asking Spring Security to ignore org.springframework.boot.autoconfigure.security.servlet.StaticResourceRequest$StaticResourceRequestMatcher@31ab9532. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+[2022-07-27 17:55:38:7312][restartedMain] INFO  o.s.s.w.DefaultSecurityFilterChain - Will secure org.springframework.boot.autoconfigure.security.servlet.StaticResourceRequest$StaticResourceRequestMatcher@31ab9532 with []
+[2022-07-27 17:55:38:7427][restartedMain] INFO  o.s.s.w.DefaultSecurityFilterChain - Will not secure any request
+[2022-07-27 17:55:38:7799][restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+[2022-07-27 17:55:39:8179][restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+[2022-07-27 17:55:39:8205][restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+[2022-07-27 17:55:39:8225][restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+[2022-07-27 17:55:39:8236][restartedMain] INFO  com.myblog.MyblogApplication - Started MyblogApplication in 7.816 seconds (JVM running for 9.605)
+[2022-07-27 17:55:40:9847][http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[2022-07-27 17:55:40:9848][http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+[2022-07-27 17:55:40:9849][http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+[2022-07-27 17:55:40:9908][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - ------------------------------0:0:0:0:0:0:0:1/955c71ac's transaction start------------------------------
+[2022-07-27 17:55:40:9909][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/955c71ac] Return:String com.myblog.article.controller.ArticleController.index(Model) ,args = [{}]
+[2022-07-27 17:55:40:9922][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/955c71ac] |-->Return:List com.myblog.article.service.ArticleService.findPopularArticle() ,args = []
+[2022-07-27 17:55:40:9925][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/955c71ac] |   |-->Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() ,args = []
+[2022-07-27 17:55:40:9982][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/955c71ac] |   |<--Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() time = 57ms
+[2022-07-27 17:55:40:9983][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/955c71ac] |<--Return:List com.myblog.article.service.ArticleService.findPopularArticle() time = 62ms
+[2022-07-27 17:55:40:9984][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/955c71ac] Return:String com.myblog.article.controller.ArticleController.index(Model) time = 76ms
+[2022-07-27 17:55:40:9988][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - -------------------------------0:0:0:0:0:0:0:1/955c71ac's transaction end/76ms-------------------------
+[2022-07-27 17:55:40:9993][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - ------------------------------0:0:0:0:0:0:0:1/52f93abf's transaction start------------------------------
+[2022-07-27 17:55:40:9994][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/52f93abf] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() ,args = []
+[2022-07-27 17:55:40:10021][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/52f93abf] |-->Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() ,args = []
+[2022-07-27 17:55:40:10025][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/52f93abf] |<--Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() time = 4ms
+[2022-07-27 17:55:40:10026][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/52f93abf] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() time = 33ms
+[2022-07-27 17:55:40:10026][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - -------------------------------0:0:0:0:0:0:0:1/52f93abf's transaction end/33ms-------------------------
+[2022-07-27 17:55:40:10027][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - ------------------------------0:0:0:0:0:0:0:1/90889587's transaction start------------------------------
+[2022-07-27 17:55:40:10027][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/90889587] Return:List com.myblog.comment.service.CommentService.findRecentComment() ,args = []
+[2022-07-27 17:55:40:10029][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/90889587] |-->Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() ,args = []
+[2022-07-27 17:55:40:10034][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/90889587] |<--Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() time = 5ms
+[2022-07-27 17:55:40:10038][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/90889587] Return:List com.myblog.comment.service.CommentService.findRecentComment() time = 11ms
+[2022-07-27 17:55:40:10038][http-nio-8080-exec-1] INFO  com.myblog.common.log.LogTracer - -------------------------------0:0:0:0:0:0:0:1/90889587's transaction end/11ms-------------------------
+[2022-07-27 17:55:48:17558][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - ------------------------------0:0:0:0:0:0:0:1/05d61575's transaction start------------------------------
+[2022-07-27 17:55:48:17559][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/05d61575] Return:String com.myblog.article.controller.ArticleController.index(Model) ,args = [{}]
+[2022-07-27 17:55:48:17560][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/05d61575] |-->Return:List com.myblog.article.service.ArticleService.findPopularArticle() ,args = []
+[2022-07-27 17:55:48:17560][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/05d61575] |   |-->Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() ,args = []
+[2022-07-27 17:55:48:17564][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/05d61575] |   |<--Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() time = 4ms
+[2022-07-27 17:55:48:17564][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/05d61575] |<--Return:List com.myblog.article.service.ArticleService.findPopularArticle() time = 4ms
+[2022-07-27 17:55:48:17565][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/05d61575] Return:String com.myblog.article.controller.ArticleController.index(Model) time = 7ms
+[2022-07-27 17:55:48:17565][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - -------------------------------0:0:0:0:0:0:0:1/05d61575's transaction end/7ms-------------------------
+[2022-07-27 17:55:48:17565][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - ------------------------------0:0:0:0:0:0:0:1/28295448's transaction start------------------------------
+[2022-07-27 17:55:48:17565][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/28295448] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() ,args = []
+[2022-07-27 17:55:48:17572][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/28295448] |-->Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() ,args = []
+[2022-07-27 17:55:48:17574][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/28295448] |<--Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() time = 2ms
+[2022-07-27 17:55:48:17574][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/28295448] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() time = 9ms
+[2022-07-27 17:55:48:17574][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - -------------------------------0:0:0:0:0:0:0:1/28295448's transaction end/9ms-------------------------
+[2022-07-27 17:55:48:17575][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - ------------------------------0:0:0:0:0:0:0:1/aa4bd391's transaction start------------------------------
+[2022-07-27 17:55:48:17575][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/aa4bd391] Return:List com.myblog.comment.service.CommentService.findRecentComment() ,args = []
+[2022-07-27 17:55:48:17575][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/aa4bd391] |-->Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() ,args = []
+[2022-07-27 17:55:48:17577][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/aa4bd391] |<--Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() time = 2ms
+[2022-07-27 17:55:48:17579][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/aa4bd391] Return:List com.myblog.comment.service.CommentService.findRecentComment() time = 4ms
+[2022-07-27 17:55:48:17579][http-nio-8080-exec-10] INFO  com.myblog.common.log.LogTracer - -------------------------------0:0:0:0:0:0:0:1/aa4bd391's transaction end/4ms-------------------------
+[2022-07-27 17:55:50:19249][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - ------------------------------0:0:0:0:0:0:0:1/d0e9835c's transaction start------------------------------
+[2022-07-27 17:55:50:19250][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/d0e9835c] Return:String com.myblog.member.controller.MemberController.login() ,args = []
+[2022-07-27 17:55:50:19252][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/d0e9835c] Return:String com.myblog.member.controller.MemberController.login() time = 3ms
+[2022-07-27 17:55:50:19252][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - -------------------------------0:0:0:0:0:0:0:1/d0e9835c's transaction end/3ms-------------------------
+[2022-07-27 17:55:50:19253][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - ------------------------------0:0:0:0:0:0:0:1/2ec77cb4's transaction start------------------------------
+[2022-07-27 17:55:50:19253][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/2ec77cb4] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() ,args = []
+[2022-07-27 17:55:50:19259][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/2ec77cb4] |-->Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() ,args = []
+[2022-07-27 17:55:50:19261][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/2ec77cb4] |<--Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() time = 2ms
+[2022-07-27 17:55:50:19261][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/2ec77cb4] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() time = 8ms
+[2022-07-27 17:55:50:19261][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - -------------------------------0:0:0:0:0:0:0:1/2ec77cb4's transaction end/8ms-------------------------
+[2022-07-27 17:55:50:19262][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - ------------------------------0:0:0:0:0:0:0:1/d530e1bc's transaction start------------------------------
+[2022-07-27 17:55:50:19262][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/d530e1bc] Return:List com.myblog.comment.service.CommentService.findRecentComment() ,args = []
+[2022-07-27 17:55:50:19262][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/d530e1bc] |-->Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() ,args = []
+[2022-07-27 17:55:50:19265][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/d530e1bc] |<--Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() time = 3ms
+[2022-07-27 17:55:50:19267][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/d530e1bc] Return:List com.myblog.comment.service.CommentService.findRecentComment() time = 5ms
+[2022-07-27 17:55:50:19267][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - -------------------------------0:0:0:0:0:0:0:1/d530e1bc's transaction end/5ms-------------------------
+[2022-07-27 17:55:51:20751][http-nio-8080-exec-8] WARN  o.a.c.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [405] milliseconds.
+[2022-07-27 17:55:54:23416][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - ------------------------------0:0:0:0:0:0:0:1/4ba59570's transaction start------------------------------
+[2022-07-27 17:55:54:23416][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/4ba59570] Return:OAuth2User com.myblog.security.oauth2.service.Oauth2MemberService.loadUser(OAuth2UserRequest) ,args = [org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest@6fb0713]
+[2022-07-27 17:55:54:23537][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/4ba59570] |-->Return:Optional com.myblog.member.repository.MemberRepository.findByEmail(String) ,args = [jyh4358@gmail.com]
+[2022-07-27 17:55:54:23547][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/4ba59570] |<--Return:Optional com.myblog.member.repository.MemberRepository.findByEmail(String) time = 10ms
+[2022-07-27 17:55:54:23548][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/4ba59570] Return:OAuth2User com.myblog.security.oauth2.service.Oauth2MemberService.loadUser(OAuth2UserRequest) time = 132ms
+[2022-07-27 17:55:54:23548][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - -------------------------------0:0:0:0:0:0:0:1/4ba59570's transaction end/132ms-------------------------
+[2022-07-27 17:55:54:23568][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - ------------------------------0:0:0:0:0:0:0:1/e3178785's transaction start------------------------------
+[2022-07-27 17:55:54:23568][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/e3178785] Return:String com.myblog.article.controller.ArticleController.index(Model) ,args = [{}]
+[2022-07-27 17:55:54:23569][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/e3178785] |-->Return:List com.myblog.article.service.ArticleService.findPopularArticle() ,args = []
+[2022-07-27 17:55:54:23570][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/e3178785] |   |-->Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() ,args = []
+[2022-07-27 17:55:54:23573][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/e3178785] |   |<--Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() time = 3ms
+[2022-07-27 17:55:54:23574][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/e3178785] |<--Return:List com.myblog.article.service.ArticleService.findPopularArticle() time = 5ms
+[2022-07-27 17:55:54:23574][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/e3178785] Return:String com.myblog.article.controller.ArticleController.index(Model) time = 6ms
+[2022-07-27 17:55:54:23574][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - -------------------------------0:0:0:0:0:0:0:1/e3178785's transaction end/6ms-------------------------
+[2022-07-27 17:55:54:23575][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - ------------------------------0:0:0:0:0:0:0:1/574fc4f8's transaction start------------------------------
+[2022-07-27 17:55:54:23575][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/574fc4f8] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() ,args = []
+[2022-07-27 17:55:54:23581][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/574fc4f8] |-->Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() ,args = []
+[2022-07-27 17:55:54:23582][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/574fc4f8] |<--Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() time = 1ms
+[2022-07-27 17:55:54:23582][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/574fc4f8] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() time = 7ms
+[2022-07-27 17:55:54:23582][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - -------------------------------0:0:0:0:0:0:0:1/574fc4f8's transaction end/7ms-------------------------
+[2022-07-27 17:55:54:23583][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - ------------------------------0:0:0:0:0:0:0:1/58359258's transaction start------------------------------
+[2022-07-27 17:55:54:23584][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/58359258] Return:List com.myblog.comment.service.CommentService.findRecentComment() ,args = []
+[2022-07-27 17:55:54:23584][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/58359258] |-->Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() ,args = []
+[2022-07-27 17:55:54:23586][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/58359258] |<--Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() time = 2ms
+[2022-07-27 17:55:54:23587][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/58359258] Return:List com.myblog.comment.service.CommentService.findRecentComment() time = 4ms
+[2022-07-27 17:55:54:23588][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - -------------------------------0:0:0:0:0:0:0:1/58359258's transaction end/4ms-------------------------
+[2022-07-27 17:55:56:26107][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - ------------------------------0:0:0:0:0:0:0:1/35939f12's transaction start------------------------------
+[2022-07-27 17:55:56:26107][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/35939f12] Return:String com.myblog.article.controller.ArticleController.adminSearchArticle(Pageable,String,CustomOauth2User,Model) ,args = [Page request [number: 0, size 8, sort: id: DESC], ALL, Name: [조윤호#11371], Granted Authorities: [[ROLE_ADMIN]], User Attributes: [{sub=113717757792959427807, name=조윤호, given_name=윤호, family_name=조, picture=https://lh3.googleusercontent.com/a/AItbvmlXvi2HpSqlOdZ-DWXD7w4_tUOYylsBDhUIyP4Z=s96-c, email=jyh4358@gmail.com, email_verified=true, locale=ko}], {}]
+[2022-07-27 17:55:56:26109][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/35939f12] |-->Return:Page com.myblog.article.service.ArticleService.findArticleByCategory(String,Pageable) ,args = [ALL, Page request [number: 0, size 8, sort: id: DESC]]
+[2022-07-27 17:55:56:26111][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/35939f12] |   |-->Return:Page org.springframework.data.repository.PagingAndSortingRepository.findAll(Pageable) ,args = [Page request [number: 0, size 8, sort: id: DESC]]
+[2022-07-27 17:55:56:26121][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/35939f12] |   |<--Return:Page org.springframework.data.repository.PagingAndSortingRepository.findAll(Pageable) time = 10ms
+[2022-07-27 17:55:57:26213][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/35939f12] |<--Return:Page com.myblog.article.service.ArticleService.findArticleByCategory(String,Pageable) time = 104ms
+[2022-07-27 17:55:57:26217][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/35939f12] Return:String com.myblog.article.controller.ArticleController.adminSearchArticle(Pageable,String,CustomOauth2User,Model) time = 110ms
+[2022-07-27 17:55:57:26217][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - -------------------------------0:0:0:0:0:0:0:1/35939f12's transaction end/110ms-------------------------
+[2022-07-27 17:56:00:29710][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - ------------------------------0:0:0:0:0:0:0:1/ef65f04f's transaction start------------------------------
+[2022-07-27 17:56:00:29710][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/ef65f04f] Return:String com.myblog.category.controller.CategoryController.categoryList(Model) ,args = [{}]
+[2022-07-27 17:56:00:29713][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/ef65f04f] |-->Return:CategoryListDto com.myblog.category.service.CategoryService.findCategories() ,args = []
+[2022-07-27 17:56:00:29717][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/ef65f04f] |<--Return:CategoryListDto com.myblog.category.service.CategoryService.findCategories() time = 4ms
+[2022-07-27 17:56:00:29718][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/ef65f04f] Return:String com.myblog.category.controller.CategoryController.categoryList(Model) time = 8ms
+[2022-07-27 17:56:00:29718][http-nio-8080-exec-8] INFO  com.myblog.common.log.LogTracer - -------------------------------0:0:0:0:0:0:0:1/ef65f04f's transaction end/8ms-------------------------
+[2022-07-27 17:56:06:35703][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - ------------------------------0:0:0:0:0:0:0:1/79e1922a's transaction start------------------------------
+[2022-07-27 17:56:06:35703][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/79e1922a] Return:ResponseEntity com.myblog.category.controller.CategoryController.editCategory(CategoryListDto,CustomOauth2User) ,args = [CategoryListDto(parentCategoryLists=[ParentCategoryList(id=1, parentCategory=웹 개발, childCategoryLists=[ChildCategoryList(id=2, childCategory=Spring, deleteCheck=false, count=0), ChildCategoryList(id=3, childCategory=JPA, deleteCheck=false, count=0), ChildCategoryList(id=4, childCategory=QueryDSL, deleteCheck=false, count=0)], deleteCheck=false, count=0), ParentCategoryList(id=5, parentCategory=언어, childCategoryLists=[ChildCategoryList(id=6, childCategory=Java, deleteCheck=false, count=0), ChildCategoryList(id=7, childCategory=Javascript, deleteCheck=false, count=0)], deleteCheck=false, count=0), ParentCategoryList(id=8, parentCategory=알고리즘, childCategoryLists=[ChildCategoryList(id=9, childCategory=programmers 문제 풀이, deleteCheck=false, count=0)], deleteCheck=false, count=0), ParentCategoryList(id=10, parentCategory=에러 노트, childCategoryLists=[ChildCategoryList(id=null, childCategory=오브젝트 - 코드로 이해하는 객체지향 설계, deleteCheck=false, count=0)], deleteCheck=false, count=0)], totalCount=0), Name: [조윤호#11371], Granted Authorities: [[ROLE_ADMIN]], User Attributes: [{sub=113717757792959427807, name=조윤호, given_name=윤호, family_name=조, picture=https://lh3.googleusercontent.com/a/AItbvmlXvi2HpSqlOdZ-DWXD7w4_tUOYylsBDhUIyP4Z=s96-c, email=jyh4358@gmail.com, email_verified=true, locale=ko}]]
+[2022-07-27 17:56:06:35705][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/79e1922a] |-->Return:void com.myblog.category.service.CategoryService.editCategory(CategoryListDto,CustomOauth2User) ,args = [CategoryListDto(parentCategoryLists=[ParentCategoryList(id=1, parentCategory=웹 개발, childCategoryLists=[ChildCategoryList(id=2, childCategory=Spring, deleteCheck=false, count=0), ChildCategoryList(id=3, childCategory=JPA, deleteCheck=false, count=0), ChildCategoryList(id=4, childCategory=QueryDSL, deleteCheck=false, count=0)], deleteCheck=false, count=0), ParentCategoryList(id=5, parentCategory=언어, childCategoryLists=[ChildCategoryList(id=6, childCategory=Java, deleteCheck=false, count=0), ChildCategoryList(id=7, childCategory=Javascript, deleteCheck=false, count=0)], deleteCheck=false, count=0), ParentCategoryList(id=8, parentCategory=알고리즘, childCategoryLists=[ChildCategoryList(id=9, childCategory=programmers 문제 풀이, deleteCheck=false, count=0)], deleteCheck=false, count=0), ParentCategoryList(id=10, parentCategory=에러 노트, childCategoryLists=[ChildCategoryList(id=null, childCategory=오브젝트 - 코드로 이해하는 객체지향 설계, deleteCheck=false, count=0)], deleteCheck=false, count=0)], totalCount=0), Name: [조윤호#11371], Granted Authorities: [[ROLE_ADMIN]], User Attributes: [{sub=113717757792959427807, name=조윤호, given_name=윤호, family_name=조, picture=https://lh3.googleusercontent.com/a/AItbvmlXvi2HpSqlOdZ-DWXD7w4_tUOYylsBDhUIyP4Z=s96-c, email=jyh4358@gmail.com, email_verified=true, locale=ko}]]
+[2022-07-27 17:56:06:35712][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/79e1922a] |   |-->Return:Object org.springframework.data.repository.CrudRepository.save(Object) ,args = [com.myblog.category.model.Category@476ea8d]
+[2022-07-27 17:56:06:35773][http-nio-8080-exec-3] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Error: 1406, SQLState: 22001
+[2022-07-27 17:56:06:35773][http-nio-8080-exec-3] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - Data truncation: Data too long for column 'title' at row 1
+[2022-07-27 17:56:06:35788][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/79e1922a] |   |<X- Return:Object org.springframework.data.repository.CrudRepository.save(Object) time = 76ms ex=org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; nested exception is org.hibernate.exception.DataException: could not execute statement
+[2022-07-27 17:56:06:35791][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/79e1922a] |<X- Return:void com.myblog.category.service.CategoryService.editCategory(CategoryListDto,CustomOauth2User) time = 86ms ex=org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; nested exception is org.hibernate.exception.DataException: could not execute statement
+[2022-07-27 17:56:06:35793][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/79e1922a]  Return:ResponseEntity com.myblog.category.controller.CategoryController.editCategory(CategoryListDto,CustomOauth2User) time = 90ms ex=org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; nested exception is org.hibernate.exception.DataException: could not execute statement
+[2022-07-27 17:56:06:35794][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - -------------------------------0:0:0:0:0:0:0:1/79e1922a's transaction end/90ms-------------------------
+[2022-07-27 17:56:06:35805][http-nio-8080-exec-3] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; nested exception is org.hibernate.exception.DataException: could not execute statement] with root cause
+com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Data too long for column 'title' at row 1
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:104)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:953)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1098)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1046)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1371)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:1031)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:197)
+	at org.hibernate.dialect.identity.GetGeneratedKeysDelegate.executeAndExtract(GetGeneratedKeysDelegate.java:58)
+	at org.hibernate.id.insert.AbstractReturningDelegate.performInsert(AbstractReturningDelegate.java:43)
+	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:3279)
+	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:3885)
+	at org.hibernate.action.internal.EntityIdentityInsertAction.execute(EntityIdentityInsertAction.java:84)
+	at org.hibernate.engine.spi.ActionQueue.execute(ActionQueue.java:645)
+	at org.hibernate.engine.spi.ActionQueue.addResolvedEntityInsertAction(ActionQueue.java:282)
+	at org.hibernate.engine.spi.ActionQueue.addInsertAction(ActionQueue.java:263)
+	at org.hibernate.engine.spi.ActionQueue.addAction(ActionQueue.java:317)
+	at org.hibernate.event.internal.AbstractSaveEventListener.addInsertAction(AbstractSaveEventListener.java:330)
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSaveOrReplicate(AbstractSaveEventListener.java:287)
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSave(AbstractSaveEventListener.java:193)
+	at org.hibernate.event.internal.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:123)
+	at org.hibernate.event.internal.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:185)
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:128)
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:55)
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:107)
+	at org.hibernate.internal.SessionImpl.firePersist(SessionImpl.java:756)
+	at org.hibernate.internal.SessionImpl.persist(SessionImpl.java:742)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.orm.jpa.ExtendedEntityManagerCreator$ExtendedEntityManagerInvocationHandler.invoke(ExtendedEntityManagerCreator.java:362)
+	at com.sun.proxy.$Proxy141.persist(Unknown Source)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:311)
+	at com.sun.proxy.$Proxy141.persist(Unknown Source)
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.save(SimpleJpaRepository.java:637)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:289)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:137)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:121)
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:529)
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:285)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:639)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:163)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:138)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:80)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:388)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:174)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:215)
+	at com.sun.proxy.$Proxy148.save(Unknown Source)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:344)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:89)
+	at com.myblog.common.log.LogAspect.doLog(LogAspect.java:27)
+	at jdk.internal.reflect.GeneratedMethodAccessor119.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:634)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:624)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:72)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:215)
+	at com.sun.proxy.$Proxy148.save(Unknown Source)
+	at com.myblog.category.service.CategoryService.lambda$createNewCategory$7(CategoryService.java:120)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at com.myblog.category.service.CategoryService.createNewCategory(CategoryService.java:119)
+	at com.myblog.category.service.CategoryService.editCategory(CategoryService.java:48)
+	at com.myblog.category.service.CategoryService$$FastClassBySpringCGLIB$$62e020c1.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:783)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:89)
+	at com.myblog.common.log.LogAspect.doLog(LogAspect.java:27)
+	at jdk.internal.reflect.GeneratedMethodAccessor119.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:634)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:624)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:72)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:388)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:698)
+	at com.myblog.category.service.CategoryService$$EnhancerBySpringCGLIB$$918b1044.editCategory(<generated>)
+	at com.myblog.category.controller.CategoryController.editCategory(CategoryController.java:41)
+	at com.myblog.category.controller.CategoryController$$FastClassBySpringCGLIB$$dc642aef.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:783)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:89)
+	at com.myblog.common.log.LogAspect.doLog(LogAspect.java:27)
+	at jdk.internal.reflect.GeneratedMethodAccessor119.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:634)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:624)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:72)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:698)
+	at com.myblog.category.controller.CategoryController$$EnhancerBySpringCGLIB$$e81748b.editCategory(<generated>)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1067)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at io.sentry.spring.SentryUserFilter.doFilterInternal(SentryUserFilter.java:56)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:327)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:122)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:109)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:219)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:213)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter.doFilterInternal(OAuth2AuthorizationRequestRedirectFilter.java:178)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.csrf.CsrfFilter.doFilterInternal(CsrfFilter.java:132)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:110)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:80)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at io.sentry.spring.tracing.SentryTracingFilter.doFilterInternal(SentryTracingFilter.java:77)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at io.sentry.spring.SentrySpringFilter.doFilterInternal(SentrySpringFilter.java:71)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:889)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1743)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+[2022-07-27 17:56:32:61280][SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+[2022-07-27 17:56:32:61283][SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+[2022-07-27 17:56:32:61290][SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+[2022-07-27 17:56:41:827][background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.3.Final
+[2022-07-27 17:56:41:827][restartedMain] INFO  com.myblog.MyblogApplication - Starting MyblogApplication using Java 11.0.13 on DESKTOP-P1F89EE with PID 25452 (C:\tools\spring\project\myblog\build\classes\java\main started by joddo in C:\tools\spring\project\myblog)
+[2022-07-27 17:56:41:830][restartedMain] INFO  com.myblog.MyblogApplication - The following 7 profiles are active: "db", "oauth", "aws", "git", "sentry", "key", "local"
+[2022-07-27 17:56:41:868][restartedMain] WARN  o.s.b.c.c.ConfigDataEnvironment - Property 'spring.profiles' imported from location 'class path resource [application-db.yml]' is invalid and should be replaced with 'spring.config.activate.on-profile' [origin: class path resource [application-db.yml] - 65:13]
+[2022-07-27 17:56:41:868][restartedMain] WARN  o.s.b.c.c.ConfigDataEnvironment - Property 'spring.profiles' imported from location 'class path resource [application-db.yml]' is invalid and should be replaced with 'spring.config.activate.on-profile' [origin: class path resource [application-db.yml] - 43:13]
+[2022-07-27 17:56:41:868][restartedMain] WARN  o.s.b.c.c.ConfigDataEnvironment - Property 'spring.profiles' imported from location 'class path resource [application-db.yml]' is invalid and should be replaced with 'spring.config.activate.on-profile' [origin: class path resource [application-db.yml] - 22:13]
+[2022-07-27 17:56:41:868][restartedMain] WARN  o.s.b.c.c.ConfigDataEnvironment - Property 'spring.profiles' imported from location 'class path resource [application-db.yml]' is invalid and should be replaced with 'spring.config.activate.on-profile' [origin: class path resource [application-db.yml] - 2:13]
+[2022-07-27 17:56:41:869][restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[2022-07-27 17:56:41:870][restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[2022-07-27 17:56:42:1774][restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2022-07-27 17:56:42:1896][restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 114 ms. Found 7 JPA repository interfaces.
+[2022-07-27 17:56:42:2334][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'io.sentry.spring.tracing.SentryAdviceConfiguration' of type [io.sentry.spring.tracing.SentryAdviceConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:56:42:2340][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'io.sentry.spring.tracing.SentrySpanPointcutConfiguration' of type [io.sentry.spring.tracing.SentrySpanPointcutConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:56:42:2343][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentrySpanPointcut' of type [org.springframework.aop.support.ComposablePointcut] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:56:42:2344][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'io.sentry.spring.boot.SentryAutoConfiguration$HubConfiguration' of type [io.sentry.spring.boot.SentryAutoConfiguration$HubConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:56:42:2350][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'io.sentry.spring.boot.SentryAutoConfiguration$HubConfiguration$ContextTagsEventProcessorConfiguration' of type [io.sentry.spring.boot.SentryAutoConfiguration$HubConfiguration$ContextTagsEventProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:56:43:3426][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentry-io.sentry.spring.boot.SentryProperties' of type [io.sentry.spring.boot.SentryProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:56:43:3443][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'contextTagsEventProcessor' of type [io.sentry.spring.ContextTagsEventProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:56:43:3448][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'inAppPackagesResolver' of type [io.sentry.spring.boot.InAppIncludesResolver] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:56:43:3449][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentryOptionsConfiguration' of type [io.sentry.spring.boot.SentryAutoConfiguration$HubConfiguration$$Lambda$600/0x0000000800559c40] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:56:43:3457][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'myblogApplication' of type [com.myblog.MyblogApplication$$EnhancerBySpringCGLIB$$d2438cc4] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:56:43:3475][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentryHub' of type [io.sentry.HubAdapter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:56:43:3485][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentrySpanAdvice' of type [io.sentry.spring.tracing.SentrySpanAdvice] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:56:43:3486][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentrySpanAdvisor' of type [org.springframework.aop.support.DefaultPointcutAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:56:43:3486][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'io.sentry.spring.tracing.SentryTransactionPointcutConfiguration' of type [io.sentry.spring.tracing.SentryTransactionPointcutConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:56:43:3487][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentryTransactionPointcut' of type [org.springframework.aop.support.ComposablePointcut] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:56:43:3489][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentryTransactionAdvice' of type [io.sentry.spring.tracing.SentryTransactionAdvice] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:56:43:3489][restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sentryTransactionAdvisor' of type [org.springframework.aop.support.DefaultPointcutAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[2022-07-27 17:56:44:3886][restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+[2022-07-27 17:56:44:3895][restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+[2022-07-27 17:56:44:3896][restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+[2022-07-27 17:56:44:3896][restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.60]
+[2022-07-27 17:56:44:4042][restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+[2022-07-27 17:56:44:4042][restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3172 ms
+[2022-07-27 17:56:44:4102][restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+[2022-07-27 17:56:44:4222][restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+[2022-07-27 17:56:44:4233][restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/myblog?allowPublicKeyRetrieval=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&cacheDefaultTimezone=false'
+[2022-07-27 17:56:44:4314][restartedMain] WARN  o.a.c.c.C.[Tomcat].[localhost].[/] - Cannot deserialize session attribute [SPRING_SECURITY_CONTEXT] for session [92B810BC9A389B8A69A2368FA15F9CBB]
+[2022-07-27 17:56:44:4427][restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+[2022-07-27 17:56:44:4474][restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.7.Final
+[2022-07-27 17:56:44:4618][restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+[2022-07-27 17:56:45:4740][restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+[2022-07-27 17:56:45:5554][restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[2022-07-27 17:56:45:5565][restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+[2022-07-27 17:56:47:6969][restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[2022-07-27 17:56:47:7174][restartedMain] WARN  o.s.s.c.a.web.builders.WebSecurity - You are asking Spring Security to ignore org.springframework.boot.autoconfigure.security.servlet.StaticResourceRequest$StaticResourceRequestMatcher@25d250b. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+[2022-07-27 17:56:47:7175][restartedMain] INFO  o.s.s.w.DefaultSecurityFilterChain - Will secure org.springframework.boot.autoconfigure.security.servlet.StaticResourceRequest$StaticResourceRequestMatcher@25d250b with []
+[2022-07-27 17:56:47:7292][restartedMain] INFO  o.s.s.w.DefaultSecurityFilterChain - Will not secure any request
+[2022-07-27 17:56:48:7707][restartedMain] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+[2022-07-27 17:56:48:8076][restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+[2022-07-27 17:56:48:8101][restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+[2022-07-27 17:56:48:8118][restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+[2022-07-27 17:56:48:8128][restartedMain] INFO  com.myblog.MyblogApplication - Started MyblogApplication in 7.751 seconds (JVM running for 9.201)
+[2022-07-27 17:56:52:11706][http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[2022-07-27 17:56:52:11706][http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+[2022-07-27 17:56:52:11707][http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+[2022-07-27 17:56:52:11768][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - ------------------------------0:0:0:0:0:0:0:1/0d0b6956's transaction start------------------------------
+[2022-07-27 17:56:52:11768][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/0d0b6956] Return:String com.myblog.member.controller.MemberController.login() ,args = []
+[2022-07-27 17:56:52:11771][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/0d0b6956] Return:String com.myblog.member.controller.MemberController.login() time = 3ms
+[2022-07-27 17:56:52:11775][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - -------------------------------0:0:0:0:0:0:0:1/0d0b6956's transaction end/3ms-------------------------
+[2022-07-27 17:56:52:11785][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - ------------------------------0:0:0:0:0:0:0:1/60066920's transaction start------------------------------
+[2022-07-27 17:56:52:11785][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/60066920] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() ,args = []
+[2022-07-27 17:56:52:11852][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/60066920] |-->Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() ,args = []
+[2022-07-27 17:56:52:11861][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/60066920] |<--Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() time = 9ms
+[2022-07-27 17:56:52:11862][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/60066920] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() time = 77ms
+[2022-07-27 17:56:52:11862][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - -------------------------------0:0:0:0:0:0:0:1/60066920's transaction end/77ms-------------------------
+[2022-07-27 17:56:52:11864][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - ------------------------------0:0:0:0:0:0:0:1/f4873a56's transaction start------------------------------
+[2022-07-27 17:56:52:11864][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/f4873a56] Return:List com.myblog.comment.service.CommentService.findRecentComment() ,args = []
+[2022-07-27 17:56:52:11867][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/f4873a56] |-->Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() ,args = []
+[2022-07-27 17:56:52:11878][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/f4873a56] |<--Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() time = 11ms
+[2022-07-27 17:56:52:11881][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/f4873a56] Return:List com.myblog.comment.service.CommentService.findRecentComment() time = 17ms
+[2022-07-27 17:56:52:11882][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - -------------------------------0:0:0:0:0:0:0:1/f4873a56's transaction end/17ms-------------------------
+[2022-07-27 17:56:55:15305][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - ------------------------------0:0:0:0:0:0:0:1/0bdeba2e's transaction start------------------------------
+[2022-07-27 17:56:55:15305][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/0bdeba2e] Return:OAuth2User com.myblog.security.oauth2.service.Oauth2MemberService.loadUser(OAuth2UserRequest) ,args = [org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest@fefe13e]
+[2022-07-27 17:56:55:15419][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/0bdeba2e] |-->Return:Optional com.myblog.member.repository.MemberRepository.findByEmail(String) ,args = [jyh4358@gmail.com]
+[2022-07-27 17:56:55:15429][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/0bdeba2e] |<--Return:Optional com.myblog.member.repository.MemberRepository.findByEmail(String) time = 10ms
+[2022-07-27 17:56:55:15430][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/0bdeba2e] Return:OAuth2User com.myblog.security.oauth2.service.Oauth2MemberService.loadUser(OAuth2UserRequest) time = 125ms
+[2022-07-27 17:56:55:15430][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - -------------------------------0:0:0:0:0:0:0:1/0bdeba2e's transaction end/125ms-------------------------
+[2022-07-27 17:56:56:15847][http-nio-8080-exec-2] WARN  o.a.c.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [400] milliseconds.
+[2022-07-27 17:56:56:15858][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - ------------------------------0:0:0:0:0:0:0:1/89dc151a's transaction start------------------------------
+[2022-07-27 17:56:56:15858][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/89dc151a] Return:String com.myblog.category.controller.CategoryController.categoryList(Model) ,args = [{}]
+[2022-07-27 17:56:56:15861][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/89dc151a] |-->Return:CategoryListDto com.myblog.category.service.CategoryService.findCategories() ,args = []
+[2022-07-27 17:56:56:15868][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/89dc151a] |<--Return:CategoryListDto com.myblog.category.service.CategoryService.findCategories() time = 7ms
+[2022-07-27 17:56:56:15869][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/89dc151a] Return:String com.myblog.category.controller.CategoryController.categoryList(Model) time = 11ms
+[2022-07-27 17:56:56:15869][http-nio-8080-exec-5] INFO  com.myblog.common.log.LogTracer - -------------------------------0:0:0:0:0:0:0:1/89dc151a's transaction end/11ms-------------------------
+[2022-07-27 17:57:03:23138][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - ------------------------------0:0:0:0:0:0:0:1/b5b2601a's transaction start------------------------------
+[2022-07-27 17:57:03:23138][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/b5b2601a] Return:ResponseEntity com.myblog.category.controller.CategoryController.editCategory(CategoryListDto,CustomOauth2User) ,args = [CategoryListDto(parentCategoryLists=[ParentCategoryList(id=1, parentCategory=웹 개발, childCategoryLists=[ChildCategoryList(id=2, childCategory=Spring, deleteCheck=false, count=0), ChildCategoryList(id=3, childCategory=JPA, deleteCheck=false, count=0), ChildCategoryList(id=4, childCategory=QueryDSL, deleteCheck=false, count=0)], deleteCheck=false, count=0), ParentCategoryList(id=5, parentCategory=언어, childCategoryLists=[ChildCategoryList(id=6, childCategory=Java, deleteCheck=false, count=0), ChildCategoryList(id=7, childCategory=Javascript, deleteCheck=false, count=0)], deleteCheck=false, count=0), ParentCategoryList(id=8, parentCategory=알고리즘, childCategoryLists=[ChildCategoryList(id=9, childCategory=programmers 문제 풀이, deleteCheck=false, count=0)], deleteCheck=false, count=0), ParentCategoryList(id=10, parentCategory=오브젝트 - 코드로 이해하는 객체지향 설계, childCategoryLists=[], deleteCheck=false, count=0)], totalCount=0), Name: [조윤호#11371], Granted Authorities: [[ROLE_ADMIN]], User Attributes: [{sub=113717757792959427807, name=조윤호, given_name=윤호, family_name=조, picture=https://lh3.googleusercontent.com/a/AItbvmlXvi2HpSqlOdZ-DWXD7w4_tUOYylsBDhUIyP4Z=s96-c, email=jyh4358@gmail.com, email_verified=true, locale=ko}]]
+[2022-07-27 17:57:03:23140][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/b5b2601a] |-->Return:void com.myblog.category.service.CategoryService.editCategory(CategoryListDto,CustomOauth2User) ,args = [CategoryListDto(parentCategoryLists=[ParentCategoryList(id=1, parentCategory=웹 개발, childCategoryLists=[ChildCategoryList(id=2, childCategory=Spring, deleteCheck=false, count=0), ChildCategoryList(id=3, childCategory=JPA, deleteCheck=false, count=0), ChildCategoryList(id=4, childCategory=QueryDSL, deleteCheck=false, count=0)], deleteCheck=false, count=0), ParentCategoryList(id=5, parentCategory=언어, childCategoryLists=[ChildCategoryList(id=6, childCategory=Java, deleteCheck=false, count=0), ChildCategoryList(id=7, childCategory=Javascript, deleteCheck=false, count=0)], deleteCheck=false, count=0), ParentCategoryList(id=8, parentCategory=알고리즘, childCategoryLists=[ChildCategoryList(id=9, childCategory=programmers 문제 풀이, deleteCheck=false, count=0)], deleteCheck=false, count=0), ParentCategoryList(id=10, parentCategory=오브젝트 - 코드로 이해하는 객체지향 설계, childCategoryLists=[], deleteCheck=false, count=0)], totalCount=0), Name: [조윤호#11371], Granted Authorities: [[ROLE_ADMIN]], User Attributes: [{sub=113717757792959427807, name=조윤호, given_name=윤호, family_name=조, picture=https://lh3.googleusercontent.com/a/AItbvmlXvi2HpSqlOdZ-DWXD7w4_tUOYylsBDhUIyP4Z=s96-c, email=jyh4358@gmail.com, email_verified=true, locale=ko}]]
+[2022-07-27 17:57:03:23147][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/b5b2601a] |<--Return:void com.myblog.category.service.CategoryService.editCategory(CategoryListDto,CustomOauth2User) time = 7ms
+[2022-07-27 17:57:03:23201][http-nio-8080-exec-9] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Error: 1406, SQLState: 22001
+[2022-07-27 17:57:03:23201][http-nio-8080-exec-9] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - Data truncation: Data too long for column 'title' at row 1
+[2022-07-27 17:57:03:23202][http-nio-8080-exec-9] INFO  o.h.e.j.b.i.AbstractBatchImpl - HHH000010: On release of batch it still contained JDBC statements
+[2022-07-27 17:57:03:23211][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - [0:0:0:0:0:0:0:1/b5b2601a]  Return:ResponseEntity com.myblog.category.controller.CategoryController.editCategory(CategoryListDto,CustomOauth2User) time = 73ms ex=org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; nested exception is org.hibernate.exception.DataException: could not execute statement
+[2022-07-27 17:57:03:23211][http-nio-8080-exec-9] INFO  com.myblog.common.log.LogTracer - -------------------------------0:0:0:0:0:0:0:1/b5b2601a's transaction end/73ms-------------------------
+[2022-07-27 17:57:03:23224][http-nio-8080-exec-9] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; nested exception is org.hibernate.exception.DataException: could not execute statement] with root cause
+com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Data too long for column 'title' at row 1
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:104)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:953)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1098)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1046)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1371)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:1031)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:197)
+	at org.hibernate.engine.jdbc.batch.internal.NonBatchingBatch.addToBatch(NonBatchingBatch.java:46)
+	at org.hibernate.persister.entity.AbstractEntityPersister.update(AbstractEntityPersister.java:3571)
+	at org.hibernate.persister.entity.AbstractEntityPersister.updateOrInsert(AbstractEntityPersister.java:3438)
+	at org.hibernate.persister.entity.AbstractEntityPersister.update(AbstractEntityPersister.java:3852)
+	at org.hibernate.action.internal.EntityUpdateAction.execute(EntityUpdateAction.java:201)
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:604)
+	at org.hibernate.engine.spi.ActionQueue.lambda$executeActions$1(ActionQueue.java:478)
+	at java.base/java.util.LinkedHashMap.forEach(LinkedHashMap.java:684)
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:475)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.performExecutions(AbstractFlushingEventListener.java:344)
+	at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:40)
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:107)
+	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1407)
+	at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:489)
+	at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:3290)
+	at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:2425)
+	at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:449)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:183)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.access$300(JdbcResourceLocalTransactionCoordinatorImpl.java:40)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:281)
+	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:101)
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:562)
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:743)
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:711)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:654)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:407)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:698)
+	at com.myblog.category.service.CategoryService$$EnhancerBySpringCGLIB$$17671605.editCategory(<generated>)
+	at com.myblog.category.controller.CategoryController.editCategory(CategoryController.java:41)
+	at com.myblog.category.controller.CategoryController$$FastClassBySpringCGLIB$$dc642aef.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:783)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:89)
+	at com.myblog.common.log.LogAspect.doLog(LogAspect.java:27)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:634)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:624)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:72)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:698)
+	at com.myblog.category.controller.CategoryController$$EnhancerBySpringCGLIB$$f9842a8a.editCategory(<generated>)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1067)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at io.sentry.spring.SentryUserFilter.doFilterInternal(SentryUserFilter.java:56)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:327)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:122)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:109)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:219)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:213)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter.doFilterInternal(OAuth2AuthorizationRequestRedirectFilter.java:178)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.csrf.CsrfFilter.doFilterInternal(CsrfFilter.java:132)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:110)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:80)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at io.sentry.spring.tracing.SentryTracingFilter.doFilterInternal(SentryTracingFilter.java:77)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at io.sentry.spring.SentrySpringFilter.doFilterInternal(SentrySpringFilter.java:71)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:889)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1743)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+[2022-07-27 18:49:14:3154383][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - ------------------------------184.105.139.69/ac17159d's transaction start------------------------------
+[2022-07-27 18:49:14:3154383][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [184.105.139.69/ac17159d] Return:String com.myblog.article.controller.ArticleController.index(Model) ,args = [{}]
+[2022-07-27 18:49:14:3154390][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [184.105.139.69/ac17159d] |-->Return:List com.myblog.article.service.ArticleService.findPopularArticle() ,args = []
+[2022-07-27 18:49:14:3154394][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [184.105.139.69/ac17159d] |   |-->Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() ,args = []
+[2022-07-27 18:49:14:3154400][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [184.105.139.69/ac17159d] |   |<--Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() time = 6ms
+[2022-07-27 18:49:14:3154401][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [184.105.139.69/ac17159d] |<--Return:List com.myblog.article.service.ArticleService.findPopularArticle() time = 11ms
+[2022-07-27 18:49:14:3154402][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [184.105.139.69/ac17159d] Return:String com.myblog.article.controller.ArticleController.index(Model) time = 19ms
+[2022-07-27 18:49:14:3154402][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - -------------------------------184.105.139.69/ac17159d's transaction end/19ms-------------------------
+[2022-07-27 18:49:14:3154402][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - ------------------------------184.105.139.69/cdf2f408's transaction start------------------------------
+[2022-07-27 18:49:14:3154403][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [184.105.139.69/cdf2f408] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() ,args = []
+[2022-07-27 18:49:14:3154409][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [184.105.139.69/cdf2f408] |-->Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() ,args = []
+[2022-07-27 18:49:14:3154410][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [184.105.139.69/cdf2f408] |<--Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() time = 1ms
+[2022-07-27 18:49:14:3154410][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [184.105.139.69/cdf2f408] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() time = 8ms
+[2022-07-27 18:49:14:3154410][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - -------------------------------184.105.139.69/cdf2f408's transaction end/8ms-------------------------
+[2022-07-27 18:49:14:3154411][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - ------------------------------184.105.139.69/26c42f1b's transaction start------------------------------
+[2022-07-27 18:49:14:3154411][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [184.105.139.69/26c42f1b] Return:List com.myblog.comment.service.CommentService.findRecentComment() ,args = []
+[2022-07-27 18:49:14:3154412][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [184.105.139.69/26c42f1b] |-->Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() ,args = []
+[2022-07-27 18:49:14:3154414][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [184.105.139.69/26c42f1b] |<--Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() time = 2ms
+[2022-07-27 18:49:14:3154416][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - [184.105.139.69/26c42f1b] Return:List com.myblog.comment.service.CommentService.findRecentComment() time = 5ms
+[2022-07-27 18:49:14:3154416][http-nio-8080-exec-4] INFO  com.myblog.common.log.LogTracer - -------------------------------184.105.139.69/26c42f1b's transaction end/5ms-------------------------
+[2022-07-27 21:47:03:13823012][SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+[2022-07-27 21:47:03:13823026][SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+[2022-07-27 21:47:03:13823033][SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

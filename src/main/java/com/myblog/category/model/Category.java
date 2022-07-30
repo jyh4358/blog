@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Category extends BasicEntity {
 
-    @Column(nullable = false, unique = false, length = 20)
+    @Column(nullable = false, unique = false, length = 50)
     private String title;
 
     // tier 필요한가..?
