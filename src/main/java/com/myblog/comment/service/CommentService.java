@@ -83,8 +83,9 @@ public class CommentService {
     public Page<ManageCommentResponse> findAllComment(Pageable pageable, CustomOauth2User customOauth2User) {
         RightLoginChecker.checkAdminMember(customOauth2User);
         Page<Comment> findCommentList = commentRepository.findAll(pageable);
-        return findCommentList.map(s ->
-                ManageCommentResponse.of(s));
+        return findCommentList.map(
+                findComment -> ManageCommentResponse.of(findComment)
+        );
     }
 
     @Transactional
@@ -96,7 +97,8 @@ public class CommentService {
             commentRepository.delete(
                     commentRepository.findById(commentId).orElseThrow(NOT_FOUNT_COMMENT::getException)
             );
-        } else {
+        }
+        if (customOauth2User.getMemberRole().equals(Role.USER)){
             commentRepository.delete(
                     commentRepository.findCommentByIdAndMember_id(commentId, customOauth2User.getMemberId()).orElseThrow(NOT_FOUNT_COMMENT::getException)
             );
