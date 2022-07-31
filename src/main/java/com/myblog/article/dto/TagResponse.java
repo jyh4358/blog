@@ -1,10 +1,10 @@
 package com.myblog.article.dto;
 
-import com.myblog.article.model.Tag;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
-@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class TagResponse {
     private String name;

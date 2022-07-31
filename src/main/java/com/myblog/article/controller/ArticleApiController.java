@@ -23,6 +23,12 @@ public class ArticleApiController {
     private final ArticleService articleService;
     private final GitHubBackupService gitHubBackupService;
 
+
+    /**
+     * index 페이지 최신게시물 무한스크롤
+     * @param curPage
+     * @return
+     */
     @GetMapping("/api/v1/article")
     public ResponseEntity<List<ArticleCardBoxResponse>> infinityScroll(@RequestParam int curPage) {
 
@@ -31,6 +37,12 @@ public class ArticleApiController {
         return new ResponseEntity<>(popularArticleResponse, HttpStatus.OK);
     }
 
+    /**
+     * 게시물 작성
+     * @param articleWriteDto
+     * @param customOauth2User
+     * @return
+     */
     @PostMapping("/api/v1/admin/article")
     public ResponseEntity<Long> saveArticle(
             @RequestBody @Valid ArticleWriteDto articleWriteDto,
@@ -43,6 +55,12 @@ public class ArticleApiController {
         return new ResponseEntity<>(savedArticle.getId(), HttpStatus.OK);
     }
 
+    /**
+     * 게시물 삭제
+     * @param articleId
+     * @param customOauth2User
+     * @return
+     */
     @DeleteMapping("/api/v1/admin/article/{articleId}")
     public ResponseEntity<Void> deleteArticle(
             @PathVariable Long articleId,
@@ -54,7 +72,13 @@ public class ArticleApiController {
     }
 
 
-
+    /**
+     * 게시물 수정
+     * @param articleId
+     * @param articleWriteDto
+     * @param customOauth2User
+     * @return
+     */
     @PatchMapping("/api/v1/admin/article/{articleId}")
     public ResponseEntity<Void> modifyArticle(
             @PathVariable Long articleId,

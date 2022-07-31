@@ -155,6 +155,13 @@ public class ArticleController {
         return "article/articleList";
     }
 
+    /**
+     * 태그별 게시물 조회
+     * @param pageable
+     * @param tag
+     * @param model
+     * @return
+     */
     @GetMapping("/article-tag")
     public String findArticleByTag(
             @PageableDefault(size = 8, sort = "id",direction = Sort.Direction.DESC) Pageable pageable,
@@ -167,6 +174,14 @@ public class ArticleController {
         return "article/articleList";
     }
 
+    /**
+     * 관리자 페이지 게시물 조회
+     * @param pageable
+     * @param categoryTitle
+     * @param customOauth2User
+     * @param model
+     * @return
+     */
     @GetMapping("/admin/article")
     public String adminSearchArticle(
             @PageableDefault(size = 8, sort = "id",direction = Sort.Direction.DESC) Pageable pageable,
