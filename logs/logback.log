@@ -1459,3 +1459,118 @@ Caused by: java.lang.IllegalArgumentException: Cannot find cache named 'sadeBarC
 [2022-07-31 18:39:22:2835052][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - [78.108.177.52/5f57a428] |<--Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() time = 9ms
 [2022-07-31 18:39:22:2835054][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - [78.108.177.52/5f57a428] Return:List com.myblog.comment.service.CommentService.findRecentComment() time = 11ms
 [2022-07-31 18:39:22:2835054][http-nio-8080-exec-3] INFO  com.myblog.common.log.LogTracer - -------------------------------78.108.177.52/5f57a428's transaction end/11ms-------------------------
+[2022-07-31 19:35:14:6186876][http-nio-8080-exec-2] INFO  o.a.coyote.http11.Http11Processor - Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x000xee0x010x000x000xea0x030x030x9e0xb40x910x03X0x180x000xe70xec0xeb0xea<0xb70xc10xee0x98Pz0x920xfd0xdd0xda`|0xae}\h0xa2n0xca\ ]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:419)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:271)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:889)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1743)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+[2022-07-31 19:35:14:6187119][http-nio-8080-exec-7] INFO  com.myblog.common.log.LogTracer - ------------------------------115.97.253.152/d3247063's transaction start------------------------------
+[2022-07-31 19:35:14:6187119][http-nio-8080-exec-7] INFO  com.myblog.common.log.LogTracer - [115.97.253.152/d3247063] Return:String com.myblog.article.controller.ArticleController.index(Model) ,args = [{}]
+[2022-07-31 19:35:14:6187121][http-nio-8080-exec-7] INFO  com.myblog.common.log.LogTracer - [115.97.253.152/d3247063] |-->Return:List com.myblog.article.service.ArticleService.findPopularArticle() ,args = []
+[2022-07-31 19:35:14:6187121][http-nio-8080-exec-7] INFO  com.myblog.common.log.LogTracer - [115.97.253.152/d3247063] |   |-->Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() ,args = []
+[2022-07-31 19:35:14:6187125][http-nio-8080-exec-7] INFO  com.myblog.common.log.LogTracer - [115.97.253.152/d3247063] |   |<--Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() time = 4ms
+[2022-07-31 19:35:14:6187125][http-nio-8080-exec-7] INFO  com.myblog.common.log.LogTracer - [115.97.253.152/d3247063] |<--Return:List com.myblog.article.service.ArticleService.findPopularArticle() time = 4ms
+[2022-07-31 19:35:14:6187125][http-nio-8080-exec-7] INFO  com.myblog.common.log.LogTracer - [115.97.253.152/d3247063] Return:String com.myblog.article.controller.ArticleController.index(Model) time = 6ms
+[2022-07-31 19:35:14:6187126][http-nio-8080-exec-7] INFO  com.myblog.common.log.LogTracer - -------------------------------115.97.253.152/d3247063's transaction end/6ms-------------------------
+[2022-07-31 19:35:14:6187126][http-nio-8080-exec-7] INFO  com.myblog.common.log.LogTracer - ------------------------------115.97.253.152/6e570471's transaction start------------------------------
+[2022-07-31 19:35:14:6187126][http-nio-8080-exec-7] INFO  com.myblog.common.log.LogTracer - [115.97.253.152/6e570471] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() ,args = []
+[2022-07-31 19:35:14:6187132][http-nio-8080-exec-7] INFO  com.myblog.common.log.LogTracer - [115.97.253.152/6e570471] |-->Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() ,args = []
+[2022-07-31 19:35:14:6187133][http-nio-8080-exec-7] INFO  com.myblog.common.log.LogTracer - [115.97.253.152/6e570471] |<--Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() time = 1ms
+[2022-07-31 19:35:14:6187133][http-nio-8080-exec-7] INFO  com.myblog.common.log.LogTracer - [115.97.253.152/6e570471] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() time = 7ms
+[2022-07-31 19:35:14:6187133][http-nio-8080-exec-7] INFO  com.myblog.common.log.LogTracer - -------------------------------115.97.253.152/6e570471's transaction end/7ms-------------------------
+[2022-07-31 19:35:14:6187134][http-nio-8080-exec-7] INFO  com.myblog.common.log.LogTracer - ------------------------------115.97.253.152/80bce10e's transaction start------------------------------
+[2022-07-31 19:35:14:6187134][http-nio-8080-exec-7] INFO  com.myblog.common.log.LogTracer - [115.97.253.152/80bce10e] Return:List com.myblog.comment.service.CommentService.findRecentComment() ,args = []
+[2022-07-31 19:35:14:6187134][http-nio-8080-exec-7] INFO  com.myblog.common.log.LogTracer - [115.97.253.152/80bce10e] |-->Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() ,args = []
+[2022-07-31 19:35:14:6187136][http-nio-8080-exec-7] INFO  com.myblog.common.log.LogTracer - [115.97.253.152/80bce10e] |<--Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() time = 2ms
+[2022-07-31 19:35:14:6187137][http-nio-8080-exec-7] INFO  com.myblog.common.log.LogTracer - [115.97.253.152/80bce10e] Return:List com.myblog.comment.service.CommentService.findRecentComment() time = 3ms
+[2022-07-31 19:35:14:6187137][http-nio-8080-exec-7] INFO  com.myblog.common.log.LogTracer - -------------------------------115.97.253.152/80bce10e's transaction end/3ms-------------------------
+[2022-07-31 19:35:14:6187571][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - ------------------------------115.97.253.152/27702119's transaction start------------------------------
+[2022-07-31 19:35:14:6187572][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - [115.97.253.152/27702119] Return:String com.myblog.article.controller.ArticleController.index(Model) ,args = [{}]
+[2022-07-31 19:35:14:6187573][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - [115.97.253.152/27702119] |-->Return:List com.myblog.article.service.ArticleService.findPopularArticle() ,args = []
+[2022-07-31 19:35:14:6187573][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - [115.97.253.152/27702119] |   |-->Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() ,args = []
+[2022-07-31 19:35:14:6187575][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - [115.97.253.152/27702119] |   |<--Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() time = 2ms
+[2022-07-31 19:35:14:6187576][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - [115.97.253.152/27702119] |<--Return:List com.myblog.article.service.ArticleService.findPopularArticle() time = 3ms
+[2022-07-31 19:35:14:6187576][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - [115.97.253.152/27702119] Return:String com.myblog.article.controller.ArticleController.index(Model) time = 5ms
+[2022-07-31 19:35:14:6187576][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - -------------------------------115.97.253.152/27702119's transaction end/5ms-------------------------
+[2022-07-31 19:35:16:6189392][http-nio-8080-exec-1] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+org.springframework.security.web.firewall.RequestRejectedException: The request was rejected because the URL contained a potentially malicious String ";"
+	at org.springframework.security.web.firewall.StrictHttpFirewall.rejectedBlocklistedUrls(StrictHttpFirewall.java:456)
+	at org.springframework.security.web.firewall.StrictHttpFirewall.getFirewalledRequest(StrictHttpFirewall.java:429)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:196)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at io.sentry.spring.tracing.SentryTracingFilter.doFilterInternal(SentryTracingFilter.java:77)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at io.sentry.spring.SentrySpringFilter.doFilterInternal(SentrySpringFilter.java:71)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:889)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1743)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+[2022-07-31 21:57:04:14697410][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - ------------------------------103.80.134.169/73ab61a1's transaction start------------------------------
+[2022-07-31 21:57:04:14697410][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [103.80.134.169/73ab61a1] Return:String com.myblog.article.controller.ArticleController.index(Model) ,args = [{}]
+[2022-07-31 21:57:04:14697411][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [103.80.134.169/73ab61a1] |-->Return:List com.myblog.article.service.ArticleService.findPopularArticle() ,args = []
+[2022-07-31 21:57:04:14697412][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [103.80.134.169/73ab61a1] |   |-->Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() ,args = []
+[2022-07-31 21:57:04:14697415][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [103.80.134.169/73ab61a1] |   |<--Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() time = 3ms
+[2022-07-31 21:57:04:14697415][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [103.80.134.169/73ab61a1] |<--Return:List com.myblog.article.service.ArticleService.findPopularArticle() time = 4ms
+[2022-07-31 21:57:04:14697416][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [103.80.134.169/73ab61a1] Return:String com.myblog.article.controller.ArticleController.index(Model) time = 6ms
+[2022-07-31 21:57:04:14697416][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - -------------------------------103.80.134.169/73ab61a1's transaction end/6ms-------------------------
+[2022-07-31 21:57:04:14697417][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - ------------------------------103.80.134.169/9cfac31e's transaction start------------------------------
+[2022-07-31 21:57:04:14697418][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [103.80.134.169/9cfac31e] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() ,args = []
+[2022-07-31 21:57:04:14697423][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [103.80.134.169/9cfac31e] |-->Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() ,args = []
+[2022-07-31 21:57:04:14697425][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [103.80.134.169/9cfac31e] |<--Return:List com.myblog.category.resposiotry.CategoryRepository.findCategoryCount() time = 1ms
+[2022-07-31 21:57:04:14697425][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [103.80.134.169/9cfac31e] Return:CategoryListDto com.myblog.category.service.CategoryService.findSidebarCategory() time = 8ms
+[2022-07-31 21:57:04:14697425][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - -------------------------------103.80.134.169/9cfac31e's transaction end/8ms-------------------------
+[2022-07-31 21:57:04:14697426][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - ------------------------------103.80.134.169/9b24f8eb's transaction start------------------------------
+[2022-07-31 21:57:04:14697426][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [103.80.134.169/9b24f8eb] Return:List com.myblog.comment.service.CommentService.findRecentComment() ,args = []
+[2022-07-31 21:57:04:14697426][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [103.80.134.169/9b24f8eb] |-->Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() ,args = []
+[2022-07-31 21:57:04:14697427][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [103.80.134.169/9b24f8eb] |<--Return:List com.myblog.comment.repository.CommentRepository.findTop5ByOrderByIdDesc() time = 1ms
+[2022-07-31 21:57:04:14697428][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - [103.80.134.169/9b24f8eb] Return:List com.myblog.comment.service.CommentService.findRecentComment() time = 2ms
+[2022-07-31 21:57:04:14697428][http-nio-8080-exec-2] INFO  com.myblog.common.log.LogTracer - -------------------------------103.80.134.169/9b24f8eb's transaction end/2ms-------------------------
+[2022-07-31 21:57:05:14697829][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - ------------------------------103.80.134.225/0f9a4b32's transaction start------------------------------
+[2022-07-31 21:57:05:14697829][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - [103.80.134.225/0f9a4b32] Return:String com.myblog.article.controller.ArticleController.index(Model) ,args = [{}]
+[2022-07-31 21:57:05:14697830][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - [103.80.134.225/0f9a4b32] |-->Return:List com.myblog.article.service.ArticleService.findPopularArticle() ,args = []
+[2022-07-31 21:57:05:14697830][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - [103.80.134.225/0f9a4b32] |   |-->Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() ,args = []
+[2022-07-31 21:57:05:14697832][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - [103.80.134.225/0f9a4b32] |   |<--Return:List com.myblog.article.repository.ArticleRepository.findTop6ByOrderByHitDesc() time = 2ms
+[2022-07-31 21:57:05:14697832][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - [103.80.134.225/0f9a4b32] |<--Return:List com.myblog.article.service.ArticleService.findPopularArticle() time = 2ms
+[2022-07-31 21:57:05:14697833][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - [103.80.134.225/0f9a4b32] Return:String com.myblog.article.controller.ArticleController.index(Model) time = 3ms
+[2022-07-31 21:57:05:14697833][http-nio-8080-exec-6] INFO  com.myblog.common.log.LogTracer - -------------------------------103.80.134.225/0f9a4b32's transaction end/3ms-------------------------
