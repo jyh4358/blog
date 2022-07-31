@@ -28,7 +28,6 @@ public class CacheConfig {
                 .name("sideBarCategoryCaching");
 
         Cache sadeBarCategoryCache = new Cache(sideBarCategoryConfiguration);
-//        Objects.requireNonNull(ehCacheManagerFactoryBean().getObject()).addCache(sadeBarCategoryCache);
         ehCacheManagerFactoryBean.getObject().addCache(sadeBarCategoryCache);
 
         CacheConfiguration sideBarRecentCommentConfiguration = new CacheConfiguration()
