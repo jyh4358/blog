@@ -150,7 +150,7 @@ interceptior를 이용하여 구현하였습니다.
 또한 블로그 특성상 게시물 갱신이 자주 일어나지 않기 때문에 반복적으로 같은 결과물을 반환하기에 캐시를 적용하여 DB와 네트워크에 
 부담을 줄여주어 성능을 향상시켰습니다.
 
-SideBar에 사용되는 메서드에 캐시 처리를 하였으며 캐시에 대한 데이터 장합성이 때지는 메서드들을 사용할 경우
+SideBar에 사용되는 메서드에 캐시 처리를 하였으며 캐시에 대한 데이터 장합성이 따지는 메서드들을 사용할 경우
 해당 캐시를 폐기하였습니다. 또한 캐시 생명주기를 30분으로 설정하여 30분이 지나면 자동으로 캐시를 폐기하도록 하였습니다.
 
 [CacheConfig](https://github.com/jyh4358/blog/blob/master/src/main/java/com/myblog/common/config/CacheConfig.java)
