@@ -2,12 +2,14 @@ package com.myblog.comment.dto;
 
 import com.myblog.comment.model.Comment;
 import com.myblog.member.model.Member;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Getter
-@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class ChildComment {

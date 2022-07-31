@@ -48,11 +48,13 @@ public class Comment extends BasicEntity {
     }
 
 
-    public static Comment createComment(String content,
-                                        boolean secret,
-                                        Article article,
-                                        Comment parent,
-                                        Member member) {
+    public static Comment createComment(
+            String content,
+            boolean secret,
+            Article article,
+            Comment parent,
+            Member member
+    ) {
         return Comment.builder()
                 .content(content)
                 .secret(secret)

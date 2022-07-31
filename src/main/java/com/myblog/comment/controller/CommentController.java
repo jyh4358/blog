@@ -21,11 +21,6 @@ public class CommentController {
 
     private final CommentService commentService;
 
-    @GetMapping("/comments")
-    public void findCommentList(@RequestParam Long articleId) {
-        System.out.println("articleId = " + articleId);
-    }
-
     @GetMapping("/admin/comments")
     public String findAllComment(
             @PageableDefault(size = 8, sort = "id",direction = Sort.Direction.DESC) Pageable pageable,

@@ -2,7 +2,10 @@ package com.myblog.comment.dto;
 
 import com.myblog.comment.model.Comment;
 import com.myblog.member.model.Member;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -10,7 +13,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
-@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class CommentListResponse {

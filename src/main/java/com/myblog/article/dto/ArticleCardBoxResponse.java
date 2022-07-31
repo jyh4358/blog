@@ -10,8 +10,6 @@ import static com.myblog.common.util.MarkdownUtils.getHtmlRenderer;
 import static com.myblog.common.util.MarkdownUtils.getParser;
 
 @Getter
-@Setter
-@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class ArticleCardBoxResponse {
