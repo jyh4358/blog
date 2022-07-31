@@ -19,8 +19,6 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Article extends BasicEntity {
 
-    // todo - 나중에 조회수 기능 까지 넣어보자
-
     @Column(nullable = false, length = 50)
     private String title;
 

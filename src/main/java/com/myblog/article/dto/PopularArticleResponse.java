@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-import static com.myblog.common.util.MarkdownUtils.getHtmlRenderer;
-import static com.myblog.common.util.MarkdownUtils.getParser;
-
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PopularArticleResponse {
