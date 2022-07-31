@@ -1,19 +1,19 @@
 package com.myblog.article.dto;
 
 import com.myblog.article.model.Article;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.myblog.article.model.Tag;
+import com.myblog.common.util.MarkdownUtils;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import static com.myblog.common.util.MarkdownUtils.getHtmlRenderer;
-import static com.myblog.common.util.MarkdownUtils.getParser;
+import static com.myblog.common.util.MarkdownUtils.*;
 
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ArticleDetailResponse {
     private Long id;
