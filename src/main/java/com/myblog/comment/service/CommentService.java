@@ -14,6 +14,8 @@ import com.myblog.member.model.Role;
 import com.myblog.member.repository.MemberRepository;
 import com.myblog.security.oauth2.model.CustomOauth2User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -38,18 +40,16 @@ public class CommentService {
         Article article = articleRepository.findById(articleId).orElseThrow(NOT_FOUNT_ARTICLE::getException);
 
         List<Comment> findComments = commentRepository.findByArticle_Id(article.getId());
-
         List<Comment> parentComments = findComments.stream().filter(s -> s.getParent() == null)
                 .collect(Collectors.toList());
 
-        List<CommentListResponse> commentListResponses = parentComments.stream().map(s ->
-                CommentListResponse.of(s, s.getMember())
+        return parentComments.stream().map(
+                parentComment -> CommentListResponse.of(parentComment, parentComment.getMember())
         ).collect(Collectors.toList());
-
-        return commentListResponses;
     }
 
     @Transactional
+    @CacheEvict(value = "sideBarRecentCommentCaching", allEntries = true)
     public void saveComment(CustomOauth2User customOauth2User, CommentSaveRequest commentSaveRequest) {
         RightLoginChecker.checkLoginMember(customOauth2User);
 
@@ -88,6 +88,7 @@ public class CommentService {
     }
 
     @Transactional
+    @CacheEvict(value = "sideBarRecentCommentCaching", allEntries = true)
     public void deleteComment(CustomOauth2User customOauth2User, Long commentId) {
         RightLoginChecker.checkLoginMember(customOauth2User);
 
@@ -102,6 +103,7 @@ public class CommentService {
         }
     }
 
+    @Cacheable(value = "sideBarRecentCommentCaching", key = "0")
     public List<RecentCommentResponse> findRecentComment() {
         List<Comment> recentTop5ByOrderByIdDesc = commentRepository.findTop5ByOrderByIdDesc();
         List<RecentCommentResponse> collect = recentTop5ByOrderByIdDesc.stream().map(s ->
