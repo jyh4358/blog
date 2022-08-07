@@ -1,9 +1,6 @@
 package com.myblog.article.repository;
 
 import com.myblog.article.model.Article;
-import com.myblog.article.model.QArticle;
-import com.myblog.article.model.QArticleTag;
-import com.myblog.article.model.QTag;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -11,17 +8,19 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
 
 import static com.myblog.article.model.QArticle.article;
-import static com.myblog.article.model.QArticleTag.*;
+import static com.myblog.article.model.QArticleTag.articleTag;
 import static com.myblog.article.model.QTag.tag;
 import static com.myblog.category.model.QCategory.category;
 
 
 @Repository
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class ArticleSearchRepository {
     private final JPAQueryFactory queryFactory;
