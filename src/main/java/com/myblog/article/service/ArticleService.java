@@ -50,9 +50,9 @@ public class ArticleService {
     public List<PopularArticleResponse> findPopularArticle() {
         List<Article> findPopularArticleList = articleRepository.findTop6ByOrderByHitDesc();
 
-        return findPopularArticleList.stream().map(s ->
-                PopularArticleResponse.of(s)
-        ).collect(Collectors.toList());
+        return findPopularArticleList.stream()
+                .map(popularArticle -> PopularArticleResponse.of(popularArticle))
+                .collect(Collectors.toList());
     }
 
 
@@ -60,7 +60,8 @@ public class ArticleService {
     public Article writeArticle(ArticleWriteDto articleWriteDto, CustomOauth2User customOauth2User) {
         RightLoginChecker.checkAdminMember(customOauth2User);
 
-        Category category = categoryRepository.findById(articleWriteDto.getCategory()).orElseThrow(NOT_FOUND_CATEGORY::getException);
+        Category category = categoryRepository
+                .findById(articleWriteDto.getCategory()).orElseThrow(NOT_FOUND_CATEGORY::getException);
 
         List<Tag> tagList = getTags(articleWriteDto.getTags());
         List<ArticleTag> collect = getArticleTags(tagList);
@@ -77,8 +78,9 @@ public class ArticleService {
         RightLoginChecker.checkAdminMember(customOauth2User);
         Article article = articleRepository.findById(articleId).orElseThrow(NOT_FOUNT_ARTICLE::getException);
         List<ArticleTag> findArticleTag = articleTagRepository.findByArticle_Id(articleId);
-        List<String> tags = findArticleTag.stream().map(s ->
-                s.getTag().getName()).collect(Collectors.toList());
+        List<String> tags = findArticleTag.stream()
+                .map(s -> s.getTag().getName())
+                .collect(Collectors.toList());
 
         ArticleModifyResponse articleModifyResponse = ArticleModifyResponse.of(article, tags);
 
@@ -90,7 +92,8 @@ public class ArticleService {
     public Long modifyArticle(Long articleId, ArticleWriteDto articleWriteDto, CustomOauth2User customOauth2User) {
         RightLoginChecker.checkAdminMember(customOauth2User);
         Article article = articleRepository.findById(articleId).orElseThrow(NOT_FOUNT_ARTICLE::getException);
-        Category category = categoryRepository.findById(articleWriteDto.getCategory()).orElseThrow(NOT_FOUND_CATEGORY::getException);
+        Category category = categoryRepository
+                .findById(articleWriteDto.getCategory()).orElseThrow(NOT_FOUND_CATEGORY::getException);
         List<ArticleTag> findArticleTagList = articleTagRepository.findByArticle_Id(article.getId());
         articleTagRepository.deleteAll(findArticleTagList);
 
@@ -118,12 +121,13 @@ public class ArticleService {
         if (hitCheck) {
             article.addHit();
         }
-        List<ArticleTag> findArticleTag = articleTagRepository.findByArticle_Id(articleId);
-        List<String> tags = findArticleTag.stream().map(s ->
-                s.getTag().getName()).collect(Collectors.toList());
 
-        ArticleDetailResponse detailResponse = ArticleDetailResponse.of(
-                article, tags, article.getMember().getUsername());
+        List<String> tags = articleTagRepository.findByArticle_Id(articleId).stream()
+                .map(articleTag -> articleTag.getTag().getName())
+                .collect(Collectors.toList());
+
+        ArticleDetailResponse detailResponse = ArticleDetailResponse
+                .of(article, tags, article.getMember().getUsername());
 
         List<SimpleArticle> simpleArticles = getSimpleArticleByCategory(article.getCategory());
         detailResponse.setSimpleArticles(simpleArticles);
@@ -141,41 +145,38 @@ public class ArticleService {
         if (categoryTitle.equals("ALL")) {
             findArticle = articleRepository.findAll(pageable);
         } else {
-            Category category = categoryRepository.findByTitle(categoryTitle).get();
-            List<String> childCategoryTitles = category.getChild().stream().map(s -> s.getTitle()).collect(Collectors.toList());
+            Category category = categoryRepository.findByTitle(categoryTitle).orElseThrow(NOT_FOUND_CATEGORY::getException);
+            List<String> childCategoryTitles = category.getChild().stream()
+                    .map(Category::getTitle)
+                    .collect(Collectors.toList());
 
             findArticle = articleSearchRepository.findSearchArticleByCategory(categoryTitle, childCategoryTitles, pageable);
 
         }
 
-        Page<ArticleCardBoxResponse> articleCardBoxResponses = findArticle.map(s -> ArticleCardBoxResponse.of(s));
-        return articleCardBoxResponses;
+        return findArticle.map(article -> ArticleCardBoxResponse.of(article));
     }
 
     /*
         - 무한 스크롤를 위한 최신 게시물 8개 씩 요청
      */
     public List<ArticleCardBoxResponse> findRecentArticle(int page) {
-        Slice<Article> findRecentArticle = articleRepository.findByOrderByIdDesc(PageRequest.of(page, PAGE_SIZE));
-        Slice<ArticleCardBoxResponse> popularArticleResponses = findRecentArticle.map(s ->
-                ArticleCardBoxResponse.of(s));
-        return popularArticleResponses.getContent();
 
+        return articleRepository.findByOrderByIdDesc(PageRequest.of(page, PAGE_SIZE))
+                .map(recentArticle -> ArticleCardBoxResponse.of(recentArticle))
+                .getContent();
     }
 
     public Page<ArticleCardBoxResponse> findSearchArticle(String keyword, Pageable pageable) {
-        Page<Article> findArticleByKeyword = articleSearchRepository.findSearchArticleBykeyword(keyword, pageable);
-        Page<ArticleCardBoxResponse> articleByKeywordResponse = findArticleByKeyword.map(s -> ArticleCardBoxResponse.of(s));
 
-
-        return articleByKeywordResponse;
+        return articleSearchRepository.findSearchArticleBykeyword(keyword, pageable)
+                .map(articleByKeyword -> ArticleCardBoxResponse.of(articleByKeyword));
     }
 
     public Page<ArticleCardBoxResponse> findArticleByTag(String tag, Pageable pageable) {
-        Page<Article> findArticleByTag = articleSearchRepository.findSearchArticleByTag(tag, pageable);
-        Page<ArticleCardBoxResponse> articleByTagResponse = findArticleByTag.map(s -> ArticleCardBoxResponse.of(s));
 
-        return articleByTagResponse;
+        return articleSearchRepository.findSearchArticleByTag(tag, pageable)
+                .map(articleByTag -> ArticleCardBoxResponse.of(articleByTag));
     }
 
     @Transactional
@@ -190,32 +191,33 @@ public class ArticleService {
      */
     private List<SimpleArticle> getSimpleArticleByCategory(Category category) {
         List<Article> simpleArticleByCategory = articleRepository.findTop6ByCategoryOrderByCreatedDateDesc(category);
-        return simpleArticleByCategory.stream().map(
-                s -> SimpleArticle.of(s)
-        ).collect(Collectors.toList());
+
+        return simpleArticleByCategory.stream()
+                .map(articleByCategory -> SimpleArticle.of(articleByCategory))
+                .collect(Collectors.toList());
     }
 
     private List<ArticleTag> getArticleTags(List<Tag> tagList) {
-        List<ArticleTag> collect = tagList.stream().map(
-                s -> ArticleTag.createArticleTag(s)
-        ).collect(Collectors.toList());
-        return collect;
-    }
 
-    private Tag findOrCreateTag(String tagName) {
-        return tagRepository.findByName(tagName)
-                .orElseGet(
-                        () -> tagRepository.save(Tag.createTag(tagName))
-                );
+        return tagList.stream()
+                .map(articleTag -> ArticleTag.createArticleTag(articleTag))
+                .collect(Collectors.toList());
     }
 
     private List<Tag> getTags(String tags) {
         List<Map<String,String>> tagsDtoArrayList = gson.fromJson(tags, ArrayList.class);
-        List<Tag> tagList = tagsDtoArrayList.stream().map(s ->
-                findOrCreateTag(s.get("value"))
-        ).collect(Collectors.toList());
+        List<Tag> tagList = tagsDtoArrayList.stream()
+                .map(tag -> findOrCreateTag(tag.get("value")))
+                .collect(Collectors.toList());
+
         return tagList;
     }
+
+    private Tag findOrCreateTag(String tagName) {
+        return tagRepository.findByName(tagName)
+                .orElseGet(() -> tagRepository.save(Tag.createTag(tagName)));
+    }
+
 
 
 

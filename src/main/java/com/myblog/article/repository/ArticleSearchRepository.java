@@ -132,7 +132,7 @@ public class ArticleSearchRepository {
         동적 쿼리 메서드
      */
     private BooleanExpression categoryTitleEq(String categoryTitle) {
-        return StringUtils.hasText(categoryTitle) ? category.title.eq(categoryTitle) : null;
+        return StringUtils.hasText(categoryTitle) || categoryTitle.equals("ALL") ? category.title.eq(categoryTitle) : null;
     }
 
     private BooleanExpression childCategoriesTitleIn(List<String> childCategoryTitles) {

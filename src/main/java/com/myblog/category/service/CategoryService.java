@@ -27,13 +27,10 @@ public class CategoryService {
 
 
     public CategoryListDto findCategories() {
-        List<Category> findCategories = categoryRepository.findAll();
-        List<Category> parentCategories = findCategories.stream().filter(s -> s.getParent() == null)
+        List<ParentCategoryList> parentCategoryLists = categoryRepository.findAll().stream()
+                .filter(parentCategory -> parentCategory.getParent() == null)
+                .map(parentCategory -> ParentCategoryList.of(parentCategory))
                 .collect(Collectors.toList());
-
-        List<ParentCategoryList> parentCategoryLists = parentCategories.stream().map(
-                s -> ParentCategoryList.of(s)
-        ).collect(Collectors.toList());
 
         return CategoryListDto.of(parentCategoryLists);
     }
@@ -59,16 +56,18 @@ public class CategoryService {
     public CategoryListDto findSidebarCategory() {
         CategoryListDto categoryListDto = findCategories();
         List<CategoryQueryDto> categoryCounts = categoryRepository.findCategoryCount();
+
         for (CategoryQueryDto categoryCount : categoryCounts) {
-            categoryListDto.getParentCategoryLists().forEach(
-                    s -> {
-                        if (s.getId().equals(categoryCount.getId())) {
-                            s.setCount((categoryCount.getCount().intValue()));
-                        } else {
-                            insertChildCategoryCount(s, categoryCount);
-                        }
-                    }
-            );
+            categoryListDto.getParentCategoryLists()
+                    .forEach(
+                            parentCategory -> {
+                                if (parentCategory.getId().equals(categoryCount.getId())) {
+                                    parentCategory.setCount((categoryCount.getCount().intValue()));
+                                } else {
+                                    insertChildCategoryCount(parentCategory, categoryCount);
+                                }
+                            }
+                    );
         }
 
         parentCategoryTotalCalc(categoryListDto);
@@ -90,16 +89,14 @@ public class CategoryService {
     }
 
     private void modifyCategoryTitle(ParentCategoryList parentCategoryList, List<Category> categories) {
-        categories.forEach(s ->
+        categories.forEach(category ->
         {
-            if (s.getId() == parentCategoryList.getId()) {
-                s.changeTitle(parentCategoryList.getParentCategory());
-                List<ChildCategoryList> collect =
-                        parentCategoryList.getChildCategoryLists().stream().filter(f -> !(f.checkNewCategory()))
-                                .collect(Collectors.toList());
+            if (category.getId() == parentCategoryList.getId()) {
+                category.changeTitle(parentCategoryList.getParentCategory());
 
-                collect.forEach(t ->
-                        modifyChildCategoryTitle(t, s.getChild()));
+                parentCategoryList.getChildCategoryLists().stream()
+                        .filter(childCategory -> !(childCategory.checkNewCategory()))
+                        .forEach(childCategory -> modifyChildCategoryTitle(childCategory, category.getChild()));
             }
         });
     }
@@ -118,10 +115,11 @@ public class CategoryService {
         }
         for (Category category : categories) {
             if (parentCategoryList.getId() == category.getId()) {
-                List<ChildCategoryList> collect = parentCategoryList.getChildCategoryLists().stream().filter(f -> f.checkNewCategory())
-                        .collect(Collectors.toList());
-                collect.stream().forEach(s ->
-                        categoryRepository.save(Category.createCategory(null, s.getChildCategory(), category))
+
+                parentCategoryList.getChildCategoryLists().stream()
+                        .filter(childCategory -> childCategory.checkNewCategory())
+                        .forEach(childCategory ->
+                        categoryRepository.save(Category.createCategory(null, childCategory.getChildCategory(), category))
                 );
             }
         }
@@ -129,19 +127,21 @@ public class CategoryService {
 
     private void deleteCategory(ParentCategoryList parentCategoryList, List<Category> categories) {
         if (parentCategoryList.getDeleteCheck()) {
-            categories.forEach(s ->
+            categories.forEach(category ->
             {
-                if (s.getId().equals(parentCategoryList.getId())) {
-                    categoryRepository.delete(s);
+                if (category.getId().equals(parentCategoryList.getId())) {
+                    categoryRepository.delete(category);
                 }
             });
         } else {
-            List<ChildCategoryList> deleteChildCategories = parentCategoryList.getChildCategoryLists().stream().filter(s -> s.getDeleteCheck()).collect(Collectors.toList());
-            categories.forEach(s ->
+            List<ChildCategoryList> deleteChildCategories = parentCategoryList.getChildCategoryLists().stream()
+                    .filter(childCategory -> childCategory.getDeleteCheck()).collect(Collectors.toList());
+
+            categories.forEach(childCategory ->
             {
-                if (s.getId().equals(parentCategoryList.getId())) {
-                    deleteChildCategories.forEach(t ->
-                            deleteChildCategoryTitle(t, s.getChild()));
+                if (childCategory.getId().equals(parentCategoryList.getId())) {
+                    deleteChildCategories.forEach(deleteChildCategory ->
+                            deleteChildCategoryTitle(deleteChildCategory, childCategory.getChild()));
                 }
             });
 
@@ -162,7 +162,8 @@ public class CategoryService {
 
     private void parentCategoryTotalCalc(CategoryListDto categoryListDto) {
         for (ParentCategoryList parentCategoryList : categoryListDto.getParentCategoryLists()) {
-            parentCategoryList.getChildCategoryLists().forEach(s -> parentCategoryList.addParentCount(s.getCount()));
+            parentCategoryList.getChildCategoryLists()
+                    .forEach(childCategory -> parentCategoryList.addParentCount(childCategory.getCount()));
         }
     }
 
