@@ -19,14 +19,9 @@ public class TagService {
 
     public List<TagResponse> findAllTag() {
 
-        List<Tag> findTags = tagRepository.findAll();
-        List<TagResponse> tagList = findTags.stream().map(s ->
-                TagResponse.of(s.getName())
-        ).collect(Collectors.toList());
-
-        for (TagResponse tagResponse : tagList) {
-            System.out.println("tagResponse = " + tagResponse.getName());
-        }
+        List<TagResponse> tagList = tagRepository.findAll().stream()
+                .map(tag -> TagResponse.of(tag.getName()))
+                .collect(Collectors.toList());
 
         return tagList;
     }

@@ -59,9 +59,9 @@ public class TempArticleService {
     public String extractedTag(String tagDto) {
         if (StringUtils.hasText(tagDto)) {
             List<Map<String, String>> tagsDtoArrayList = gson.fromJson(tagDto, ArrayList.class);
-            List<String> tagList = tagsDtoArrayList.stream().map(s ->
-                    s.get("value")
-            ).collect(Collectors.toList());
+            List<String> tagList = tagsDtoArrayList.stream()
+                    .map(tag -> tag.get("value"))
+                    .collect(Collectors.toList());
 
             return String.join(",", tagList);
         }

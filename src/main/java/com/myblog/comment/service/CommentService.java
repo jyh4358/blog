@@ -35,17 +35,16 @@ public class CommentService {
     private final ArticleRepository articleRepository;
     private final MemberRepository memberRepository;
 
+
     public List<CommentListResponse> findCommentList(Long articleId) {
 
         Article article = articleRepository.findById(articleId).orElseThrow(NOT_FOUNT_ARTICLE::getException);
-
         List<Comment> findComments = commentRepository.findByArticle_Id(article.getId());
-        List<Comment> parentComments = findComments.stream().filter(s -> s.getParent() == null)
-                .collect(Collectors.toList());
 
-        return parentComments.stream().map(
-                parentComment -> CommentListResponse.of(parentComment, parentComment.getMember())
-        ).collect(Collectors.toList());
+        return findComments.stream()
+                .filter(s -> s.getParent() == null)
+                .map(parentComment -> CommentListResponse.of(parentComment, parentComment.getMember()))
+                .collect(Collectors.toList());
     }
 
     @Transactional
@@ -108,15 +107,15 @@ public class CommentService {
     @Cacheable(value = "sideBarRecentCommentCaching", key = "0")
     public List<RecentCommentResponse> findRecentComment() {
         List<Comment> recentTop5ByOrderByIdDesc = commentRepository.findTop5ByOrderByIdDesc();
-        List<RecentCommentResponse> collect = recentTop5ByOrderByIdDesc.stream().map(s ->
-                RecentCommentResponse.of(
-                        s.getArticle().getId(),
-                        s.getContent(),
-                        s.getMember().getId(),
-                        s.getMember().getUsername(),
-                        s.isSecret())
-        ).collect(Collectors.toList());
-        return collect;
+
+        return commentRepository.findTop5ByOrderByIdDesc().stream()
+                .map(recentComment -> RecentCommentResponse.of(
+                        recentComment.getArticle().getId(),
+                        recentComment.getContent(),
+                        recentComment.getMember().getId(),
+                        recentComment.getMember().getUsername(),
+                        recentComment.isSecret()))
+                .collect(Collectors.toList());
     }
 
 }
