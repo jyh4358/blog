@@ -107,13 +107,13 @@
 
 ### jenkins CI/CD 무중단 배포
 
-![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%EC%9D%B8%ED%94%84%EB%9D%BC.png)
+![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%EB%B8%94%EB%A1%9C%EA%B7%B8%EC%9D%B8%ED%94%84%EB%9D%BC2.png)
 
 애플리케이션 출시에 있어서 지속적 통합과 지속적 배포를 위해 jenkins를 이용하여 빌드 및 배포를 진행하였습니다.
 
 Nginx가 외부의 요청을 받아 뒷단 서버로 요청을 전달하는 리버스 프록시를 이용하여 무중단 배포를 구현하기위해 
 신규 배포가 필요할 경우 Nginx와 연결되지 않은 포트(8081 or 8082)에 배포한 후 정상적으로 배포가 완료될 경우
-Nginx는 새로 배포한 포트로 리버스 프록시하도록 했습니다.
+Nginx는 새로 배포한 포트로 리버스 프록시하도록 하는 Blue / Green 배포 방식으로 구축하였습니다.
 
 <br/>
 <br/>
@@ -147,10 +147,10 @@ Spring AOP를 이용하여 Controller, Service, Repository에 포인트컷을 �
 SideBar에 필요한 카테고리와 게시물 수, 최신 댓글들은 관리자 페이지를 제외한 모든 페이지에서 해당 값들을 가져올 수 있도록 
 interceptior를 이용하여 구현하였습니다. 
 하지만 모든 페이지 조회마다 직접 DB에서 해당 값들을 가져오니 DB와 네트워크에 부담이 상당한 것을 깨달았으며. 
-또한 블로그 특성상 게시물 갱신이 자주 일어나지 않기 때문에 반복적으로 같은 결과물을 반환하기에 캐시를 적용하여 DB와 네트워크에 
+또한 블로그 특성상 게시물 갱신이 자주 일어나지 않기 않고, 반복적으로 같은 결과물을 반환하기에 캐시를 적용하여 DB와 네트워크에 
 부담을 줄여주어 성능을 향상시켰습니다.
 
-SideBar에 사용되는 메서드에 캐시 처리를 하였으며 캐시에 대한 데이터 장합성이 따지는 메서드들을 사용할 경우
+SideBar에 사용되는 메서드에 캐시 처리를 하였으며 캐시에 대한 데이터 정합성이 따지는 메서드들을 사용할 경우
 해당 캐시를 폐기하였습니다. 또한 캐시 생명주기를 30분으로 설정하여 30분이 지나면 자동으로 캐시를 폐기하도록 하였습니다.
 
 [CacheConfig](https://github.com/jyh4358/blog/blob/master/src/main/java/com/myblog/common/config/CacheConfig.java)
@@ -261,7 +261,7 @@ Github api를 이용하여 게시물 작성 시 자동으로 Github repository�
 
 ### tagify를 이용한 태그 기능 구현
 
-tagify 라이브러리를 이용하여 태그 기능을 이용하여 게시물 작성시 기존의 등록한 태그를 사용하거나 새로 태그를 추가할 수 있도록 구현했습니다.
+tagify 라이브러리를 이용한 태그 기능을 이용하여 게시물 작성시 기존의 등록한 태그를 사용하거나 새로 태그를 추가할 수 있도록 구현했습니다.
 
 ![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%ED%83%9C%EA%B7%B8%ED%8C%8C%EC%9D%B4.gif)
 
