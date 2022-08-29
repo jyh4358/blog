@@ -61,7 +61,7 @@
                 <ul class="pagination">
                     <li class="page-item">
                         <a class="page-link" aria-label="First"
-                           th:href="@{/templates/admin/article(categoryTitle=${param.categoryTitle}, page=0)}"
+                           th:href="@{/admin/article(categoryTitle=${param.categoryTitle}, page=0)}"
                            th:if="${pageDto.currentPageNum} > 4">
                             <span> « </span>
                         </a>
@@ -69,7 +69,7 @@
 
                     <li class="page-item">
                         <a class="page-link" aria-label="Previous"
-                           th:href="@{/templates/admin/article(categoryTitle=${param.categoryTitle}, page=${pageDto.currentPageNum - 5})}"
+                           th:href="@{/admin/article(categoryTitle=${param.categoryTitle}, page=${pageDto.currentPageNum - 5})}"
                            th:if="${articleCardBoxList.number} > 4">
                             <span> < </span>
                         </a>
@@ -84,12 +84,12 @@
                     </th:block>
                     <li class="page-item">
                         <a class="page-link" aria-label="Next"
-                           th:href="@{/templates/admin/article(categoryTitle=${param.categoryTitle}, page=${pageDto.currentPageNum + 5})}"
+                           th:href="@{/admin/article(categoryTitle=${param.categoryTitle}, page=${pageDto.currentPageNum + 5})}"
                            th:if="${pageDto.endPageNum < pageDto.lastPageNum} and ${pageDto.currentPageNum + 5 <= pageDto.lastPageNum}">
                             <span aria-hidden="true"> > </span>
                         </a>
                         <a class="page-link" aria-label="Next"
-                           th:href="@{/templates/admin/article(categoryTitle=${param.categoryTitle}, page=${pageDto.lastPageNum})}"
+                           th:href="@{/admin/article(categoryTitle=${param.categoryTitle}, page=${pageDto.lastPageNum})}"
                            th:if="${pageDto.endPageNum < pageDto.lastPageNum} and ${pageDto.currentPageNum + 5 > pageDto.lastPageNum}">
                             <span aria-hidden="true"> > </span>
                         </a>
@@ -97,7 +97,7 @@
 
                     <li class="page-item">
                         <a class="page-link" aria-label="Last"
-                           th:href="@{/templates/admin/article(categoryTitle=${param.categoryTitle}, page=${pageDto.lastPageNum})}"
+                           th:href="@{/admin/article(categoryTitle=${param.categoryTitle}, page=${pageDto.lastPageNum})}"
                            th:if="${pageDto.endPageNum < pageDto.lastPageNum}">
                             <span aria-hidden="true">»</span>
                         </a>
