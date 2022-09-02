@@ -22,13 +22,11 @@ public class GitHubBackupService {
     private GHRepository repository;
 
 
-
-    public void backupArticleToGitHub(Article article) {;
+    public void backupArticleToGitHub(Article article) {
         String path = "";
         if (article.getCategory().getParent() != null) {
             path = article.getCategory().getParent().getTitle() + "/" + article.getCategory().getTitle() + "/[" + article.getCreatedDate() + "]" + article.getTitle() + ".md";
-                }
-        if (article.getCategory().getParent() == null) {
+        } else {
             path = article.getCategory().getTitle() + "/[" + article.getCreatedDate() + "]" + article.getTitle() + ".md";
         }
         try {

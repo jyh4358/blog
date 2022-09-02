@@ -209,9 +209,6 @@ public class ArticleController {
         }
 
         String[] viewCookieList = hitCookieValue.split("/");
-        for (String s : viewCookieList) {
-            System.out.println("cookieviewview = " + s);
-        }
         if (Arrays.stream(viewCookieList).anyMatch(s -> s.equals(articleId.toString()))) {
             return false;
         } else {

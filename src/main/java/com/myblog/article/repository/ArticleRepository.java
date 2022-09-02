@@ -10,10 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ArticleRepository extends JpaRepository<Article, Long> {
-    List<Article> findAllByArticleTags(String tag);
 
     List<Article> findTop6ByCategoryOrderByCreatedDateDesc(Category category);
-
 
     List<Article> findTop6ByOrderByHitDesc();
 
