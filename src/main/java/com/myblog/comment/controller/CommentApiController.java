@@ -44,7 +44,7 @@ public class CommentApiController {
 
 
     /**
-     *  게시물
+     *  게시물에 등록된 댓글 삭제
      */
     @DeleteMapping("/api/v1/comment/{commentId}")
     public ResponseEntity<Void> deleteComment(

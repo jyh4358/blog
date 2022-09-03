@@ -21,6 +21,9 @@ import static com.myblog.member.model.QMember.member;
 public class CommentQueryRepository {
     private final JPAQueryFactory queryFactory;
 
+    /*
+        - 게시물에 등록된 댓글 조회
+     */
     public List<Comment> findCommentListByArticleId(Long articleId) {
         return queryFactory
                 .selectFrom(comment)
@@ -29,6 +32,11 @@ public class CommentQueryRepository {
                 .fetch();
     }
 
+
+
+    /*
+        - 사이드바에 필요한 댓글 조회
+     */
     public List<Comment> findRecentComment() {
         return queryFactory
                 .selectFrom(comment)
@@ -38,6 +46,11 @@ public class CommentQueryRepository {
                 .fetch();
     }
 
+
+
+    /*
+        - [관리자 페이지] 전체 댓글 조회
+     */
     public Page<Comment> findAllComment(Pageable pageable) {
         List<Comment> content = getCommentList(pageable);
         Long count = getCommentCount();

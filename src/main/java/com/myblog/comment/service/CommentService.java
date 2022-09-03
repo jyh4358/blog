@@ -38,6 +38,9 @@ public class CommentService {
     private final MemberRepository memberRepository;
 
 
+    /*
+        - 게시물에 등록된 댓글 조회
+     */
     public List<CommentListResponse> findCommentList(Long articleId) {
 
         Article article = articleRepository.findById(articleId).orElseThrow(NOT_FOUNT_ARTICLE::getException);
@@ -48,6 +51,11 @@ public class CommentService {
                 .collect(Collectors.toList());
     }
 
+
+
+    /*
+        - 게시물에 댓글 등록
+     */
     @Transactional
     @CacheEvict(value = "sideBarRecentCommentCaching", allEntries = true)
     public void saveComment(CustomOauth2User customOauth2User, CommentSaveRequest commentSaveRequest) {
@@ -71,13 +79,11 @@ public class CommentService {
                 ));
     }
 
-    public Page<ManageCommentResponse> findAllComment(Pageable pageable, CustomOauth2User customOauth2User) {
-        RightLoginChecker.checkAdminMember(customOauth2User);
 
-        return commentQueryRepository.findAllComment(pageable)
-                .map(ManageCommentResponse::of);
-    }
 
+    /*
+        - 게시물에 등록된 댓글 삭제
+     */
     @Transactional
     @CacheEvict(value = "sideBarRecentCommentCaching", allEntries = true)
     public void deleteComment(CustomOauth2User customOauth2User, Long commentId) {
@@ -92,6 +98,23 @@ public class CommentService {
         }
     }
 
+
+
+    /*
+        - [관리자 페이지] 전체 댓글 조회
+     */
+    public Page<ManageCommentResponse> findAllComment(Pageable pageable, CustomOauth2User customOauth2User) {
+        RightLoginChecker.checkAdminMember(customOauth2User);
+
+        return commentQueryRepository.findAllComment(pageable)
+                .map(ManageCommentResponse::of);
+    }
+
+
+
+    /*
+        - 사이드바에 필요한 댓글 조회, 캐시 적용
+     */
     @Cacheable(value = "sideBarRecentCommentCaching", key = "0")
     public List<RecentCommentResponse> findRecentComment() {
 
