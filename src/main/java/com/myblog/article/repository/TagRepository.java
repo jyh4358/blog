@@ -9,8 +9,4 @@ import java.util.Optional;
 
 public interface TagRepository extends JpaRepository<Tag, Long> {
     Optional<Tag> findByName(String name);
-
-    @Query("select t from Tag t " +
-            "join fetch t.articleTags")
-    List<Tag> findByArticle_Id(Long articleId);
 }

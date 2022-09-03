@@ -45,7 +45,7 @@ public class ArticleService {
 
 
     /*
-        - 메인 페이지 인기 게시물 6개 요청
+        - 메인 페이지 인기 게시물 조회, size = 8
      */
     public List<PopularArticleResponse> findPopularArticle() {
         List<Article> findPopularArticleList = articleRepository.findTop6ByOrderByHitDesc();
@@ -75,11 +75,13 @@ public class ArticleService {
 
     }
 
+
     /*
         - 게시물 수정을 위한 기존 게시물 상세 조회
      */
     public ArticleModifyResponse findModifyArticle(Long articleId, CustomOauth2User customOauth2User) {
         RightLoginChecker.checkAdminMember(customOauth2User);
+
         Article article = articleRepository.findById(articleId).orElseThrow(NOT_FOUNT_ARTICLE::getException);
         List<String> tags = articleTagRepository.findByArticle_Id(articleId).stream()
                 .map(ArticleTag::getTag)
@@ -89,12 +91,14 @@ public class ArticleService {
         return ArticleModifyResponse.of(article, tags);
     }
 
+
     /*
         - 게시물 수정
      */
     @Transactional
     public Long modifyArticle(Long articleId, ArticleWriteDto articleWriteDto, CustomOauth2User customOauth2User) {
         RightLoginChecker.checkAdminMember(customOauth2User);
+
         Article article = articleRepository.findById(articleId).orElseThrow(NOT_FOUNT_ARTICLE::getException);
         Category category = categoryRepository
                 .findById(articleWriteDto.getCategory()).orElseThrow(NOT_FOUND_CATEGORY::getException);
@@ -114,8 +118,9 @@ public class ArticleService {
         return article.getId();
     }
 
+
     /*
-        - 게시물 상세 데이터 요청 및 조회 수 증가
+        - 게시물 상세 조회 및 조회 수 증가
      */
     @Transactional
     public ArticleDetailResponse findArticleDetail(Long articleId, boolean hitCheck) {
@@ -129,8 +134,7 @@ public class ArticleService {
                 .map(Tag::getName)
                 .collect(Collectors.toList());
 
-        ArticleDetailResponse detailResponse = ArticleDetailResponse
-                .of(article, tags, article.getMember().getUsername());
+        ArticleDetailResponse detailResponse = ArticleDetailResponse.of(article, tags, article.getMember().getUsername());
 
         List<SimpleArticle> simpleArticles = getSimpleArticleByCategory(article.getCategory());
         detailResponse.setSimpleArticles(simpleArticles);
@@ -160,6 +164,7 @@ public class ArticleService {
         return findArticle.map(ArticleCardBoxResponse::of);
     }
 
+
     /*
         - 무한 스크롤를 위한 최신 게시물 요청, size = 8
      */
@@ -170,6 +175,7 @@ public class ArticleService {
                 .getContent();
     }
 
+
     /*
         - title, content 에 검색어가 포함된 게시물 조회, size = 8
      */
@@ -179,6 +185,7 @@ public class ArticleService {
                 .map(ArticleCardBoxResponse::of);
     }
 
+
     /*
         - tag와 관련된 게시물 조회, size = 8
      */
@@ -187,6 +194,7 @@ public class ArticleService {
         return articleSearchRepository.findSearchArticleByTag(tag, pageable)
                 .map(ArticleCardBoxResponse::of);
     }
+
 
     /*
         - 게시물 삭제

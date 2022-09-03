@@ -21,7 +21,9 @@ public class GitHubBackupService {
     private GitHub github;
     private GHRepository repository;
 
-
+    /*
+        - 게시물 작성 시 자동으로 GitHub Back-up Repository에 백업을 위한 작성글 push 기능
+     */
     public void backupArticleToGitHub(Article article) {
         String path = "";
         if (article.getCategory().getParent() != null) {

@@ -2,7 +2,6 @@ package com.myblog.article.repository;
 
 import com.myblog.article.model.Article;
 import com.myblog.article.model.QArticle;
-import com.myblog.member.model.QMember;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -30,8 +29,8 @@ public class ArticleSearchRepository {
     private final JPAQueryFactory queryFactory;
 
     /*
-        카테고리 별 article 리스트 페이징처리하여 가져오기
-        부모 카테고리로 article 조회하거나 자식 카테고리로 article 조회 시 동적 쿼리를 이용한 페이징 처리
+        - 카테고리별 최신 게시물 조회, size = 8
+        - 부모 카테고리로 조회, 자식 카테고리로 조회 시 동적으로 해당 조건에 따른 리스트 조회
      */
     public Page<Article> findSearchArticleByCategory(String categoryTitle, List<String> childCategoryTitles, Pageable pageable) {
 
@@ -40,6 +39,48 @@ public class ArticleSearchRepository {
 
         return new PageImpl<>(content, pageable, count);
     }
+
+
+
+    /*
+        - 검색어(keyword)로 게시물 조회, size = 8
+        - title, content 에 검색어가 포함된 게시물 조회
+    */
+    public Page<Article> findSearchArticleByKeyword(String keyword, Pageable pageable) {
+        List<Article> findArticleByKeyword = getArticleByKeyword(keyword, pageable);
+        Long count = getArticleCountByKeyword(keyword);
+
+        return new PageImpl<>(findArticleByKeyword, pageable, count);
+    }
+
+
+    /*
+        - tag 로 게시물 조회, size = 8
+    */
+    public Page<Article> findSearchArticleByTag(String tagName, Pageable pageable) {
+        List<Article> findArticleByTag = getArticleByTag(tagName, pageable);
+        Long count = getArticleCountByTag(tagName);
+
+        return new PageImpl<>(findArticleByTag, pageable, count);
+    }
+
+
+    /*
+        - 게시물 상세 데이터 조회
+     */
+    public Optional<Article> findByArticleIdWithTags(Long articleId) {
+        Article findArticleWithTags = queryFactory
+                .selectFrom(QArticle.article)
+                .join(QArticle.article.articleTags, articleTag).fetchJoin()
+                .join(articleTag.tag, tag).fetchJoin()
+                .join(article.category, category).fetchJoin()
+                .join(article.member, member).fetchJoin()
+                .where(QArticle.article.id.eq(articleId))
+                .fetchOne();
+        return Optional.ofNullable(findArticleWithTags);
+    }
+
+
 
     private List<Article> getArticleByCategory(String categoryTitle, Pageable pageable, List<String> childCategoryTitles) {
         List<Article> findArticleByCategory = queryFactory
@@ -66,17 +107,6 @@ public class ArticleSearchRepository {
         return count;
     }
 
-
-    /*
-    - title, content 에 검색어가 포함된 게시물 조회, size = 8
-    */
-    public Page<Article> findSearchArticleByKeyword(String keyword, Pageable pageable) {
-        List<Article> findArticleByKeyword = getArticleByKeyword(keyword, pageable);
-        Long count = getArticleCountByKeyword(keyword);
-
-        return new PageImpl<>(findArticleByKeyword, pageable, count);
-    }
-
     private List<Article> getArticleByKeyword(String keyword, Pageable pageable) {
         List<Article> findArticleByKeyword = queryFactory
                 .selectFrom(article)
@@ -101,16 +131,6 @@ public class ArticleSearchRepository {
         return count;
     }
 
-    /*
-        - tag와 관련된 게시물 조회, size = 8
-    */
-    public Page<Article> findSearchArticleByTag(String tagName, Pageable pageable) {
-        List<Article> findArticleByTag = getArticleByTag(tagName, pageable);
-        Long count = getArticleCountByTag(tagName);
-
-        return new PageImpl<>(findArticleByTag, pageable, count);
-    }
-
     private List<Article> getArticleByTag(String tagName, Pageable pageable) {
         return queryFactory
                 .selectFrom(article)
@@ -128,21 +148,6 @@ public class ArticleSearchRepository {
                 .fetchOne();
     }
 
-    /*
-        - 게시물 상세 데이터 요청
-     */
-    public Optional<Article> findByArticleIdWithTags(Long articleId) {
-        Article findArticleWithTags = queryFactory
-                .selectFrom(QArticle.article)
-                .join(QArticle.article.articleTags, articleTag).fetchJoin()
-                .join(articleTag.tag, tag).fetchJoin()
-                .join(article.category, category).fetchJoin()
-                .join(article.member, member).fetchJoin()
-                .where(QArticle.article.id.eq(articleId))
-                .fetchOne();
-        return Optional.ofNullable(findArticleWithTags);
-    }
-
 
     /*
         동적 쿼리 메서드
@@ -158,5 +163,6 @@ public class ArticleSearchRepository {
     private BooleanExpression keywordContains(String keyword) {
         return StringUtils.hasText(keyword) ? article.title.contains(keyword).or(article.content.contains(keyword)) : null;
     }
+
 
 }
