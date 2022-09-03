@@ -137,7 +137,7 @@ public class ArticleSearchRepository {
                 .join(QArticle.article.articleTags, articleTag).fetchJoin()
                 .join(articleTag.tag, tag).fetchJoin()
                 .join(article.category, category).fetchJoin()
-                .join(article.member, member)
+                .join(article.member, member).fetchJoin()
                 .where(QArticle.article.id.eq(articleId))
                 .fetchOne();
         return Optional.ofNullable(findArticleWithTags);

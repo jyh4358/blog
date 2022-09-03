@@ -19,8 +19,10 @@ public class CommentApiController {
 
     private final CommentService commentService;
 
-
-    @GetMapping("/api/v1/article/{articleId}/comments")
+    /**
+     *  게시물에 등록된 댓글 조회
+     */
+    @GetMapping("/api/v1/comments")
     public ResponseEntity<List<CommentListResponse>> findComment(
             @PathVariable Long articleId
     ) {
@@ -28,6 +30,9 @@ public class CommentApiController {
         return new ResponseEntity<>(commentListResponses, HttpStatus.OK);
     }
 
+    /**
+     *  게시물에 댓글 등록
+     */
     @PostMapping("/api/v1/comment")
     public ResponseEntity<Void> saveComment(
             @AuthenticationPrincipal CustomOauth2User customOauth2User,
@@ -37,16 +42,10 @@ public class CommentApiController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    // todo - 이후에 수정 구현(화면단 구현해야 됨)
-//    @PatchMapping("/api/v1/comment/{commentId}")
-//    public ResponseEntity<Void> modifyComment(
-//            @AuthenticationPrincipal CustomOauth2User customOauth2User,
-//            @PathVariable String commentId
-//    ) {
-//        System.out.println("commentId = " + commentId);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
 
+    /**
+     *  게시물
+     */
     @DeleteMapping("/api/v1/comment/{commentId}")
     public ResponseEntity<Void> deleteComment(
             @AuthenticationPrincipal CustomOauth2User customOauth2User,

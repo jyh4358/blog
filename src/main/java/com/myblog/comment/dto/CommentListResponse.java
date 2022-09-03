@@ -26,18 +26,18 @@ public class CommentListResponse {
 
     private List<ChildComment> childComments = new ArrayList<>();
 
-    public static CommentListResponse of(Comment comment, Member member) {
+    public static CommentListResponse of(Comment comment) {
         return new CommentListResponse(
                 comment.getId(),
                 comment.getContent(),
-                member.getId(),
-                member.getUsername(),
-                member.getPicUrl(),
+                comment.getMember().getId(),
+                comment.getMember().getUsername(),
+                comment.getMember().getPicUrl(),
                 comment.isSecret(),
                 comment.getCreatedDate(),
-                comment.getChild().stream().map(
-                        t -> ChildComment.of(t, t.getMember())
-                ).collect(Collectors.toList())
+                comment.getChild().stream()
+                        .map(ChildComment::of)
+                        .collect(Collectors.toList())
         );
     }
 }

@@ -21,6 +21,9 @@ public class CommentController {
 
     private final CommentService commentService;
 
+    /**
+     *    관리자 페이지 전체 댓글 조회
+     */
     @GetMapping("/admin/comments")
     public String findAllComment(
             @PageableDefault(size = 8, sort = "id",direction = Sort.Direction.DESC) Pageable pageable,
