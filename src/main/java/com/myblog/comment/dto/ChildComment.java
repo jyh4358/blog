@@ -21,13 +21,13 @@ public class ChildComment {
     private boolean secret;
     private LocalDateTime createDate;
 
-    public static ChildComment of(Comment comment, Member member) {
+    public static ChildComment of(Comment comment) {
         return new ChildComment(
                 comment.getId(),
                 comment.getContent(),
-                member.getId(),
-                member.getUsername(),
-                member.getPicUrl(),
+                comment.getMember().getId(),
+                comment.getMember().getUsername(),
+                comment.getMember().getPicUrl(),
                 comment.isSecret(),
                 comment.getCreatedDate()
         );

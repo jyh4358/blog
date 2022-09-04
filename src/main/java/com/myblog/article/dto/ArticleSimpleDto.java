@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class SimpleArticle {
+public class ArticleSimpleDto {
     private Long id;
     private String title;
 
-    public static SimpleArticle of(Article article) {
-        return new SimpleArticle(
+    public static ArticleSimpleDto of(Article article) {
+        return new ArticleSimpleDto(
                 article.getId(),
                 article.getTitle()
         );

@@ -48,8 +48,7 @@ public class Oauth2MemberService extends DefaultOAuth2UserService {
 
     //동일 이름을 식별하기 위해 Google 식별키로 구분
     private void changeMemberName(OAuth2User oAuth2User, Member member) {
-        String providerId = oAuth2User.getAttribute("sub");
-        String subProviderId = providerId.substring(0, 5);
+        String subProviderId = oAuth2User.getAttribute("sub").toString().substring(0, 5);
         String name = oAuth2User.getAttribute("name");
         member.setUsername(name + "#" + subProviderId);
     }

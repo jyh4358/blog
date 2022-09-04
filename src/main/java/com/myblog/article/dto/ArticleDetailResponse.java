@@ -1,13 +1,10 @@
 package com.myblog.article.dto;
 
 import com.myblog.article.model.Article;
-import com.myblog.article.model.Tag;
-import com.myblog.common.util.MarkdownUtils;
 import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static com.myblog.common.util.MarkdownUtils.*;
@@ -25,7 +22,7 @@ public class ArticleDetailResponse {
     private String category;
     private List<String> tags = new ArrayList<>();
     private LocalDateTime createDate;
-    private List<SimpleArticle> simpleArticles = new ArrayList<>();
+    private List<ArticleSimpleDto> articleSimpleDtos = new ArrayList<>();
 
     @Builder
     public ArticleDetailResponse(Long id,

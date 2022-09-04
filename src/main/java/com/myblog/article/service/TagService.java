@@ -17,10 +17,13 @@ public class TagService {
     private final TagRepository tagRepository;
 
 
+    /*
+        - 전체 태그 검색
+     */
     public List<TagResponse> findAllTag() {
-
         List<TagResponse> tagList = tagRepository.findAll().stream()
-                .map(tag -> TagResponse.of(tag.getName()))
+                .map(Tag::getName)
+                .map(TagResponse::of)
                 .collect(Collectors.toList());
 
         return tagList;

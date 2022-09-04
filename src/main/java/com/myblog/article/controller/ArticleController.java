@@ -34,10 +34,9 @@ public class ArticleController {
     private final CommentService commentService;
     private final TagService tagService;
 
+
     /**
-     * 메인 페이지 요청
-     * @model - popularArticleResponse : 인기 게시물
-     * @return
+     * 메인 페이지(index) 요청
      */
     @GetMapping("/")
     public String index(Model model) {
@@ -47,57 +46,9 @@ public class ArticleController {
         return "index";
     }
 
-    /**
-     * 게시물 작성 페이지 요청
-     * @model - tagListDto : tag list
-     *        - categoryListDto : category list
-     * @return
-     */
-    @GetMapping("/admin/article-write")
-    public String articleWriteForm(
-            Model model,
-            @AuthenticationPrincipal CustomOauth2User customOauth2User
-    ) {
-        RightLoginChecker.checkAdminMember(customOauth2User);
-        model.addAttribute("tagListDto", tagService.findAllTag());
-        model.addAttribute("categoryListDto", categoryService.findCategories());
-//        model.addAttribute("articleWriteDto", ArticleWriteDto.createDefaultArticleDto());
-
-        return "admin/article/articleWriteForm";
-    }
-
-
-    /**
-     * 게시물 수정 페이지 요청
-     * @param articleId - article 식별자
-     * @model - articleModifyResponse : article detail dto
-     *        - tagListDto : tag list
-     *        - categoryListDto : category list
-     * @return
-     */
-    @GetMapping("/admin/article-modify/{articleId}")
-    public String modifyArticleForm(
-            Model model,
-            @PathVariable Long articleId,
-            @AuthenticationPrincipal CustomOauth2User customOauth2User
-            ) {
-        ArticleModifyResponse articleModifyResponse = articleService.findModifyArticle(articleId, customOauth2User);
-
-        model.addAttribute("articleModifyResponse", articleModifyResponse);
-        model.addAttribute("tagListDto", tagService.findAllTag());
-        model.addAttribute("categoryListDto", categoryService.findCategories());
-
-        return "admin/article/articleModifyForm";
-    }
-
 
     /**
      * 게시물 상세 페이지 요청
-     * @param articleId : article 식별자
-     * @param hitCookieValue : 중복 조회 방지 cookie value
-     * @model - articleDetailResponse : article detail dto
-     *        - commentList : 게시물 comment list
-     * @return
      */
     @GetMapping("/article/{articleId}")
     public String articleView(
@@ -119,10 +70,44 @@ public class ArticleController {
 
 
     /**
-     * 게시물 카테고리별 조회
-     * @param pageable : 페이지 정보
-     * @param categoryTitle : category title
-     * @return
+     * 게시물 작성 페이지 요청
+     */
+    @GetMapping("/admin/article-write")
+    public String articleWriteForm(
+            Model model,
+            @AuthenticationPrincipal CustomOauth2User customOauth2User
+    ) {
+
+        RightLoginChecker.checkAdminMember(customOauth2User);
+        model.addAttribute("tagListDto", tagService.findAllTag());
+        model.addAttribute("categoryListDto", categoryService.findCategories());
+
+        return "admin/article/articleWriteForm";
+    }
+
+
+    /**
+     * 게시물 수정 페이지 요청
+     */
+    @GetMapping("/admin/article-modify/{articleId}")
+    public String modifyArticleForm(
+            Model model,
+            @PathVariable Long articleId,
+            @AuthenticationPrincipal CustomOauth2User customOauth2User
+    ) {
+
+        ArticleModifyResponse articleModifyResponse = articleService.findModifyArticle(articleId, customOauth2User);
+
+        model.addAttribute("articleModifyResponse", articleModifyResponse);
+        model.addAttribute("tagListDto", tagService.findAllTag());
+        model.addAttribute("categoryListDto", categoryService.findCategories());
+
+        return "admin/article/articleModifyForm";
+    }
+
+
+    /**
+     * 카테고리(categoryTitle)로 게시물 조회
      */
     @GetMapping("/article")
     public String findArticleByCategory(
@@ -137,11 +122,9 @@ public class ArticleController {
         return "article/articleList";
     }
 
+
     /**
-     * 검색어로 게시물 조회
-     * @param pageable
-     * @param keyword
-     * @return
+     * 검색어(keyword)로 게시물 조회
      */
     @GetMapping("/article-search")
     public String findSearchArticleByKeyword(
@@ -152,15 +135,13 @@ public class ArticleController {
         Page<ArticleCardBoxResponse> articleByKeywordResponse = articleService.findSearchArticle(keyword, pageable);
         model.addAttribute("articleCardBoxList", articleByKeywordResponse);
         model.addAttribute("pageDto", PagingUtill.createPageDto(articleByKeywordResponse));
+
         return "article/articleList";
     }
 
+
     /**
-     * 태그별 게시물 조회
-     * @param pageable
-     * @param tag
-     * @param model
-     * @return
+     * 태그(tag)로 게시물 조회
      */
     @GetMapping("/article-tag")
     public String findArticleByTag(
@@ -171,16 +152,13 @@ public class ArticleController {
         Page<ArticleCardBoxResponse> articleByTagResponse = articleService.findArticleByTag(tag, pageable);
         model.addAttribute("articleCardBoxList", articleByTagResponse);
         model.addAttribute("pageDto", PagingUtill.createPageDto(articleByTagResponse));
+
         return "article/articleList";
     }
 
+
     /**
-     * 관리자 페이지 게시물 조회
-     * @param pageable
-     * @param categoryTitle
-     * @param customOauth2User
-     * @param model
-     * @return
+     * [관리자 페이지] 게시물 조회
      */
     @GetMapping("/admin/article")
     public String adminSearchArticle(
@@ -193,8 +171,10 @@ public class ArticleController {
         Page<ArticleCardBoxResponse> articleAll = articleService.findArticleByCategory(categoryTitle, pageable);
         model.addAttribute("articleCardBoxList", articleAll);
         model.addAttribute("pageDto", PagingUtill.createPageDto(articleAll));
+
         return "admin/article/adminArticleList";
     }
+
 
     /*
         조회 수 중복 방지 로직
@@ -209,9 +189,6 @@ public class ArticleController {
         }
 
         String[] viewCookieList = hitCookieValue.split("/");
-        for (String s : viewCookieList) {
-            System.out.println("cookieviewview = " + s);
-        }
         if (Arrays.stream(viewCookieList).anyMatch(s -> s.equals(articleId.toString()))) {
             return false;
         } else {

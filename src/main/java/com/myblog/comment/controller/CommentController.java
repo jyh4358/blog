@@ -13,7 +13,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,6 +20,9 @@ public class CommentController {
 
     private final CommentService commentService;
 
+    /**
+     *    [관리자 페이지] 전체 댓글 조회
+     */
     @GetMapping("/admin/comments")
     public String findAllComment(
             @PageableDefault(size = 8, sort = "id",direction = Sort.Direction.DESC) Pageable pageable,
