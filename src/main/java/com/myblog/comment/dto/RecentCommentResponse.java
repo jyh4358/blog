@@ -1,5 +1,6 @@
 package com.myblog.comment.dto;
 
+import com.myblog.comment.model.Comment;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,13 +22,13 @@ public class RecentCommentResponse {
         this.secret = secret;
     }
 
-    public static RecentCommentResponse of(Long articleId, String content, Long memberId, String username, boolean secret) {
+    public static RecentCommentResponse of(Comment comment) {
         return new RecentCommentResponse(
-                articleId,
-                content,
-                memberId,
-                username,
-                secret
+                comment.getArticle().getId(),
+                comment.getArticle().getContent(),
+                comment.getMember().getId(),
+                comment.getMember().getUsername(),
+                comment.isSecret()
         );
     }
 }

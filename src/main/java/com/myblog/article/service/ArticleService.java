@@ -6,7 +6,7 @@ import com.myblog.article.model.Article;
 import com.myblog.article.model.ArticleTag;
 import com.myblog.article.model.Tag;
 import com.myblog.article.repository.ArticleRepository;
-import com.myblog.article.repository.ArticleSearchRepository;
+import com.myblog.article.repository.ArticleQueryRepository;
 import com.myblog.article.repository.ArticleTagRepository;
 import com.myblog.article.repository.TagRepository;
 import com.myblog.category.model.Category;
@@ -17,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,7 +36,7 @@ public class ArticleService {
     private static final int PAGE_SIZE = 8;
 
     private final ArticleRepository articleRepository;
-    private final ArticleSearchRepository articleSearchRepository;
+    private final ArticleQueryRepository articleQueryRepository;
     private final CategoryRepository categoryRepository;
     private final TagRepository tagRepository;
     private final ArticleTagRepository articleTagRepository;
@@ -45,99 +44,104 @@ public class ArticleService {
 
 
     /*
-        - 메인 페이지 인기 게시물 6개 요청
+        - 메인 페이지 인기 게시물 조회, size = 8
      */
     public List<PopularArticleResponse> findPopularArticle() {
-        List<Article> findPopularArticleList = articleRepository.findTop6ByOrderByHitDesc();
+        List<Article> popularArticleList = articleRepository.findTop6ByOrderByHitDesc();
 
-        return findPopularArticleList.stream()
-                .map(popularArticle -> PopularArticleResponse.of(popularArticle))
+        return popularArticleList.stream()
+                .map(PopularArticleResponse::of)
                 .collect(Collectors.toList());
     }
 
 
+    /*
+        - 게시물 작성
+     */
     @Transactional
-    public Article writeArticle(ArticleWriteDto articleWriteDto, CustomOauth2User customOauth2User) {
+    public Article writeArticle(ArticleWriteRequest articleWriteRequest, CustomOauth2User customOauth2User) {
         RightLoginChecker.checkAdminMember(customOauth2User);
 
-        Category category = categoryRepository
-                .findById(articleWriteDto.getCategory()).orElseThrow(NOT_FOUND_CATEGORY::getException);
+        Category category = categoryRepository.findById(articleWriteRequest.getCategory())
+                .orElseThrow(NOT_FOUND_CATEGORY::getException);
 
-        List<Tag> tagList = getTags(articleWriteDto.getTags());
-        List<ArticleTag> collect = getArticleTags(tagList);
+        List<ArticleTag> articleTags = getArticleTags(articleWriteRequest.getTags());
 
-
-        Article article = Article.createArticle(articleWriteDto, customOauth2User.getMember(), category, collect);
+        Article article = Article.createArticle(articleWriteRequest, customOauth2User.getMember(), category, articleTags);
         return articleRepository.save(article);
 
     }
 
 
-
+    /*
+        - 게시물 수정을 위한 기존 게시물 상세 조회
+     */
     public ArticleModifyResponse findModifyArticle(Long articleId, CustomOauth2User customOauth2User) {
         RightLoginChecker.checkAdminMember(customOauth2User);
-        Article article = articleRepository.findById(articleId).orElseThrow(NOT_FOUNT_ARTICLE::getException);
-        List<ArticleTag> findArticleTag = articleTagRepository.findByArticle_Id(articleId);
-        List<String> tags = findArticleTag.stream()
-                .map(s -> s.getTag().getName())
+
+        Article article = articleQueryRepository.findByArticleIdWithArticleTags(articleId).orElseThrow(NOT_FOUNT_ARTICLE::getException);
+        List<String> tags = article.getArticleTags().stream()
+                .map(ArticleTag::getTag)
+                .map(Tag::getName)
                 .collect(Collectors.toList());
 
-        ArticleModifyResponse articleModifyResponse = ArticleModifyResponse.of(article, tags);
-
-        return articleModifyResponse;
+        return ArticleModifyResponse.of(article, tags);
     }
 
 
+    /*
+        - 게시물 수정
+     */
     @Transactional
-    public Long modifyArticle(Long articleId, ArticleWriteDto articleWriteDto, CustomOauth2User customOauth2User) {
+    public Long modifyArticle(Long articleId, ArticleWriteRequest articleWriteRequest, CustomOauth2User customOauth2User) {
         RightLoginChecker.checkAdminMember(customOauth2User);
-        Article article = articleRepository.findById(articleId).orElseThrow(NOT_FOUNT_ARTICLE::getException);
+
+        Article article = articleQueryRepository.findByArticleIdWithArticleTags(articleId).orElseThrow(NOT_FOUNT_ARTICLE::getException);
         Category category = categoryRepository
-                .findById(articleWriteDto.getCategory()).orElseThrow(NOT_FOUND_CATEGORY::getException);
-        List<ArticleTag> findArticleTagList = articleTagRepository.findByArticle_Id(article.getId());
-        articleTagRepository.deleteAll(findArticleTagList);
+                .findById(articleWriteRequest.getCategory()).orElseThrow(NOT_FOUND_CATEGORY::getException);
 
-        List<Tag> tags = getTags(articleWriteDto.getTags());
+        articleTagRepository.deleteAll(article.getArticleTags());
 
-        List<ArticleTag> collect = getArticleTags(tags);
+        List<ArticleTag> articleTags = getArticleTags(articleWriteRequest.getTags());
+
 
         article.modifyArticle(
-                articleWriteDto.getTitle(),
-                articleWriteDto.getContent(),
-                articleWriteDto.getThumbnailUrl(),
+                articleWriteRequest.getTitle(),
+                articleWriteRequest.getContent(),
+                articleWriteRequest.getThumbnailUrl(),
                 category);
-        article.addArticleTags(collect);
+        article.addArticleTags(articleTags);
 
         return article.getId();
     }
 
+
     /*
-        - 게시물 상세 데이터 요청 및 조회 수 count
+        - 게시물 상세 조회 및 조회 수 증가
      */
     @Transactional
     public ArticleDetailResponse findArticleDetail(Long articleId, boolean hitCheck) {
-        // todo - fetch join으로 변경할
-        Article article = articleRepository.findById(articleId).orElseThrow(NOT_FOUNT_ARTICLE::getException);
+        Article article = articleQueryRepository.findByArticleIdWithTags(articleId).orElseThrow(NOT_FOUNT_ARTICLE::getException);
         if (hitCheck) {
             article.addHit();
         }
 
-        List<String> tags = articleTagRepository.findByArticle_Id(articleId).stream()
-                .map(articleTag -> articleTag.getTag().getName())
+        List<String> tags = article.getArticleTags().stream()
+                .map(ArticleTag::getTag)
+                .map(Tag::getName)
                 .collect(Collectors.toList());
 
-        ArticleDetailResponse detailResponse = ArticleDetailResponse
-                .of(article, tags, article.getMember().getUsername());
+        ArticleDetailResponse detailResponse = ArticleDetailResponse.of(article, tags, article.getMember().getUsername());
 
-        List<SimpleArticle> simpleArticles = getSimpleArticleByCategory(article.getCategory());
-        detailResponse.setSimpleArticles(simpleArticles);
+        List<ArticleSimpleDto> articlesSimpleDtoListByCategory = getSimpleArticleByCategory(article.getCategory());
+        detailResponse.setArticleSimpleDtos(articlesSimpleDtoListByCategory);
 
         return detailResponse;
     }
 
 
     /*
-        - 카테고리별 최신 게시물 8개 요청
+        - 카테고리별 최신 게시물 요청, size = 8
      */
     public Page<ArticleCardBoxResponse> findArticleByCategory(String categoryTitle, Pageable pageable) {
         Page<Article> findArticle = null;
@@ -150,75 +154,77 @@ public class ArticleService {
                     .map(Category::getTitle)
                     .collect(Collectors.toList());
 
-            findArticle = articleSearchRepository.findSearchArticleByCategory(categoryTitle, childCategoryTitles, pageable);
+            findArticle = articleQueryRepository.findSearchArticleByCategory(categoryTitle, childCategoryTitles, pageable);
 
         }
 
-        return findArticle.map(article -> ArticleCardBoxResponse.of(article));
+        return findArticle.map(ArticleCardBoxResponse::of);
     }
 
+
     /*
-        - 무한 스크롤를 위한 최신 게시물 8개 씩 요청
+        - 무한 스크롤를 위한 최신 게시물 요청, size = 8
      */
     public List<ArticleCardBoxResponse> findRecentArticle(int page) {
-
         return articleRepository.findByOrderByIdDesc(PageRequest.of(page, PAGE_SIZE))
-                .map(recentArticle -> ArticleCardBoxResponse.of(recentArticle))
+                .map(ArticleCardBoxResponse::of)
                 .getContent();
     }
 
+
+    /*
+        - title, content 에 검색어가 포함된 게시물 조회, size = 8
+     */
     public Page<ArticleCardBoxResponse> findSearchArticle(String keyword, Pageable pageable) {
-
-        return articleSearchRepository.findSearchArticleBykeyword(keyword, pageable)
-                .map(articleByKeyword -> ArticleCardBoxResponse.of(articleByKeyword));
+        return articleQueryRepository.findSearchArticleByKeyword(keyword, pageable)
+                .map(ArticleCardBoxResponse::of);
     }
 
+
+    /*
+        - tag와 관련된 게시물 조회, size = 8
+     */
     public Page<ArticleCardBoxResponse> findArticleByTag(String tag, Pageable pageable) {
-
-        return articleSearchRepository.findSearchArticleByTag(tag, pageable)
-                .map(articleByTag -> ArticleCardBoxResponse.of(articleByTag));
+        return articleQueryRepository.findSearchArticleByTag(tag, pageable)
+                .map(ArticleCardBoxResponse::of);
     }
 
+
+    /*
+        - 게시물 삭제
+     */
     @Transactional
     public void deleteArticle(Long articleId, CustomOauth2User customOauth2User) {
-        RightLoginChecker.checkLoginMember(customOauth2User);
+        RightLoginChecker.checkAdminMember(customOauth2User);
         Article article = articleRepository.findById(articleId).orElseThrow(NOT_FOUNT_ARTICLE::getException);
         articleRepository.delete(article);
     }
 
+
     /*
-        서비스 로직
+        ======= 서비스 로직 ========
      */
-    private List<SimpleArticle> getSimpleArticleByCategory(Category category) {
-        List<Article> simpleArticleByCategory = articleRepository.findTop6ByCategoryOrderByCreatedDateDesc(category);
+    private List<ArticleSimpleDto> getSimpleArticleByCategory(Category category) {
+        List<Article> articleSimpleDtoListByCategory = articleRepository.findTop6ByCategoryOrderByCreatedDateDesc(category);
 
-        return simpleArticleByCategory.stream()
-                .map(articleByCategory -> SimpleArticle.of(articleByCategory))
+        return articleSimpleDtoListByCategory.stream()
+                .map(ArticleSimpleDto::of)
                 .collect(Collectors.toList());
     }
 
-    private List<ArticleTag> getArticleTags(List<Tag> tagList) {
 
-        return tagList.stream()
-                .map(articleTag -> ArticleTag.createArticleTag(articleTag))
-                .collect(Collectors.toList());
-    }
-
-    private List<Tag> getTags(String tags) {
+    private List<ArticleTag> getArticleTags(String tags) {
         List<Map<String,String>> tagsDtoArrayList = gson.fromJson(tags, ArrayList.class);
-        List<Tag> tagList = tagsDtoArrayList.stream()
-                .map(tag -> findOrCreateTag(tag.get("value")))
-                .collect(Collectors.toList());
 
-        return tagList;
+        return tagsDtoArrayList.stream()
+                .map(tag -> findOrCreateTag(tag.get("value")))
+                .map(ArticleTag::createArticleTag)
+                .collect(Collectors.toList());
     }
 
     private Tag findOrCreateTag(String tagName) {
         return tagRepository.findByName(tagName)
                 .orElseGet(() -> tagRepository.save(Tag.createTag(tagName)));
     }
-
-
-
 
 }

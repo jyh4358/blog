@@ -1,6 +1,6 @@
 package com.myblog.article.model;
 
-import com.myblog.article.dto.ArticleWriteDto;
+import com.myblog.article.dto.ArticleWriteRequest;
 import com.myblog.category.model.Category;
 import com.myblog.comment.model.Comment;
 import com.myblog.common.model.BasicEntity;
@@ -60,11 +60,11 @@ public class Article extends BasicEntity {
         this.category = category;
     }
 
-    public static Article createArticle(ArticleWriteDto articleWriteDto, Member member, Category category, List<ArticleTag> articleTags) {
+    public static Article createArticle(ArticleWriteRequest articleWriteRequest, Member member, Category category, List<ArticleTag> articleTags) {
         Article article = Article.builder()
-                .title(articleWriteDto.getTitle())
-                .content(articleWriteDto.getContent())
-                .thumbnailUrl(articleWriteDto.getThumbnailUrl())
+                .title(articleWriteRequest.getTitle())
+                .content(articleWriteRequest.getContent())
+                .thumbnailUrl(articleWriteRequest.getThumbnailUrl())
                 .member(member)
                 .category(category)
                 .build();

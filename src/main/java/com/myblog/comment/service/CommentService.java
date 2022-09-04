@@ -7,6 +7,7 @@ import com.myblog.comment.dto.CommentSaveRequest;
 import com.myblog.comment.dto.ManageCommentResponse;
 import com.myblog.comment.dto.RecentCommentResponse;
 import com.myblog.comment.model.Comment;
+import com.myblog.comment.repository.CommentQueryRepository;
 import com.myblog.comment.repository.CommentRepository;
 import com.myblog.common.checker.RightLoginChecker;
 import com.myblog.member.model.Member;
@@ -32,21 +33,29 @@ import static com.myblog.common.exception.ExceptionMessage.*;
 public class CommentService {
 
     private final CommentRepository commentRepository;
+    private final CommentQueryRepository commentQueryRepository;
     private final ArticleRepository articleRepository;
     private final MemberRepository memberRepository;
 
 
+    /*
+        - 게시물에 등록된 댓글 조회
+     */
     public List<CommentListResponse> findCommentList(Long articleId) {
 
         Article article = articleRepository.findById(articleId).orElseThrow(NOT_FOUNT_ARTICLE::getException);
-        List<Comment> findComments = commentRepository.findByArticle_Id(article.getId());
 
-        return findComments.stream()
-                .filter(s -> s.getParent() == null)
-                .map(parentComment -> CommentListResponse.of(parentComment, parentComment.getMember()))
+        return commentQueryRepository.findCommentListByArticleId(article.getId()).stream()
+                .filter(comment -> comment.getParent() == null)
+                .map(parentComment -> CommentListResponse.of(parentComment))
                 .collect(Collectors.toList());
     }
 
+
+
+    /*
+        - 게시물에 댓글 등록
+     */
     @Transactional
     @CacheEvict(value = "sideBarRecentCommentCaching", allEntries = true)
     public void saveComment(CustomOauth2User customOauth2User, CommentSaveRequest commentSaveRequest) {
@@ -55,66 +64,62 @@ public class CommentService {
         Member member = memberRepository.findById(customOauth2User.getMemberId()).orElseThrow(NOT_FOUND_MEMBER::getException);
         Article article = articleRepository.findById(commentSaveRequest.getArticleId()).orElseThrow(NOT_FOUNT_ARTICLE::getException);
 
+        Comment parentComment = null;
         if (commentSaveRequest.checkParentCommentId()) {
-            Comment parentComment = commentRepository.findById(commentSaveRequest.getParentCommentId()).orElseThrow(NOT_FOUND_CATEGORY::getException);
-            commentRepository.save(
-                    Comment.createComment(
-                            commentSaveRequest.getContent(),
-                            commentSaveRequest.isSecret(),
-                            article,
-                            parentComment,
-                            member
-                    )
-            );
-        } else {
-            commentRepository.save(
-                    Comment.createComment(
-                            commentSaveRequest.getContent(),
-                            commentSaveRequest.isSecret(),
-                            article,
-                            null,
-                            member
-                    )
-            );
+            parentComment = commentRepository.findById(commentSaveRequest.getParentCommentId()).orElseThrow(NOT_FOUND_CATEGORY::getException);
         }
+
+        commentRepository.save(
+                Comment.createComment(
+                        commentSaveRequest.getContent(),
+                        commentSaveRequest.isSecret(),
+                        article,
+                        parentComment,
+                        member
+                ));
     }
 
-    public Page<ManageCommentResponse> findAllComment(Pageable pageable, CustomOauth2User customOauth2User) {
-        RightLoginChecker.checkAdminMember(customOauth2User);
-        Page<Comment> findCommentList = commentRepository.findAll(pageable);
-        return findCommentList.map(
-                findComment -> ManageCommentResponse.of(findComment)
-        );
-    }
 
+
+    /*
+        - 게시물에 등록된 댓글 삭제
+     */
     @Transactional
     @CacheEvict(value = "sideBarRecentCommentCaching", allEntries = true)
     public void deleteComment(CustomOauth2User customOauth2User, Long commentId) {
         RightLoginChecker.checkLoginMember(customOauth2User);
 
         if (customOauth2User.getMemberRole().equals(Role.ADMIN)) {
-            commentRepository.delete(
-                    commentRepository.findById(commentId).orElseThrow(NOT_FOUNT_COMMENT::getException)
-            );
+            commentRepository.delete(commentRepository.findById(commentId).orElseThrow(NOT_FOUNT_COMMENT::getException));
         }
         if (customOauth2User.getMemberRole().equals(Role.USER)){
-            commentRepository.delete(
-                    commentRepository.findCommentByIdAndMember_id(commentId, customOauth2User.getMemberId()).orElseThrow(NOT_FOUNT_COMMENT::getException)
-            );
+            commentRepository.delete(commentRepository.findCommentByIdAndMember_id(commentId, customOauth2User.getMemberId())
+                    .orElseThrow(NOT_FOUNT_COMMENT::getException));
         }
     }
 
+
+
+    /*
+        - [관리자 페이지] 전체 댓글 조회
+     */
+    public Page<ManageCommentResponse> findAllComment(Pageable pageable, CustomOauth2User customOauth2User) {
+        RightLoginChecker.checkAdminMember(customOauth2User);
+
+        return commentQueryRepository.findAllComment(pageable)
+                .map(ManageCommentResponse::of);
+    }
+
+
+
+    /*
+        - 사이드바에 필요한 댓글 조회, 캐시 적용
+     */
     @Cacheable(value = "sideBarRecentCommentCaching", key = "0")
     public List<RecentCommentResponse> findRecentComment() {
-        List<Comment> recentTop5ByOrderByIdDesc = commentRepository.findTop5ByOrderByIdDesc();
 
-        return commentRepository.findTop5ByOrderByIdDesc().stream()
-                .map(recentComment -> RecentCommentResponse.of(
-                        recentComment.getArticle().getId(),
-                        recentComment.getContent(),
-                        recentComment.getMember().getId(),
-                        recentComment.getMember().getUsername(),
-                        recentComment.isSecret()))
+        return commentQueryRepository.findRecentComment().stream()
+                .map(RecentCommentResponse::of)
                 .collect(Collectors.toList());
     }
 

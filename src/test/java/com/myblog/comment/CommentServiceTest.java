@@ -1,6 +1,6 @@
 package com.myblog.comment;
 
-import com.myblog.article.dto.ArticleWriteDto;
+import com.myblog.article.dto.ArticleWriteRequest;
 import com.myblog.article.model.Article;
 import com.myblog.article.model.ArticleTag;
 import com.myblog.article.model.Tag;
@@ -38,7 +38,7 @@ public class CommentServiceTest extends ServiceBaseTest {
         Category savedCategory = categoryRepository.save(new Category("Java"));
 
         Tag savedTag = tagRepository.save(new Tag("java"));
-        ArticleWriteDto articleWriteDto = new ArticleWriteDto(
+        ArticleWriteRequest articleWriteRequest = new ArticleWriteRequest(
                 "게시물 타이틀",
                 "게시물 내용",
                 "게시물 썸내일",
@@ -46,7 +46,7 @@ public class CommentServiceTest extends ServiceBaseTest {
                 "[{\"value\":\"Java\"},{\"value\":\"Study\"}]"
         );
         ArticleTag savedArticleTag = new ArticleTag(savedTag);
-        Article savedArticle = articleRepository.save(Article.createArticle(articleWriteDto, customOauth2User.getMember(), savedCategory, List.of(savedArticleTag)));
+        Article savedArticle = articleRepository.save(Article.createArticle(articleWriteRequest, customOauth2User.getMember(), savedCategory, List.of(savedArticleTag)));
 
         CommentSaveRequest commentSaveRequest = new CommentSaveRequest(savedArticle.getId(), "댓글작성", false, null);
 
@@ -70,7 +70,7 @@ public class CommentServiceTest extends ServiceBaseTest {
         Category savedCategory = categoryRepository.save(new Category("Java"));
 
         Tag savedTag = tagRepository.save(new Tag("java"));
-        ArticleWriteDto articleWriteDto = new ArticleWriteDto(
+        ArticleWriteRequest articleWriteRequest = new ArticleWriteRequest(
                 "게시물 타이틀",
                 "게시물 내용",
                 "게시물 썸내일",
@@ -78,7 +78,7 @@ public class CommentServiceTest extends ServiceBaseTest {
                 "[{\"value\":\"Java\"},{\"value\":\"Study\"}]"
         );
         ArticleTag savedArticleTag = new ArticleTag(savedTag);
-        Article savedArticle = articleRepository.save(Article.createArticle(articleWriteDto, customOauth2User.getMember(), savedCategory, List.of(savedArticleTag)));
+        Article savedArticle = articleRepository.save(Article.createArticle(articleWriteRequest, customOauth2User.getMember(), savedCategory, List.of(savedArticleTag)));
 
         Comment savedComment = commentRepository.save(Comment.createComment("댓글 내용", false, savedArticle, null, member));
 
