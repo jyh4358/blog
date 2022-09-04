@@ -76,6 +76,7 @@ public class Article extends BasicEntity {
     }
 
     public void addArticleTags(List<ArticleTag> articleTagDto) {
+        articleTags.clear();
         for (ArticleTag articleTag : articleTagDto) {
             articleTags.add(articleTag);
             articleTag.setArticle(this);
