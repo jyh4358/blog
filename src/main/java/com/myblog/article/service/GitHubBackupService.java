@@ -2,17 +2,13 @@ package com.myblog.article.service;
 
 import com.myblog.article.model.Article;
 import com.myblog.article.properties.GithubProperties;
-import com.myblog.common.exception.ExceptionMessage;
 import lombok.RequiredArgsConstructor;
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GitHub;
 import org.kohsuke.github.GitHubBuilder;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
-
-import static com.myblog.common.exception.ExceptionMessage.FAIL_BACKUP;
 
 @Service
 @RequiredArgsConstructor

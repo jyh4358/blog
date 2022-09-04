@@ -1,7 +1,6 @@
 package com.myblog.article.repository;
 
 import com.myblog.article.model.Article;
-import com.myblog.article.model.QArticle;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -75,7 +74,7 @@ public class ArticleQueryRepository {
                 .join(articleTag.tag, tag).fetchJoin()
                 .join(article.category, category).fetchJoin()
                 .join(article.member, member).fetchJoin()
-                .where(QArticle.article.id.eq(articleId))
+                .where(article.id.eq(articleId))
                 .fetchOne();
         return Optional.ofNullable(articleWithTags);
     }
@@ -88,7 +87,7 @@ public class ArticleQueryRepository {
                 .selectFrom(article)
                 .join(article.articleTags, articleTag).fetchJoin()
                 .join(articleTag.tag, tag)
-                .where(QArticle.article.id.eq(articleId))
+                .where(article.id.eq(articleId))
                 .fetchOne();
         return Optional.ofNullable(articleWithArticleTags);
     }
