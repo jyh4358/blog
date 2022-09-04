@@ -25,7 +25,7 @@ import static com.myblog.member.model.QMember.member;
 @Repository
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class ArticleSearchRepository {
+public class ArticleQueryRepository {
     private final JPAQueryFactory queryFactory;
 
     /*
@@ -34,10 +34,10 @@ public class ArticleSearchRepository {
      */
     public Page<Article> findSearchArticleByCategory(String categoryTitle, List<String> childCategoryTitles, Pageable pageable) {
 
-        List<Article> content = getArticleByCategory(categoryTitle, pageable, childCategoryTitles);
+        List<Article> articleByCategory = getArticleByCategory(categoryTitle, pageable, childCategoryTitles);
         Long count = getArticleCountByCategory(categoryTitle, childCategoryTitles);
 
-        return new PageImpl<>(content, pageable, count);
+        return new PageImpl<>(articleByCategory, pageable, count);
     }
 
 
@@ -47,10 +47,10 @@ public class ArticleSearchRepository {
         - title, content 에 검색어가 포함된 게시물 조회
     */
     public Page<Article> findSearchArticleByKeyword(String keyword, Pageable pageable) {
-        List<Article> findArticleByKeyword = getArticleByKeyword(keyword, pageable);
+        List<Article> articleByKeyword = getArticleByKeyword(keyword, pageable);
         Long count = getArticleCountByKeyword(keyword);
 
-        return new PageImpl<>(findArticleByKeyword, pageable, count);
+        return new PageImpl<>(articleByKeyword, pageable, count);
     }
 
 
@@ -58,10 +58,10 @@ public class ArticleSearchRepository {
         - tag 로 게시물 조회, size = 8
     */
     public Page<Article> findSearchArticleByTag(String tagName, Pageable pageable) {
-        List<Article> findArticleByTag = getArticleByTag(tagName, pageable);
+        List<Article> articleByTag = getArticleByTag(tagName, pageable);
         Long count = getArticleCountByTag(tagName);
 
-        return new PageImpl<>(findArticleByTag, pageable, count);
+        return new PageImpl<>(articleByTag, pageable, count);
     }
 
 
@@ -69,21 +69,33 @@ public class ArticleSearchRepository {
         - 게시물 상세 데이터 조회
      */
     public Optional<Article> findByArticleIdWithTags(Long articleId) {
-        Article findArticleWithTags = queryFactory
-                .selectFrom(QArticle.article)
-                .join(QArticle.article.articleTags, articleTag).fetchJoin()
+        Article articleWithTags = queryFactory
+                .selectFrom(article)
+                .join(article.articleTags, articleTag).fetchJoin()
                 .join(articleTag.tag, tag).fetchJoin()
                 .join(article.category, category).fetchJoin()
                 .join(article.member, member).fetchJoin()
                 .where(QArticle.article.id.eq(articleId))
                 .fetchOne();
-        return Optional.ofNullable(findArticleWithTags);
+        return Optional.ofNullable(articleWithTags);
+    }
+
+    /*
+        - 게시물 수정을 하기위한 기존 게시물 조회
+     */
+    public Optional<Article> findByArticleIdWithArticleTags(Long articleId) {
+        Article articleWithArticleTags = queryFactory
+                .selectFrom(article)
+                .join(article.articleTags, articleTag).fetchJoin()
+                .join(articleTag.tag, tag)
+                .where(QArticle.article.id.eq(articleId))
+                .fetchOne();
+        return Optional.ofNullable(articleWithArticleTags);
     }
 
 
-
     private List<Article> getArticleByCategory(String categoryTitle, Pageable pageable, List<String> childCategoryTitles) {
-        List<Article> findArticleByCategory = queryFactory
+        return queryFactory
                 .selectFrom(article)
                 .join(article.category, category).fetchJoin()
                 .where(
@@ -93,42 +105,34 @@ public class ArticleSearchRepository {
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
-        return findArticleByCategory;
     }
 
     private Long getArticleCountByCategory(String categoryTitle, List<String> childCategoryTitles) {
-        Long count = queryFactory
+        return queryFactory
                 .select(article.count())
                 .from(article)
                 .where(
                         categoryTitleEq(categoryTitle).or(childCategoriesTitleIn(childCategoryTitles))
                 )
                 .fetchOne();
-        return count;
     }
 
     private List<Article> getArticleByKeyword(String keyword, Pageable pageable) {
-        List<Article> findArticleByKeyword = queryFactory
+        return queryFactory
                 .selectFrom(article)
-                .where(
-                        keywordContains(keyword)
-                )
+                .where(keywordContains(keyword))
                 .orderBy(article.id.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
-        return findArticleByKeyword;
     }
 
     private Long getArticleCountByKeyword(String keyword) {
-        Long count = queryFactory
+        return queryFactory
                 .select(article.count())
                 .from(article)
-                .where(
-                        keywordContains(keyword)
-                )
+                .where(keywordContains(keyword))
                 .fetchOne();
-        return count;
     }
 
     private List<Article> getArticleByTag(String tagName, Pageable pageable) {
