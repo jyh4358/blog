@@ -14,7 +14,5 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
             "from Article a join a.category c group by c.id")
     List<CategoryQueryDto> findCategoryCount();
 
-    List<Category> findByParent_Id(Long parentId);
-
     Optional<Category> findByTitle(String title);
 }

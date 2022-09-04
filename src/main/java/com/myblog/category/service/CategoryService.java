@@ -25,7 +25,9 @@ public class CategoryService {
 
     private final CategoryRepository categoryRepository;
 
-
+    /*
+        - 카테고리 조회
+     */
     public CategoryListDto findCategories() {
         List<ParentCategoryList> parentCategoryLists = categoryRepository.findAll().stream()
                 .filter(parentCategory -> parentCategory.getParent() == null)
@@ -35,6 +37,9 @@ public class CategoryService {
         return CategoryListDto.of(parentCategoryLists);
     }
 
+    /*
+        - 카테고리 등록 및 수정
+     */
     @Transactional
     @CacheEvict(value = "sideBarCategoryCaching", allEntries = true)
     public void editCategory(CategoryListDto categoryListDto, CustomOauth2User customOauth2User) {
@@ -51,7 +56,9 @@ public class CategoryService {
         }
     }
 
-
+    /*
+        사이드바 카테고리와 카테고리에 있는 게시물 수 조회
+     */
     @Cacheable(value = "sideBarCategoryCaching", key = "0")
     public CategoryListDto findSidebarCategory() {
         CategoryListDto categoryListDto = findCategories();
@@ -135,7 +142,8 @@ public class CategoryService {
             });
         } else {
             List<ChildCategoryList> deleteChildCategories = parentCategoryList.getChildCategoryLists().stream()
-                    .filter(childCategory -> childCategory.getDeleteCheck()).collect(Collectors.toList());
+                    .filter(childCategory -> childCategory.getDeleteCheck())
+                    .collect(Collectors.toList());
 
             categories.forEach(childCategory ->
             {

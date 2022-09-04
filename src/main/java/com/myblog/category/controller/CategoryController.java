@@ -21,7 +21,9 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
-
+    /**
+     *  카테고리 조회
+     */
     @GetMapping("/admin/categories")
     public String categoryList(Model model) {
 
@@ -31,7 +33,9 @@ public class CategoryController {
         return "admin/category/categoryList";
     }
 
-
+    /**
+     *  카테고리 등록 및 수정
+     */
     @PostMapping("/admin/categories")
     public @ResponseBody ResponseEntity<Void> editCategory(
             @RequestBody CategoryListDto categoryListDto,
