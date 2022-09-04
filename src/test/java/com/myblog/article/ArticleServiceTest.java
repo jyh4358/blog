@@ -1,7 +1,7 @@
 package com.myblog.article;
 
 import com.myblog.article.dto.ArticleDetailResponse;
-import com.myblog.article.dto.ArticleWriteDto;
+import com.myblog.article.dto.ArticleWriteRequest;
 import com.myblog.article.model.Article;
 import com.myblog.article.model.ArticleTag;
 import com.myblog.article.model.Tag;
@@ -33,7 +33,7 @@ public class ArticleServiceTest extends ServiceBaseTest {
         CustomOauth2User customOauth2User = TestHelper.인증_객체_생성(member);
 
         Category category = categoryRepository.save(new Category("Java"));
-        ArticleWriteDto articleWriteDto = new ArticleWriteDto(
+        ArticleWriteRequest articleWriteRequest = new ArticleWriteRequest(
                 "게시물 타이틀",
                 "게시물 내용",
                 "게시물 썸내일",
@@ -41,13 +41,13 @@ public class ArticleServiceTest extends ServiceBaseTest {
                 "[{\"value\":\"Java\"},{\"value\":\"Study\"}]"
         );
         // when
-        Article article = articleService.writeArticle(articleWriteDto, customOauth2User);
+        Article article = articleService.writeArticle(articleWriteRequest, customOauth2User);
 
         // then
-        Assertions.assertThat(article.getTitle()).isEqualTo(articleWriteDto.getTitle());
-        Assertions.assertThat(article.getContent()).isEqualTo(articleWriteDto.getContent());
-        Assertions.assertThat(article.getThumbnailUrl()).isEqualTo(articleWriteDto.getThumbnailUrl());
-        Assertions.assertThat(article.getCategory().getId()).isEqualTo(articleWriteDto.getCategory());
+        Assertions.assertThat(article.getTitle()).isEqualTo(articleWriteRequest.getTitle());
+        Assertions.assertThat(article.getContent()).isEqualTo(articleWriteRequest.getContent());
+        Assertions.assertThat(article.getThumbnailUrl()).isEqualTo(articleWriteRequest.getThumbnailUrl());
+        Assertions.assertThat(article.getCategory().getId()).isEqualTo(articleWriteRequest.getCategory());
         Assertions.assertThat(article.getArticleTags().size()).isEqualTo(2);
     }
 
@@ -62,7 +62,7 @@ public class ArticleServiceTest extends ServiceBaseTest {
         Category savedCategory = categoryRepository.save(new Category("Java"));
 
         Tag savedTag = tagRepository.save(new Tag("java"));
-        ArticleWriteDto articleWriteDto = new ArticleWriteDto(
+        ArticleWriteRequest articleWriteRequest = new ArticleWriteRequest(
                 "게시물 타이틀",
                 "게시물 내용",
                 "게시물 썸내일",
@@ -70,7 +70,7 @@ public class ArticleServiceTest extends ServiceBaseTest {
                 "[{\"value\":\"Java\"},{\"value\":\"Study\"}]"
         );
         ArticleTag savedArticleTag = new ArticleTag(savedTag);
-        Article savedArticle = articleRepository.save(Article.createArticle(articleWriteDto, customOauth2User.getMember(), savedCategory, List.of(savedArticleTag)));
+        Article savedArticle = articleRepository.save(Article.createArticle(articleWriteRequest, customOauth2User.getMember(), savedCategory, List.of(savedArticleTag)));
 
         // when
         ArticleDetailResponse articleDetail = articleService.findArticleDetail(savedArticle.getId(), false);
@@ -98,7 +98,7 @@ public class ArticleServiceTest extends ServiceBaseTest {
         Category savedCategory = categoryRepository.save(new Category("Java"));
 
         Tag savedTag = tagRepository.save(new Tag("java"));
-        ArticleWriteDto articleWriteDto = new ArticleWriteDto(
+        ArticleWriteRequest articleWriteRequest = new ArticleWriteRequest(
                 "게시물 타이틀",
                 "게시물 내용",
                 "게시물 썸내일",
@@ -106,9 +106,9 @@ public class ArticleServiceTest extends ServiceBaseTest {
                 "[{\"value\":\"Java\"},{\"value\":\"Study\"}]"
         );
         ArticleTag savedArticleTag = new ArticleTag(savedTag);
-        Article savedArticle = articleRepository.save(Article.createArticle(articleWriteDto, customOauth2User.getMember(), savedCategory, List.of(savedArticleTag)));
+        Article savedArticle = articleRepository.save(Article.createArticle(articleWriteRequest, customOauth2User.getMember(), savedCategory, List.of(savedArticleTag)));
 
-        ArticleWriteDto modifyDto = new ArticleWriteDto(
+        ArticleWriteRequest modifyDto = new ArticleWriteRequest(
                 "수정된 타이틀",
                 "수정된 내용",
                 "수정된 썸내일",

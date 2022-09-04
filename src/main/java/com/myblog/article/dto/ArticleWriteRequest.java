@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class ArticleWriteDto {
+public class ArticleWriteRequest {
 
     @NotBlank(message = "제목을 입력해주세요.")
     private String title;

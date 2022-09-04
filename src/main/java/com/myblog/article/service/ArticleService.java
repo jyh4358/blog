@@ -59,15 +59,15 @@ public class ArticleService {
         - 게시물 작성
      */
     @Transactional
-    public Article writeArticle(ArticleWriteDto articleWriteDto, CustomOauth2User customOauth2User) {
+    public Article writeArticle(ArticleWriteRequest articleWriteRequest, CustomOauth2User customOauth2User) {
         RightLoginChecker.checkAdminMember(customOauth2User);
 
-        Category category = categoryRepository.findById(articleWriteDto.getCategory())
+        Category category = categoryRepository.findById(articleWriteRequest.getCategory())
                 .orElseThrow(NOT_FOUND_CATEGORY::getException);
 
-        List<ArticleTag> articleTags = getArticleTags(articleWriteDto.getTags());
+        List<ArticleTag> articleTags = getArticleTags(articleWriteRequest.getTags());
 
-        Article article = Article.createArticle(articleWriteDto, customOauth2User.getMember(), category, articleTags);
+        Article article = Article.createArticle(articleWriteRequest, customOauth2User.getMember(), category, articleTags);
         return articleRepository.save(article);
 
     }
@@ -93,22 +93,22 @@ public class ArticleService {
         - 게시물 수정
      */
     @Transactional
-    public Long modifyArticle(Long articleId, ArticleWriteDto articleWriteDto, CustomOauth2User customOauth2User) {
+    public Long modifyArticle(Long articleId, ArticleWriteRequest articleWriteRequest, CustomOauth2User customOauth2User) {
         RightLoginChecker.checkAdminMember(customOauth2User);
 
         Article article = articleQueryRepository.findByArticleIdWithArticleTags(articleId).orElseThrow(NOT_FOUNT_ARTICLE::getException);
         Category category = categoryRepository
-                .findById(articleWriteDto.getCategory()).orElseThrow(NOT_FOUND_CATEGORY::getException);
+                .findById(articleWriteRequest.getCategory()).orElseThrow(NOT_FOUND_CATEGORY::getException);
 
         articleTagRepository.deleteAll(article.getArticleTags());
 
-        List<ArticleTag> articleTags = getArticleTags(articleWriteDto.getTags());
+        List<ArticleTag> articleTags = getArticleTags(articleWriteRequest.getTags());
 
 
         article.modifyArticle(
-                articleWriteDto.getTitle(),
-                articleWriteDto.getContent(),
-                articleWriteDto.getThumbnailUrl(),
+                articleWriteRequest.getTitle(),
+                articleWriteRequest.getContent(),
+                articleWriteRequest.getThumbnailUrl(),
                 category);
         article.addArticleTags(articleTags);
 

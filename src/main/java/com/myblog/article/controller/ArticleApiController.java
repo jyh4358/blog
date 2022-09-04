@@ -1,8 +1,7 @@
 package com.myblog.article.controller;
 
 import com.myblog.article.dto.ArticleCardBoxResponse;
-import com.myblog.article.dto.ArticleWriteDto;
-import com.myblog.article.dto.PopularArticleResponse;
+import com.myblog.article.dto.ArticleWriteRequest;
 import com.myblog.article.model.Article;
 import com.myblog.article.service.ArticleService;
 import com.myblog.article.service.GitHubBackupService;
@@ -41,11 +40,11 @@ public class ArticleApiController {
      */
     @PostMapping("/api/v1/admin/article")
     public ResponseEntity<Long> saveArticle(
-            @RequestBody @Valid ArticleWriteDto articleWriteDto,
+            @RequestBody @Valid ArticleWriteRequest articleWriteRequest,
             @AuthenticationPrincipal CustomOauth2User customOauth2User
     ) {
 
-        Article savedArticle = articleService.writeArticle(articleWriteDto, customOauth2User);
+        Article savedArticle = articleService.writeArticle(articleWriteRequest, customOauth2User);
         gitHubBackupService.backupArticleToGitHub(savedArticle);
 
         return new ResponseEntity<>(savedArticle.getId(), HttpStatus.OK);
@@ -74,11 +73,11 @@ public class ArticleApiController {
     @PatchMapping("/api/v1/admin/article/{articleId}")
     public ResponseEntity<Void> modifyArticle(
             @PathVariable Long articleId,
-            @RequestBody @Valid ArticleWriteDto articleWriteDto,
+            @RequestBody @Valid ArticleWriteRequest articleWriteRequest,
             @AuthenticationPrincipal CustomOauth2User customOauth2User
     ) {
 
-        articleService.modifyArticle(articleId, articleWriteDto, customOauth2User);
+        articleService.modifyArticle(articleId, articleWriteRequest, customOauth2User);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
