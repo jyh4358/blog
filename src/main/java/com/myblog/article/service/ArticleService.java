@@ -100,10 +100,7 @@ public class ArticleService {
         Category category = categoryRepository
                 .findById(articleWriteRequest.getCategory()).orElseThrow(NOT_FOUND_CATEGORY::getException);
 
-        articleTagRepository.deleteAll(article.getArticleTags());
-
         List<ArticleTag> articleTags = getArticleTags(articleWriteRequest.getTags());
-
 
         article.modifyArticle(
                 articleWriteRequest.getTitle(),
