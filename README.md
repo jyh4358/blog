@@ -12,7 +12,7 @@
 <br/>
 
 1. [개발 환경](#1-개발-환경)
-2. [사용 기술](#2-사용-기술)
+2. [기술 스택](#2-기술-스택)
 3. [블로그 프로젝트를 기획한 이유](#3-블로그-프로젝트를-기획한-이유)
 4. [패키지 구조](#4-도메인형-패키지-구조)
 5. [E-R 다이어그램](#5-e-r-다이어그램)
@@ -160,7 +160,7 @@ SideBar에 사용되는 메서드에 캐시 처리를 하였으며 캐시에 대
 
 ### rest api
 
-페이지 요청을 제외한 get, post, patch, delete 요청은 rest api 방식으로 구현하여 자원의 행위를 보다 직관적으로 나타내도록 했습니다.
+페이지 요청을 제외한 get, post, patch, delete 요청을 rest api 방식으로 구현하여 자원의 행위를 보다 직관적으로 나타내도록 했습니다.
 
 예시 코드
 - [ArticleApiController 코드](https://github.com/jyh4358/blog/blob/master/src/main/java/com/myblog/article/controller/ArticleApiController.java)
@@ -222,10 +222,10 @@ Github api를 이용하여 게시물 작성 시 자동으로 Github repository�
 검색 관련 부분은 QueryDSL의 동적 쿼리 메서드를 이용하여 구현하였습니다.
 
 특히 카테고리 경우 부모 카테고리로 검색할때는 하위 자식 카테고리에 포함된 모든 게시물들을 검색해야 했기 때문에 부모 카테고리 검색과,
-자식 카테고리 검색의 경우 분기처리를 해줘야 했습니다. 하지만 QueryDSL을 이용하여 분기처리 없이 동적 쿼리 메서드를 이용하여 검색이 가능하도록
+자식 카테고리 검색의 경우 분기처리를 해줘야 했습니다. 따라서 QueryDSL을 이용하여 분기처리 없이 동적 쿼리 메서드를 이용하여 검색이 가능하도록
 구현하였습니다.
 
-[QeuryDSL을 적용한 repository](https://github.com/jyh4358/blog/blob/master/src/main/java/com/myblog/article/repository/ArticleSearchRepository.java)
+[QeuryDSL을 적용한 repository](https://github.com/jyh4358/blog/blob/master/src/main/java/com/myblog/article/repository/ArticleQueryRepository.java)
 
 ![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%EA%B2%80%EC%83%89.gif)
 
@@ -303,8 +303,8 @@ tagify 라이브러리를 이용한 태그 기능을 이용하여 게시물 작�
 
 **카카오 공유 예시**
 
-![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%EC%B9%B4%EC%B9%B4%EC%98%A4+%EA%B3%B5%EC%9C%A0.JPG)
 
+![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%EA%B3%B5%EC%9C%A0.JPG)
 
 <br/>
 <br/>
