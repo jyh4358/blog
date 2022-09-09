@@ -137,6 +137,8 @@ public class ArticleQueryRepository {
     private List<Article> getArticleByTag(String tagName, Pageable pageable) {
         return queryFactory
                 .selectFrom(article)
+                .join(article.articleTags, articleTag)
+                .join(articleTag.tag, tag)
                 .where(tag.name.eq(tagName))
                 .orderBy(article.id.desc())
                 .offset(pageable.getOffset())
@@ -147,6 +149,8 @@ public class ArticleQueryRepository {
     private Long getArticleCountByTag(String tagName) {
         return queryFactory.select(article.count())
                 .from(article)
+                .join(article.articleTags, articleTag)
+                .join(articleTag.tag, tag)
                 .where(tag.name.eq(tagName))
                 .fetchOne();
     }
