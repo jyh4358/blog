@@ -25,7 +25,7 @@ public class RecentCommentResponse {
     public static RecentCommentResponse of(Comment comment) {
         return new RecentCommentResponse(
                 comment.getArticle().getId(),
-                comment.getArticle().getContent(),
+                comment.getContent(),
                 comment.getMember().getId(),
                 comment.getMember().getUsername(),
                 comment.isSecret()
