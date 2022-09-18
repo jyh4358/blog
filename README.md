@@ -2,10 +2,17 @@
 
 나만의 블로그 웹 사이트 개발 프로젝트
 
+[JDong's Blog](http://ec2-13-209-229-21.ap-northeast-2.compute.amazonaws.com/)
+
 <br/>
+
+기본 페이지
 
 ![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%EB%A9%94%EC%9D%B8.gif)
 
+관리자 페이지
+
+![image](https://file-upload-store-jdd.s3.ap-northeast-2.amazonaws.com/%EA%B4%80%EB%A6%AC%EC%9E%90%ED%8E%98%EC%9D%B4%EC%A7%80.gif)
 
 ## 목차
 
