@@ -2,6 +2,8 @@ package com.myblog.common;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,5 +24,10 @@ public class ProfileController {
                 .filter(realProfiles::contains)
                 .findAny()
                 .orElse("NotFound");
+    }
+
+    @GetMapping("/health")
+    public ResponseEntity<Void> health() {
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
