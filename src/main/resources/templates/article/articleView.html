@@ -79,7 +79,8 @@
                             </div>
                             <div></div>
                             <div class="toolbox-head mt-3 ms-5 me-5">
-                                <a th:text="${articleDetailResponse.category}">카테고리</a>
+                                <a th:href="@{/article(categoryTitle=${articleDetailResponse.category})}"
+                                   th:text="|${articleDetailResponse.category} 관련 글|">카테고리</a>
                                 <span></span></div>
                             <ul class="row row-cols-1 row-cols-sm-2 mt-2 ms-5 me-5 toolList">
 
