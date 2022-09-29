@@ -35,7 +35,7 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-thumb {
-    background-color: rgb(233, 224, 224);
+    background-color: rgb(170, 170, 170);
     background-clip: padding-box;
     border: 4px solid transparent;
     border-top-left-radius: 100px;
@@ -51,7 +51,7 @@ body::-webkit-scrollbar-track {
 }
 
 .offcanvas-body::-webkit-scrollbar-thumb {
-    background-color: rgb(233, 224, 224);
+    background-color: rgb(170, 170, 170);
     background-clip: padding-box;
     border: 4px solid transparent;
     border-top-left-radius: 100px;
@@ -271,7 +271,7 @@ body::-webkit-scrollbar-track {
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-    background-color: rgb(233, 224, 224, 0.7);
+    background-color: rgb(170, 170, 170, 0.7);
     background-clip: padding-box;
     border: 4px solid transparent;
     border-top-left-radius: 100px;
