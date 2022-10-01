@@ -74,6 +74,7 @@ public class ArticleQueryRepository {
                 .join(articleTag.tag, tag).fetchJoin()
                 .join(article.category, category).fetchJoin()
                 .join(article.member, member).fetchJoin()
+                .distinct()
                 .where(article.id.eq(articleId))
                 .fetchOne();
         return Optional.ofNullable(articleWithTags);
@@ -86,17 +87,23 @@ public class ArticleQueryRepository {
         Article articleWithArticleTags = queryFactory
                 .selectFrom(article)
                 .join(article.articleTags, articleTag).fetchJoin()
-                .join(articleTag.tag, tag)
+                .join(articleTag.tag, tag).fetchJoin()
+                .join(article.category, category).fetchJoin()
+                .distinct()
                 .where(article.id.eq(articleId))
                 .fetchOne();
         return Optional.ofNullable(articleWithArticleTags);
     }
 
 
+
+    // =====================================================================
+
     private List<Article> getArticleByCategory(String categoryTitle, Pageable pageable, List<String> childCategoryTitles) {
         return queryFactory
                 .selectFrom(article)
                 .join(article.category, category).fetchJoin()
+                .distinct()
                 .where(
                         categoryTitleEq(categoryTitle).or(childCategoriesTitleIn(childCategoryTitles))
                 )
@@ -137,8 +144,9 @@ public class ArticleQueryRepository {
     private List<Article> getArticleByTag(String tagName, Pageable pageable) {
         return queryFactory
                 .selectFrom(article)
-                .join(article.articleTags, articleTag)
-                .join(articleTag.tag, tag)
+                .join(article.articleTags, articleTag).fetchJoin()
+                .join(articleTag.tag, tag).fetchJoin()
+                .distinct()
                 .where(tag.name.eq(tagName))
                 .orderBy(article.id.desc())
                 .offset(pageable.getOffset())
