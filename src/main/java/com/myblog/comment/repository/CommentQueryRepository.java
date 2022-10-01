@@ -1,6 +1,7 @@
 package com.myblog.comment.repository;
 
 import com.myblog.comment.model.Comment;
+import com.myblog.comment.model.QComment;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -25,24 +26,28 @@ public class CommentQueryRepository {
         - 게시물에 등록된 댓글 조회
      */
     public List<Comment> findCommentListByArticleId(Long articleId) {
+
+        QComment child = new QComment("child");
         return queryFactory
                 .selectFrom(comment)
                 .join(comment.member, member).fetchJoin()
+                .join(comment.child, child).fetchJoin()
+                .distinct()
                 .where(comment.article.id.eq(articleId))
                 .fetch();
     }
-
-
 
     /*
         - 사이드바에 필요한 댓글 조회
      */
     public List<Comment> findRecentComment() {
+
         return queryFactory
                 .selectFrom(comment)
                 .join(comment.article, article).fetchJoin()
                 .join(comment.member, member).fetchJoin()
                 .limit(5)
+                .orderBy(comment.id.desc())
                 .fetch();
     }
 
@@ -58,13 +63,6 @@ public class CommentQueryRepository {
         return new PageImpl<>(content, pageable, count);
     }
 
-    private Long getCommentCount() {
-        return queryFactory
-                .select(comment.count())
-                .from(comment)
-                .fetchOne();
-    }
-
     private List<Comment> getCommentList(Pageable pageable) {
         return queryFactory
                 .selectFrom(comment)
@@ -74,7 +72,13 @@ public class CommentQueryRepository {
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
+    }
 
+    private Long getCommentCount() {
+        return queryFactory
+                .select(comment.count())
+                .from(comment)
+                .fetchOne();
     }
 
 }
