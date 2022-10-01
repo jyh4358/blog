@@ -31,7 +31,7 @@ public class CommentQueryRepository {
         return queryFactory
                 .selectFrom(comment)
                 .join(comment.member, member).fetchJoin()
-                .join(comment.child, child).fetchJoin()
+                .leftJoin(comment.child, child).fetchJoin()
                 .distinct()
                 .where(comment.article.id.eq(articleId))
                 .fetch();
