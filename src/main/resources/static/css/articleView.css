@@ -715,6 +715,7 @@ ul.toolList .otherArticle:before {
 ul.toolList .curArticle:before  {
     content: "\f518";
     font-family: FontAwesome;
+    font-weight: 900;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     display: inline-block;
