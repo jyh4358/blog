@@ -129,8 +129,7 @@ public class ArticleService {
                 .collect(Collectors.toList());
 
         ArticleDetailResponse detailResponse = ArticleDetailResponse.of(article, tags, article.getMember().getUsername());
-
-        List<ArticleSimpleDto> articlesSimpleDtoListByCategory = getSimpleArticleByCategory(article.getCategory());
+        List<ArticleSimpleDto> articlesSimpleDtoListByCategory = getSimpleArticleByCategory(article);
         detailResponse.setArticleSimpleDtos(articlesSimpleDtoListByCategory);
 
         return detailResponse;
@@ -201,10 +200,10 @@ public class ArticleService {
     /*
         ======= 서비스 로직 ========
      */
-    private List<ArticleSimpleDto> getSimpleArticleByCategory(Category category) {
-        List<Article> articleSimpleDtoListByCategory = articleRepository.findTop6ByCategoryOrderByCreatedDateDesc(category);
+    private List<ArticleSimpleDto> getSimpleArticleByCategory(Article article) {
+        List<Article> articleSimpleListByCategory = articleQueryRepository.getSimpleArticleByCategory(article.getId(), article.getCategory().getId());
 
-        return articleSimpleDtoListByCategory.stream()
+        return articleSimpleListByCategory.stream()
                 .map(ArticleSimpleDto::of)
                 .collect(Collectors.toList());
     }

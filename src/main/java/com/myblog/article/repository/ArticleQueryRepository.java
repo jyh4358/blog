@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +27,11 @@ import static com.myblog.member.model.QMember.member;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class ArticleQueryRepository {
+
+    private final static int PRE_DEFAULT_SIZE = 3;
+    private final static int NEXT_DEFAULT_SIZE = 4;
+    private final static int TOTAL_DEFAULT_SIZE = 7;
+
     private final JPAQueryFactory queryFactory;
 
     /*
@@ -38,7 +45,6 @@ public class ArticleQueryRepository {
 
         return new PageImpl<>(articleByCategory, pageable, count);
     }
-
 
 
     /*
@@ -95,9 +101,46 @@ public class ArticleQueryRepository {
         return Optional.ofNullable(articleWithArticleTags);
     }
 
+    /*
+        - 게시물과 관련된 카테고리의 게시물 6개 조회
+        - 조회한 게시물 기준으로 이전 게시물 2개, 이후 게시물 4개와 조회 게시물 포함하여 총 6개 게시물 반환
+     */
+    public List<Article> getSimpleArticleByCategory(Long articleId, Long categoryId) {
+
+        // articleId 기준으로 이전 게시물 6개 조회
+        List<Article> preResult = queryFactory
+                .selectFrom(article)
+                .join(article.category, category)
+                .where(
+                        article.id.loe(articleId),
+                        article.category.id.eq(categoryId)
+                )
+                .limit(6)
+                .orderBy(article.id.desc())
+                .fetch();
+
+        // articleId 기준으로 이후 게시물 조회,
+        // preResult(이전 게시물)이 없을 경우 그 갯수만큼 이후 게시물을 추가 조회
+        List<Article> nextResult = queryFactory
+                .selectFrom(article)
+                .join(article.category, category)
+                .where(
+                        article.id.goe(articleId),
+                        article.category.id.eq(categoryId)
+                )
+                .limit(NEXT_DEFAULT_SIZE + (preResult.size() < PRE_DEFAULT_SIZE ? PRE_DEFAULT_SIZE - preResult.size() : 0))
+                .orderBy(article.id.asc())
+                .fetch();
+
+        Collections.reverse(nextResult);
+
+        nextResult.addAll(preResult.subList(1, preResult.size() <= PRE_DEFAULT_SIZE ? preResult.size() : TOTAL_DEFAULT_SIZE - nextResult.size()));
+        return nextResult;
+    }
 
 
     // =====================================================================
+
 
     private List<Article> getArticleByCategory(String categoryTitle, Pageable pageable, List<String> childCategoryTitles) {
         return queryFactory

@@ -85,7 +85,13 @@
                             <ul class="row row-cols-1 row-cols-sm-2 mt-2 ms-5 me-5 toolList">
 
                                 <th:block th:each="simpleArticle : ${articleDetailResponse.getArticleSimpleDtos}">
-                                    <li class="col text-block otherArticle">
+                                    <li th:unless="${simpleArticle.id} == ${articleDetailResponse.id}"
+                                        class="col text-block otherArticle">
+                                        <a th:href="@{/article/{articleId}(articleId=${simpleArticle.id})}"
+                                           th:text="${simpleArticle.title}">글목록</a>
+                                    </li>
+                                    <li th:if="${simpleArticle.id} == ${articleDetailResponse.id}"
+                                        class="col text-block curArticle">
                                         <a th:href="@{/article/{articleId}(articleId=${simpleArticle.id})}"
                                            th:text="${simpleArticle.title}">글목록</a>
                                     </li>
